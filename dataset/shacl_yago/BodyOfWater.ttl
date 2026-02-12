@@ -1,0 +1,83 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+
+#################################################################
+# BodyOfWater Shape
+#################################################################
+<http://shaclshapes.org/BodyOfWaterShape>
+    a sh:NodeShape ;
+    sh:targetClass schema:BodyOfWater ;
+
+    ############################## schema:Thing property
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:alternateName ;
+        sh:datatype rdf:langString ;
+    ] ;
+    sh:property [
+        sh:path schema:mainEntityOfPage ;
+        sh:datatype xsd:anyURI ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:datatype xsd:anyURI ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:image ;
+        sh:datatype xsd:anyURI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    ########## schema.org properties 
+
+    sh:property [
+        sh:path schema:geo ;
+        sh:datatype geo:wktLiteral ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+    ] ;
+    ############################## Yago property
+    sh:property [
+        sh:path yago:flowsInto ;
+        sh:class schema:BodyOfWater ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path yago:area ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:property [
+        sh:path yago:elevation ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:property [
+        sh:path yago:neighbors ;
+        sh:class schema:Place ;
+    ] ;
+    ############################## owl:sameAs restricted to Wikidata
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:pattern "^http://www.wikidata.org/entity/" ;
+    ] .
+
+

@@ -1,0 +1,101 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+#################################################################
+# Event Shape
+#################################################################
+<http://shaclshapes.org/EventShape>
+    a sh:NodeShape ;
+    sh:targetClass schema:Event ;
+
+    ############################## schema:Thing property
+    # schema:Thing properties
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue schema:Event ;
+    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:alternateName ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:image ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:mainEntityOfPage ;
+        sh:datatype xsd:anyURI ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:url ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    ########## schema.org properties 
+    sh:property [
+        sh:path schema:about ;
+    ] ;
+    sh:property [
+        sh:path schema:endDate ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+    ] ;
+    sh:property [
+        sh:path schema:organizer ;
+        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+
+    ] ;
+    sh:property [
+        sh:path schema:sponsor ;
+        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+
+    ] ;
+    sh:property [
+        sh:path schema:startDate ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:superEvent ;
+        sh:class schema:Event ;
+    ] ;
+
+    ############################## Yago property
+    sh:property [
+        sh:path yago:follows ;
+        sh:class schema:Event ;
+    ] ;
+    sh:property [
+        sh:path yago:participant ;
+        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+        sh:maxCount 1 ;
+
+    ] ;
+
+    ############################## owl:sameAs restricted to Wikidata
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:pattern "^http://www.wikidata.org/entity/" ;
+    ] .

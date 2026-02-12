@@ -1,0 +1,72 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+
+<http://shaclshapes.org/SportsPersonShape> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:path schema:sameAs ],
+        [ sh:class schema:Place ;
+            sh:path schema:homeLocation ],
+        [ sh:class yago:BeliefSystem ;
+            sh:path yago:beliefSystem ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path schema:birthDate ],
+        [ sh:class schema:Person ;
+            sh:path schema:spouse ],
+        [ sh:class yago:Award ;
+            sh:path schema:award ],
+        [ sh:class yago:Gender ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path schema:gender ],
+        [ sh:datatype rdf:langString ;
+            sh:path rdfs:comment ],
+        [ sh:class schema:Person ;
+            sh:path schema:children ],
+        [ sh:class schema:Place ;
+            sh:maxCount 1 ;
+            sh:path schema:deathPlace ],
+        [ sh:datatype rdf:langString ;
+            sh:path schema:alternateName ],
+        [ sh:class schema:Organization ;
+            sh:path schema:alumniOf ],
+        [ sh:class schema:Event ;
+            sh:path yago:playsIn ],
+        [ sh:class schema:Organization ;
+            sh:path schema:worksFor ],
+        [ sh:datatype xsd:string ;
+            sh:path yago:sportNumber ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:url ],
+        [ sh:class schema:Organization ;
+            sh:path schema:memberOf ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path owl:sameAs ;
+            sh:pattern "^http://www.wikidata.org/entity/" ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:image ],
+        [ sh:datatype xsd:anyURI ;
+            sh:minCount 1 ;
+            sh:path schema:mainEntityOfPage ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path rdfs:label ],
+        [ sh:class yago:Human_Language_Q20162172 ;
+            sh:path schema:knowsLanguage ],
+        [ sh:class schema:Country ;
+            sh:maxCount 1 ;
+            sh:path schema:nationality ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path schema:deathDate ],
+        [ sh:class schema:Place ;
+            sh:maxCount 1 ;
+            sh:path schema:birthPlace ] ;
+    sh:targetClass yago:SportsPerson .
+

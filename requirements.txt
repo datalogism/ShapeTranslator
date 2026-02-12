@@ -1,0 +1,4 @@
+rdflib>=7.0
+pyshexc
+ShExJSG
+pytest

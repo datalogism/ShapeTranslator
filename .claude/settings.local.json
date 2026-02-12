@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:book.validatingrdf.com)",
+      "Bash(gh repo view:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(wc:*)",
+      "Bash(find:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(du:*)",
+      "Bash(python3 -m venv:*)",
+      "Bash(.venv/bin/pip install:*)",
+      "Bash(pip3 install:*)",
+      "Bash(python3 -m pip install:*)",
+      "Bash(sudo apt-get update:*)",
+      "Bash(sudo apt-get:*)",
+      "Bash(# Check the Windows venv that already exists ls /mnt/c/Users/doccr/PycharmProjects/PythonProject1/.venv/Scripts/)",
+      "Bash(/mnt/c/Users/doccr/PycharmProjects/PythonProject1/.venv/Scripts/pip.exe install:*)",
+      "Bash(/mnt/c/Users/doccr/PycharmProjects/PythonProject1/.venv/Scripts/python.exe:*)",
+      "Bash(export PYTHON=/mnt/c/Users/doccr/PycharmProjects/PythonProject1/.venv/Scripts/python.exe:*)",
+      "Bash($PYTHON -c \"print\\(''alias works''\\)\")",
+      "Bash(xxd:*)"
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+
+<http://shaclshapes.org/CountryShape> a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path owl:sameAs ;
+            sh:pattern "^http://www.wikidata.org/entity/" ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path yago:area ],
+        [ sh:class schema:Organization ;
+            sh:path schema:memberOf ],
+        [ sh:datatype xsd:anyURI ;
+            sh:minCount 1 ;
+            sh:path schema:mainEntityOfPage ],
+        [ sh:datatype xsd:decimal ;
+            sh:path yago:unemploymentRate ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:url ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path yago:populationNumber ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path schema:alternateName ],
+        [ sh:datatype xsd:string ;
+            sh:path yago:demonym ],
+        [ sh:class schema:City ;
+            sh:path yago:capital ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:image ],
+        [ sh:class schema:Place ;
+            sh:path yago:neighbors ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path rdfs:comment ],
+        [ sh:class schema:Landform ;
+            sh:maxCount 1 ;
+            sh:path yago:highestPoint ],
+        [ sh:datatype xsd:decimal ;
+            sh:path yago:humanDevelopmentIndex ],
+        [ sh:class schema:Place ;
+            sh:path schema:location ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path rdfs:label ],
+        [ sh:datatype geo:wktLiteral ;
+            sh:maxCount 1 ;
+            sh:path schema:geo ],
+        [ sh:class schema:AdministrativeArea ;
+            sh:path yago:replaces ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:slogan ],
+        [ sh:datatype xsd:anyURI ;
+            sh:minCount 1 ;
+            sh:path schema:sameAs ],
+        [ sh:class schema:Landform ;
+            sh:maxCount 1 ;
+            sh:path yago:lowestPoint ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path schema:dateCreated ],
+        [ sh:class yago:Human_Language_Q20162172 ;
+            sh:path yago:officialLanguage ],
+        [ sh:class schema:Person ;
+            sh:path yago:leader ] ;
+    sh:targetClass schema:Country .
+

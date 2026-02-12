@@ -1,0 +1,48 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+#################################################################
+# Language Shape
+#################################################################
+<http://shaclshapes.org/LanguageShape> a sh:NodeShape ;
+    sh:targetClass schema:Language ;
+    
+    ############################## schema:Thing property
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype rdf:langString ;
+    ] ;
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+    ] ;
+    sh:property [
+        sh:path schema:alternateName ;
+        sh:datatype rdf:langString ;
+    ] ;
+    sh:property [
+        sh:path schema:image ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:mainEntityOfPage ;
+        sh:minCount 1 ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    ############################## owl:sameAs restricted to Wikidata
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:pattern "^http://www.wikidata.org/entity/" ;
+    ] .
+

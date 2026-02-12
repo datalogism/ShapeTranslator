@@ -1,0 +1,139 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+
+#################################################################
+# Person Shape
+#################################################################
+<http://shaclshapes.org/PersonShape> a sh:NodeShape ;
+    sh:targetClass schema:Person ;
+    
+    ############################## schema:Thing property
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:alternateName ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:image ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:mainEntityOfPage ;
+        sh:minCount 1 ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:url ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    
+    ########## schema.org properties 
+    sh:property [
+        sh:path schema:affiliation ;
+        sh:class schema:Organization ;
+    ] ;
+    sh:property [
+        sh:path schema:alumniOf ;
+        sh:class schema:Organization ;
+    ] ;
+    sh:property [
+        sh:path schema:award ;
+        sh:class yago:Award ;
+    ] ;
+    sh:property [
+        sh:path schema:birthDate ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:birthPlace ;
+        sh:class schema:Place ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:children ;
+        sh:class schema:Person ;
+    ] ;
+    sh:property [
+        sh:path schema:deathDate ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:deathPlace ;
+        sh:class schema:Place ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:gender ;
+        sh:class yago:Gender ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:homeLocation ;
+        sh:class schema:Place ;
+    ] ;
+    sh:property [
+        sh:path schema:knowsLanguage ;
+        sh:class schema:Language ;
+    ] ;
+    sh:property [
+        sh:path schema:memberOf ;
+        sh:class schema:Organization ;
+    ] ;
+    sh:property [
+        sh:path schema:nationality ;
+        sh:class schema:Country ;
+    ] ;
+    sh:property [
+        sh:path schema:owns ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+    sh:property [
+        sh:path schema:spouse ;
+        sh:class schema:Person ;
+    ] ;
+    sh:property [
+        sh:path schema:worksFor ;
+        sh:class schema:Organization ;
+    ] ;
+    
+    
+    ############################## Yago property
+    sh:property [
+        sh:path yago:academicDegree ;
+        sh:class yago:Academic_degree ;
+    ] ;
+    sh:property [
+        sh:path yago:beliefSystem ;
+        sh:class yago:BeliefSystem ;
+    ] ;
+    sh:property [
+        sh:path yago:appearsIn ;
+        sh:class schema:CreativeWork ;
+    ] ;
+    
+    ############################## owl:sameAs restricted to Wikidata
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:pattern "^http://www.wikidata.org/entity/" ;
+    ] .
+

@@ -1,0 +1,81 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+
+#################################################################
+# MusicComposition Shape
+#################################################################
+<http://shaclshapes.org/MusicCompositionShape>
+    a sh:NodeShape ;
+    sh:targetClass schema:MusicComposition ;
+
+    ############################## schema:Thing property
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+    ] ;
+    sh:property [
+        sh:path schema:alternateName ;
+        sh:datatype rdf:langString ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:image ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:mainEntityOfPage ;
+        sh:datatype xsd:anyURI ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    ############################## schema.org property
+    sh:property [
+        sh:path schema:iswcCode ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:lyricist ;
+        sh:class [ sh:or ( schema:MusicGroup schema:Person ) ] ;
+    ] ;
+    sh:property [
+        sh:path schema:musicBy ;
+        sh:class [ sh:or ( schema:MusicGroup schema:Person ) ] ;
+    ] ;
+    sh:property [
+        sh:path schema:author ;
+        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+    ] ;
+    sh:property [
+        sh:path schema:dateCreated ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:inLanguage ;
+        sh:class schema:Language ;
+    ] ;
+    sh:property [
+        sh:path schema:editor ;
+        sh:class schema:Person ;
+    ] ;
+
+    ############################## owl:sameAs restricted to Wikidata
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:pattern "^http://www.wikidata.org/entity/" ;
+    ] .

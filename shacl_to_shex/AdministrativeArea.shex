@@ -1,0 +1,58 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+start = @<AdministrativeArea>
+
+<AdministrativeArea> EXTRA rdf:type {
+  rdf:type [ schema:AdministrativeArea ] ;
+  rdfs:comment rdf:langString * ;
+  rdfs:label rdf:langString + ;
+  schema:alternateName rdf:langString * ;
+  schema:image xsd:anyURI * ;
+  schema:mainEntityOfPage xsd:anyURI + ;
+  schema:sameAs xsd:anyURI * ;
+  schema:url xsd:anyURI * ;
+  schema:administrates @<Place> * ;
+  schema:dateCreated xsd:dateTime ;
+  schema:demonym xsd:string * ;
+  schema:leader @<Person> * ;
+  schema:memberOf @<Organization> * ;
+  schema:slogan xsd:string * ;
+  schema:postalCode xsd:string ? ;
+  schema:geo geo:wktLiteral ? ;
+  yago:populationNumber xsd:decimal * ;
+  yago:capital @<City> ? ;
+  yago:replaces @<AdministrativeArea> ? ;
+  yago:area xsd:decimal * ;
+  yago:elevation xsd:decimal * ;
+  yago:highestPoint @<Mountain> ? ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
+}
+
+<City> EXTRA rdf:type {
+  rdf:type [ schema:City ]
+}
+
+<Mountain> EXTRA rdf:type {
+  rdf:type [ yago:Mountain ]
+}
+
+<Organization> EXTRA rdf:type {
+  rdf:type [ schema:Organization ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ schema:Person ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ schema:Place ]
+}

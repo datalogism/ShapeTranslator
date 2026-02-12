@@ -1,0 +1,80 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+#################################################################
+# ProductShape Shape
+#################################################################
+<http://shaclshapes.org/ProductShape> a sh:NodeShape ;
+    sh:targetClass schema:Product ;
+    
+
+    ############################## schema:Thing property
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue schema:Product ;
+    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:alternateName ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:image ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:mainEntityOfPage ;
+        sh:datatype xsd:anyURI ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:url ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    
+
+    ############################## schema.org property
+    sh:property [
+        sh:path schema:award ;
+        sh:class yago:Award ;
+    ] ;
+    sh:property [
+        sh:path schema:dateCreated ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:gtin ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:manufacturer ;
+        sh:class schema:Corporation ;
+    ] ;
+    sh:property [
+        sh:path schema:material ;
+        sh:class yago:Material ;
+    ] ;
+    
+    ############################## owl:sameAs restricted to Wikidata
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:pattern "^http://www.wikidata.org/entity/" ;
+    ] .

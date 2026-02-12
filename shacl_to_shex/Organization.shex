@@ -1,0 +1,56 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+start = @<Organization>
+
+<Organization> EXTRA rdf:type {
+  rdf:type [ schema:Organization ] ;
+  rdfs:label xsd:string + ;
+  rdfs:comment xsd:string * ;
+  schema:alternateName xsd:string * ;
+  schema:image xsd:anyURI * ;
+  schema:mainEntityOfPage xsd:anyURI + ;
+  schema:sameAs xsd:anyURI * ;
+  schema:url xsd:anyURI * ;
+  schema:address xsd:string * ;
+  schema:award @<Award> * ;
+  schema:dateCreated xsd:dateTime ? ;
+  schema:dissolutionDate xsd:dateTime ? ;
+  schema:duns xsd:string ? ;
+  schema:founder @<Person> * ;
+  schema:leiCode xsd:string ? ;
+  schema:location @<Place> * ;
+  schema:locationCreated @<Place> * ;
+  schema:logo xsd:anyURI * ;
+  schema:memberOf @<Organization> * ;
+  schema:motto xsd:string * ;
+  schema:numberOfEmployees xsd:decimal * ;
+  schema:slogan xsd:string * ;
+  yago:leader @<Person> * ;
+  yago:ownedBy @<OwnedBy> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
+}
+
+<Award> EXTRA rdf:type {
+  rdf:type [ yago:Award ]
+}
+
+<OwnedBy> EXTRA rdf:type {
+  rdf:type [ schema:Organization schema:Person ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ schema:Person ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ schema:Place ]
+}

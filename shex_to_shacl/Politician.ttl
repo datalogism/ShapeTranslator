@@ -1,0 +1,84 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+
+<http://shaclshapes.org/PoliticianShape> a sh:NodeShape ;
+    sh:property [ sh:class schema:Place ;
+            sh:path schema:spouse ],
+        [ sh:class schema:Event ;
+            sh:path yago:candidateIn ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path rdfs:label ],
+        [ sh:class schema:Place ;
+            sh:maxCount 1 ;
+            sh:path schema:deathPlace ],
+        [ sh:class yago:BeliefSystem ;
+            sh:path yago:beliefSystem ],
+        [ sh:datatype xsd:anyURI ;
+            sh:minCount 1 ;
+            sh:path schema:mainEntityOfPage ],
+        [ sh:class schema:Country ;
+            sh:path schema:nationality ],
+        [ sh:class schema:CreativeWork ;
+            sh:path yago:notableWork ],
+        [ sh:class schema:EducationalOrganization ;
+            sh:path schema:alumniOf ],
+        [ sh:datatype rdf:langString ;
+            sh:path schema:alternateName ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path schema:owns ],
+        [ sh:class schema:Person ;
+            sh:path yago:doctoralAdvisor ],
+        [ sh:class schema:Organization ;
+            sh:path schema:affiliation ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path schema:deathDate ],
+        [ sh:class yago:Academic_degree ;
+            sh:path yago:academicDegree ],
+        [ sh:class schema:Person ;
+            sh:path yago:influencedBy ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:image ],
+        [ sh:class schema:Person ;
+            sh:path schema:children ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path owl:sameAs ;
+            sh:pattern "^http://www.wikidata.org/entity/" ],
+        [ sh:class schema:Organization ;
+            sh:path schema:worksFor ],
+        [ sh:class yago:Gender ;
+            sh:maxCount 1 ;
+            sh:path schema:gender ],
+        [ sh:class schema:Place ;
+            sh:maxCount 1 ;
+            sh:path schema:birthPlace ],
+        [ sh:class schema:Organization ;
+            sh:path schema:memberOf ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:url ],
+        [ sh:datatype rdf:langString ;
+            sh:path rdfs:comment ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:sameAs ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path schema:birthDate ],
+        [ sh:class schema:Place ;
+            sh:path schema:homeLocation ],
+        [ sh:class schema:Person ;
+            sh:path yago:studentOf ],
+        [ sh:class schema:CreativeWork ;
+            sh:path yago:appearsIn ],
+        [ sh:class yago:Award ;
+            sh:path schema:award ],
+        [ sh:class yago:Human_Language_Q20162172 ;
+            sh:path schema:knowsLanguage ] ;
+    sh:targetClass yago:Politician .
+
