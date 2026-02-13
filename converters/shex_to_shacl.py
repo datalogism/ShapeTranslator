@@ -28,6 +28,8 @@ from models.shex_model import (
 )
 
 RDF_TYPE = IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+WDT_P31 = IRI("http://www.wikidata.org/prop/direct/P31")  # Wikidata instance-of
+INSTANCE_OF_PREDICATES = {RDF_TYPE, WDT_P31}
 SHACL_SHAPES_BASE = "http://shaclshapes.org/"
 
 # Standard SHACL prefixes
@@ -62,10 +64,15 @@ def _get_triple_constraints(shape: Shape) -> list[TripleConstraint]:
     return []
 
 
+def _is_instance_of_predicate(predicate: IRI) -> bool:
+    """Check if a predicate is an instance-of predicate (rdf:type or wdt:P31)."""
+    return predicate in INSTANCE_OF_PREDICATES
+
+
 def _extract_target_class(tcs: list[TripleConstraint]) -> Optional[IRI]:
-    """Check if any triple constraint is rdf:type with a value set → target class."""
+    """Check if any triple constraint is an instance-of with a value set -> target class."""
     for tc in tcs:
-        if tc.predicate == RDF_TYPE and isinstance(tc.constraint, NodeConstraint):
+        if _is_instance_of_predicate(tc.predicate) and isinstance(tc.constraint, NodeConstraint):
             if tc.constraint.values and len(tc.constraint.values) == 1:
                 val = tc.constraint.values[0].value
                 if isinstance(val, IRI):
@@ -73,9 +80,9 @@ def _extract_target_class(tcs: list[TripleConstraint]) -> Optional[IRI]:
     return None
 
 
-def _is_rdf_type_with_single_class(tc: TripleConstraint) -> bool:
-    """Check if this is a simple rdf:type [ClassName] constraint."""
-    if tc.predicate != RDF_TYPE:
+def _is_instance_of_with_single_class(tc: TripleConstraint) -> bool:
+    """Check if this is an instance-of [ClassName] constraint (rdf:type or wdt:P31)."""
+    if not _is_instance_of_predicate(tc.predicate):
         return False
     if not isinstance(tc.constraint, NodeConstraint):
         return False
@@ -86,9 +93,9 @@ def _is_rdf_type_with_single_class(tc: TripleConstraint) -> bool:
     return isinstance(tc.constraint.values[0].value, IRI)
 
 
-def _is_rdf_type_with_multi_class(tc: TripleConstraint) -> bool:
-    """Check if this is rdf:type [Class1 Class2 ...] (multiple classes)."""
-    if tc.predicate != RDF_TYPE:
+def _is_instance_of_with_multi_class(tc: TripleConstraint) -> bool:
+    """Check if this is an instance-of [Class1 Class2 ...] constraint."""
+    if not _is_instance_of_predicate(tc.predicate):
         return False
     if not isinstance(tc.constraint, NodeConstraint):
         return False
@@ -148,19 +155,29 @@ def _convert_triple_constraint_to_property(
 
         if ref_shape:
             ref_tcs = _get_triple_constraints(ref_shape)
-            # If it's a simple type assertion shape, convert to sh:class
-            if len(ref_tcs) == 1 and _is_rdf_type_with_single_class(ref_tcs[0]):
-                class_iri = ref_tcs[0].constraint.values[0].value
-                class_ = class_iri
-            # If it's a multi-class type (sh:or pattern)
-            elif len(ref_tcs) == 1 and _is_rdf_type_with_multi_class(ref_tcs[0]):
+            # If it's a single-constraint shape with a value set of one class,
+            # inline as sh:class (covers rdf:type, wdt:P31, wdt:P279, etc.)
+            if (len(ref_tcs) == 1
+                    and isinstance(ref_tcs[0].constraint, NodeConstraint)
+                    and ref_tcs[0].constraint.values
+                    and len(ref_tcs[0].constraint.values) == 1
+                    and isinstance(ref_tcs[0].constraint.values[0].value, IRI)):
+                class_ = ref_tcs[0].constraint.values[0].value
+            # If it's a single-constraint shape with multiple classes in value set
+            elif (len(ref_tcs) == 1
+                    and isinstance(ref_tcs[0].constraint, NodeConstraint)
+                    and ref_tcs[0].constraint.values
+                    and len(ref_tcs[0].constraint.values) > 1):
                 class_iris = [
                     v.value for v in ref_tcs[0].constraint.values
                     if isinstance(v.value, IRI)
                 ]
-                or_constraints = class_iris
+                if class_iris:
+                    or_constraints = class_iris
+                else:
+                    node = _make_shape_iri(ref_name)
             else:
-                # Complex shape → sh:class with the referenced type
+                # Complex shape → sh:class with the extracted target, or sh:node
                 class_ = _extract_target_class(ref_tcs)
                 if class_ is None:
                     node = _make_shape_iri(ref_name)
@@ -258,12 +275,9 @@ def convert_shex_to_shacl(shex: ShExSchema) -> SHACLSchema:
         has_rdf_type_target = False
 
         for tc in tcs:
-            # If this is the rdf:type constraint that maps to targetClass,
-            # add it as sh:hasValue if not already the target
-            if _is_rdf_type_with_single_class(tc) and target_class:
-                # The rdf:type [Class] maps to sh:targetClass.
-                # Also add an explicit property for rdf:type with sh:hasValue
-                # if the SHACL source would have it
+            # If this is the instance-of constraint that maps to targetClass,
+            # skip it (it becomes sh:targetClass on the NodeShape)
+            if _is_instance_of_with_single_class(tc) and target_class:
                 has_rdf_type_target = True
                 continue
 
@@ -277,11 +291,11 @@ def convert_shex_to_shacl(shex: ShExSchema) -> SHACLSchema:
         )
         shapes.append(node_shape)
 
-    # Build prefixes — use standard SHACL prefixes
+    # Build prefixes — use standard SHACL prefixes plus any from the source
     prefixes = list(STANDARD_SHACL_PREFIXES)
     standard_iris = {p.iri for p in STANDARD_SHACL_PREFIXES}
     for pfx in shex.prefixes:
-        if pfx.iri not in standard_iris and pfx.name not in ('sh', 'geo', 'skos', 'wd', 'wdt'):
+        if pfx.iri not in standard_iris and pfx.name not in ('sh',):
             prefixes.append(pfx)
 
     return SHACLSchema(shapes=shapes, prefixes=prefixes)

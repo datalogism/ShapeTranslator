@@ -1,0 +1,53 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/PatentShape> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:path wdt:P5778 ],
+        [ sh:class [ sh:or ( wd:Q327333 wd:Q4830453 ) ] ;
+            sh:path wdt:P859 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q1288568 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P407 ],
+        [ sh:class wd:Q5 ;
+            sh:path wdt:P50 ],
+        [ sh:class wd:Q5 ;
+            sh:path wdt:P61 ],
+        [ sh:class [ sh:or ( wd:Q13442814 wd:Q253623 ) ] ;
+            sh:path wdt:P2860 ],
+        [ sh:datatype xsd:string ;
+            sh:path wdt:P2093 ],
+        [ sh:class [ sh:or ( wd:Q4830453 wd:Q5 wd:Q43229 ) ] ;
+            sh:maxCount 1 ;
+            sh:path wdt:P127 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1476 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P953 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P5008 ],
+        [ sh:class [ sh:or ( wd:Q43229 wd:Q1148446 ) ] ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2378 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P17 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P577 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P373 ] ;
+    sh:targetClass wd:Q253623 .
+

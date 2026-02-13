@@ -1,0 +1,187 @@
+{
+  "shapes": [
+    {
+      "name": "AdministrativeArea",
+      "targetClass": "http://schema.org/AdministrativeArea",
+      "closed": false,
+      "properties": [
+        {
+          "path": "http://schema.org/administrates",
+          "classRef": "http://schema.org/Place",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/alternateName",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/dateCreated",
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/demonym",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/geo",
+          "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/image",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/leader",
+          "classRef": "http://schema.org/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/mainEntityOfPage",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/memberOf",
+          "classRef": "http://schema.org/Organization",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/postalCode",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/sameAs",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/slogan",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/url",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#comment",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#label",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2002/07/owl#sameAs",
+          "iriStem": "http://www.wikidata.org/entity",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://yago-knowledge.org/resource/area",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://yago-knowledge.org/resource/capital",
+          "classRef": "http://schema.org/City",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://yago-knowledge.org/resource/elevation",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://yago-knowledge.org/resource/highestPoint",
+          "classRef": "http://yago-knowledge.org/resource/Mountain",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://yago-knowledge.org/resource/populationNumber",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://yago-knowledge.org/resource/replaces",
+          "nodeRef": "AdministrativeArea",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        }
+      ]
+    }
+  ]
+}

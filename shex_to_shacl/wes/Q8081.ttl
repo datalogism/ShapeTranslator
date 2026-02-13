@@ -1,0 +1,56 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/TornadoShape> a sh:NodeShape ;
+    sh:property [ sh:class wd:Q2696963 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q56061 ;
+            sh:path wdt:P131 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2630 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P1542 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q515 ;
+            sh:path wdt:P276 ],
+        [ sh:class wd:Q8081 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P156 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1120 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2047 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P17 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P580 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P585 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P582 ],
+        [ sh:class wd:Q8081 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P155 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2895 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1339 ] ;
+    sh:targetClass wd:Q8081 .
+

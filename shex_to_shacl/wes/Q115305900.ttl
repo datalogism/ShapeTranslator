@@ -1,0 +1,60 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/LargeLanguageModelShape> a sh:NodeShape ;
+    sh:property [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:hasValue wd:Q50423863 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P6216 ],
+        [ sh:class wd:Q115305900 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P156 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P495 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P1535 ],
+        [ sh:class wd:Q1047113 ;
+            sh:path wdt:P366 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P373 ],
+        [ sh:class [ sh:or ( wd:Q43229 wd:Q18388277 ) ] ;
+            sh:path wdt:P178 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P577 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1324 ],
+        [ sh:datatype xsd:string ;
+            sh:path wdt:P348 ],
+        [ sh:hasValue wd:Q20923490 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P407 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P5008 ],
+        [ sh:class wd:Q9143 ;
+            sh:path wdt:P277 ],
+        [ sh:class wd:Q115305900 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P155 ],
+        [ sh:class wd:Q1047113 ;
+            sh:path wdt:P144 ],
+        [ sh:class wd:Q13442814 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1343 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P571 ],
+        [ sh:class wd:Q77205602 ;
+            sh:path wdt:P275 ] ;
+    sh:targetClass wd:Q115305900 .
+

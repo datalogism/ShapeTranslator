@@ -1,0 +1,34 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/FruitShape> a sh:NodeShape ;
+    sh:property [ sh:class wd:Q16521 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1582 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P7971 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P6000 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P487 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P495 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P910 ],
+        [ sh:class [ sh:or ( wd:Q1075 wd:Q166902 ) ] ;
+            sh:path wdt:P462 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ] ;
+    sh:targetClass wd:Q3314483 .
+

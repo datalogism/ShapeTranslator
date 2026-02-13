@@ -1,0 +1,156 @@
+{
+  "shapes": [
+    {
+      "name": "Event",
+      "targetClass": "http://schema.org/Event",
+      "closed": false,
+      "properties": [
+        {
+          "path": "http://schema.org/about",
+          "nodeKind": "IRI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/alternateName",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/endDate",
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/image",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/location",
+          "classRef": "http://schema.org/Place",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/mainEntityOfPage",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/organizer",
+          "classRefOr": [
+            "http://schema.org/Organization",
+            "http://schema.org/Person"
+          ],
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/sameAs",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/sponsor",
+          "classRefOr": [
+            "http://schema.org/Organization",
+            "http://schema.org/Person"
+          ],
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/startDate",
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/superEvent",
+          "nodeRef": "Event",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/url",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#comment",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#label",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2002/07/owl#sameAs",
+          "iriStem": "http://www.wikidata.org/entity",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://yago-knowledge.org/resource/follows",
+          "nodeRef": "Event",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://yago-knowledge.org/resource/participant",
+          "classRefOr": [
+            "http://schema.org/Organization",
+            "http://schema.org/Person"
+          ],
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        }
+      ]
+    }
+  ]
+}

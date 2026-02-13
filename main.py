@@ -1,8 +1,8 @@
 """SHACL <-> ShEx Translator — CLI entry point.
 
 Usage:
-    python main.py --input FILE --direction shacl2shex|shex2shacl [--output FILE]
-    python main.py --input-dir DIR --output-dir DIR --direction shacl2shex|shex2shacl
+    python main.py --input FILE --direction shacl2shex|shex2shacl|shacl2json|shex2json [--output FILE]
+    python main.py --input-dir DIR --output-dir DIR --direction shacl2shex|shex2shacl|shacl2json|shex2json
     python main.py --batch   # Run full YAGO batch in both directions
 """
 from __future__ import annotations
@@ -39,6 +39,22 @@ def convert_file(input_path: str, direction: str, output_path: str | None = None
         shex = parse_shex_file(input_path)
         shacl = convert_shex_to_shacl(shex)
         result = serialize_shacl(shacl)
+    elif direction == "shacl2json":
+        from parsers.shacl_parser import parse_shacl_file
+        from converters.shacl_to_json import convert_shacl_to_json
+        from serializers.json_serializer import serialize_json
+
+        shacl = parse_shacl_file(input_path)
+        canonical = convert_shacl_to_json(shacl)
+        result = serialize_json(canonical)
+    elif direction == "shex2json":
+        from parsers.shex_parser import parse_shex_file
+        from converters.shex_to_json import convert_shex_to_json
+        from serializers.json_serializer import serialize_json
+
+        shex = parse_shex_file(input_path)
+        canonical = convert_shex_to_json(shex)
+        result = serialize_json(canonical)
     else:
         raise ValueError(f"Unknown direction: {direction!r}")
 
@@ -58,10 +74,13 @@ def convert_batch(input_dir: str, output_dir: str, direction: str) -> tuple[int,
     """
     os.makedirs(output_dir, exist_ok=True)
 
-    if direction == "shacl2shex":
-        ext_in, ext_out = ".ttl", ".shex"
-    else:
-        ext_in, ext_out = ".shex", ".ttl"
+    ext_map = {
+        "shacl2shex": (".ttl", ".shex"),
+        "shex2shacl": (".shex", ".ttl"),
+        "shacl2json": (".ttl", ".json"),
+        "shex2json": (".shex", ".json"),
+    }
+    ext_in, ext_out = ext_map[direction]
 
     ok = 0
     fail = 0
@@ -123,7 +142,7 @@ def main():
     )
     parser.add_argument(
         "--direction", "-d",
-        choices=["shacl2shex", "shex2shacl"],
+        choices=["shacl2shex", "shex2shacl", "shacl2json", "shex2json"],
         help="Conversion direction",
     )
     parser.add_argument(

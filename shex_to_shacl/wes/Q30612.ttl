@@ -1,0 +1,58 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/ClinicalTrialShape> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2899 ],
+        [ sh:class [ sh:or ( wd:Q12136 wd:Q7189713 ) ] ;
+            sh:path wdt:P1050 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1813 ],
+        [ sh:class wd:Q78088984 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path wdt:P8363 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path wdt:P1132 ],
+        [ sh:class wd:Q6256 ;
+            sh:path wdt:P17 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path wdt:P580 ],
+        [ sh:class wd:Q7180990 ;
+            sh:path wdt:P6099 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path wdt:P1476 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P4844 ],
+        [ sh:class [ sh:or ( wd:Q43229 wd:Q4830453 wd:Q16917 ) ] ;
+            sh:maxCount 1 ;
+            sh:path wdt:P859 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P8329 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P582 ],
+        [ sh:class [ sh:or ( wd:Q16917 wd:Q43229 wd:Q4830453 ) ] ;
+            sh:path wdt:P767 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P4135 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ] ;
+    sh:targetClass wd:Q30612 .
+

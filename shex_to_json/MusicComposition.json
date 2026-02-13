@@ -1,0 +1,132 @@
+{
+  "shapes": [
+    {
+      "name": "MusicComposition",
+      "targetClass": "http://schema.org/MusicComposition",
+      "closed": false,
+      "properties": [
+        {
+          "path": "http://schema.org/alternateName",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/author",
+          "classRefOr": [
+            "http://schema.org/Organization",
+            "http://schema.org/Person"
+          ],
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/dateCreated",
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/editor",
+          "classRef": "http://schema.org/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/image",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/inLanguage",
+          "classRef": "http://schema.org/Language",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/iswcCode",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/lyricist",
+          "classRefOr": [
+            "http://schema.org/MusicGroup",
+            "http://schema.org/Person"
+          ],
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/mainEntityOfPage",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/musicBy",
+          "classRefOr": [
+            "http://schema.org/MusicGroup",
+            "http://schema.org/Person"
+          ],
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/sameAs",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#comment",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#label",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2002/07/owl#sameAs",
+          "iriStem": "http://www.wikidata.org/entity",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        }
+      ]
+    }
+  ]
+}

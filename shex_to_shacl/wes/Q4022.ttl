@@ -1,0 +1,120 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/RiverShape> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2044 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P2789 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path wdt:P17 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q89210005 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P3871 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2043 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P5008 ],
+        [ sh:class [ sh:or ( wd:Q82794 wd:Q618123 wd:Q2221906 wd:Q17334923 ) ] ;
+            sh:maxCount 1 ;
+            sh:path wdt:P276 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P366 ],
+        [ sh:class wd:Q43229 ;
+            sh:path wdt:P126 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q67376938 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P7959 ],
+        [ sh:class [ sh:or ( wd:Q12323 wd:Q105190 ) ] ;
+            sh:path wdt:P4792 ],
+        [ sh:class wd:Q6256 ;
+            sh:path wdt:P205 ],
+        [ sh:class [ sh:or ( wd:Q4022 wd:Q355304 ) ] ;
+            sh:path wdt:P974 ],
+        [ sh:datatype rdf:langString ;
+            sh:path wdt:P1705 ],
+        [ sh:class wd:Q15324 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P403 ],
+        [ sh:class [ sh:or ( wd:Q3331189 wd:Q47461344 ) ] ;
+            sh:path wdt:P1343 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P935 ],
+        [ sh:class [ sh:or ( wd:Q210272 wd:Q386426 ) ] ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1435 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1200 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2053 ],
+        [ sh:class wd:Q5107 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P30 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2225 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1548 ],
+        [ sh:class wd:Q12143 ;
+            sh:path wdt:P421 ],
+        [ sh:class [ sh:or ( wd:Q82794 wd:Q618123 wd:Q2221906 ) ] ;
+            sh:maxCount 1 ;
+            sh:path wdt:P706 ],
+        [ sh:datatype xsd:decimal ;
+            sh:path wdt:P2046 ],
+        [ sh:class wd:Q23397 ;
+            sh:path wdt:P469 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1183 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P460 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P4184 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:datatype rdf:langString ;
+            sh:path wdt:P1448 ],
+        [ sh:class [ sh:or ( wd:Q56061 wd:Q7930989 ) ] ;
+            sh:maxCount 1 ;
+            sh:path wdt:P131 ],
+        [ sh:class [ sh:or ( wd:Q271669 wd:Q15324 ) ] ;
+            sh:maxCount 1 ;
+            sh:path wdt:P885 ],
+        [ sh:class wd:Q473972 ;
+            sh:path wdt:P3018 ],
+        [ sh:class [ sh:or ( wd:Q1061151 wd:Q8502 wd:Q46831 ) ] ;
+            sh:maxCount 1 ;
+            sh:path wdt:P4552 ],
+        [ sh:class wd:Q166620 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P4614 ] ;
+    sh:targetClass wd:Q4022 .
+

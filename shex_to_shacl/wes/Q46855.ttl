@@ -1,0 +1,72 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/HackathonShape> a sh:NodeShape ;
+    sh:property [ sh:class [ sh:or ( wd:Q5 wd:Q43229 ) ] ;
+            sh:path wdt:P710 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P373 ],
+        [ sh:class [ sh:or ( wd:Q16334295 wd:Q43229 ) ] ;
+            sh:path wdt:P664 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P580 ],
+        [ sh:class wd:Q46855 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P156 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P585 ],
+        [ sh:datatype xsd:string ;
+            sh:path wdt:P2572 ],
+        [ sh:class wd:Q46855 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P155 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P17 ],
+        [ sh:class wd:Q515 ;
+            sh:path wdt:P276 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:class [ sh:or ( wd:Q5 wd:Q43229 ) ] ;
+            sh:path wdt:P1346 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:class wd:Q15275719 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P179 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1324 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:class wd:Q43229 ;
+            sh:path wdt:P859 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P393 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P6104 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2121 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P582 ],
+        [ sh:datatype xsd:decimal ;
+            sh:path wdt:P1132 ] ;
+    sh:targetClass wd:Q46855 .
+

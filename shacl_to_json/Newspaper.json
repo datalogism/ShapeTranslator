@@ -1,0 +1,148 @@
+{
+  "shapes": [
+    {
+      "name": "Newspaper",
+      "targetClass": "http://schema.org/Newspaper",
+      "closed": false,
+      "properties": [
+        {
+          "path": "http://schema.org/about",
+          "nodeKind": "IRI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/alternateName",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/author",
+          "classRefOr": [
+            "http://schema.org/Organization",
+            "http://schema.org/Person"
+          ],
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/award",
+          "classRef": "http://yago-knowledge.org/resource/Award",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/dateCreated",
+          "datatype": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/image",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/inLanguage",
+          "classRef": "http://schema.org/Language",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/locationCreated",
+          "classRef": "http://schema.org/Place",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/mainEntityOfPage",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/publisher",
+          "classRefOr": [
+            "http://schema.org/Organization",
+            "http://schema.org/Person"
+          ],
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/sameAs",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://schema.org/sponsor",
+          "classRefOr": [
+            "http://schema.org/Organization",
+            "http://schema.org/Person"
+          ],
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://schema.org/url",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#comment",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#label",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2002/07/owl#sameAs",
+          "iriStem": "http://www.wikidata.org/entity",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        }
+      ]
+    }
+  ]
+}

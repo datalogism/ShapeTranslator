@@ -1,0 +1,41 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/LunarCraterShape> a sh:NodeShape ;
+    sh:property [ sh:class wd:Q180874 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P706 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1448 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path wdt:P2386 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2046 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path wdt:P373 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path wdt:P4511 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:hasValue wd:Q405 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path wdt:P376 ],
+        [ sh:class wd:Q56551180 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path wdt:P276 ] ;
+    sh:targetClass wd:Q1348589 .
+

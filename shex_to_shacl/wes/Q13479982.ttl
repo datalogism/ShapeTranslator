@@ -1,0 +1,83 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/CryptocurrencyShape> a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1324 ],
+        [ sh:datatype xsd:string ;
+            sh:path wdt:P348 ],
+        [ sh:datatype xsd:decimal ;
+            sh:path wdt:P8687 ],
+        [ sh:datatype xsd:decimal ;
+            sh:path wdt:P2284 ],
+        [ sh:class wd:Q25401607 ;
+            sh:path wdt:P414 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P495 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P1535 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path wdt:P571 ],
+        [ sh:class wd:Q4830453 ;
+            sh:path wdt:P178 ],
+        [ sh:class wd:Q9135 ;
+            sh:path wdt:P306 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path wdt:P5061 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:class wd:Q308229 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P489 ],
+        [ sh:class wd:Q9143 ;
+            sh:path wdt:P277 ],
+        [ sh:class wd:Q13479982 ;
+            sh:path wdt:P941 ],
+        [ sh:hasValue wd:Q50423863 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P6216 ],
+        [ sh:class [ sh:or ( wd:Q5 wd:Q4830453 ) ] ;
+            sh:path wdt:P112 ],
+        [ sh:class [ sh:or ( wd:Q1047113 wd:Q11862829 ) ] ;
+            sh:path wdt:P366 ],
+        [ sh:class [ sh:or ( wd:Q5 wd:Q4830453 ) ] ;
+            sh:path wdt:P170 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P910 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path wdt:P373 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P6541 ],
+        [ sh:class wd:Q13479982 ;
+            sh:path wdt:P144 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path wdt:P2226 ],
+        [ sh:datatype xsd:string ;
+            sh:path wdt:P5810 ],
+        [ sh:class wd:Q77205602 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P275 ],
+        [ sh:maxCount 1 ;
+            sh:path wdt:P6363 ;
+            sh:pattern "^http://data.thenextweb.com/tnw/entity//" ] ;
+    sh:targetClass wd:Q13479982 .
+

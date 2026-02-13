@@ -1,0 +1,60 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/FileSystemShape> a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1324 ],
+        [ sh:datatype xsd:string ;
+            sh:path wdt:P4654 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:path wdt:P571 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P366 ],
+        [ sh:class wd:Q174989 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P156 ],
+        [ sh:class wd:Q77205602 ;
+            sh:path wdt:P275 ],
+        [ sh:class wd:Q7397 ;
+            sh:path wdt:P2283 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:datatype xsd:string ;
+            sh:path wdt:P348 ],
+        [ sh:class [ sh:or ( wd:Q5 wd:Q43229 wd:Q4830453 ) ] ;
+            sh:path wdt:P178 ],
+        [ sh:class wd:Q174989 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P1366 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q7397 ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q9135 ;
+            sh:path wdt:P306 ],
+        [ sh:class wd:Q7397 ;
+            sh:path wdt:P1535 ],
+        [ sh:class wd:Q9143 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P277 ],
+        [ sh:class wd:Q174989 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P155 ],
+        [ sh:hasValue wd:Q50423863 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P6216 ],
+        [ sh:class wd:Q174989 ;
+            sh:maxCount 1 ;
+            sh:path wdt:P144 ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1482 ] ;
+    sh:targetClass wd:Q174989 .
+
