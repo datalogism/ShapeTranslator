@@ -21,12 +21,20 @@ This project is a Python companion to [weso/shaclex](https://github.com/weso/sha
           +--------------+                  +--------------+
                   |           \        /           |
         shacl_serializer.py    Canonical    shex_serializer.py
-                  |             (JSON)             |
-                  v                                v
-             SHACL (Turtle)                    ShEx (ShExC)
+                  |           /   JSON  \          |
+                  v          v          v          v
+             SHACL (Turtle)    (*.json)       ShEx (ShExC)
+                               |
+                          json_parser.py
+                               |
+                               v
+                       +--------------+
+                       |  Canonical   |--- canonical_to_shacl ---> SHACL
+                       |   Schema     |--- canonical_to_shex  ---> ShEx
+                       +--------------+
 ```
 
-The pipeline is: **parse** input into an internal schema model, **convert** between models, then **serialize** to the target format. Both directions can also produce a **canonical JSON** intermediate representation for deterministic comparison.
+The pipeline is: **parse** input into an internal schema model, **convert** between models, then **serialize** to the target format. All three representations (SHACL, ShEx, canonical JSON) are fully interconvertible -- the canonical JSON format serves both as a deterministic comparison tool and as a portable interchange format that can be converted back to SHACL or ShEx.
 
 ## Project Structure
 
@@ -41,18 +49,21 @@ The pipeline is: **parse** input into an internal schema model, **convert** betw
 │   │   ├── shex.py              ShEx dataclasses (ShExSchema, Shape, TripleConstraint)
 │   │   └── canonical.py         Canonical JSON model (CanonicalSchema, CanonicalShape)
 │   ├── converter/
-│   │   ├── shacl_to_shex.py     SHACL schema -> ShEx schema
-│   │   ├── shex_to_shacl.py     ShEx schema -> SHACL schema
-│   │   ├── shacl_to_canonical.py SHACL schema -> canonical JSON
-│   │   └── shex_to_canonical.py  ShEx schema -> canonical JSON
+│   │   ├── shacl_to_shex.py      SHACL schema -> ShEx schema
+│   │   ├── shex_to_shacl.py      ShEx schema -> SHACL schema
+│   │   ├── shacl_to_canonical.py  SHACL schema -> canonical JSON
+│   │   ├── shex_to_canonical.py   ShEx schema -> canonical JSON
+│   │   ├── canonical_to_shacl.py  Canonical JSON -> SHACL schema
+│   │   └── canonical_to_shex.py   Canonical JSON -> ShEx schema
 │   ├── parser/
 │   │   ├── shacl_parser.py      Turtle/SHACL -> SHACL schema (uses rdflib)
-│   │   └── shex_parser.py       ShExC -> ShEx schema (custom tokenizer)
+│   │   ├── shex_parser.py       ShExC -> ShEx schema (custom tokenizer)
+│   │   └── json_parser.py       JSON file/string -> CanonicalSchema
 │   └── serializer/
 │       ├── shacl_serializer.py  SHACL schema -> Turtle string (uses rdflib)
 │       ├── shex_serializer.py   ShEx schema -> ShExC string
 │       └── json_serializer.py   Canonical schema -> JSON string
-├── tests/                       37 tests across 5 test files
+├── tests/                       91 tests across 7 test files
 ├── dataset/
 │   ├── shacl_yago/              37 YAGO SHACL reference files (.ttl)
 │   └── shex_yago/               37 YAGO ShEx reference files (.shex)

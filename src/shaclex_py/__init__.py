@@ -16,6 +16,10 @@ from shaclex_py.converter.shacl_to_shex import convert_shacl_to_shex
 from shaclex_py.converter.shex_to_shacl import convert_shex_to_shacl
 from shaclex_py.converter.shacl_to_canonical import convert_shacl_to_canonical
 from shaclex_py.converter.shex_to_canonical import convert_shex_to_canonical
+from shaclex_py.converter.canonical_to_shacl import convert_canonical_to_shacl
+from shaclex_py.converter.canonical_to_shex import convert_canonical_to_shex
+
+from shaclex_py.parser.json_parser import parse_canonical, parse_canonical_file
 
 from shaclex_py.serializer.shacl_serializer import serialize_shacl
 from shaclex_py.serializer.shex_serializer import serialize_shex
@@ -33,6 +37,9 @@ __all__ = [
     # Converters
     "convert_shacl_to_shex", "convert_shex_to_shacl",
     "convert_shacl_to_canonical", "convert_shex_to_canonical",
+    "convert_canonical_to_shacl", "convert_canonical_to_shex",
+    # Parsers (canonical)
+    "parse_canonical", "parse_canonical_file",
     # Serializers
     "serialize_shacl", "serialize_shex", "serialize_json",
 ]

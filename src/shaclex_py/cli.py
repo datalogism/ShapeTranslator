@@ -55,6 +55,22 @@ def convert_file(input_path: str, direction: str, output_path: str | None = None
         shex = parse_shex_file(input_path)
         canonical = convert_shex_to_canonical(shex)
         result = serialize_json(canonical)
+    elif direction == "json2shacl":
+        from shaclex_py.parser.json_parser import parse_canonical_file
+        from shaclex_py.converter.canonical_to_shacl import convert_canonical_to_shacl
+        from shaclex_py.serializer.shacl_serializer import serialize_shacl
+
+        canonical = parse_canonical_file(input_path)
+        shacl = convert_canonical_to_shacl(canonical)
+        result = serialize_shacl(shacl)
+    elif direction == "json2shex":
+        from shaclex_py.parser.json_parser import parse_canonical_file
+        from shaclex_py.converter.canonical_to_shex import convert_canonical_to_shex
+        from shaclex_py.serializer.shex_serializer import serialize_shex
+
+        canonical = parse_canonical_file(input_path)
+        shex = convert_canonical_to_shex(canonical)
+        result = serialize_shex(shex)
     else:
         raise ValueError(f"Unknown direction: {direction!r}")
 
@@ -79,6 +95,8 @@ def convert_batch(input_dir: str, output_dir: str, direction: str) -> tuple[int,
         "shex2shacl": (".shex", ".ttl"),
         "shacl2json": (".ttl", ".json"),
         "shex2json": (".shex", ".json"),
+        "json2shacl": (".json", ".ttl"),
+        "json2shex": (".json", ".shex"),
     }
     ext_in, ext_out = ext_map[direction]
 
@@ -142,7 +160,7 @@ def main():
     )
     parser.add_argument(
         "--direction", "-d",
-        choices=["shacl2shex", "shex2shacl", "shacl2json", "shex2json"],
+        choices=["shacl2shex", "shex2shacl", "shacl2json", "shex2json", "json2shacl", "json2shex"],
         help="Conversion direction",
     )
     parser.add_argument(
