@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+
+# Output directories
+shacl_to_shex/
+shex_to_shacl/
+shacl_to_json/
+shex_to_json/
+
+# OS
+.DS_Store
+Thumbs.db
