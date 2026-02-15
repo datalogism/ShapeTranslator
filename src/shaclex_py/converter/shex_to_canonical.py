@@ -11,8 +11,8 @@ from __future__ import annotations
 
 from typing import Optional, Union
 
-from models.common import IRI, UNBOUNDED, IriStem, Literal, NodeKind
-from models.shex_model import (
+from shaclex_py.schema.common import IRI, UNBOUNDED, IriStem, Literal, NodeKind
+from shaclex_py.schema.shex import (
     EachOf,
     NodeConstraint,
     OneOf,
@@ -22,7 +22,7 @@ from models.shex_model import (
     TripleConstraint,
     ValueSetValue,
 )
-from models.json_model import (
+from shaclex_py.schema.canonical import (
     CanonicalCardinality,
     CanonicalProperty,
     CanonicalSchema,
@@ -161,7 +161,7 @@ def _identify_main_shapes(schema: ShExSchema) -> set[str]:
     return main_names
 
 
-def convert_shex_to_json(shex: ShExSchema) -> CanonicalSchema:
+def convert_shex_to_canonical(shex: ShExSchema) -> CanonicalSchema:
     """Convert a ShEx schema to a canonical JSON schema.
 
     Args:

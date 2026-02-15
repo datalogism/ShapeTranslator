@@ -1,12 +1,12 @@
 """Roundtrip tests: SHACL -> ShEx -> SHACL and ShEx -> SHACL -> ShEx."""
 import os
 import pytest
-from parsers.shacl_parser import parse_shacl_file
-from parsers.shex_parser import parse_shex_file
-from converters.shacl_to_shex import convert_shacl_to_shex
-from converters.shex_to_shacl import convert_shex_to_shacl
-from serializers.shacl_serializer import serialize_shacl
-from serializers.shex_serializer import serialize_shex
+from shaclex_py.parser.shacl_parser import parse_shacl_file
+from shaclex_py.parser.shex_parser import parse_shex_file
+from shaclex_py.converter.shacl_to_shex import convert_shacl_to_shex
+from shaclex_py.converter.shex_to_shacl import convert_shex_to_shacl
+from shaclex_py.serializer.shacl_serializer import serialize_shacl
+from shaclex_py.serializer.shex_serializer import serialize_shex
 
 SHACL_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shacl_yago")
 SHEX_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shex_yago")

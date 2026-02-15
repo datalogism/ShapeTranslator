@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from typing import Optional, Union
 
-from models.common import (
+from shaclex_py.schema.common import (
     IRI,
     UNBOUNDED,
     Cardinality,
@@ -15,8 +15,8 @@ from models.common import (
     NodeKind,
     Prefix,
 )
-from models.shacl_model import NodeShape, PropertyShape, SHACLSchema
-from models.shex_model import (
+from shaclex_py.schema.shacl import NodeShape, PropertyShape, SHACLSchema
+from shaclex_py.schema.shex import (
     EachOf,
     NodeConstraint,
     OneOf,
@@ -134,7 +134,7 @@ def _convert_triple_constraint_to_property(
     schema: ShExSchema,
 ) -> PropertyShape:
     """Convert a ShEx TripleConstraint to a SHACL PropertyShape."""
-    from models.common import Path
+    from shaclex_py.schema.common import Path
 
     path = Path(iri=tc.predicate)
     min_count, max_count = _convert_cardinality_to_shacl(tc.cardinality)

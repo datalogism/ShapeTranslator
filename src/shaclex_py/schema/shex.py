@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Optional, Union
 
-from models.common import IRI, Cardinality, IriStem, Literal, NodeKind, Prefix
+from shaclex_py.schema.common import IRI, Cardinality, IriStem, Literal, NodeKind, Prefix
 
 
 @dataclass

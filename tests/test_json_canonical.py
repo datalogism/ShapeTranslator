@@ -8,11 +8,11 @@ import os
 
 import pytest
 
-from parsers.shacl_parser import parse_shacl_file
-from parsers.shex_parser import parse_shex_file
-from converters.shacl_to_json import convert_shacl_to_json
-from converters.shex_to_json import convert_shex_to_json
-from serializers.json_serializer import serialize_json
+from shaclex_py.parser.shacl_parser import parse_shacl_file
+from shaclex_py.parser.shex_parser import parse_shex_file
+from shaclex_py.converter.shacl_to_canonical import convert_shacl_to_canonical
+from shaclex_py.converter.shex_to_canonical import convert_shex_to_canonical
+from shaclex_py.serializer.json_serializer import serialize_json
 
 SHACL_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shacl_yago")
 SHEX_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shex_yago")
@@ -21,13 +21,13 @@ SHEX_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shex_yago")
 def _shacl_json(name: str) -> str:
     """Parse SHACL file and return canonical JSON string."""
     shacl = parse_shacl_file(os.path.join(SHACL_DIR, f"{name}.ttl"))
-    return serialize_json(convert_shacl_to_json(shacl))
+    return serialize_json(convert_shacl_to_canonical(shacl))
 
 
 def _shex_json(name: str) -> str:
     """Parse ShEx file and return canonical JSON string."""
     shex = parse_shex_file(os.path.join(SHEX_DIR, f"{name}.shex"))
-    return serialize_json(convert_shex_to_json(shex))
+    return serialize_json(convert_shex_to_canonical(shex))
 
 
 # ── Structural tests ──────────────────────────────────────────────

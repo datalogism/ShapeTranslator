@@ -22,7 +22,11 @@
       "Bash(/mnt/c/Users/doccr/PycharmProjects/PythonProject1/.venv/Scripts/python.exe:*)",
       "Bash(export PYTHON=/mnt/c/Users/doccr/PycharmProjects/PythonProject1/.venv/Scripts/python.exe:*)",
       "Bash($PYTHON -c \"print\\(''alias works''\\)\")",
-      "Bash(xxd:*)"
+      "Bash(xxd:*)",
+      "WebSearch",
+      "Bash(git mv:*)",
+      "Bash(pip install:*)",
+      "Bash(pytest:*)"
     ]
   }
 }

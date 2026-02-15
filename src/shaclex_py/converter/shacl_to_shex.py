@@ -7,7 +7,7 @@ from __future__ import annotations
 import re
 from typing import Optional, Union
 
-from models.common import (
+from shaclex_py.schema.common import (
     IRI,
     UNBOUNDED,
     Cardinality,
@@ -16,8 +16,8 @@ from models.common import (
     NodeKind,
     Prefix,
 )
-from models.shacl_model import NodeShape, PropertyShape, SHACLSchema
-from models.shex_model import (
+from shaclex_py.schema.shacl import NodeShape, PropertyShape, SHACLSchema
+from shaclex_py.schema.shex import (
     EachOf,
     NodeConstraint,
     Shape,

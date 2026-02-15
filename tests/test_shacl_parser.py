@@ -1,7 +1,7 @@
 """Tests for SHACL parser."""
 import os
 import pytest
-from parsers.shacl_parser import parse_shacl_file
+from shaclex_py.parser.shacl_parser import parse_shacl_file
 
 
 YAGO_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shacl_yago")

@@ -1,8 +1,8 @@
 """Tests for ShEx parser."""
 import os
 import pytest
-from parsers.shex_parser import parse_shex_file
-from models.shex_model import EachOf, TripleConstraint, NodeConstraint, ShapeRef
+from shaclex_py.parser.shex_parser import parse_shex_file
+from shaclex_py.schema.shex import EachOf, TripleConstraint, NodeConstraint, ShapeRef
 
 
 YAGO_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shex_yago")

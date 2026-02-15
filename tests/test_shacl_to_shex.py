@@ -1,11 +1,11 @@
 """Tests for SHACL -> ShEx converter."""
 import os
 import pytest
-from parsers.shacl_parser import parse_shacl_file
-from parsers.shex_parser import parse_shex_file
-from converters.shacl_to_shex import convert_shacl_to_shex
-from serializers.shex_serializer import serialize_shex
-from models.shex_model import EachOf, TripleConstraint, NodeConstraint, ShapeRef
+from shaclex_py.parser.shacl_parser import parse_shacl_file
+from shaclex_py.parser.shex_parser import parse_shex_file
+from shaclex_py.converter.shacl_to_shex import convert_shacl_to_shex
+from shaclex_py.serializer.shex_serializer import serialize_shex
+from shaclex_py.schema.shex import EachOf, TripleConstraint, NodeConstraint, ShapeRef
 
 SHACL_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shacl_yago")
 SHEX_REF_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shex_yago")

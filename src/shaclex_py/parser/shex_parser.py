@@ -10,8 +10,8 @@ from __future__ import annotations
 import re
 from typing import Optional, Union
 
-from models.common import IRI, UNBOUNDED, Cardinality, IriStem, Literal, NodeKind, Prefix
-from models.shex_model import (
+from shaclex_py.schema.common import IRI, UNBOUNDED, Cardinality, IriStem, Literal, NodeKind, Prefix
+from shaclex_py.schema.shex import (
     EachOf,
     NodeConstraint,
     Shape,

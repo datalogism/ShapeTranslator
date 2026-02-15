@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 
-from models.json_model import CanonicalSchema
+from shaclex_py.schema.canonical import CanonicalSchema
 
 
 def serialize_json(schema: CanonicalSchema) -> str:

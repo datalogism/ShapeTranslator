@@ -5,8 +5,8 @@ import rdflib
 from rdflib import BNode, Graph, Namespace, URIRef
 from rdflib.collection import Collection
 
-from models.common import IRI, Literal, NodeKind
-from models.shacl_model import NodeShape, PropertyShape, SHACLSchema
+from shaclex_py.schema.common import IRI, Literal, NodeKind
+from shaclex_py.schema.shacl import NodeShape, PropertyShape, SHACLSchema
 
 SH = Namespace("http://www.w3.org/ns/shacl#")
 RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")

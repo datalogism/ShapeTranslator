@@ -3,8 +3,8 @@ from __future__ import annotations
 
 from typing import Union
 
-from models.common import IRI, UNBOUNDED, IriStem, Literal, NodeKind
-from models.shex_model import (
+from shaclex_py.schema.common import IRI, UNBOUNDED, IriStem, Literal, NodeKind
+from shaclex_py.schema.shex import (
     EachOf,
     NodeConstraint,
     OneOf,

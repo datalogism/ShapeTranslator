@@ -13,9 +13,9 @@ from __future__ import annotations
 import re
 from typing import Optional, Union
 
-from models.common import IRI, UNBOUNDED, IriStem, Literal, NodeKind
-from models.shacl_model import NodeShape, PropertyShape, SHACLSchema
-from models.json_model import (
+from shaclex_py.schema.common import IRI, UNBOUNDED, IriStem, Literal, NodeKind
+from shaclex_py.schema.shacl import NodeShape, PropertyShape, SHACLSchema
+from shaclex_py.schema.canonical import (
     CanonicalCardinality,
     CanonicalProperty,
     CanonicalSchema,
@@ -92,7 +92,7 @@ def _convert_property(ps: PropertyShape) -> Optional[CanonicalProperty]:
     return prop
 
 
-def convert_shacl_to_json(shacl: SHACLSchema) -> CanonicalSchema:
+def convert_shacl_to_canonical(shacl: SHACLSchema) -> CanonicalSchema:
     """Convert a SHACL schema to a canonical JSON schema.
 
     Args:

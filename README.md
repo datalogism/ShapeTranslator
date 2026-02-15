@@ -1,8 +1,12 @@
-# SHACL <-> ShEx Translator
+# shaclex-py
 
 A bidirectional translator between **SHACL** (Shapes Constraint Language, Turtle format) and **ShEx** (Shape Expressions, ShExC compact syntax), built from scratch in Python.
 
-The translator converts between these two RDF validation languages using an intermediate model representation, handling the semantic differences documented in [Validating RDF Data, Ch. 13](https://book.validatingrdf.com/bookHtml013.html) and informed by the [weso/shaclex](https://github.com/weso/shaclex) Scala reference implementation.
+The translator converts between these two RDF validation languages using an intermediate model representation, handling the semantic differences documented in [Validating RDF Data, Ch. 13](https://book.validatingrdf.com/bookHtml013.html).
+
+## Relationship to weso/shaclex
+
+This project is a Python companion to [weso/shaclex](https://github.com/weso/shaclex), the Scala reference implementation for SHACL/ShEx interoperability. The module layout (`schema`, `converter`, `parser`, `serializer`) mirrors the architecture of shaclex to make the two projects easy to navigate side by side. Where shaclex provides the authoritative Scala-based toolkit, **shaclex-py** offers a lightweight pure-Python alternative suitable for scripting, prototyping, and integration into Python-based RDF workflows.
 
 ## Architecture
 
@@ -13,41 +17,47 @@ The translator converts between these two RDF validation languages using an inte
                   |                                 |
                   v                                 v
           +--------------+                  +--------------+
-          | SHACL Model  | <--- convert --> |  ShEx Model  |
+          | SHACL Schema | <--- convert --> |  ShEx Schema |
           +--------------+                  +--------------+
-                  |                                 |
-        shacl_serializer.py                shex_serializer.py
-                  |                                 |
-                  v                                 v
+                  |           \        /           |
+        shacl_serializer.py    Canonical    shex_serializer.py
+                  |             (JSON)             |
+                  v                                v
              SHACL (Turtle)                    ShEx (ShExC)
 ```
 
-The pipeline is: **parse** input into an internal model, **convert** between models, then **serialize** to the target format. This design keeps each concern isolated and allows roundtrip testing.
+The pipeline is: **parse** input into an internal schema model, **convert** between models, then **serialize** to the target format. Both directions can also produce a **canonical JSON** intermediate representation for deterministic comparison.
 
 ## Project Structure
 
 ```
-├── models/
-│   ├── common.py             Shared types (Cardinality, IRI, NodeKind, Path, etc.)
-│   ├── shacl_model.py        SHACL dataclasses (SHACLSchema, NodeShape, PropertyShape)
-│   └── shex_model.py         ShEx dataclasses (ShExSchema, Shape, TripleConstraint)
-├── parsers/
-│   ├── shacl_parser.py       Turtle/SHACL -> SHACL model (uses rdflib)
-│   └── shex_parser.py        ShExC -> ShEx model (custom tokenizer)
-├── converters/
-│   ├── shacl_to_shex.py      SHACL model -> ShEx model
-│   └── shex_to_shacl.py      ShEx model -> SHACL model
-├── serializers/
-│   ├── shacl_serializer.py   SHACL model -> Turtle string (uses rdflib)
-│   └── shex_serializer.py    ShEx model -> ShExC string
-├── tests/                    37 tests across 5 test files
+├── src/shaclex_py/
+│   ├── __init__.py              Public API + version
+│   ├── __main__.py              python -m shaclex_py support
+│   ├── cli.py                   CLI entry point
+│   ├── schema/
+│   │   ├── common.py            Shared types (Cardinality, IRI, NodeKind, Path, ...)
+│   │   ├── shacl.py             SHACL dataclasses (SHACLSchema, NodeShape, PropertyShape)
+│   │   ├── shex.py              ShEx dataclasses (ShExSchema, Shape, TripleConstraint)
+│   │   └── canonical.py         Canonical JSON model (CanonicalSchema, CanonicalShape)
+│   ├── converter/
+│   │   ├── shacl_to_shex.py     SHACL schema -> ShEx schema
+│   │   ├── shex_to_shacl.py     ShEx schema -> SHACL schema
+│   │   ├── shacl_to_canonical.py SHACL schema -> canonical JSON
+│   │   └── shex_to_canonical.py  ShEx schema -> canonical JSON
+│   ├── parser/
+│   │   ├── shacl_parser.py      Turtle/SHACL -> SHACL schema (uses rdflib)
+│   │   └── shex_parser.py       ShExC -> ShEx schema (custom tokenizer)
+│   └── serializer/
+│       ├── shacl_serializer.py  SHACL schema -> Turtle string (uses rdflib)
+│       ├── shex_serializer.py   ShEx schema -> ShExC string
+│       └── json_serializer.py   Canonical schema -> JSON string
+├── tests/                       37 tests across 5 test files
 ├── dataset/
-│   ├── shacl_yago/           37 YAGO SHACL reference files (.ttl)
-│   └── shex_yago/            37 YAGO ShEx reference files (.shex)
-├── shacl_to_shex/            Output: SHACL -> ShEx conversion results
-├── shex_to_shacl/            Output: ShEx -> SHACL conversion results
-├── main.py                   CLI entry point
-└── requirements.txt
+│   ├── shacl_yago/              37 YAGO SHACL reference files (.ttl)
+│   └── shex_yago/               37 YAGO ShEx reference files (.shex)
+├── main.py                      Thin CLI wrapper (backward compat)
+└── pyproject.toml
 ```
 
 ## Installation
@@ -55,43 +65,39 @@ The pipeline is: **parse** input into an internal model, **convert** between mod
 Requires Python 3.10+.
 
 ```bash
-pip install -r requirements.txt
+pip install -e ".[dev]"
 ```
 
 Dependencies:
 - **rdflib** (>=7.0) -- SHACL/Turtle parsing and serialization
-- **pytest** -- test runner
-
-> Note: `pyshexc` and `ShExJSG` are listed in requirements.txt for reference but are not used at runtime. The ShEx parser is a custom implementation to avoid compatibility issues with Python 3.12+.
+- **pytest** (dev) -- test runner
 
 ## Usage
 
-### Single file conversion
+### CLI
 
 ```bash
 # SHACL -> ShEx (output to stdout)
-python main.py --input shapes.ttl --direction shacl2shex
+shaclex-py --input shapes.ttl --direction shacl2shex
 
 # ShEx -> SHACL (output to file)
-python main.py --input shapes.shex --direction shex2shacl --output shapes.ttl
-```
+shaclex-py --input shapes.shex --direction shex2shacl --output shapes.ttl
 
-### Batch conversion
-
-```bash
 # Convert a directory of files
-python main.py --input-dir my_shacl/ --output-dir my_shex/ --direction shacl2shex
+shaclex-py --input-dir my_shacl/ --output-dir my_shex/ --direction shacl2shex
 
 # Run the full YAGO dataset in both directions
-python main.py --batch
+shaclex-py --batch
 ```
+
+Also available via `python -m shaclex_py` or the legacy `python main.py`.
 
 ### Python API
 
 ```python
-from parsers.shacl_parser import parse_shacl_file
-from converters.shacl_to_shex import convert_shacl_to_shex
-from serializers.shex_serializer import serialize_shex
+from shaclex_py import (
+    parse_shacl_file, convert_shacl_to_shex, serialize_shex,
+)
 
 shacl = parse_shacl_file("shapes.ttl")
 shex = convert_shacl_to_shex(shacl)
@@ -99,9 +105,9 @@ print(serialize_shex(shex))
 ```
 
 ```python
-from parsers.shex_parser import parse_shex_file
-from converters.shex_to_shacl import convert_shex_to_shacl
-from serializers.shacl_serializer import serialize_shacl
+from shaclex_py import (
+    parse_shex_file, convert_shex_to_shacl, serialize_shacl,
+)
 
 shex = parse_shex_file("shapes.shex")
 shacl = convert_shex_to_shacl(shex)
@@ -146,6 +152,7 @@ The test suite includes:
 - **Parser tests**: Verify all 37 YAGO files parse correctly in both formats
 - **Converter tests**: Structural comparison against reference files
 - **Roundtrip tests**: SHACL -> ShEx -> SHACL and ShEx -> SHACL -> ShEx for all 37 files
+- **Canonical JSON tests**: Exact-match comparison ensuring SHACL and ShEx produce identical canonical output
 
 ## Evaluation Against YAGO Ground Truth
 
