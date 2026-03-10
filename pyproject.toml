@@ -31,7 +31,12 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
+    "pyshacl>=0.20",
+    "PyShEx>=0.8",
 ]
+pyshacl = ["pyshacl>=0.20"]
+pyshex = ["PyShEx>=0.8"]
+validation = ["pyshacl>=0.20", "PyShEx>=0.8"]
 
 [project.scripts]
 shaclex-py = "shaclex_py.cli:main"

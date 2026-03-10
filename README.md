@@ -76,12 +76,95 @@ The pipeline is: **parse** input into an internal schema model, **convert** betw
 Requires Python 3.10+.
 
 ```bash
+# Core (rdflib only)
+pip install -e .
+
+# With development tools + validators
 pip install -e ".[dev]"
+
+# With pySHACL validator only
+pip install -e ".[pyshacl]"
+
+# With PyShEx validator only
+pip install -e ".[pyshex]"
+
+# With both validators
+pip install -e ".[validation]"
 ```
 
 Dependencies:
-- **rdflib** (>=7.0) -- SHACL/Turtle parsing and serialization
+- **rdflib** (>=7.0) -- SHACL/Turtle parsing and serialization (required)
+- **pyshacl** (>=0.20) -- SHACL validation against generated shapes (optional)
+- **PyShEx** (>=0.8) -- ShEx validation against generated schemas (optional)
 - **pytest** (dev) -- test runner
+
+## pySHACL Compatibility
+
+SHACL output produced by shaclex-py is compatible with
+[pySHACL](https://github.com/RDFLib/pySHACL).
+
+```python
+import pyshacl
+from shaclex_py import parse_shacl_file, serialize_shacl
+
+# Load and re-serialize any SHACL shape
+schema = parse_shacl_file("shapes.ttl")
+shapes_turtle = serialize_shacl(schema)
+
+# Use directly as the shapes graph in pyshacl
+conforms, report_graph, report_text = pyshacl.validate(
+    data_graph="data.ttl",
+    data_graph_format="turtle",
+    shacl_graph=shapes_turtle,
+    shacl_graph_format="turtle",
+)
+print(report_text)
+```
+
+**OR-class constraint encoding**: The SHACL specification requires
+`sh:or` at the property shape level for disjunctive class constraints.
+shaclex-py serializes these as:
+
+```turtle
+sh:property [
+    sh:path schema:founder ;
+    sh:or ([ sh:class schema:Organization ] [ sh:class schema:Person ]) ;
+] ;
+```
+
+The parser accepts both this standard form and the custom YAGO form
+(`sh:class [ sh:or (...) ]`) for backward compatibility with the
+`dataset/shacl_yago/` reference files.
+
+## PyShEx Compatibility
+
+ShExC output produced by shaclex-py is compatible with
+[PyShEx](https://github.com/hsolbrig/PyShEx).
+
+```python
+from pyshex.shex_evaluator import ShExEvaluator
+from shaclex_py import parse_shacl_file, convert_shacl_to_shex, serialize_shex
+
+schema = parse_shacl_file("shapes.ttl")
+shex = convert_shacl_to_shex(schema)
+shexc = serialize_shex(shex)
+
+evaluator = ShExEvaluator(
+    rdf="data.ttl",
+    schema=shexc,
+    rdf_format="turtle",
+)
+results = evaluator.evaluate(
+    focus="http://example.org/myNode",
+    start="http://example.org/MyShape",  # or use the shape IRI
+)
+for r in results:
+    print(r.focus, "conforms:", r.result)
+```
+
+**Shape name IRIs**: shaclex-py serializes shape names as relative IRIs
+(e.g. `<Person>`). When using PyShEx, resolve these against your chosen
+base URI or provide fully-qualified IRIs in the `start` parameter.
 
 ## Usage
 

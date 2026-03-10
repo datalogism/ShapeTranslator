@@ -26,7 +26,17 @@
       "WebSearch",
       "Bash(git mv:*)",
       "Bash(pip install:*)",
-      "Bash(pytest:*)"
+      "Bash(pytest:*)",
+      "Bash(.venv/Scripts/python.exe -c \"import pyshacl; print\\(pyshacl.__version__\\)\" 2>/dev/null || .venv/bin/python -c \"import pyshacl; print\\(pyshacl.__version__\\)\" 2>/dev/null || echo \"pyshacl not installed\")",
+      "Bash(.venv/Scripts/python.exe -c \"import pyshex; print\\(pyshex.__version__\\)\" 2>/dev/null || .venv/bin/python -c \"import pyshex; print\\(pyshex.__version__\\)\" 2>/dev/null || echo \"pyshex not installed\")",
+      "Bash(.venv/bin/python -c \"\nfrom shaclex_py.parser.shacl_parser import parse_shacl_file\nfrom shaclex_py.serializer.shacl_serializer import serialize_shacl\nschema = parse_shacl_file\\('dataset/shacl_yago/Airline.ttl'\\)\nttl = serialize_shacl\\(schema\\)\nprint\\('Has sh:or:', 'sh:or' in ttl\\)\nfor line in ttl.split\\('\\\\n'\\):\n    if 'or' in line.lower\\(\\) or 'class' in line.lower\\(\\):\n        print\\(line\\)\n\")",
+      "Bash(PYTHONPATH=src .venv/bin/python -c \"\nfrom shaclex_py.parser.shacl_parser import parse_shacl_file\nfrom shaclex_py.serializer.shacl_serializer import serialize_shacl\nschema = parse_shacl_file\\('dataset/shacl_yago/Airline.ttl'\\)\nttl = serialize_shacl\\(schema\\)\nprint\\('Has sh:or:', 'sh:or' in ttl\\)\nfor line in ttl.split\\('\\\\n'\\):\n    if 'sh:or' in line or 'sh:class' in line:\n        print\\(line\\)\n\")",
+      "Bash(ls /mnt/c/Users/doccr/PycharmProjects/PythonProject1/.venv/bin/ | grep python && pip show rdflib 2>/dev/null || echo \"no system pip\")",
+      "Bash(PYTHONPATH=src python -c \"\nfrom shaclex_py.parser.shacl_parser import parse_shacl_file\nfrom shaclex_py.serializer.shacl_serializer import serialize_shacl\nschema = parse_shacl_file\\('dataset/shacl_yago/Airline.ttl'\\)\nttl = serialize_shacl\\(schema\\)\nprint\\('Has sh:or:', 'sh:or' in ttl\\)\nfor line in ttl.split\\('\\\\n'\\):\n    if 'sh:or' in line or 'sh:class' in line:\n        print\\(line\\)\n\")",
+      "Bash(PYTHONPATH=src python3 -c \"\nfrom shaclex_py.parser.shacl_parser import parse_shacl_file\nfrom shaclex_py.serializer.shacl_serializer import serialize_shacl\nschema = parse_shacl_file\\('dataset/shacl_yago/Airline.ttl'\\)\nttl = serialize_shacl\\(schema\\)\nprint\\('Has sh:or:', 'sh:or' in ttl\\)\nfor line in ttl.split\\('\\\\n'\\):\n    if 'sh:or' in line or 'sh:class' in line:\n        print\\(repr\\(line\\)\\)\n\")",
+      "Bash(PYTHONPATH=src python3 -m pytest tests/ -x --ignore=tests/test_pyshacl_compat.py --ignore=tests/test_pyshex_compat.py -q 2>&1 | tail -20)",
+      "Bash(git stash:*)",
+      "Bash(PYTHONPATH=src python3 -m pytest tests/ --ignore=tests/test_pyshacl_compat.py --ignore=tests/test_pyshex_compat.py -q 2>&1 | tail -10)"
     ]
   }
 }

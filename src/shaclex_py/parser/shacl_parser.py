@@ -77,6 +77,9 @@ def _parse_property_shape(g: Graph, prop_node) -> PropertyShape:
     datatype = _uri_to_iri(dt) if dt else None
 
     # sh:class — simple class or sh:or pattern
+    # Handles two forms:
+    #   (a) Custom YAGO form: sh:class [sh:or (class1 class2)]
+    #   (b) Standard SHACL form: sh:or ([sh:class class1] [sh:class class2])
     or_classes = _parse_or_classes(g, prop_node)
     class_ = None
     or_constraints = None
@@ -86,6 +89,19 @@ def _parse_property_shape(g: Graph, prop_node) -> PropertyShape:
         cls = g.value(prop_node, SH["class"])
         if cls and isinstance(cls, URIRef):
             class_ = _uri_to_iri(cls)
+
+    # Standard sh:or at property shape level (pySHACL-compatible form)
+    if or_constraints is None and class_ is None:
+        or_list_head = g.value(prop_node, SH["or"])
+        if or_list_head is not None:
+            items = _parse_rdf_list(g, or_list_head)
+            classes = [
+                _uri_to_iri(g.value(item, SH["class"]))
+                for item in items
+                if isinstance(g.value(item, SH["class"]), URIRef)
+            ]
+            if classes:
+                or_constraints = classes
 
     # sh:nodeKind
     nk = g.value(prop_node, SH.nodeKind)

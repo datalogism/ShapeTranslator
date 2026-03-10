@@ -76,12 +76,18 @@ def _add_property_shape(g: Graph, shape_node: URIRef, ps: PropertyShape):
         g.add((prop, SH.node, _iri_to_uri(ps.node)))
 
     if ps.or_constraints:
-        or_node = BNode()
-        items = [_iri_to_uri(c) for c in ps.or_constraints]
+        # Standard SHACL sh:or at property shape level:
+        #   sh:or ([sh:class class1] [sh:class class2])
+        # pySHACL requires this form; the custom sh:class [sh:or (...)] is
+        # not standard SHACL.
+        or_items = []
+        for c in ps.or_constraints:
+            item_node = BNode()
+            g.add((item_node, SH["class"], _iri_to_uri(c)))
+            or_items.append(item_node)
         or_list = BNode()
-        Collection(g, or_list, items)
-        g.add((or_node, SH["or"], or_list))
-        g.add((prop, SH["class"], or_node))
+        Collection(g, or_list, or_items)
+        g.add((prop, SH["or"], or_list))
 
 
 def serialize_shacl(schema: SHACLSchema) -> str:
