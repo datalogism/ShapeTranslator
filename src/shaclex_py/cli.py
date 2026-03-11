@@ -12,13 +12,61 @@ import os
 import sys
 
 
-def convert_file(input_path: str, direction: str, output_path: str | None = None) -> str:
+def _maybe_fetch_labels(schema, direction: str, wikidata_labels: bool) -> dict:
+    """Fetch Wikidata labels when ``--wikidata-labels`` is set and the output
+    is ShEx.  Returns an empty dict otherwise (labels disabled by default).
+
+    Only targets ShEx-producing directions: ``shacl2shex`` and ``json2shex``.
+    The label map is built lazily from the already-parsed schema so we make
+    exactly one SPARQL round-trip per file.
+    """
+    if not wikidata_labels:
+        return {}
+    if direction not in ("shacl2shex", "json2shex"):
+        return {}
+    try:
+        from shaclex_py.utils.wikidata import (
+            collect_iris_from_shacl,
+            collect_iris_from_canonical,
+            fetch_labels,
+        )
+        from shaclex_py.schema.shacl import SHACLSchema
+        from shaclex_py.schema.canonical import CanonicalSchema
+
+        if isinstance(schema, SHACLSchema):
+            iris = collect_iris_from_shacl(schema)
+        elif isinstance(schema, CanonicalSchema):
+            iris = collect_iris_from_canonical(schema)
+        else:
+            iris = []
+
+        if not iris:
+            return {}
+        print(f"  [wikidata-labels] fetching labels for {len(iris)} IRIs …",
+              flush=True)
+        return fetch_labels(iris)
+    except Exception as exc:
+        print(f"  [wikidata-labels] WARNING: label fetch failed: {exc}",
+              flush=True)
+        return {}
+
+
+def convert_file(
+    input_path: str,
+    direction: str,
+    output_path: str | None = None,
+    wikidata_labels: bool = False,
+) -> str:
     """Convert a single file.
 
     Args:
-        input_path: Path to input file.
-        direction: 'shacl2shex', 'shex2shacl', 'shacl2json', or 'shex2json'.
-        output_path: Optional output file path. If None, prints to stdout.
+        input_path:       Path to input file.
+        direction:        Conversion direction.
+        output_path:      Optional output file path. If None, prints to stdout.
+        wikidata_labels:  When True and direction produces ShEx, fetch English
+                          labels from the Wikidata SPARQL endpoint and use them
+                          for ``@<ShapeName>`` references and inline comments.
+                          Disabled by default.
 
     Returns:
         The converted output string.
@@ -29,8 +77,9 @@ def convert_file(input_path: str, direction: str, output_path: str | None = None
         from shaclex_py.serializer.shex_serializer import serialize_shex
 
         shacl = parse_shacl_file(input_path)
-        shex = convert_shacl_to_shex(shacl)
-        result = serialize_shex(shex)
+        label_map = _maybe_fetch_labels(shacl, direction, wikidata_labels)
+        shex = convert_shacl_to_shex(shacl, label_map=label_map or None)
+        result = serialize_shex(shex, label_map=label_map or None)
     elif direction == "shex2shacl":
         from shaclex_py.parser.shex_parser import parse_shex_file
         from shaclex_py.converter.shex_to_shacl import convert_shex_to_shacl
@@ -69,8 +118,9 @@ def convert_file(input_path: str, direction: str, output_path: str | None = None
         from shaclex_py.serializer.shex_serializer import serialize_shex
 
         canonical = parse_canonical_file(input_path)
-        shex = convert_canonical_to_shex(canonical)
-        result = serialize_shex(shex)
+        label_map = _maybe_fetch_labels(canonical, direction, wikidata_labels)
+        shex = convert_canonical_to_shex(canonical, label_map=label_map or None)
+        result = serialize_shex(shex, label_map=label_map or None)
     else:
         raise ValueError(f"Unknown direction: {direction!r}")
 
@@ -82,7 +132,12 @@ def convert_file(input_path: str, direction: str, output_path: str | None = None
     return result
 
 
-def convert_batch(input_dir: str, output_dir: str, direction: str) -> tuple[int, int]:
+def convert_batch(
+    input_dir: str,
+    output_dir: str,
+    direction: str,
+    wikidata_labels: bool = False,
+) -> tuple[int, int]:
     """Convert all files in a directory.
 
     Returns:
@@ -113,7 +168,8 @@ def convert_batch(input_dir: str, output_dir: str, direction: str) -> tuple[int,
         output_path = os.path.join(output_dir, output_name)
 
         try:
-            convert_file(input_path, direction, output_path)
+            convert_file(input_path, direction, output_path,
+                         wikidata_labels=wikidata_labels)
             print(f"  OK  {filename} -> {output_name}")
             ok += 1
         except Exception as e:
@@ -176,6 +232,17 @@ def main():
         action="store_true",
         help="Run full YAGO batch conversion in both directions",
     )
+    parser.add_argument(
+        "--wikidata-labels",
+        action="store_true",
+        default=False,
+        help=(
+            "Fetch English labels from the Wikidata SPARQL endpoint and use "
+            "them for @<ShapeName> references and inline comments in ShEx "
+            "output.  Only applies to shacl2shex and json2shex directions. "
+            "Disabled by default."
+        ),
+    )
 
     args = parser.parse_args()
 
@@ -183,13 +250,21 @@ def main():
         run_yago_batch()
         return
 
+    wikidata_labels = getattr(args, "wikidata_labels", False)
+
     if args.input_dir and args.output_dir and args.direction:
-        ok, fail = convert_batch(args.input_dir, args.output_dir, args.direction)
+        ok, fail = convert_batch(
+            args.input_dir, args.output_dir, args.direction,
+            wikidata_labels=wikidata_labels,
+        )
         print(f"\nConverted {ok} files, {fail} failed")
         return
 
     if args.input and args.direction:
-        result = convert_file(args.input, args.direction, args.output)
+        result = convert_file(
+            args.input, args.direction, args.output,
+            wikidata_labels=wikidata_labels,
+        )
         if not args.output:
             print(result)
         return

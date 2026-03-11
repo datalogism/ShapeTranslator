@@ -63,7 +63,18 @@ class Shape:
 
 
 @dataclass
+class NodeConstraintShape:
+    """A top-level shape that is an OR of NodeConstraints (datatype alternatives).
+
+    Represents ``sh:or ([sh:datatype D1] [sh:datatype D2] ...)`` at NodeShape
+    level.  Serialized in ShExC as ``<Name> dtype1 OR dtype2 OR ...``.
+    """
+    name: IRI
+    datatypes: list[IRI] = field(default_factory=list)
+
+
+@dataclass
 class ShExSchema:
-    shapes: list[Shape] = field(default_factory=list)
+    shapes: list[Union[Shape, NodeConstraintShape]] = field(default_factory=list)
     prefixes: list[Prefix] = field(default_factory=list)
     start: Optional[IRI] = None  # start = @<Shape>

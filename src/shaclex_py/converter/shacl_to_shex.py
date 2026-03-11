@@ -1,6 +1,12 @@
 """Convert SHACL model to ShEx model.
 
 Mapping rules based on the Validating RDF Book Ch. 13 and weso/shaclex.
+
+Pass ``label_map`` (a ``dict[str, str]`` mapping Wikidata IRIs to English
+labels) to ``convert_shacl_to_shex`` to enable label-based auxiliary shape
+naming.  Shape references will use human-readable labels such as
+``@<Human>`` instead of ``@<Q5>``.  Build the map with
+:func:`shaclex_py.utils.wikidata.fetch_labels`.
 """
 from __future__ import annotations
 
@@ -20,6 +26,7 @@ from shaclex_py.schema.shacl import NodeShape, PropertyShape, SHACLSchema
 from shaclex_py.schema.shex import (
     EachOf,
     NodeConstraint,
+    NodeConstraintShape,
     Shape,
     ShapeRef,
     ShExSchema,
@@ -57,12 +64,27 @@ def _shape_name_from_iri(iri: IRI) -> str:
     return value.rsplit("/", 1)[-1]
 
 
-def _class_to_shape_name(class_iri: IRI) -> str:
+def _class_to_shape_name(
+    class_iri: IRI,
+    label_map: Optional[dict[str, str]] = None,
+) -> str:
     """Convert a class IRI to a shape name.
 
-    E.g., 'http://schema.org/Person' → 'Person'
-         'http://yago-knowledge.org/resource/Award' → 'Award'
+    When *label_map* is provided and the IRI is a known Wikidata entity, the
+    English label is used (CamelCased).  Falls back to the IRI local name.
+
+    Examples::
+
+        _class_to_shape_name(IRI("http://schema.org/Person"))    → "Person"
+        _class_to_shape_name(IRI("http://wikidata.org/entity/Q5"),
+                              {"http://wikidata.org/entity/Q5": "human"})
+                                                                  → "Human"
     """
+    if label_map:
+        label = label_map.get(class_iri.value)
+        if label:
+            from shaclex_py.utils.wikidata import to_shape_name
+            return to_shape_name(label)
     return class_iri.value.rsplit("/", 1)[-1]
 
 
@@ -92,6 +114,7 @@ def _pattern_to_iri_stem(pattern: str) -> Optional[IriStem]:
 def _convert_property_to_triple_constraint(
     ps: PropertyShape,
     auxiliary_shapes: dict[str, Shape],
+    label_map: Optional[dict[str, str]] = None,
 ) -> TripleConstraint:
     """Convert a SHACL PropertyShape to a ShEx TripleConstraint."""
     predicate = ps.path.iri
@@ -117,15 +140,22 @@ def _convert_property_to_triple_constraint(
             values.append(ValueSetValue(value=v))
         constraint = NodeConstraint(values=values)
 
-    # sh:class with sh:or → auxiliary shape with value set for rdf:type
+    # sh:class with sh:or → auxiliary shape with value set for rdf:type.
+    # For Wikidata: use the property label as the shape name (multiple classes
+    # mean no single class label applies).
     elif ps.or_constraints:
-        shape_name = _make_or_shape_name(ps, auxiliary_shapes)
+        shape_name = _make_or_shape_name(ps, auxiliary_shapes, label_map)
         _create_auxiliary_or_shape(shape_name, ps.or_constraints, auxiliary_shapes)
         constraint = ShapeRef(name=IRI(shape_name))
 
-    # sh:class → shape reference
+    # sh:class → shape reference.
+    # For Wikidata: prefer the class label (single type → share the shape,
+    # e.g. P488/P112/P3975 all → @<Human>).  Fall back to property label, then
+    # IRI local name.
     elif ps.class_:
-        shape_name = _class_to_shape_name(ps.class_)
+        shape_name = _resolve_class_shape_name(
+            ps.class_, ps.path.iri, auxiliary_shapes, label_map
+        )
         _ensure_auxiliary_class_shape(shape_name, ps.class_, auxiliary_shapes)
         constraint = ShapeRef(name=IRI(shape_name))
 
@@ -164,15 +194,87 @@ def _convert_property_to_triple_constraint(
     )
 
 
-def _make_or_shape_name(
-    ps: PropertyShape, existing: dict[str, Shape]
+def _resolve_class_shape_name(
+    class_iri: IRI,
+    prop_iri: IRI,
+    existing: dict[str, Shape],
+    label_map: Optional[dict[str, str]] = None,
 ) -> str:
-    """Generate a shape name for an sh:or constraint."""
-    # Use the property local name as the shape name
+    """Choose the best auxiliary shape name for a single-class reference.
+
+    Priority:
+    1. Class label from *label_map* (e.g. Q5 → "Human")  — preferred because
+       multiple properties pointing to the same type share one shape.
+    2. Property label from *label_map* (e.g. P159 → "HeadquartersLocation").
+    3. IRI local name (e.g. "Person", "Q5").
+
+    Uniqueness: if the chosen name is already in *existing* pointing to a
+    *different* class, append a numeric suffix.
+    """
+    if label_map:
+        from shaclex_py.utils.wikidata import to_shape_name
+        class_label = label_map.get(class_iri.value)
+        if class_label:
+            return _ensure_unique(to_shape_name(class_label), class_iri, existing)
+        prop_label = label_map.get(prop_iri.value)
+        if prop_label:
+            return _ensure_unique(to_shape_name(prop_label), class_iri, existing)
+    local = class_iri.value.rsplit("/", 1)[-1]
+    return _ensure_unique(local, class_iri, existing)
+
+
+def _ensure_unique(
+    name: str, class_iri: IRI, existing: dict[str, Shape]
+) -> str:
+    """Return *name* or a suffixed variant that is not already taken by a
+    different class in *existing*."""
+    if name not in existing:
+        return name
+    # If the existing shape with this name already represents the same class,
+    # reuse it (this is exactly the sharing we want for e.g. @<Human>).
+    from shaclex_py.schema.shex import TripleConstraint, NodeConstraint
+    from shaclex_py.schema.common import IRI as _IRI
+    shape = existing[name]
+    if shape.expression is not None:
+        tc = shape.expression
+        if isinstance(tc, TripleConstraint):
+            nc = tc.constraint
+            if (isinstance(nc, NodeConstraint) and nc.values
+                    and len(nc.values) == 1
+                    and isinstance(nc.values[0].value, _IRI)
+                    and nc.values[0].value.value == class_iri.value):
+                return name  # same class → reuse
+    # Different class, need a fresh name
+    i = 2
+    while f"{name}{i}" in existing:
+        i += 1
+    return f"{name}{i}"
+
+
+def _make_or_shape_name(
+    ps: PropertyShape,
+    existing: dict[str, Shape],
+    label_map: Optional[dict[str, str]] = None,
+) -> str:
+    """Generate a shape name for an sh:or (multi-class) constraint.
+
+    Uses the property label when *label_map* is available; falls back to
+    the property IRI local name.
+    """
+    if label_map:
+        prop_label = label_map.get(ps.path.iri.value)
+        if prop_label:
+            from shaclex_py.utils.wikidata import to_shape_name
+            name = to_shape_name(prop_label)
+            if name not in existing:
+                return name
+            i = 2
+            while f"{name}{i}" in existing:
+                i += 1
+            return f"{name}{i}"
+    # Fallback: property IRI local name, CamelCased
     path_local = ps.path.iri.value.rsplit("/", 1)[-1]
-    # Capitalize first letter
     name = path_local[0].upper() + path_local[1:] if path_local else "OrShape"
-    # Ensure uniqueness
     if name in existing:
         i = 2
         while f"{name}{i}" in existing:
@@ -230,11 +332,15 @@ def _ensure_auxiliary_class_shape(
     )
 
 
-def _collect_used_iris(shapes: list[Shape]) -> set[str]:
+def _collect_used_iris(shapes: list) -> set[str]:
     """Collect all IRIs used in shapes for prefix filtering."""
     iris: set[str] = set()
     for shape in shapes:
         iris.add(shape.name.value)
+        if isinstance(shape, NodeConstraintShape):
+            for dt in shape.datatypes:
+                iris.add(dt.value)
+            continue
         for e in shape.extra:
             iris.add(e.value)
         if shape.expression is None:
@@ -260,21 +366,39 @@ def _collect_used_iris(shapes: list[Shape]) -> set[str]:
     return iris
 
 
-def convert_shacl_to_shex(shacl: SHACLSchema) -> ShExSchema:
+def convert_shacl_to_shex(
+    shacl: SHACLSchema,
+    label_map: Optional[dict[str, str]] = None,
+) -> ShExSchema:
     """Convert a SHACL schema to a ShEx schema.
 
     Args:
-        shacl: The SHACL schema to convert.
+        shacl:      The SHACL schema to convert.
+        label_map:  Optional mapping of Wikidata IRI → English label.  When
+                    provided, auxiliary shape names are derived from labels
+                    (e.g. ``@<Human>`` instead of ``@<Q5>``).  Build with
+                    :func:`shaclex_py.utils.wikidata.fetch_labels`.
 
     Returns:
         Equivalent ShEx schema.
     """
-    shapes: list[Shape] = []
+    shapes: list = []
     auxiliary_shapes: dict[str, Shape] = {}
     start: Optional[IRI] = None
 
     for node_shape in shacl.shapes:
         shape_name = _shape_name_from_iri(node_shape.iri)
+
+        # Named value shape: sh:or ([sh:datatype D1] [sh:datatype D2] ...) at NodeShape level.
+        # Emit as NodeConstraintShape (ShExC: <Name> D1 OR D2 OR ...).
+        if node_shape.or_datatypes:
+            nc_shape = NodeConstraintShape(
+                name=IRI(shape_name),
+                datatypes=list(node_shape.or_datatypes),
+            )
+            shapes.append(nc_shape)
+            # Don't set start for pure NodeConstraintShapes — they are auxiliary
+            continue
 
         triple_constraints: list[TripleConstraint] = []
 
@@ -290,15 +414,13 @@ def convert_shacl_to_shex(shacl: SHACLSchema) -> ShExSchema:
             triple_constraints.append(tc_type)
 
         # Convert each property shape
-        has_rdf_type_prop = False
         for ps in node_shape.properties:
             # Skip rdf:type property if we already added targetClass as rdf:type
             if (ps.path.iri == RDF_TYPE and node_shape.target_class and
                     ps.has_value is not None):
-                has_rdf_type_prop = True
                 continue
 
-            tc = _convert_property_to_triple_constraint(ps, auxiliary_shapes)
+            tc = _convert_property_to_triple_constraint(ps, auxiliary_shapes, label_map)
             triple_constraints.append(tc)
 
         # Build expression
@@ -327,9 +449,8 @@ def convert_shacl_to_shex(shacl: SHACLSchema) -> ShExSchema:
             start = IRI(shape_name)
 
     # Add auxiliary shapes (sorted by name for consistent output)
+    main_names = {s.name.value for s in shapes}
     for name in sorted(auxiliary_shapes):
-        # Don't add auxiliary shape if it has the same name as a main shape
-        main_names = {s.name.value for s in shapes}
         if name not in main_names:
             shapes.append(auxiliary_shapes[name])
 

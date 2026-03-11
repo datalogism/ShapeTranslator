@@ -137,11 +137,17 @@ def convert_canonical_to_shacl(canonical: CanonicalSchema) -> SHACLSchema:
             ps = _convert_property(cprop)
             properties.append(ps)
 
+        or_datatypes = (
+            [IRI(d) for d in cshape.datatypeOr]
+            if cshape.datatypeOr else None
+        )
+
         shapes.append(NodeShape(
             iri=shape_iri,
             target_class=target_class,
             properties=properties,
             closed=cshape.closed,
+            or_datatypes=or_datatypes,
         ))
 
     return SHACLSchema(shapes=shapes, prefixes=list(STANDARD_SHACL_PREFIXES))

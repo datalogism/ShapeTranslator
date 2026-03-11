@@ -72,12 +72,16 @@ class CanonicalShape:
     targetClass: Optional[str] = None
     closed: bool = False
     properties: list[CanonicalProperty] = field(default_factory=list)
+    # OR-of-datatypes at NodeShape level (DBpedia named value shapes)
+    datatypeOr: Optional[list[str]] = None
 
     def to_dict(self) -> dict:
         d: dict = {"name": self.name}
         if self.targetClass is not None:
             d["targetClass"] = self.targetClass
         d["closed"] = self.closed
+        if self.datatypeOr is not None:
+            d["datatypeOr"] = sorted(self.datatypeOr)
         d["properties"] = sorted(
             [p.to_dict() for p in self.properties],
             key=lambda p: p["path"],

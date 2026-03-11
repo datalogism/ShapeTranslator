@@ -199,12 +199,37 @@ def parse_shacl(source: str, format: str = "turtle") -> SHACLSchema:
             ps = _parse_property_shape(g, prop_node)
             properties.append(ps)
 
+        # sh:or at NodeShape level — two sub-patterns:
+        # (a) sh:or ([ sh:datatype D1 ] [ sh:datatype D2 ] ...) — named value shape
+        # (b) sh:or ([ sh:property [...] ] [ sh:property [...] ] ...) — property alternatives
+        or_datatypes = None
+        or_head = g.value(shape_node, SH["or"])
+        if or_head is not None:
+            or_items = _parse_rdf_list(g, or_head)
+            # Detect pattern (a): every alternative has sh:datatype
+            dt_list = [
+                _uri_to_iri(g.value(item, SH.datatype))
+                for item in or_items
+                if isinstance(g.value(item, SH.datatype), URIRef)
+            ]
+            if len(dt_list) == len(or_items) and or_items:
+                or_datatypes = dt_list
+            else:
+                # Pattern (b): alternatives may contain sh:property blocks.
+                # Flatten all property alternatives into the shape's property list
+                # (union/over-approximation — preserves all constraint information).
+                for item in or_items:
+                    for prop_node in g.objects(item, SH.property):
+                        ps = _parse_property_shape(g, prop_node)
+                        properties.append(ps)
+
         shapes.append(NodeShape(
             iri=shape_iri,
             target_class=target_class,
             properties=properties,
             closed=closed,
             ignored_properties=ignored_properties,
+            or_datatypes=or_datatypes,
         ))
 
     return SHACLSchema(shapes=shapes, prefixes=prefixes)

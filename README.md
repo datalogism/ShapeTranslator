@@ -98,6 +98,61 @@ Dependencies:
 - **PyShEx** (>=0.8) -- ShEx validation against generated schemas (optional)
 - **pytest** (dev) -- test runner
 
+## Wikidata Label-Aware ShEx Generation
+
+When generating ShEx for Wikidata-based schemas, shape references and comments
+use human-readable English labels instead of raw QIDs/PIDs.  The feature is
+**disabled by default** (no network calls are made) and only applies to ShEx
+output directions (`shacl2shex`, `json2shex`).
+
+### CLI
+
+```bash
+shaclex-py --input Q1172284.ttl --direction shacl2shex --wikidata-labels
+```
+
+With `--wikidata-labels` the output matches the WES ShEx format:
+
+```shex
+<DataSet> EXTRA wdt:P31 {
+  # WikibaseItem property
+  wdt:P31   [ wd:Q1172284 ] ;            # instance of
+  wdt:P50   @<Author> * ;                # author
+  wdt:P126  @<MaintainedBy> ? ;          # maintained by
+  wdt:P407  @<LanguageOfWorkOrName> * ;  # language of work or name
+
+  # URL, String, Quantity, Time property
+  wdt:P577  xsd:dateTime ? ;             # publication date
+}
+
+<Author> EXTRA wdt:P31 {
+  wdt:P31 [ wd:Q482980 ]  # author
+}
+```
+
+Key behaviours:
+- `@<ShapeName>` uses the English label of the class, never `@<Q5>`.
+- Single-class auxiliaries use the **class** label (`@<Human>` for Q5).
+- Multi-class OR auxiliaries use the **property** label.
+- Multiple properties targeting the same class share one auxiliary shape.
+- Section headers separate WikibaseItem from literal/IRI properties.
+- Auxiliary shapes get `# qid_label, qid_label` comments.
+
+### Python API
+
+```python
+from shaclex_py.utils.wikidata import collect_iris_from_shacl, fetch_labels
+from shaclex_py import parse_shacl_file, convert_shacl_to_shex, serialize_shex
+
+shacl     = parse_shacl_file("Q1172284.ttl")
+label_map = fetch_labels(collect_iris_from_shacl(shacl))  # one SPARQL round-trip
+
+shex   = convert_shacl_to_shex(shacl, label_map=label_map)
+output = serialize_shex(shex,          label_map=label_map)
+```
+
+Pass `label_map=None` (default) for plain output without any network calls.
+
 ## pySHACL Compatibility
 
 SHACL output produced by shaclex-py is compatible with
@@ -210,22 +265,339 @@ print(serialize_shacl(shacl))
 
 ## Mapping Rules
 
-The converter handles the following SHACL/ShEx correspondences:
+The sections below cover every pattern the converter handles, grouped by topic. For each pattern, the SHACL source, the canonical JSON representation, and the ShEx output are shown.
 
-| SHACL | ShEx | Notes |
+### Shape container and target class
+
+**SHACL**
+```turtle
+<http://shaclshapes.org/PersonShape> a sh:NodeShape ;
+    sh:targetClass schema:Person .
+```
+
+**Canonical JSON**
+```json
+{ "name": "Person", "targetClass": "http://schema.org/Person", "closed": false, "properties": [] }
+```
+
+**ShEx**
+```shex
+<Person> EXTRA rdf:type {
+  rdf:type [ schema:Person ]
+}
+```
+
+The shape IRI suffix `Shape` is stripped to produce the short name (`PersonShape` → `Person`).  `sh:targetClass` becomes an `rdf:type [C]` triple constraint inside the ShEx body.
+
+---
+
+### Datatype constraint (`sh:datatype`)
+
+**SHACL**
+```turtle
+sh:property [
+    sh:path schema:birthDate ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{ "path": "http://schema.org/birthDate", "datatype": "http://www.w3.org/2001/XMLSchema#date", "cardinality": {"min": 0, "max": 1} }
+```
+
+**ShEx**
+```shex
+schema:birthDate xsd:date ?
+```
+
+---
+
+### Class reference (`sh:class`)
+
+A single class reference becomes an auxiliary shape and a `@<ShapeName>` reference.
+
+**SHACL**
+```turtle
+sh:property [
+    sh:path schema:founder ;
+    sh:class schema:Person ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{ "path": "http://schema.org/founder", "classRef": "http://schema.org/Person", "cardinality": {"min": 0, "max": -1} }
+```
+
+**ShEx**
+```shex
+schema:founder @<Person> *
+
+<Person> EXTRA rdf:type {
+  rdf:type [ schema:Person ]
+}
+```
+
+---
+
+### OR class constraint — property level (`sh:or` with `sh:class`)
+
+Two supported surface forms are parsed identically; both round-trip as the standard pySHACL form.
+
+**SHACL (standard form — pySHACL compatible)**
+```turtle
+sh:property [
+    sh:path schema:founder ;
+    sh:or ( [ sh:class schema:Organization ] [ sh:class schema:Person ] ) ;
+] ;
+```
+
+**SHACL (custom YAGO form — also accepted by the parser)**
+```turtle
+sh:property [
+    sh:path schema:founder ;
+    sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{ "path": "http://schema.org/founder", "classRefOr": ["http://schema.org/Organization","http://schema.org/Person"], "cardinality": {"min": 0, "max": -1} }
+```
+
+**ShEx**
+```shex
+schema:founder @<Founder> *
+
+<Founder> EXTRA rdf:type {
+  rdf:type [ schema:Organization schema:Person ]
+}
+```
+
+The auxiliary shape name is derived from the property label (Wikidata mode) or the property IRI local name.
+
+---
+
+### Node kind (`sh:nodeKind`)
+
+**SHACL**
+```turtle
+sh:property [
+    sh:path schema:url ;
+    sh:nodeKind sh:IRI ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{ "path": "http://schema.org/url", "nodeKind": "IRI", "cardinality": {"min": 0, "max": -1} }
+```
+
+**ShEx**
+```shex
+schema:url IRI *
+```
+
+Supported node kinds: `sh:IRI`, `sh:BlankNode`, `sh:Literal`, `sh:BlankNodeOrIRI`, `sh:BlankNodeOrLiteral`, `sh:IRIOrLiteral`.
+
+---
+
+### Cardinality (`sh:minCount` / `sh:maxCount`)
+
+| SHACL | ShEx shorthand | Notes |
 |---|---|---|
-| `sh:NodeShape` | `<ShapeName> { ... }` | Shape container |
-| `sh:targetClass C` | `rdf:type [C]` | Target class becomes a value set constraint |
-| `sh:property [ sh:path P ]` | `P ...` | Property path becomes a predicate |
-| `sh:datatype D` | `D` | Direct datatype mapping |
-| `sh:class C` | `@<CShape>` | Class reference becomes a shape reference |
-| `sh:class [ sh:or (A B) ]` | `@<AuxShape>` with `rdf:type [A B]` | OR classes become an auxiliary shape |
-| `sh:nodeKind sh:IRI` | `IRI` | Node kind mapping |
-| `sh:minCount m` / `sh:maxCount n` | `{m,n}`, `?`, `*`, `+` | Cardinality (defaults differ: SHACL {0,\*} vs ShEx {1,1}) |
-| `sh:hasValue V` | `[V]` | Single-value set |
-| `sh:in (v1 v2)` | `[v1 v2]` | Value set |
-| `sh:pattern "^http://..."` | `[<http://...>~]` | Regex pattern to IRI stem |
-| `EXTRA rdf:type` | _(always emitted)_ | Extra predicates for open typing |
+| _(none)_ | `*` | SHACL default `{0,*}` |
+| `sh:minCount 0 ; sh:maxCount 1` | `?` | Optional single |
+| `sh:minCount 1` | `+` | At least one |
+| `sh:minCount 1 ; sh:maxCount 1` | _(no suffix)_ | Exactly one (ShEx default) |
+| `sh:minCount 2 ; sh:maxCount 5` | `{2,5}` | Explicit range |
+
+The converter always emits explicit cardinality to avoid ambiguity between the different language defaults (SHACL `{0,*}` vs ShEx `{1,1}`).
+
+---
+
+### Single-value constraint (`sh:hasValue`)
+
+**SHACL**
+```turtle
+sh:property [
+    sh:path rdf:type ;
+    sh:hasValue schema:Person ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{ "path": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "hasValue": "http://schema.org/Person", "cardinality": {"min": 0, "max": -1} }
+```
+
+**ShEx**
+```shex
+rdf:type [ schema:Person ] *
+```
+
+---
+
+### Enumerated values (`sh:in`)
+
+**SHACL**
+```turtle
+sh:property [
+    sh:path schema:gender ;
+    sh:in ( schema:Male schema:Female ) ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{ "path": "http://schema.org/gender", "inValues": ["http://schema.org/Female","http://schema.org/Male"], "cardinality": {"min": 0, "max": -1} }
+```
+
+**ShEx**
+```shex
+schema:gender [ schema:Male schema:Female ] *
+```
+
+---
+
+### IRI stem pattern (`sh:pattern` matching a URL prefix)
+
+Patterns of the form `^http://...` are converted to a ShEx IRI stem.
+
+**SHACL**
+```turtle
+sh:property [
+    sh:path schema:sameAs ;
+    sh:pattern "^http://www.wikidata.org/entity/" ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{ "path": "http://schema.org/sameAs", "iriStem": "http://www.wikidata.org/entity", "cardinality": {"min": 0, "max": -1} }
+```
+
+**ShEx**
+```shex
+schema:sameAs [ <http://www.wikidata.org/entity>~ ] *
+```
+
+Arbitrary regex patterns that do not match a URL prefix are kept as `pattern` in the canonical JSON and have no ShEx equivalent.
+
+---
+
+### Shape reference (`sh:node`)
+
+`sh:node` links a property to a separately declared NodeShape.
+
+**SHACL**
+```turtle
+sh:property [
+    sh:path dbo:cost ;
+    sh:node shapes:costValueShape ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{ "path": "http://dbpedia.org/ontology/cost", "nodeRef": "http://shaclshapes.org/costValueShape", "cardinality": {"min": 0, "max": -1} }
+```
+
+**ShEx**
+```shex
+dbo:cost @<costValue> *
+```
+
+The referenced shape is emitted separately (see *Named value shapes* below for the case where the target is a datatype-OR shape).
+
+---
+
+### Named value shapes — `sh:or` with datatype alternatives at NodeShape level
+
+DBpedia uses reusable "value type" shapes that declare which datatypes a literal value may have. The `sh:or` sits directly on the `sh:NodeShape`, not on a property.
+
+**SHACL**
+```turtle
+shapes:costValueShape a sh:NodeShape ;
+    sh:or (
+        [ sh:datatype dbt:usDollar ]
+        [ sh:datatype dbt:euro ]
+        [ sh:datatype dbt:poundSterling ]
+    ) .
+
+# Used by the main shape via sh:node:
+sh:property [
+    sh:path dbo:cost ;
+    sh:node shapes:costValueShape ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{
+  "name": "costValue",
+  "datatypeOr": [
+    "http://dbpedia.org/datatype/euro",
+    "http://dbpedia.org/datatype/poundSterling",
+    "http://dbpedia.org/datatype/usDollar"
+  ],
+  "closed": false,
+  "properties": []
+}
+```
+
+**ShEx**
+```shex
+<costValue> dbt:usDollar OR dbt:euro OR dbt:poundSterling
+```
+
+The datatype list is sorted alphabetically in the canonical JSON. The ShEx uses the valid `NodeConstraint OR NodeConstraint` syntax (ShEx 2.0 `ShapeOr`).
+
+---
+
+### Property alternative groups — `sh:or` with `sh:property` items at NodeShape level
+
+Some DBpedia shapes use `sh:or` to declare that a node must satisfy one of several property groups (e.g., two alternative paths for the same measurement). Each alternative is a blank node containing `sh:property` blocks.
+
+**SHACL**
+```turtle
+sh:or (
+    [
+        sh:property [
+            sh:path dbo:height ;
+            sh:datatype dbt:centimetre ;
+            sh:maxCount 1 ;
+        ]
+    ]
+    [
+        sh:property [
+            sh:path <http://dbpedia.org/ontology/Person/height> ;
+            sh:datatype dbt:centimetre ;
+            sh:maxCount 1 ;
+        ]
+    ]
+) ;
+```
+
+**Canonical JSON** (union of all branches)
+```json
+[
+  { "path": "http://dbpedia.org/ontology/height",        "datatype": "http://dbpedia.org/datatype/centimetre", "cardinality": {"min": 0, "max": 1} },
+  { "path": "http://dbpedia.org/ontology/Person/height", "datatype": "http://dbpedia.org/datatype/centimetre", "cardinality": {"min": 0, "max": 1} }
+]
+```
+
+**ShEx**
+```shex
+dbo:height        dbt:centimetre ? ;
+dbo:Person/height dbt:centimetre ?
+```
+
+The translator flattens all alternatives into the parent shape's property list (union / over-approximation). All constraint information is preserved; the strict "exactly one branch" disjunction is relaxed to "any combination allowed".
+
+---
 
 ### Semantic Differences
 
@@ -234,7 +606,9 @@ Some constructs do not have exact equivalents:
 - **Default cardinality**: ShEx defaults to `{1,1}`, SHACL defaults to `{0,*}`. The converter always emits explicit cardinality to avoid ambiguity.
 - **`sh:pattern`**: Only patterns matching IRI prefixes (`^http://...`) are converted to ShEx IRI stems. Arbitrary regex patterns have no ShEx equivalent.
 - **`rdf:type` handling**: SHACL uses `sh:targetClass` for class targeting, while ShEx uses `rdf:type [Class]` inside the shape body. During ShEx-to-SHACL conversion, the `rdf:type` constraint is promoted to `sh:targetClass`.
-- **Auxiliary shapes**: When SHACL uses `sh:class` or `sh:or`, the ShEx output generates auxiliary shapes (e.g., `<Place> EXTRA rdf:type { rdf:type [schema:Place] }`) to represent class constraints as shape references.
+- **Auxiliary shapes**: When SHACL uses `sh:class` or `sh:or` with classes, the ShEx output generates auxiliary shapes (e.g., `<Place> EXTRA rdf:type { rdf:type [schema:Place] }`) to represent class constraints as shape references.
+- **`sh:or` property alternatives**: The `sh:or ([ sh:property ... ] [ sh:property ... ])` pattern at NodeShape level is flattened into the property list. The strict disjunction semantics are approximated by a union of all branches.
+- **Named value shapes**: `sh:or ([sh:datatype D1] [sh:datatype D2] ...)` at NodeShape level is preserved faithfully in the canonical JSON (`datatypeOr`) and serialized as `<Name> D1 OR D2 OR ...` in ShEx.
 
 ## Testing
 

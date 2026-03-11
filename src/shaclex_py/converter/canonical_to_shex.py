@@ -23,6 +23,7 @@ from shaclex_py.schema.common import (
 from shaclex_py.schema.shex import (
     EachOf,
     NodeConstraint,
+    NodeConstraintShape,
     Shape,
     ShapeRef,
     ShExSchema,
@@ -71,8 +72,20 @@ def _canonical_value_to_model(val: Union[str, dict]) -> Union[IRI, Literal]:
     return IRI(str(val))
 
 
-def _class_to_shape_name(class_iri: str) -> str:
-    """Extract local name from a class IRI for use as a shape name."""
+def _class_to_shape_name(
+    class_iri: str,
+    label_map: Optional[dict[str, str]] = None,
+) -> str:
+    """Extract a shape name from a class IRI.
+
+    When *label_map* is provided and the IRI is a known Wikidata entity, uses
+    the English label (CamelCased).  Falls back to the IRI local name.
+    """
+    if label_map:
+        label = label_map.get(class_iri)
+        if label:
+            from shaclex_py.utils.wikidata import to_shape_name
+            return to_shape_name(label)
     return class_iri.rsplit("/", 1)[-1]
 
 
@@ -87,11 +100,31 @@ def _unique_aux_name(
     base: str,
     auxiliary_shapes: dict[str, Shape],
     main_shape_names: set[str],
+    class_iri: Optional[str] = None,
 ) -> str:
-    """Generate a unique auxiliary shape name that doesn't clash with main or existing aux shapes."""
+    """Generate a unique auxiliary shape name that doesn't clash with existing shapes.
+
+    If *class_iri* is provided and the existing shape with *base* already
+    represents that same class, the name is reused (allows sharing ``@<Human>``
+    across multiple properties, for example).
+    """
     if base not in main_shape_names and base not in auxiliary_shapes:
         return base
-    # Append suffix to avoid collision
+
+    # Check if the existing auxiliary shape already represents the same class.
+    if class_iri and base in auxiliary_shapes:
+        from shaclex_py.schema.shex import TripleConstraint, NodeConstraint
+        from shaclex_py.schema.common import IRI as _IRI
+        shape = auxiliary_shapes[base]
+        expr = shape.expression
+        if isinstance(expr, TripleConstraint):
+            nc = expr.constraint
+            if (isinstance(nc, NodeConstraint) and nc.values
+                    and len(nc.values) == 1
+                    and isinstance(nc.values[0].value, _IRI)
+                    and nc.values[0].value.value == class_iri):
+                return base  # same class → reuse the shape
+
     candidate = f"{base}_class"
     if candidate not in main_shape_names and candidate not in auxiliary_shapes:
         return candidate
@@ -103,10 +136,45 @@ def _unique_aux_name(
         i += 1
 
 
+def _resolve_class_base_name(
+    class_iri: str,
+    prop_iri: str,
+    label_map: Optional[dict[str, str]],
+) -> str:
+    """Derive an auxiliary shape base name from a single class IRI.
+
+    Priority: class label → property label → IRI local name.
+    """
+    if label_map:
+        from shaclex_py.utils.wikidata import to_shape_name
+        class_label = label_map.get(class_iri)
+        if class_label:
+            return to_shape_name(class_label)
+        prop_label = label_map.get(prop_iri)
+        if prop_label:
+            return to_shape_name(prop_label)
+    return class_iri.rsplit("/", 1)[-1]
+
+
+def _resolve_prop_base_name(
+    prop_iri: str,
+    label_map: Optional[dict[str, str]],
+) -> str:
+    """Derive an auxiliary shape base name from a property IRI (for OR shapes)."""
+    if label_map:
+        prop_label = label_map.get(prop_iri)
+        if prop_label:
+            from shaclex_py.utils.wikidata import to_shape_name
+            return to_shape_name(prop_label)
+    path_local = prop_iri.rsplit("/", 1)[-1]
+    return path_local[0].upper() + path_local[1:] if path_local else "OrShape"
+
+
 def _convert_property(
     cprop: CanonicalProperty,
     auxiliary_shapes: dict[str, Shape],
     main_shape_names: set[str],
+    label_map: Optional[dict[str, str]] = None,
 ) -> TripleConstraint:
     """Convert a CanonicalProperty to a ShEx TripleConstraint."""
     predicate = IRI(cprop.path)
@@ -118,15 +186,17 @@ def _convert_property(
         constraint = NodeConstraint(datatype=IRI(cprop.datatype))
 
     elif cprop.classRef is not None:
-        base_name = _class_to_shape_name(cprop.classRef)
-        shape_name = _unique_aux_name(base_name, auxiliary_shapes, main_shape_names)
+        # For Wikidata: prefer class label, then property label, then local name.
+        base_name = _resolve_class_base_name(cprop.classRef, cprop.path, label_map)
+        shape_name = _unique_aux_name(
+            base_name, auxiliary_shapes, main_shape_names, class_iri=cprop.classRef
+        )
         _ensure_auxiliary_class_shape(shape_name, IRI(cprop.classRef), auxiliary_shapes)
         constraint = ShapeRef(name=IRI(shape_name))
 
     elif cprop.classRefOr is not None:
-        # Generate auxiliary shape name from property local name
-        path_local = cprop.path.rsplit("/", 1)[-1]
-        base_name = path_local[0].upper() + path_local[1:] if path_local else "OrShape"
+        # Multiple classes: use property label or property local name.
+        base_name = _resolve_prop_base_name(cprop.path, label_map)
         shape_name = _unique_aux_name(base_name, auxiliary_shapes, main_shape_names)
         class_iris = [IRI(c) for c in cprop.classRefOr]
         _create_auxiliary_or_shape(shape_name, class_iris, auxiliary_shapes)
@@ -200,22 +270,37 @@ def _ensure_auxiliary_class_shape(
     )
 
 
-def convert_canonical_to_shex(canonical: CanonicalSchema) -> ShExSchema:
+def convert_canonical_to_shex(
+    canonical: CanonicalSchema,
+    label_map: Optional[dict[str, str]] = None,
+) -> ShExSchema:
     """Convert a canonical JSON schema to a ShEx schema.
 
     Args:
-        canonical: The canonical schema to convert.
+        canonical:  The canonical schema to convert.
+        label_map:  Optional mapping of Wikidata IRI → English label.  When
+                    provided, auxiliary shape names use human-readable labels
+                    (e.g. ``@<Human>`` instead of ``@<Q5>``).
 
     Returns:
         Equivalent ShEx schema.
     """
-    shapes: list[Shape] = []
+    shapes: list = []
     auxiliary_shapes: dict[str, Shape] = {}
     start: Optional[IRI] = None
     main_shape_names = {cs.name for cs in canonical.shapes}
 
     for cshape in canonical.shapes:
         shape_name = cshape.name
+
+        # Named value shape with OR-of-datatypes → NodeConstraintShape
+        if cshape.datatypeOr:
+            nc_shape = NodeConstraintShape(
+                name=IRI(shape_name),
+                datatypes=[IRI(d) for d in cshape.datatypeOr],
+            )
+            shapes.append(nc_shape)
+            continue
 
         triple_constraints: list[TripleConstraint] = []
 
@@ -232,7 +317,7 @@ def convert_canonical_to_shex(canonical: CanonicalSchema) -> ShExSchema:
 
         # Convert each property
         for cprop in cshape.properties:
-            tc = _convert_property(cprop, auxiliary_shapes, main_shape_names)
+            tc = _convert_property(cprop, auxiliary_shapes, main_shape_names, label_map)
             triple_constraints.append(tc)
 
         # Build expression
@@ -255,7 +340,7 @@ def convert_canonical_to_shex(canonical: CanonicalSchema) -> ShExSchema:
         if start is None:
             start = IRI(shape_name)
 
-    # Add auxiliary shapes
+    # Add auxiliary shapes (skip those already covered by main shapes)
     main_names = {s.name.value for s in shapes}
     for name in sorted(auxiliary_shapes):
         if name not in main_names:

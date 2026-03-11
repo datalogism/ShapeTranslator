@@ -130,6 +130,17 @@ def serialize_shacl(schema: SHACLSchema) -> str:
             Collection(g, collection, items)
             g.add((shape_uri, SH.ignoredProperties, collection))
 
+        # sh:or at NodeShape level (named value shapes with datatype alternatives)
+        if shape.or_datatypes:
+            or_items = []
+            for dt in shape.or_datatypes:
+                item_node = BNode()
+                g.add((item_node, SH.datatype, _iri_to_uri(dt)))
+                or_items.append(item_node)
+            or_list = BNode()
+            Collection(g, or_list, or_items)
+            g.add((shape_uri, SH["or"], or_list))
+
         for ps in shape.properties:
             _add_property_shape(g, shape_uri, ps)
 

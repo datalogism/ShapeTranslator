@@ -122,11 +122,17 @@ def convert_shacl_to_canonical(shacl: SHACLSchema) -> CanonicalSchema:
             if prop is not None:
                 properties.append(prop)
 
+        datatype_or = (
+            [d.value for d in node_shape.or_datatypes]
+            if node_shape.or_datatypes else None
+        )
+
         canonical_shapes.append(CanonicalShape(
             name=shape_name,
             targetClass=target_class,
             closed=node_shape.closed,
             properties=properties,
+            datatypeOr=datatype_or,
         ))
 
     return CanonicalSchema(shapes=canonical_shapes)

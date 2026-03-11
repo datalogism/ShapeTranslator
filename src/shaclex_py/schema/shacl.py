@@ -35,6 +35,8 @@ class NodeShape:
     properties: list[PropertyShape] = field(default_factory=list)
     closed: bool = False
     ignored_properties: list[IRI] = field(default_factory=list)
+    # sh:or at NodeShape level with sh:datatype alternatives (named value shapes)
+    or_datatypes: Optional[list[IRI]] = None
 
 
 @dataclass

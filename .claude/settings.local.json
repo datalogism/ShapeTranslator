@@ -36,7 +36,16 @@
       "Bash(PYTHONPATH=src python3 -c \"\nfrom shaclex_py.parser.shacl_parser import parse_shacl_file\nfrom shaclex_py.serializer.shacl_serializer import serialize_shacl\nschema = parse_shacl_file\\('dataset/shacl_yago/Airline.ttl'\\)\nttl = serialize_shacl\\(schema\\)\nprint\\('Has sh:or:', 'sh:or' in ttl\\)\nfor line in ttl.split\\('\\\\n'\\):\n    if 'sh:or' in line or 'sh:class' in line:\n        print\\(repr\\(line\\)\\)\n\")",
       "Bash(PYTHONPATH=src python3 -m pytest tests/ -x --ignore=tests/test_pyshacl_compat.py --ignore=tests/test_pyshex_compat.py -q 2>&1 | tail -20)",
       "Bash(git stash:*)",
-      "Bash(PYTHONPATH=src python3 -m pytest tests/ --ignore=tests/test_pyshacl_compat.py --ignore=tests/test_pyshex_compat.py -q 2>&1 | tail -10)"
+      "Bash(PYTHONPATH=src python3 -m pytest tests/ --ignore=tests/test_pyshacl_compat.py --ignore=tests/test_pyshex_compat.py -q 2>&1 | tail -10)",
+      "Bash(PYTHONPATH=src python3 -m shaclex_py --input-dir dataset/shacl_dbpedia/ --output-dir /tmp/dbpedia_json --direction shacl2json 2>&1 | head -100)",
+      "Bash(PYTHONPATH=src python3 -m shaclex_py --input-dir dataset/shacl_dbpedia/ --output-dir /tmp/dbpedia_shex --direction shacl2shex 2>&1 | head -100)",
+      "Bash(PYTHONPATH=src python3 -m shaclex_py --input-dir dataset/shacl_dbpedia/ --output-dir /tmp/dbpedia_json --direction shacl2json 2>&1)",
+      "Bash(PYTHONPATH=src python3 -m shaclex_py --input-dir dataset/shacl_dbpedia/ --output-dir /tmp/dbpedia_shex --direction shacl2shex 2>&1)",
+      "Bash(PYTHONPATH=src python3 -m shaclex_py --input-dir /tmp/dbpedia_json --output-dir /tmp/dbpedia_json2shacl --direction json2shacl 2>&1 && PYTHONPATH=src python3 -m shaclex_py --input-dir /tmp/dbpedia_json --output-dir /tmp/dbpedia_json2shex --direction json2shex 2>&1)",
+      "Bash(python3 -c \"\nimport json\nwith open\\('/tmp/dbpedia_json/Company.json'\\) as f:\n    d = json.load\\(f\\)\nfor s in d['shapes']:\n    print\\(f'Shape: {s[\\\\\"name\\\\\"]}  \\({len\\(s[\\\\\"properties\\\\\"]\\)} props\\)'\\)\n\")",
+      "Bash(PYTHONPATH=src python3 -m pytest tests/test_json_canonical.py -q 2>&1 | tail -10)",
+      "Bash(PYTHONPATH=src python3 -m shaclex_py --input-dir dataset/shacl_dbpedia/ --output-dir shacl_to_json_dbpedia --direction shacl2json && PYTHONPATH=src python3 -m shaclex_py --input-dir dataset/shacl_dbpedia/ --output-dir shacl_to_shex_dbpedia --direction shacl2shex && PYTHONPATH=src python3 -m shaclex_py --input-dir shacl_to_json_dbpedia/ --output-dir json_to_shacl_dbpedia --direction json2shacl && PYTHONPATH=src python3 -m shaclex_py --input-dir shacl_to_json_dbpedia/ --output-dir json_to_shex_dbpedia --direction json2shex 2>&1 | grep -E \"Converted|FAIL\")",
+      "Bash(PYTHONPATH=src python3 -m pytest tests/ -q --ignore=tests/test_json_canonical.py 2>&1 | tail -5)"
     ]
   }
 }
