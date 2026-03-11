@@ -1,0 +1,161 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/PersonShape> a sh:NodeShape ;
+    sh:property [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/restingPlace> ],
+        [ sh:class <http://dbpedia.org/ontology/EducationalInstitution> ;
+            sh:path <http://dbpedia.org/ontology/school> ],
+        [ sh:class <http://dbpedia.org/ontology/MilitaryUnit> ;
+            sh:path <http://dbpedia.org/ontology/militaryBranch> ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/serviceStartYear> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 2 ;
+            sh:path <http://dbpedia.org/ontology/shoots> ],
+        [ sh:datatype <http://dbpedia.org/datatype/centimetre> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/height> ],
+        [ sh:class <http://dbpedia.org/ontology/Settlement> ;
+            sh:path <http://dbpedia.org/ontology/hometown> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/parent> ],
+        [ sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/wikiPageID> ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path rdfs:comment ],
+        [ sh:class <http://dbpedia.org/ontology/RecordLabel> ;
+            sh:path <http://dbpedia.org/ontology/recordLabel> ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path foaf:depiction ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/draftRound> ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/activeYearsEndYear> ],
+        [ sh:class <http://dbpedia.org/ontology/EducationalInstitution> ;
+            sh:path <http://dbpedia.org/ontology/college> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/spouse> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/child> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/allegiance> ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/thumbnail> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/team> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/bowlingSide> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path rdfs:seeAlso ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/overallRecord> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/debutTeam> ],
+        [ sh:datatype xsd:integer ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/wikiPageRevisionID> ],
+        [ sh:class <http://dbpedia.org/ontology/Band> ;
+            sh:path <http://dbpedia.org/ontology/associatedBand> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/battingSide> ],
+        [ sh:class <http://dbpedia.org/ontology/Organisation> ;
+            sh:path <http://dbpedia.org/ontology/employer> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path owl:differentFrom ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/draftYear> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/relation> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/draftPick> ],
+        [ sh:datatype <http://dbpedia.org/datatype/centimetre> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/Person/height> ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/activeYearsStartYear> ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/serviceEndYear> ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/undraftedYear> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/draft> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/doctoralAdvisor> ],
+        [ sh:class <http://dbpedia.org/ontology/Instrument> ;
+            sh:path <http://dbpedia.org/ontology/instrument> ],
+        [ sh:class <http://dbpedia.org/ontology/Award> ;
+            sh:path <http://dbpedia.org/ontology/award> ],
+        [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:path <http://dbpedia.org/ontology/residence> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/relative> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/managerClub> ],
+        [ sh:class <http://dbpedia.org/ontology/MilitaryService> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/militaryService> ],
+        [ sh:class <http://dbpedia.org/ontology/Genre> ;
+            sh:path <http://dbpedia.org/ontology/genre> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/draftTeam> ],
+        [ sh:path <http://dbpedia.org/ontology/education> ],
+        [ sh:class <http://dbpedia.org/ontology/Country> ;
+            sh:path <http://dbpedia.org/ontology/stateOfOrigin> ],
+        [ sh:hasValue <http://dbpedia.org/ontology/Person> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:datatype rdf:langString ;
+            sh:path <http://dbpedia.org/ontology/title> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/formerTeam> ],
+        [ sh:class <http://dbpedia.org/ontology/Country> ;
+            sh:path <http://dbpedia.org/ontology/country> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/militaryCommand> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path <http://dbpedia.org/ontology/wikiPageRedirects> ],
+        [ sh:class <http://dbpedia.org/ontology/CareerStation> ;
+            sh:path <http://dbpedia.org/ontology/careerStation> ],
+        [ sh:class <http://dbpedia.org/ontology/MilitaryUnit> ;
+            sh:path <http://dbpedia.org/ontology/militaryUnit> ],
+        [ sh:class <http://dbpedia.org/ontology/Organisation> ;
+            sh:path <http://dbpedia.org/ontology/institution> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/imdbId> ],
+        [ sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:class <http://dbpedia.org/ontology/SportsLeague> ;
+            sh:path <http://dbpedia.org/ontology/league> ],
+        [ sh:class <http://dbpedia.org/ontology/School> ;
+            sh:path <http://dbpedia.org/ontology/highschool> ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/abstract> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/Person> .
+

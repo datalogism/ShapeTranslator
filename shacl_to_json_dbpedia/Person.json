@@ -1,0 +1,497 @@
+{
+  "shapes": [
+    {
+      "name": "Person",
+      "targetClass": "http://dbpedia.org/ontology/Person",
+      "closed": false,
+      "properties": [
+        {
+          "path": "http://dbpedia.org/ontology/Person/height",
+          "datatype": "http://dbpedia.org/datatype/centimetre",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/abstract",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/activeYearsEndYear",
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/activeYearsStartYear",
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/allegiance",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/associatedBand",
+          "classRef": "http://dbpedia.org/ontology/Band",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/award",
+          "classRef": "http://dbpedia.org/ontology/Award",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/battingSide",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/bowlingSide",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/careerStation",
+          "classRef": "http://dbpedia.org/ontology/CareerStation",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/child",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/college",
+          "classRef": "http://dbpedia.org/ontology/EducationalInstitution",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/country",
+          "classRef": "http://dbpedia.org/ontology/Country",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/debutTeam",
+          "classRef": "http://dbpedia.org/ontology/SportsTeam",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/doctoralAdvisor",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/draft",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/draftPick",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/draftRound",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/draftTeam",
+          "classRef": "http://dbpedia.org/ontology/SportsTeam",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/draftYear",
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/education",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/employer",
+          "classRef": "http://dbpedia.org/ontology/Organisation",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/formerTeam",
+          "classRef": "http://dbpedia.org/ontology/SportsTeam",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/genre",
+          "classRef": "http://dbpedia.org/ontology/Genre",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/height",
+          "datatype": "http://dbpedia.org/datatype/centimetre",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/highschool",
+          "classRef": "http://dbpedia.org/ontology/School",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/hometown",
+          "classRef": "http://dbpedia.org/ontology/Settlement",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/imdbId",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/institution",
+          "classRef": "http://dbpedia.org/ontology/Organisation",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/instrument",
+          "classRef": "http://dbpedia.org/ontology/Instrument",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/league",
+          "classRef": "http://dbpedia.org/ontology/SportsLeague",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/managerClub",
+          "classRef": "http://dbpedia.org/ontology/SportsTeam",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/militaryBranch",
+          "classRef": "http://dbpedia.org/ontology/MilitaryUnit",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/militaryCommand",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/militaryService",
+          "classRef": "http://dbpedia.org/ontology/MilitaryService",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/militaryUnit",
+          "classRef": "http://dbpedia.org/ontology/MilitaryUnit",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/overallRecord",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/parent",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/recordLabel",
+          "classRef": "http://dbpedia.org/ontology/RecordLabel",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/relation",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/relative",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/residence",
+          "classRef": "http://dbpedia.org/ontology/Place",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/restingPlace",
+          "classRef": "http://dbpedia.org/ontology/Place",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/school",
+          "classRef": "http://dbpedia.org/ontology/EducationalInstitution",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/serviceEndYear",
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/serviceStartYear",
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/shoots",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": 2
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/spouse",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/stateOfOrigin",
+          "classRef": "http://dbpedia.org/ontology/Country",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/team",
+          "classRef": "http://dbpedia.org/ontology/SportsTeam",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/thumbnail",
+          "classRef": "http://dbpedia.org/ontology/Image",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/title",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/undraftedYear",
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageID",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageRedirects",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageRevisionID",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#comment",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2002/07/owl#differentFrom",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://xmlns.com/foaf/0.1/depiction",
+          "classRef": "http://dbpedia.org/ontology/Image",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        }
+      ]
+    }
+  ]
+}

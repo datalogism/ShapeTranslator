@@ -1,0 +1,255 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/AthleteShape> a sh:NodeShape ;
+    sh:property [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path foaf:depiction ],
+        [ sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/wikiPageID> ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path rdfs:comment ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/weight> ],
+        [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:path <http://dbpedia.org/ontology/ground> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/formerPartner> ],
+        [ sh:node <http://shaclshapes.org/careerPrizeMoneyValueShape> ;
+            sh:path <http://dbpedia.org/ontology/careerPrizeMoney> ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/height> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/bowlingSide> ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:path <http://dbpedia.org/ontology/races> ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/activeYearsEndYear> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path <http://dbpedia.org/ontology/wikiPageExternalLink> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/overallRecord> ],
+        [ sh:class <http://dbpedia.org/ontology/Country> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/nationality> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/status> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path owl:sameAs ],
+        [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/deathPlace> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/plays> ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/poles> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path owl:differentFrom ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/choreographer> ],
+        [ sh:class <http://dbpedia.org/ontology/EducationalInstitution> ;
+            sh:path <http://dbpedia.org/ontology/school> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsLeague> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/prospectLeague> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/formerTeam> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path <http://dbpedia.org/ontology/wikiPageWikiLink> ],
+        [ sh:class <http://dbpedia.org/ontology/Settlement> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/hometown> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/spike> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsLeague> ;
+            sh:path <http://dbpedia.org/ontology/league> ],
+        [ sh:datatype rdf:langString ;
+            sh:path <http://dbpedia.org/ontology/title> ],
+        [ sh:datatype xsd:integer ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/wikiPageRevisionID> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/imdbId> ],
+        [ sh:class <http://dbpedia.org/ontology/HockeyTeam> ;
+            sh:path <http://dbpedia.org/ontology/whaDraftTeam> ],
+        [ sh:class <http://dbpedia.org/ontology/CareerStation> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/careerStation> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/debutTeam> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/formerChoreographer> ],
+        [ sh:datatype <http://dbpedia.org/datatype/centimetre> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/Person/height> ],
+        [ sh:datatype xsd:gYear ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/activeYearsStartYear> ],
+        [ sh:path <http://dbpedia.org/ontology/position> ],
+        [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/birthPlace> ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/birthName> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/managerClub> ],
+        [ sh:datatype xsd:date ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/birthDate> ],
+        [ sh:class <http://dbpedia.org/ontology/Horse> ;
+            sh:path <http://dbpedia.org/ontology/raceHorse> ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path rdfs:label ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/birthYear> ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:path <http://dbpedia.org/ontology/number> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/draftRound> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/draftPick> ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/thumbnail> ],
+        [ sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/draftTeam> ],
+        [ sh:class <http://dbpedia.org/ontology/GrandPrix> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/lastRace> ],
+        [ sh:datatype xsd:date ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/deathDate> ],
+        [ sh:hasValue <http://dbpedia.org/ontology/Athlete> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:class <http://dbpedia.org/ontology/Genre> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/genre> ],
+        [ sh:class <http://dbpedia.org/ontology/EducationalInstitution> ;
+            sh:path <http://dbpedia.org/ontology/university> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/coach> ],
+        [ sh:class <http://dbpedia.org/ontology/EducationalInstitution> ;
+            sh:path <http://dbpedia.org/ontology/college> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/whaDraft> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/club> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/nationalTeam> ],
+        [ sh:class <http://dbpedia.org/ontology/School> ;
+            sh:path <http://dbpedia.org/ontology/highschool> ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:path <http://dbpedia.org/ontology/championships> ],
+        [ sh:class <http://dbpedia.org/ontology/PopulatedPlace> ;
+            sh:path <http://dbpedia.org/ontology/billed> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/battingSide> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/currentPartner> ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/fastestLap> ],
+        [ sh:class <http://dbpedia.org/ontology/GrandPrix> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/firstRace> ],
+        [ sh:path <http://dbpedia.org/ontology/wikiPageDisambiguates> ],
+        [ sh:class <http://dbpedia.org/ontology/Country> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/stateOfOrigin> ],
+        [ sh:class <http://dbpedia.org/ontology/Award> ;
+            sh:path <http://dbpedia.org/ontology/award> ],
+        [ sh:class <http://dbpedia.org/ontology/PersonFunction> ;
+            sh:path <http://dbpedia.org/ontology/occupation> ],
+        [ sh:class <http://dbpedia.org/ontology/Language> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/language> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/manager> ],
+        [ sh:class <http://dbpedia.org/ontology/Sport> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/sport> ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:path <http://dbpedia.org/ontology/podiums> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/formerCoach> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/team> ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/wikiPageLength> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/relative> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/block> ],
+        [ sh:class <http://dbpedia.org/ontology/Race> ;
+            sh:path <http://dbpedia.org/ontology/race> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/trainer> ],
+        [ sh:datatype <http://dbpedia.org/datatype/kilogram> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/Person/weight> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/draft> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path rdfs:seeAlso ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/bbr> ],
+        [ sh:class <http://dbpedia.org/ontology/Country> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/country> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/draftLeague> ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/undraftedYear> ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/draftYear> ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:path <http://dbpedia.org/ontology/wins> ],
+        [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/residence> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://dbpedia.org/ontology/shoots> ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/abstract> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/Athlete> .
+
+<http://shaclshapes.org/careerPrizeMoneyValueShape> a sh:NodeShape ;
+    sh:or ( [ sh:datatype <http://dbpedia.org/datatype/poundSterling> ] [ sh:datatype <http://dbpedia.org/datatype/usDollar> ] ) .
+

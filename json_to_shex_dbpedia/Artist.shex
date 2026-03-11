@@ -1,0 +1,133 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+start = @<Artist>
+
+<Artist> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Artist> ] ;
+  <http://dbpedia.org/ontology/Person/height> <http://dbpedia.org/datatype/centimetre> ? ;
+  <http://dbpedia.org/ontology/abstract> rdf:langString + ;
+  <http://dbpedia.org/ontology/academicDiscipline> . * ;
+  <http://dbpedia.org/ontology/activeYearsEndYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/activeYearsStartYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/alias> rdf:langString * ;
+  <http://dbpedia.org/ontology/associatedBand> @<Band> * ;
+  <http://dbpedia.org/ontology/associatedMusicalArtist> @<MusicalArtist> * ;
+  <http://dbpedia.org/ontology/award> @<Award> * ;
+  <http://dbpedia.org/ontology/background> xsd:string * ;
+  <http://dbpedia.org/ontology/birthDate> xsd:date ;
+  <http://dbpedia.org/ontology/birthName> rdf:langString + ;
+  <http://dbpedia.org/ontology/birthPlace> @<Place> ;
+  <http://dbpedia.org/ontology/birthYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/child> @<Person> * ;
+  <http://dbpedia.org/ontology/deathDate> xsd:date ? ;
+  <http://dbpedia.org/ontology/deathPlace> @<Place> ? ;
+  <http://dbpedia.org/ontology/deathYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/doctoralAdvisor> @<Person> * ;
+  <http://dbpedia.org/ontology/education> . * ;
+  <http://dbpedia.org/ontology/field> . * ;
+  <http://dbpedia.org/ontology/genre> @<Genre> + ;
+  <http://dbpedia.org/ontology/height> <http://dbpedia.org/datatype/centimetre> ? ;
+  <http://dbpedia.org/ontology/hometown> @<Settlement> ;
+  <http://dbpedia.org/ontology/imdbId> xsd:string ? ;
+  <http://dbpedia.org/ontology/institution> @<Organisation> * ;
+  <http://dbpedia.org/ontology/instrument> @<Instrument> * ;
+  <http://dbpedia.org/ontology/movement> . * ;
+  <http://dbpedia.org/ontology/nationality> @<Country> + ;
+  <http://dbpedia.org/ontology/notableWork> @<Work> * ;
+  <http://dbpedia.org/ontology/originalName> rdf:langString * ;
+  <http://dbpedia.org/ontology/parent> @<Person> {0,2} ;
+  <http://dbpedia.org/ontology/partner> @<Person> * ;
+  <http://dbpedia.org/ontology/pseudonym> rdf:langString * ;
+  <http://dbpedia.org/ontology/recordLabel> @<RecordLabel> * ;
+  <http://dbpedia.org/ontology/relative> @<Person> * ;
+  <http://dbpedia.org/ontology/residence> @<Place> * ;
+  <http://dbpedia.org/ontology/restingPlace> @<Place> ? ;
+  <http://dbpedia.org/ontology/soundRecording> @<Sound> * ;
+  <http://dbpedia.org/ontology/spouse> @<Person> * ;
+  <http://dbpedia.org/ontology/stateOfOrigin> @<Country> ? ;
+  <http://dbpedia.org/ontology/thumbnail> @<Image> + ;
+  <http://dbpedia.org/ontology/wikiPageExternalLink> xsd:anyURI * ;
+  <http://dbpedia.org/ontology/wikiPageID> xsd:integer ;
+  <http://dbpedia.org/ontology/wikiPageLength> xsd:nonNegativeInteger ;
+  <http://dbpedia.org/ontology/wikiPageRevisionID> xsd:integer + ;
+  <http://dbpedia.org/ontology/wikiPageWikiLink> xsd:anyURI * ;
+  <http://purl.org/dc/terms/subject> @<core#Concept> * ;
+  <http://purl.org/linguistics/gold/hypernym> . ? ;
+  rdf:type . + ;
+  rdfs:comment rdf:langString + ;
+  rdfs:label rdf:langString + ;
+  rdfs:seeAlso xsd:anyURI * ;
+  owl:sameAs xsd:anyURI * ;
+  <http://www.w3.org/ns/prov#wasDerivedFrom> xsd:anyURI * ;
+  <http://xmlns.com/foaf/0.1/depiction> @<Image> + ;
+  <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> xsd:anyURI *
+}
+
+<Award> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Award> ]
+}
+
+<Band> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Band> ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Country> ]
+}
+
+<Genre> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Genre> ]
+}
+
+<Image> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Image> ]
+}
+
+<Instrument> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Instrument> ]
+}
+
+<MusicalArtist> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/MusicalArtist> ]
+}
+
+<Organisation> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Organisation> ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Person> ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Place> ]
+}
+
+<RecordLabel> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/RecordLabel> ]
+}
+
+<Settlement> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Settlement> ]
+}
+
+<Sound> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Sound> ]
+}
+
+<Work> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Work> ]
+}
+
+<core#Concept> EXTRA rdf:type {
+  rdf:type [ skos:Concept ]
+}

@@ -1,0 +1,148 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbt: <http://dbpedia.org/datatype/>
+
+start = @<Person>
+
+<Person> EXTRA rdf:type {
+  rdf:type [ dbo:Person ] ;
+  dbo:abstract rdf:langString + ;
+  dbo:thumbnail @<Image> + ;
+  dbo:wikiPageID xsd:integer ;
+  dbo:wikiPageRedirects xsd:anyURI * ;
+  dbo:wikiPageRevisionID xsd:integer + ;
+  rdf:type . + ;
+  rdfs:comment rdf:langString + ;
+  rdfs:seeAlso xsd:anyURI * ;
+  owl:differentFrom xsd:anyURI * ;
+  foaf:depiction @<Image> + ;
+  dbo:award @<Award> * ;
+  dbo:careerStation @<CareerStation> * ;
+  dbo:genre @<Genre> * ;
+  dbo:instrument @<Instrument> * ;
+  dbo:education . * ;
+  dbo:activeYearsStartYear xsd:gYear ? ;
+  dbo:activeYearsEndYear xsd:gYear ? ;
+  dbo:draftYear xsd:gYear ? ;
+  dbo:serviceStartYear xsd:gYear ? ;
+  dbo:serviceEndYear xsd:gYear ? ;
+  dbo:undraftedYear xsd:gYear ? ;
+  dbo:title rdf:langString * ;
+  dbo:stateOfOrigin @<Country> * ;
+  dbo:country @<Country> * ;
+  dbo:residence @<Place> * ;
+  dbo:restingPlace @<Place> ? ;
+  dbo:hometown @<Settlement> * ;
+  dbo:associatedBand @<Band> * ;
+  dbo:college @<EducationalInstitution> * ;
+  dbo:school @<EducationalInstitution> * ;
+  dbo:militaryService @<MilitaryService> ? ;
+  dbo:militaryBranch @<MilitaryUnit> * ;
+  dbo:militaryUnit @<MilitaryUnit> * ;
+  dbo:institution @<Organisation> * ;
+  dbo:employer @<Organisation> * ;
+  dbo:recordLabel @<RecordLabel> * ;
+  dbo:highschool @<School> * ;
+  dbo:militaryCommand xsd:string * ;
+  dbo:spouse @<Person> * ;
+  dbo:parent @<Person> * ;
+  dbo:child @<Person> * ;
+  dbo:relative @<Person> * ;
+  dbo:relation @<Person> * ;
+  dbo:doctoralAdvisor @<Person> * ;
+  dbo:allegiance xsd:string * ;
+  dbo:imdbId xsd:string ? ;
+  dbo:league @<SportsLeague> * ;
+  dbo:team @<SportsTeam> * ;
+  dbo:formerTeam @<SportsTeam> * ;
+  dbo:managerClub @<SportsTeam> * ;
+  dbo:debutTeam @<SportsTeam> ? ;
+  dbo:draftTeam @<SportsTeam> ? ;
+  dbo:draftPick xsd:string ? ;
+  dbo:battingSide xsd:string ? ;
+  dbo:draftRound xsd:string ? ;
+  dbo:shoots xsd:string {0,2} ;
+  dbo:bowlingSide xsd:string ? ;
+  dbo:draft xsd:string ? ;
+  dbo:overallRecord xsd:string * ;
+  dbo:Person/height dbt:centimetre ? ;
+  dbo:height dbt:centimetre ?
+}
+
+<Award> EXTRA rdf:type {
+  rdf:type [ dbo:Award ]
+}
+
+<Band> EXTRA rdf:type {
+  rdf:type [ dbo:Band ]
+}
+
+<CareerStation> EXTRA rdf:type {
+  rdf:type [ dbo:CareerStation ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ dbo:Country ]
+}
+
+<EducationalInstitution> EXTRA rdf:type {
+  rdf:type [ dbo:EducationalInstitution ]
+}
+
+<Genre> EXTRA rdf:type {
+  rdf:type [ dbo:Genre ]
+}
+
+<Image> EXTRA rdf:type {
+  rdf:type [ dbo:Image ]
+}
+
+<Instrument> EXTRA rdf:type {
+  rdf:type [ dbo:Instrument ]
+}
+
+<MilitaryService> EXTRA rdf:type {
+  rdf:type [ dbo:MilitaryService ]
+}
+
+<MilitaryUnit> EXTRA rdf:type {
+  rdf:type [ dbo:MilitaryUnit ]
+}
+
+<Organisation> EXTRA rdf:type {
+  rdf:type [ dbo:Organisation ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ dbo:Place ]
+}
+
+<RecordLabel> EXTRA rdf:type {
+  rdf:type [ dbo:RecordLabel ]
+}
+
+<School> EXTRA rdf:type {
+  rdf:type [ dbo:School ]
+}
+
+<Settlement> EXTRA rdf:type {
+  rdf:type [ dbo:Settlement ]
+}
+
+<SportsLeague> EXTRA rdf:type {
+  rdf:type [ dbo:SportsLeague ]
+}
+
+<SportsTeam> EXTRA rdf:type {
+  rdf:type [ dbo:SportsTeam ]
+}

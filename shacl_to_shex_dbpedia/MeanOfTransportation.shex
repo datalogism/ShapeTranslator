@@ -1,0 +1,126 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbt: <http://dbpedia.org/datatype/>
+PREFIX shapes: <http://shaclshapes.org/>
+
+start = @<MeanOfTransportation>
+
+<costValue> dbt:usDollar OR dbt:poundSterling OR dbt:euro OR dbt:japaneseYen OR dbt:canadianDollar OR dbt:swedishKrona OR dbt:norwegianKrone OR dbt:danishKrone OR dbt:swissFranc OR dbt:australianDollar OR dbt:malaysianRinggit OR dbt:russianRouble OR dbt:indonesianRupiah OR dbt:polishZłoty OR dbt:unitedArabEmiratesDirham OR dbt:renminbi OR dbt:czechKoruna OR dbt:indianRupee OR dbt:bulgarianLev OR dbt:sriLankanRupee OR dbt:hungarianForint OR dbt:southKoreanWon OR dbt:lithuanianLitas OR dbt:croatianKuna OR dbt:iraqiDinar OR dbt:mexicanPeso OR dbt:saudiRiyal OR dbt:turkishLira OR dbt:estonianKroon OR dbt:hongKongDollar OR dbt:newTaiwanDollar OR dbt:thaiBaht OR dbt:pakistaniRupee OR dbt:slovakKoruna OR dbt:chileanPeso OR dbt:kuwaitiDinar OR dbt:newZealandDollar OR dbt:bangladeshiTaka OR dbt:philippinePeso OR dbt:serbianDinar OR dbt:brazilianReal OR dbt:tanzanianShilling OR dbt:georgianLari OR dbt:algerianDinar OR dbt:armenianDram OR dbt:colombianPeso OR dbt:argentinePeso OR dbt:israeliNewSheqel OR dbt:moroccanDirham OR dbt:egyptianPound OR dbt:lebanesePound OR dbt:iranianRial OR dbt:capeVerdeEscudo OR dbt:kenyanShilling OR dbt:ugandaShilling OR dbt:bruneiDollar OR dbt:cambodianRiel
+
+<unitCostValue> dbt:usDollar OR dbt:euro OR dbt:poundSterling OR dbt:russianRouble OR dbt:nicaraguanCórdoba
+
+<MeanOfTransportation> EXTRA rdf:type {
+  rdf:type [ dbo:MeanOfTransportation ] ;
+  dbo:wikiPageInterLanguageLink xsd:anyURI * ;
+  dbo:wikiPageRedirects xsd:anyURI * ;
+  rdfs:seeAlso xsd:anyURI * ;
+  owl:differentFrom xsd:anyURI * ;
+  dbo:launchSite @<Building> * ;
+  dbo:shipLaunch xsd:date ? ;
+  dbo:commissioningDate xsd:date ;
+  dbo:layingDown xsd:date ? ;
+  dbo:decommissioningDate xsd:date ? ;
+  dbo:acquirementDate xsd:date * ;
+  dbo:orderDate xsd:date ? ;
+  dbo:completionDate xsd:date ? ;
+  dbo:activeYearsEndDate xsd:date ? ;
+  dbo:activeYearsStartDate xsd:date ? ;
+  dbo:maidenVoyage xsd:date ? ;
+  dbo:recommissioningDate xsd:date ? ;
+  dbo:captureDate xsd:date ? ;
+  dbo:maidenFlight xsd:date ? ;
+  dbo:retired xsd:date ? ;
+  dbo:finalFlight xsd:date ? ;
+  dbo:productionStartYear xsd:gYear ? ;
+  dbo:productionEndYear xsd:gYear ? ;
+  dbo:activeYearsStartYear xsd:gYear ? ;
+  dbo:activeYearsEndYear xsd:gYear ? ;
+  dbo:modelStartYear xsd:gYear ? ;
+  dbo:modelEndYear xsd:gYear ? ;
+  dbo:yearOfConstruction xsd:gYear * ;
+  dbo:numberBuilt xsd:nonNegativeInteger ? ;
+  dbo:cylinderCount xsd:nonNegativeInteger ? ;
+  dbo:totalLaunches xsd:nonNegativeInteger ? ;
+  dbo:failedLaunches xsd:nonNegativeInteger ? ;
+  dbo:numberOfDoors xsd:positiveInteger * ;
+  dbo:cost @<http://shaclshapes.org/costValueShape> ? ;
+  dbo:unitCost @<http://shaclshapes.org/unitCostValueShape> ? ;
+  dbo:alternativeName rdf:langString * ;
+  dbo:motto xsd:string ? ;
+  dbo:country @<Country> * ;
+  dbo:countryOrigin @<Country> * ;
+  dbo:homeport @<Place> ? ;
+  dbo:origin @<PopulatedPlace> ? ;
+  dbo:designCompany @<Company> * ;
+  dbo:owner @<Agent> * ;
+  dbo:designer @<Person> * ;
+  dbo:engine @<AutomobileEngine> ? ;
+  dbo:battery @<Battery> ? ;
+  dbo:shipBeam xsd:double ? ;
+  dbo:topSpeed xsd:double ? ;
+  dbo:shipDraft xsd:double ? ;
+  dbo:shipDisplacement xsd:double * ;
+  dbo:diameter xsd:double ? ;
+  dbo:capacity xsd:nonNegativeInteger * ;
+  dbo:relatedMeanOfTransportation @<MeanOfTransportation> * ;
+  dbo:comparable @<Rocket> * ;
+  dbo:automobilePlatform @<Automobile> ? ;
+  dbo:rocketStages xsd:nonNegativeInteger ? ;
+  dbo:status xsd:string ? ;
+  dbo:transmission xsd:string * ;
+  dbo:MeanOfTransportation/length dbt:millimetre + ;
+  dbo:length dbt:millimetre +
+}
+
+<Agent> EXTRA rdf:type {
+  rdf:type [ dbo:Agent ]
+}
+
+<Automobile> EXTRA rdf:type {
+  rdf:type [ dbo:Automobile ]
+}
+
+<AutomobileEngine> EXTRA rdf:type {
+  rdf:type [ dbo:AutomobileEngine ]
+}
+
+<Battery> EXTRA rdf:type {
+  rdf:type [ dbo:Battery ]
+}
+
+<Building> EXTRA rdf:type {
+  rdf:type [ dbo:Building ]
+}
+
+<Company> EXTRA rdf:type {
+  rdf:type [ dbo:Company ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ dbo:Country ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ dbo:Person ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ dbo:Place ]
+}
+
+<PopulatedPlace> EXTRA rdf:type {
+  rdf:type [ dbo:PopulatedPlace ]
+}
+
+<Rocket> EXTRA rdf:type {
+  rdf:type [ dbo:Rocket ]
+}

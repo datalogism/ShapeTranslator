@@ -1,0 +1,72 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+start = @<CelestialBody>
+
+<CelestialBody> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/CelestialBody> ] ;
+  <http://dbpedia.org/ontology/Planet/meanRadius> <http://dbpedia.org/datatype/kilometre> ? ;
+  <http://dbpedia.org/ontology/Planet/minimumTemperature> <http://dbpedia.org/datatype/kelvin> * ;
+  <http://dbpedia.org/ontology/Planet/orbitalPeriod> <http://dbpedia.org/datatype/day> ;
+  <http://dbpedia.org/ontology/Planet/periapsis> <http://dbpedia.org/datatype/kilometre> ;
+  <http://dbpedia.org/ontology/Planet/surfaceArea> <http://dbpedia.org/datatype/squareKilometre> ? ;
+  <http://dbpedia.org/ontology/Planet/volume> <http://dbpedia.org/datatype/cubicKilometre> ? ;
+  <http://dbpedia.org/ontology/abbreviation> xsd:string ;
+  <http://dbpedia.org/ontology/absoluteMagnitude> xsd:double * ;
+  <http://dbpedia.org/ontology/abstract> rdf:langString + ;
+  <http://dbpedia.org/ontology/albedo> xsd:double * ;
+  <http://dbpedia.org/ontology/apoapsis> xsd:double ? ;
+  <http://dbpedia.org/ontology/apparentMagnitude> xsd:double ;
+  <http://dbpedia.org/ontology/averageSpeed> xsd:double ? ;
+  <http://dbpedia.org/ontology/density> xsd:double ? ;
+  <http://dbpedia.org/ontology/detectionMethod> xsd:string * ;
+  <http://dbpedia.org/ontology/discovered> xsd:date + ;
+  <http://dbpedia.org/ontology/discoverer> @<Person> + ;
+  <http://dbpedia.org/ontology/epoch> xsd:string + ;
+  <http://dbpedia.org/ontology/escapeVelocity> xsd:double ? ;
+  <http://dbpedia.org/ontology/formerName> rdf:langString + ;
+  <http://dbpedia.org/ontology/meanRadius> xsd:double ? ;
+  <http://dbpedia.org/ontology/neighbourConstellations> xsd:string * ;
+  <http://dbpedia.org/ontology/orbitalPeriod> xsd:double + ;
+  <http://dbpedia.org/ontology/orbitalPeriod> <http://dbpedia.org/datatype/day> ;
+  <http://dbpedia.org/ontology/periapsis> xsd:double ? ;
+  <http://dbpedia.org/ontology/rotationPeriod> xsd:double ? ;
+  <http://dbpedia.org/ontology/surfaceArea> xsd:double ? ;
+  <http://dbpedia.org/ontology/thumbnail> @<Image> + ;
+  <http://dbpedia.org/ontology/volume> xsd:double ? ;
+  <http://dbpedia.org/ontology/wikiPageExternalLink> xsd:anyURI * ;
+  <http://dbpedia.org/ontology/wikiPageID> xsd:integer ;
+  <http://dbpedia.org/ontology/wikiPageLength> xsd:nonNegativeInteger ;
+  <http://dbpedia.org/ontology/wikiPageRevisionID> xsd:integer + ;
+  <http://dbpedia.org/ontology/wikiPageWikiLink> xsd:anyURI * ;
+  <http://purl.org/dc/terms/subject> @<core#Concept> * ;
+  rdf:type . + ;
+  rdfs:comment rdf:langString + ;
+  rdfs:label rdf:langString + ;
+  rdfs:seeAlso xsd:anyURI * ;
+  owl:differentFrom xsd:anyURI * ;
+  owl:sameAs xsd:anyURI * ;
+  <http://www.w3.org/ns/prov#wasDerivedFrom> xsd:anyURI * ;
+  <http://xmlns.com/foaf/0.1/depiction> @<Image> + ;
+  <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> xsd:anyURI *
+}
+
+<Image> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Image> ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Person> ]
+}
+
+<core#Concept> EXTRA rdf:type {
+  rdf:type [ skos:Concept ]
+}

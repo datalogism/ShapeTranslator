@@ -1,0 +1,431 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbt: <http://dbpedia.org/datatype/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix umbel: <http://umbel.org/umbel/rc/> .
+@prefix shapes: <http://shaclshapes.org/> .
+
+
+# ── Reusable value shapes (from SPARQL-inferred ranges) ──────────────────────
+
+shapes:budgetValueShape
+    a sh:NodeShape ;
+    sh:or (
+        [ sh:datatype dbt:usDollar ]
+        [ sh:datatype dbt:euro ]
+        [ sh:datatype dbt:poundSterling ]
+        [ sh:datatype dbt:indianRupee ]
+        [ sh:datatype dbt:japaneseYen ]
+        [ sh:datatype dbt:malaysianRinggit ]
+        [ sh:datatype dbt:canadianDollar ]
+        [ sh:datatype dbt:swedishKrona ]
+        [ sh:datatype dbt:czechKoruna ]
+        [ sh:datatype dbt:australianDollar ]
+        [ sh:datatype dbt:sriLankanRupee ]
+        [ sh:datatype dbt:norwegianKrone ]
+        [ sh:datatype dbt:renminbi ]
+        [ sh:datatype dbt:russianRouble ]
+        [ sh:datatype dbt:danishKrone ]
+        [ sh:datatype dbt:swissFranc ]
+        [ sh:datatype dbt:croatianKuna ]
+        [ sh:datatype dbt:maldivianRufiyaa ]
+        [ sh:datatype dbt:bruneiDollar ]
+        [ sh:datatype dbt:newZealandDollar ]
+        [ sh:datatype dbt:indonesianRupiah ]
+        [ sh:datatype dbt:polishZłoty ]
+        [ sh:datatype dbt:bangladeshiTaka ]
+        [ sh:datatype dbt:brazilianReal ]
+        [ sh:datatype dbt:thaiBaht ]
+        [ sh:datatype dbt:southKoreanWon ]
+        [ sh:datatype dbt:egyptianPound ]
+        [ sh:datatype dbt:nepaleseRupee ]
+        [ sh:datatype dbt:hungarianForint ]
+        [ sh:datatype dbt:southAfricanRand ]
+        [ sh:datatype dbt:hongKongDollar ]
+        [ sh:datatype dbt:pakistaniRupee ]
+        [ sh:datatype dbt:argentinePeso ]
+        [ sh:datatype dbt:moroccanDirham ]
+        [ sh:datatype dbt:chileanPeso ]
+        [ sh:datatype dbt:mongolianTögrög ]
+        [ sh:datatype dbt:icelandKrona ]
+        [ sh:datatype dbt:newTaiwanDollar ]
+        [ sh:datatype dbt:philippinePeso ]
+        [ sh:datatype dbt:latvianLats ]
+        [ sh:datatype dbt:ukrainianHryvnia ]
+        [ sh:datatype dbt:serbianDinar ]
+        [ sh:datatype dbt:nigerianNaira ]
+        [ sh:datatype dbt:unitedArabEmiratesDirham ]
+        [ sh:datatype dbt:westAfricanCfaFranc ]
+        [ sh:datatype dbt:eastCaribbeanDollar ]
+        [ sh:datatype dbt:trinidadAndTobagoDollar ]
+        [ sh:datatype dbt:macedonianDenar ]
+        [ sh:datatype dbt:estonianKroon ]
+        [ sh:datatype dbt:mexicanPeso ]
+        [ sh:datatype dbt:fijiDollar ]
+        [ sh:datatype dbt:bosniaAndHerzegovinaConvertibleMarks ]
+        [ sh:datatype dbt:bulgarianLev ]
+        [ sh:datatype dbt:singaporeDollar ]
+        [ sh:datatype dbt:libyanDinar ]
+        [ sh:datatype dbt:honduranLempira ]
+        [ sh:datatype dbt:myanmaKyat ]
+        [ sh:datatype dbt:georgianLari ]
+        [ sh:datatype dbt:guineaFranc ]
+        [ sh:datatype dbt:barbadosDollar ]
+        [ sh:datatype dbt:israeliNewSheqel ]
+        [ sh:datatype dbt:nicaraguanCórdoba ]
+        [ sh:datatype dbt:haitiGourde ]
+        [ sh:datatype dbt:bahrainiDinar ]
+        [ sh:datatype dbt:botswanaPula ]
+        [ sh:datatype dbt:namibianDollar ]
+        [ sh:datatype dbt:ghanaianCedi ]
+    ) .
+
+
+<http://shaclshapes.org/FilmShape> a sh:NodeShape ;
+    sh:targetClass dbo:Film ;
+
+    # === DBpedia Common Properties ===
+    sh:property [
+        sh:path dbo:abstract ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:thumbnail ;
+        sh:class dbo:Image ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageExternalLink ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageID ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageLength ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRedirects ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageWikiLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+    ] ;
+
+    sh:property [
+        sh:path dct:subject ;
+        sh:class skos:Concept ;
+    ] ;
+
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:seeAlso ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:depiction ;
+        sh:class dbo:Image ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:isPrimaryTopicOf ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    # === Career & achievements ===
+    sh:property [
+        sh:path dbo:award ;
+        sh:class dbo:Award ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:genre ;
+        sh:class dbo:Genre ;
+        sh:minCount 1 ;
+    ] ;
+
+    # === Cast, crew & creators ===
+    sh:property [
+        sh:path dbo:starring ;
+        sh:class dbo:Actor ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:producer ;
+        sh:class dbo:Agent ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:editor ;
+        sh:class dbo:Agent ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:musicComposer ;
+        sh:class dbo:MusicalArtist ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:director ;
+        sh:class dbo:Person ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:writer ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:cinematography ;
+        sh:class dbo:Person ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:editing ;
+        sh:class dbo:Person ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:narrator ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:author ;
+        sh:class dbo:Person ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:composer ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:musicBy ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:lyrics ;
+        sh:class dbo:Person ;
+    ] ;
+
+    # === Dates & timeline ===
+    sh:property [
+        sh:path dbo:releaseDate ;
+        sh:datatype xsd:date ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Economics & statistics ===
+    sh:property [
+        sh:path dbo:gross ;
+        sh:datatype xsd:double ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:budget ;
+        sh:node shapes:budgetValueShape ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfEpisodes ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfSeasons ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    # === Identity & naming ===
+    sh:property [
+        sh:path dbo:alias ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    # === Location & geography ===
+    sh:property [
+        sh:path dbo:country ;
+        sh:class dbo:Country ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:location ;
+        sh:class dbo:Place ;
+    ] ;
+
+    # === Media & publications ===
+    sh:property [
+        sh:path dbo:language ;
+        sh:class dbo:Language ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:soundRecording ;
+        sh:class dbo:Sound ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:openingTheme ;
+        sh:class dbo:Work ;
+    ] ;
+
+    # === Organization & affiliation ===
+    sh:property [
+        sh:path dbo:publisher ;
+        sh:class dbo:Agent ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:productionCompany ;
+        sh:class dbo:Company ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:distributor ;
+        sh:class dbo:Organisation ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:company ;
+        sh:class dbo:Organisation ;
+    ] ;
+
+    # === People & family ===
+    sh:property [
+        sh:path dbo:creator ;
+        sh:class dbo:Agent ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:keyPerson ;
+        sh:class dbo:Person ;
+    ] ;
+
+    # === References & links ===
+    sh:property [
+        sh:path dbo:subsequentWork ;
+        sh:class dbo:Work ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:previousWork ;
+        sh:class dbo:Work ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:imdbId ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Physical dimensions & specs (alternatives) ===
+    sh:or (
+        [
+            sh:property [
+                sh:path <http://dbpedia.org/ontology/Work/runtime> ;
+                sh:datatype dbt:minute ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path dbo:runtime ;
+                sh:datatype dbt:minute ;
+            ]
+        ]
+    ) ;
+
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:runtime ;
+                sh:datatype xsd:double ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path <http://dbpedia.org/ontology/Work/runtime> ;
+                sh:datatype xsd:double ;
+            ]
+        ]
+    ) .
+

@@ -1,0 +1,434 @@
+{
+  "shapes": [
+    {
+      "name": "SportsTeam",
+      "targetClass": "http://dbpedia.org/ontology/SportsTeam",
+      "closed": false,
+      "properties": [
+        {
+          "path": "http://dbpedia.org/ontology/Work/runtime",
+          "datatype": "http://dbpedia.org/datatype/minute",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/abstract",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/activeYearsEndYear",
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/aircraftTrainer",
+          "classRef": "http://dbpedia.org/ontology/MeanOfTransportation",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/capacity",
+          "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/chairman",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/chairmanTitle",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/city",
+          "classRef": "http://dbpedia.org/ontology/City",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/coach",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/colour",
+          "classRef": "http://dbpedia.org/ontology/Colour",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/colourName",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/commandStructure",
+          "classRef": "http://dbpedia.org/ontology/MilitaryUnit",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/country",
+          "classRef": "http://dbpedia.org/ontology/Country",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/currentMember",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/director",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/dissolutionYear",
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/dissolved",
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/formationDate",
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/foundingYear",
+          "datatype": "http://www.w3.org/2001/XMLSchema#gYear",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/generalManager",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/homeStadium",
+          "classRef": "http://dbpedia.org/ontology/Stadium",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/imdbId",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/league",
+          "classRef": "http://dbpedia.org/ontology/SportsLeague",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/location",
+          "classRef": "http://dbpedia.org/ontology/Place",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/logo",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/manager",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/managerTitle",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/mascot",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/owner",
+          "classRef": "http://dbpedia.org/ontology/Agent",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/parentCompany",
+          "classRef": "http://dbpedia.org/ontology/Company",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/president",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/runtime",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/sport",
+          "classRef": "http://dbpedia.org/ontology/Sport",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/squadNumber",
+          "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/stadium",
+          "classRef": "http://dbpedia.org/ontology/Stadium",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/status",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/team",
+          "classRef": "http://dbpedia.org/ontology/SportsTeam",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/thumbnail",
+          "classRef": "http://dbpedia.org/ontology/Image",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/title",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/uciCode",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageExternalLink",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageID",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageLength",
+          "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageRevisionID",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://purl.org/dc/terms/subject",
+          "classRef": "http://www.w3.org/2004/02/skos/core#Concept",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#comment",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#label",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2002/07/owl#differentFrom",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/ns/prov#wasDerivedFrom",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://xmlns.com/foaf/0.1/depiction",
+          "classRef": "http://dbpedia.org/ontology/Image",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        }
+      ]
+    }
+  ]
+}

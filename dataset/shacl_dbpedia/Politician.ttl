@@ -1,0 +1,490 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbt: <http://dbpedia.org/datatype/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix umbel: <http://umbel.org/umbel/rc/> .
+@prefix shapes: <http://shaclshapes.org/> .
+
+
+<http://shaclshapes.org/PoliticianShape> a sh:NodeShape ;
+    sh:targetClass dbo:Politician ;
+
+    # === DBpedia Common Properties ===
+    sh:property [
+        sh:path dbo:abstract ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:thumbnail ;
+        sh:class dbo:Image ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageExternalLink ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageID ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageLength ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageWikiLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+    ] ;
+
+    sh:property [
+        sh:path dct:subject ;
+        sh:class skos:Concept ;
+    ] ;
+
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:seeAlso ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:depiction ;
+        sh:class dbo:Image ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:isPrimaryTopicOf ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    # === Career & achievements ===
+    sh:property [
+        sh:path dbo:award ;
+        sh:class dbo:Award ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:nationality ;
+        sh:class dbo:Country ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:occupation ;
+        sh:class dbo:PersonFunction ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:education ;
+        sh:minCount 1 ;
+    ] ;
+
+    # === Dates & timeline ===
+    sh:property [
+        sh:path dbo:termPeriod ;
+        sh:class dbo:TimePeriod ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:birthDate ;
+        sh:datatype xsd:date ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:deathDate ;
+        sh:datatype xsd:date ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:activeYearsStartDate ;
+        sh:datatype xsd:date ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:activeYearsEndDate ;
+        sh:datatype xsd:date ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:serviceStartYear ;
+        sh:datatype xsd:gYear ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:serviceEndYear ;
+        sh:datatype xsd:gYear ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:birthYear ;
+        sh:datatype xsd:gYear ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:deathYear ;
+        sh:datatype xsd:gYear ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:activeYearsStartYear ;
+        sh:datatype xsd:gYear ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:activeYearsEndYear ;
+        sh:datatype xsd:gYear ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Identity & naming ===
+    sh:property [
+        sh:path dbo:originalName ;
+        sh:datatype rdf:langString ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:alias ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    # === Location & geography ===
+    sh:property [
+        sh:path dbo:stateOfOrigin ;
+        sh:class dbo:Country ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:country ;
+        sh:class dbo:Country ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:birthPlace ;
+        sh:class dbo:Place ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:deathPlace ;
+        sh:class dbo:Place ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:residence ;
+        sh:class dbo:Place ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:restingPlace ;
+        sh:class dbo:Place ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:region ;
+        sh:class dbo:Place ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:restingPlacePosition ;
+        sh:class geo:SpatialThing ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Media & publications ===
+    sh:property [
+        sh:path dbo:soundRecording ;
+        sh:class dbo:Sound ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:signature ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Organization & affiliation ===
+    sh:property [
+        sh:path dbo:almaMater ;
+        sh:class dbo:EducationalInstitution ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:militaryService ;
+        sh:class dbo:MilitaryService ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:militaryBranch ;
+        sh:class dbo:MilitaryUnit ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:militaryUnit ;
+        sh:class dbo:MilitaryUnit ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:militaryCommand ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # === People & family ===
+    sh:property [
+        sh:path dbo:father ;
+        sh:class dbo:Person ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:parent ;
+        sh:class dbo:Person ;
+        sh:maxCount 2 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:relative ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:spouse ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:relation ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:child ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:partner ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:mother ;
+        sh:class dbo:Person ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:associate ;
+        sh:class dbo:Person ;
+    ] ;
+
+    # === Physical dimensions & specs ===
+    sh:property [
+        sh:path <http://dbpedia.org/ontology/Person/height> ;
+        sh:datatype dbt:centimetre ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:height ;
+        sh:datatype xsd:double ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Politics & governance ===
+    sh:property [
+        sh:path dbo:battle ;
+        sh:class dbo:MilitaryConflict ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:lieutenant ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:president ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:primeMinister ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:monarch ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:governor ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:vicePresident ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:deputy ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:appointer ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:chancellor ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:governorGeneral ;
+        sh:class dbo:Person ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:otherParty ;
+        sh:class dbo:PoliticalParty ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:party ;
+        sh:class dbo:PoliticalParty ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:electionMajority ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:office ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:orderInOffice ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:committee ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:portfolio ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:seniority ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # === References & links ===
+    sh:property [
+        sh:path dbo:imdbId ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # === Identity & naming (alternatives) ===
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:birthName ;
+                sh:datatype rdf:langString ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path foaf:name ;
+                sh:datatype rdf:langString ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+            ]
+        ]
+    ) .
+

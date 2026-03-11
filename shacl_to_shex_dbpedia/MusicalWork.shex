@@ -1,0 +1,161 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbt: <http://dbpedia.org/datatype/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX shapes: <http://shaclshapes.org/>
+
+start = @<MusicalWork>
+
+<budgetValue> dbt:usDollar OR dbt:poundSterling OR dbt:euro OR dbt:canadianDollar OR dbt:japaneseYen OR dbt:russianRouble OR dbt:sriLankanRupee OR dbt:croatianKuna OR dbt:jordanianDinar OR dbt:southAfricanRand OR dbt:philippinePeso OR dbt:indianRupee OR dbt:renminbi OR dbt:netherlandsAntilleanGuilder OR dbt:pakistaniRupee OR dbt:malaysianRinggit OR dbt:nepaleseRupee OR dbt:unitedArabEmiratesDirham OR dbt:lebanesePound OR dbt:peruvianNuevoSol OR dbt:hungarianForint OR dbt:swedishKrona OR dbt:danishKrone OR dbt:thaiBaht
+
+<MusicalWork> EXTRA rdf:type {
+  rdf:type [ dbo:MusicalWork ] ;
+  dbo:abstract rdf:langString + ;
+  dbo:thumbnail @<Image> + ;
+  dbo:wikiPageExternalLink xsd:anyURI * ;
+  dbo:wikiPageID xsd:integer ;
+  dbo:wikiPageInterLanguageLink xsd:anyURI * ;
+  dbo:wikiPageLength xsd:nonNegativeInteger ;
+  dbo:wikiPageRedirects xsd:anyURI * ;
+  dbo:wikiPageRevisionID xsd:integer + ;
+  dbo:wikiPageWikiLink xsd:anyURI * ;
+  dct:subject @<core#Concept> * ;
+  rdf:type . + ;
+  rdfs:comment rdf:langString + ;
+  rdfs:label rdf:langString + ;
+  rdfs:seeAlso xsd:anyURI * ;
+  owl:differentFrom xsd:anyURI * ;
+  owl:sameAs xsd:anyURI * ;
+  prov:wasDerivedFrom xsd:anyURI * ;
+  foaf:depiction @<Image> + ;
+  foaf:isPrimaryTopicOf xsd:anyURI * ;
+  dbo:genre @<Genre> + ;
+  dbo:award @<Award> * ;
+  dbo:writer @<Person> * ;
+  dbo:artist @<Agent> + ;
+  dbo:producer @<Agent> * ;
+  dbo:composer @<Person> * ;
+  dbo:musicBy @<Person> * ;
+  dbo:lyrics @<Person> * ;
+  dbo:author @<Person> * ;
+  dbo:starring @<Actor> * ;
+  dbo:musicComposer @<MusicalArtist> * ;
+  dbo:director @<Person> * ;
+  dbo:cinematography @<Person> * ;
+  dbo:editing @<Person> * ;
+  dbo:associatedMusicalArtist @<MusicalArtist> * ;
+  dbo:releaseDate xsd:date ? ;
+  dbo:recordDate xsd:date ;
+  dbo:publicationDate xsd:date ? ;
+  dbo:budget @<http://shaclshapes.org/budgetValueShape> ? ;
+  foaf:name rdfs:Literal * ;
+  dbo:subtitle xsd:string * ;
+  dbo:title rdf:langString ? ;
+  dbo:country @<Country> * ;
+  dbo:origin @<PopulatedPlace> * ;
+  dbo:language @<Language> * ;
+  dbo:album @<Album> * ;
+  dbo:soundRecording @<Sound> * ;
+  dbo:bSide xsd:string ? ;
+  dbo:wikiPageDisambiguates . ? ;
+  dbo:recordLabel @<RecordLabel> * ;
+  dbo:distributor @<Organisation> * ;
+  dbo:productionCompany @<Company> * ;
+  dbo:associatedBand @<Band> * ;
+  dbo:runtime xsd:double ? ;
+  dbo:Work/runtime dbt:minute ? ;
+  dbo:subsequentWork @<Work> * ;
+  dbo:previousWork @<Work> * ;
+  foaf:homepage @<Document> ? ;
+  dbo:basedOn @<Work> * ;
+  dbo:imdbId xsd:string * ;
+  dbo:recordedIn @<PopulatedPlace> * ;
+  dbo:runtime @<PopulatedPlace> *
+}
+
+<Actor> EXTRA rdf:type {
+  rdf:type [ dbo:Actor ]
+}
+
+<Agent> EXTRA rdf:type {
+  rdf:type [ dbo:Agent ]
+}
+
+<Album> EXTRA rdf:type {
+  rdf:type [ dbo:Album ]
+}
+
+<Award> EXTRA rdf:type {
+  rdf:type [ dbo:Award ]
+}
+
+<Band> EXTRA rdf:type {
+  rdf:type [ dbo:Band ]
+}
+
+<Company> EXTRA rdf:type {
+  rdf:type [ dbo:Company ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ dbo:Country ]
+}
+
+<Document> EXTRA rdf:type {
+  rdf:type [ foaf:Document ]
+}
+
+<Genre> EXTRA rdf:type {
+  rdf:type [ dbo:Genre ]
+}
+
+<Image> EXTRA rdf:type {
+  rdf:type [ dbo:Image ]
+}
+
+<Language> EXTRA rdf:type {
+  rdf:type [ dbo:Language ]
+}
+
+<MusicalArtist> EXTRA rdf:type {
+  rdf:type [ dbo:MusicalArtist ]
+}
+
+<Organisation> EXTRA rdf:type {
+  rdf:type [ dbo:Organisation ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ dbo:Person ]
+}
+
+<PopulatedPlace> EXTRA rdf:type {
+  rdf:type [ dbo:PopulatedPlace ]
+}
+
+<RecordLabel> EXTRA rdf:type {
+  rdf:type [ dbo:RecordLabel ]
+}
+
+<Sound> EXTRA rdf:type {
+  rdf:type [ dbo:Sound ]
+}
+
+<Work> EXTRA rdf:type {
+  rdf:type [ dbo:Work ]
+}
+
+<core#Concept> EXTRA rdf:type {
+  rdf:type [ skos:Concept ]
+}

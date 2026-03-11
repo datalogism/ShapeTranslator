@@ -1,0 +1,159 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/FilmShape> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:anyURI ;
+            sh:path <http://dbpedia.org/ontology/wikiPageWikiLink> ],
+        [ sh:class <http://dbpedia.org/ontology/Work> ;
+            sh:path <http://dbpedia.org/ontology/openingTheme> ],
+        [ sh:class <http://dbpedia.org/ontology/Country> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/country> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/director> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/writer> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/cinematography> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/musicBy> ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/wikiPageLength> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path <http://dbpedia.org/ontology/wikiPageRedirects> ],
+        [ sh:class <http://dbpedia.org/ontology/Genre> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/genre> ],
+        [ sh:datatype <http://dbpedia.org/datatype/minute> ;
+            sh:path <http://dbpedia.org/ontology/Work/runtime> ],
+        [ sh:datatype rdf:langString ;
+            sh:path <http://dbpedia.org/ontology/alias> ],
+        [ sh:class <http://dbpedia.org/ontology/Actor> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/starring> ],
+        [ sh:class <http://dbpedia.org/ontology/Sound> ;
+            sh:path <http://dbpedia.org/ontology/soundRecording> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/author> ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path rdfs:label ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/editing> ],
+        [ sh:class <http://dbpedia.org/ontology/Agent> ;
+            sh:path <http://dbpedia.org/ontology/creator> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path prov:wasDerivedFrom ],
+        [ sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/wikiPageID> ],
+        [ sh:class <http://dbpedia.org/ontology/Organisation> ;
+            sh:path <http://dbpedia.org/ontology/distributor> ],
+        [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:path <http://dbpedia.org/ontology/location> ],
+        [ sh:class <http://dbpedia.org/ontology/Work> ;
+            sh:path <http://dbpedia.org/ontology/previousWork> ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/thumbnail> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path foaf:isPrimaryTopicOf ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:path <http://dbpedia.org/ontology/numberOfSeasons> ],
+        [ sh:class <http://dbpedia.org/ontology/Award> ;
+            sh:path <http://dbpedia.org/ontology/award> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:node <http://shaclshapes.org/budgetValueShape> ;
+            sh:path <http://dbpedia.org/ontology/budget> ],
+        [ sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:class <http://dbpedia.org/ontology/Work> ;
+            sh:path <http://dbpedia.org/ontology/subsequentWork> ],
+        [ sh:class <http://dbpedia.org/ontology/Agent> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/publisher> ],
+        [ sh:class <http://dbpedia.org/ontology/Company> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/productionCompany> ],
+        [ sh:class skos:Concept ;
+            sh:path dcterms:subject ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/gross> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/keyPerson> ],
+        [ sh:class <http://dbpedia.org/ontology/MusicalArtist> ;
+            sh:path <http://dbpedia.org/ontology/musicComposer> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/narrator> ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path rdfs:comment ],
+        [ sh:datatype xsd:date ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/releaseDate> ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:path <http://dbpedia.org/ontology/numberOfEpisodes> ],
+        [ sh:datatype <http://dbpedia.org/datatype/minute> ;
+            sh:path <http://dbpedia.org/ontology/runtime> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/imdbId> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path owl:sameAs ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/composer> ],
+        [ sh:class <http://dbpedia.org/ontology/Agent> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/editor> ],
+        [ sh:hasValue <http://dbpedia.org/ontology/Film> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/lyrics> ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/abstract> ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path <http://dbpedia.org/ontology/wikiPageExternalLink> ],
+        [ sh:datatype xsd:integer ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/wikiPageRevisionID> ],
+        [ sh:class <http://dbpedia.org/ontology/Agent> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/producer> ],
+        [ sh:class <http://dbpedia.org/ontology/Organisation> ;
+            sh:path <http://dbpedia.org/ontology/company> ],
+        [ sh:class <http://dbpedia.org/ontology/Language> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/language> ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path foaf:depiction ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path rdfs:seeAlso ] ;
+    sh:targetClass <http://dbpedia.org/ontology/Film> .
+
+<http://shaclshapes.org/budgetValueShape> a sh:NodeShape ;
+    sh:or ( [ sh:datatype <http://dbpedia.org/datatype/argentinePeso> ] [ sh:datatype <http://dbpedia.org/datatype/australianDollar> ] [ sh:datatype <http://dbpedia.org/datatype/bahrainiDinar> ] [ sh:datatype <http://dbpedia.org/datatype/bangladeshiTaka> ] [ sh:datatype <http://dbpedia.org/datatype/barbadosDollar> ] [ sh:datatype <http://dbpedia.org/datatype/bosniaAndHerzegovinaConvertibleMarks> ] [ sh:datatype <http://dbpedia.org/datatype/botswanaPula> ] [ sh:datatype <http://dbpedia.org/datatype/brazilianReal> ] [ sh:datatype <http://dbpedia.org/datatype/bruneiDollar> ] [ sh:datatype <http://dbpedia.org/datatype/bulgarianLev> ] [ sh:datatype <http://dbpedia.org/datatype/canadianDollar> ] [ sh:datatype <http://dbpedia.org/datatype/chileanPeso> ] [ sh:datatype <http://dbpedia.org/datatype/croatianKuna> ] [ sh:datatype <http://dbpedia.org/datatype/czechKoruna> ] [ sh:datatype <http://dbpedia.org/datatype/danishKrone> ] [ sh:datatype <http://dbpedia.org/datatype/eastCaribbeanDollar> ] [ sh:datatype <http://dbpedia.org/datatype/egyptianPound> ] [ sh:datatype <http://dbpedia.org/datatype/estonianKroon> ] [ sh:datatype <http://dbpedia.org/datatype/euro> ] [ sh:datatype <http://dbpedia.org/datatype/fijiDollar> ] [ sh:datatype <http://dbpedia.org/datatype/georgianLari> ] [ sh:datatype <http://dbpedia.org/datatype/ghanaianCedi> ] [ sh:datatype <http://dbpedia.org/datatype/guineaFranc> ] [ sh:datatype <http://dbpedia.org/datatype/haitiGourde> ] [ sh:datatype <http://dbpedia.org/datatype/honduranLempira> ] [ sh:datatype <http://dbpedia.org/datatype/hongKongDollar> ] [ sh:datatype <http://dbpedia.org/datatype/hungarianForint> ] [ sh:datatype <http://dbpedia.org/datatype/icelandKrona> ] [ sh:datatype <http://dbpedia.org/datatype/indianRupee> ] [ sh:datatype <http://dbpedia.org/datatype/indonesianRupiah> ] [ sh:datatype <http://dbpedia.org/datatype/israeliNewSheqel> ] [ sh:datatype <http://dbpedia.org/datatype/japaneseYen> ] [ sh:datatype <http://dbpedia.org/datatype/latvianLats> ] [ sh:datatype <http://dbpedia.org/datatype/libyanDinar> ] [ sh:datatype <http://dbpedia.org/datatype/macedonianDenar> ] [ sh:datatype <http://dbpedia.org/datatype/malaysianRinggit> ] [ sh:datatype <http://dbpedia.org/datatype/maldivianRufiyaa> ] [ sh:datatype <http://dbpedia.org/datatype/mexicanPeso> ] [ sh:datatype <http://dbpedia.org/datatype/mongolianTögrög> ] [ sh:datatype <http://dbpedia.org/datatype/moroccanDirham> ] [ sh:datatype <http://dbpedia.org/datatype/myanmaKyat> ] [ sh:datatype <http://dbpedia.org/datatype/namibianDollar> ] [ sh:datatype <http://dbpedia.org/datatype/nepaleseRupee> ] [ sh:datatype <http://dbpedia.org/datatype/newTaiwanDollar> ] [ sh:datatype <http://dbpedia.org/datatype/newZealandDollar> ] [ sh:datatype <http://dbpedia.org/datatype/nicaraguanCórdoba> ] [ sh:datatype <http://dbpedia.org/datatype/nigerianNaira> ] [ sh:datatype <http://dbpedia.org/datatype/norwegianKrone> ] [ sh:datatype <http://dbpedia.org/datatype/pakistaniRupee> ] [ sh:datatype <http://dbpedia.org/datatype/philippinePeso> ] [ sh:datatype <http://dbpedia.org/datatype/polishZłoty> ] [ sh:datatype <http://dbpedia.org/datatype/poundSterling> ] [ sh:datatype <http://dbpedia.org/datatype/renminbi> ] [ sh:datatype <http://dbpedia.org/datatype/russianRouble> ] [ sh:datatype <http://dbpedia.org/datatype/serbianDinar> ] [ sh:datatype <http://dbpedia.org/datatype/singaporeDollar> ] [ sh:datatype <http://dbpedia.org/datatype/southAfricanRand> ] [ sh:datatype <http://dbpedia.org/datatype/southKoreanWon> ] [ sh:datatype <http://dbpedia.org/datatype/sriLankanRupee> ] [ sh:datatype <http://dbpedia.org/datatype/swedishKrona> ] [ sh:datatype <http://dbpedia.org/datatype/swissFranc> ] [ sh:datatype <http://dbpedia.org/datatype/thaiBaht> ] [ sh:datatype <http://dbpedia.org/datatype/trinidadAndTobagoDollar> ] [ sh:datatype <http://dbpedia.org/datatype/ukrainianHryvnia> ] [ sh:datatype <http://dbpedia.org/datatype/unitedArabEmiratesDirham> ] [ sh:datatype <http://dbpedia.org/datatype/usDollar> ] [ sh:datatype <http://dbpedia.org/datatype/westAfricanCfaFranc> ] ) .
+

@@ -1,0 +1,168 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbt: <http://dbpedia.org/datatype/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix umbel: <http://umbel.org/umbel/rc/> .
+@prefix shapes: <http://shaclshapes.org/> .
+
+
+<http://shaclshapes.org/ComicsCaracterShape> a sh:NodeShape ;
+    sh:targetClass dbo:ComicsCharacter ;
+
+    # === DBpedia Common Properties ===
+    sh:property [
+        sh:path dbo:abstract ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:thumbnail ;
+        sh:class dbo:Image ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageExternalLink ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageID ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageInterLanguageLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageLength ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRedirects ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageWikiLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+    ] ;
+
+    sh:property [
+        sh:path dct:subject ;
+        sh:class skos:Concept ;
+    ] ;
+
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:seeAlso ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path owl:differentFrom ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:depiction ;
+        sh:class dbo:Image ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:isPrimaryTopicOf ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    # === Cast, crew & creators ===
+    sh:property [
+        sh:path dbo:writer ;
+        sh:class dbo:Person ;
+        sh:minCount 1 ;
+    ] ;
+
+    # === Dates & timeline ===
+    sh:property [
+        sh:path dbo:firstAppearance ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # === Media & publications ===
+    sh:property [
+        sh:path dbo:wikiPageDisambiguates ;
+    ] ;
+
+    # === Organization & affiliation ===
+    sh:property [
+        sh:path dbo:publisher ;
+        sh:class dbo:Agent ;
+        sh:minCount 1 ;
+    ] ;
+
+    # === People & family ===
+    sh:property [
+        sh:path dbo:creator ;
+        sh:class dbo:Agent ;
+        sh:minCount 1 ;
+    ] ;
+
+    # === References & links ===
+    sh:property [
+        sh:path dbo:imdbId ;
+        sh:datatype xsd:string ;
+    ] .
+

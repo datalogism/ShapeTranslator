@@ -1,0 +1,127 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+start = @<MeanOfTransportation>
+
+<MeanOfTransportation> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/MeanOfTransportation> ] ;
+  <http://dbpedia.org/ontology/MeanOfTransportation/length> <http://dbpedia.org/datatype/millimetre> + ;
+  <http://dbpedia.org/ontology/acquirementDate> xsd:date * ;
+  <http://dbpedia.org/ontology/activeYearsEndDate> xsd:date ? ;
+  <http://dbpedia.org/ontology/activeYearsEndYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/activeYearsStartDate> xsd:date ? ;
+  <http://dbpedia.org/ontology/activeYearsStartYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/alternativeName> rdf:langString * ;
+  <http://dbpedia.org/ontology/automobilePlatform> @<Automobile> ? ;
+  <http://dbpedia.org/ontology/battery> @<Battery> ? ;
+  <http://dbpedia.org/ontology/capacity> xsd:nonNegativeInteger * ;
+  <http://dbpedia.org/ontology/captureDate> xsd:date ? ;
+  <http://dbpedia.org/ontology/commissioningDate> xsd:date ;
+  <http://dbpedia.org/ontology/comparable> @<Rocket> * ;
+  <http://dbpedia.org/ontology/completionDate> xsd:date ? ;
+  <http://dbpedia.org/ontology/cost> @<http://shaclshapes.org/costValueShape> ? ;
+  <http://dbpedia.org/ontology/country> @<Country> * ;
+  <http://dbpedia.org/ontology/countryOrigin> @<Country> * ;
+  <http://dbpedia.org/ontology/cylinderCount> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/decommissioningDate> xsd:date ? ;
+  <http://dbpedia.org/ontology/designCompany> @<Company> * ;
+  <http://dbpedia.org/ontology/designer> @<Person> * ;
+  <http://dbpedia.org/ontology/diameter> xsd:double ? ;
+  <http://dbpedia.org/ontology/engine> @<AutomobileEngine> ? ;
+  <http://dbpedia.org/ontology/failedLaunches> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/finalFlight> xsd:date ? ;
+  <http://dbpedia.org/ontology/homeport> @<Place> ? ;
+  <http://dbpedia.org/ontology/launchSite> @<Building> * ;
+  <http://dbpedia.org/ontology/layingDown> xsd:date ? ;
+  <http://dbpedia.org/ontology/length> <http://dbpedia.org/datatype/millimetre> + ;
+  <http://dbpedia.org/ontology/maidenFlight> xsd:date ? ;
+  <http://dbpedia.org/ontology/maidenVoyage> xsd:date ? ;
+  <http://dbpedia.org/ontology/modelEndYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/modelStartYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/motto> xsd:string ? ;
+  <http://dbpedia.org/ontology/numberBuilt> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/numberOfDoors> xsd:positiveInteger * ;
+  <http://dbpedia.org/ontology/orderDate> xsd:date ? ;
+  <http://dbpedia.org/ontology/origin> @<PopulatedPlace> ? ;
+  <http://dbpedia.org/ontology/owner> @<Agent> * ;
+  <http://dbpedia.org/ontology/productionEndYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/productionStartYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/recommissioningDate> xsd:date ? ;
+  <http://dbpedia.org/ontology/relatedMeanOfTransportation> @<MeanOfTransportation_class> * ;
+  <http://dbpedia.org/ontology/retired> xsd:date ? ;
+  <http://dbpedia.org/ontology/rocketStages> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/shipBeam> xsd:double ? ;
+  <http://dbpedia.org/ontology/shipDisplacement> xsd:double * ;
+  <http://dbpedia.org/ontology/shipDraft> xsd:double ? ;
+  <http://dbpedia.org/ontology/shipLaunch> xsd:date ? ;
+  <http://dbpedia.org/ontology/status> xsd:string ? ;
+  <http://dbpedia.org/ontology/topSpeed> xsd:double ? ;
+  <http://dbpedia.org/ontology/totalLaunches> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/transmission> xsd:string * ;
+  <http://dbpedia.org/ontology/unitCost> @<http://shaclshapes.org/unitCostValueShape> ? ;
+  <http://dbpedia.org/ontology/wikiPageInterLanguageLink> xsd:anyURI * ;
+  <http://dbpedia.org/ontology/wikiPageRedirects> xsd:anyURI * ;
+  <http://dbpedia.org/ontology/yearOfConstruction> xsd:gYear * ;
+  rdfs:seeAlso xsd:anyURI * ;
+  owl:differentFrom xsd:anyURI *
+}
+
+<costValue> <http://dbpedia.org/datatype/algerianDinar> OR <http://dbpedia.org/datatype/argentinePeso> OR <http://dbpedia.org/datatype/armenianDram> OR <http://dbpedia.org/datatype/australianDollar> OR <http://dbpedia.org/datatype/bangladeshiTaka> OR <http://dbpedia.org/datatype/brazilianReal> OR <http://dbpedia.org/datatype/bruneiDollar> OR <http://dbpedia.org/datatype/bulgarianLev> OR <http://dbpedia.org/datatype/cambodianRiel> OR <http://dbpedia.org/datatype/canadianDollar> OR <http://dbpedia.org/datatype/capeVerdeEscudo> OR <http://dbpedia.org/datatype/chileanPeso> OR <http://dbpedia.org/datatype/colombianPeso> OR <http://dbpedia.org/datatype/croatianKuna> OR <http://dbpedia.org/datatype/czechKoruna> OR <http://dbpedia.org/datatype/danishKrone> OR <http://dbpedia.org/datatype/egyptianPound> OR <http://dbpedia.org/datatype/estonianKroon> OR <http://dbpedia.org/datatype/euro> OR <http://dbpedia.org/datatype/georgianLari> OR <http://dbpedia.org/datatype/hongKongDollar> OR <http://dbpedia.org/datatype/hungarianForint> OR <http://dbpedia.org/datatype/indianRupee> OR <http://dbpedia.org/datatype/indonesianRupiah> OR <http://dbpedia.org/datatype/iranianRial> OR <http://dbpedia.org/datatype/iraqiDinar> OR <http://dbpedia.org/datatype/israeliNewSheqel> OR <http://dbpedia.org/datatype/japaneseYen> OR <http://dbpedia.org/datatype/kenyanShilling> OR <http://dbpedia.org/datatype/kuwaitiDinar> OR <http://dbpedia.org/datatype/lebanesePound> OR <http://dbpedia.org/datatype/lithuanianLitas> OR <http://dbpedia.org/datatype/malaysianRinggit> OR <http://dbpedia.org/datatype/mexicanPeso> OR <http://dbpedia.org/datatype/moroccanDirham> OR <http://dbpedia.org/datatype/newTaiwanDollar> OR <http://dbpedia.org/datatype/newZealandDollar> OR <http://dbpedia.org/datatype/norwegianKrone> OR <http://dbpedia.org/datatype/pakistaniRupee> OR <http://dbpedia.org/datatype/philippinePeso> OR <http://dbpedia.org/datatype/polishZłoty> OR <http://dbpedia.org/datatype/poundSterling> OR <http://dbpedia.org/datatype/renminbi> OR <http://dbpedia.org/datatype/russianRouble> OR <http://dbpedia.org/datatype/saudiRiyal> OR <http://dbpedia.org/datatype/serbianDinar> OR <http://dbpedia.org/datatype/slovakKoruna> OR <http://dbpedia.org/datatype/southKoreanWon> OR <http://dbpedia.org/datatype/sriLankanRupee> OR <http://dbpedia.org/datatype/swedishKrona> OR <http://dbpedia.org/datatype/swissFranc> OR <http://dbpedia.org/datatype/tanzanianShilling> OR <http://dbpedia.org/datatype/thaiBaht> OR <http://dbpedia.org/datatype/turkishLira> OR <http://dbpedia.org/datatype/ugandaShilling> OR <http://dbpedia.org/datatype/unitedArabEmiratesDirham> OR <http://dbpedia.org/datatype/usDollar>
+
+<unitCostValue> <http://dbpedia.org/datatype/euro> OR <http://dbpedia.org/datatype/nicaraguanCórdoba> OR <http://dbpedia.org/datatype/poundSterling> OR <http://dbpedia.org/datatype/russianRouble> OR <http://dbpedia.org/datatype/usDollar>
+
+<Agent> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Agent> ]
+}
+
+<Automobile> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Automobile> ]
+}
+
+<AutomobileEngine> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/AutomobileEngine> ]
+}
+
+<Battery> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Battery> ]
+}
+
+<Building> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Building> ]
+}
+
+<Company> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Company> ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Country> ]
+}
+
+<MeanOfTransportation_class> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/MeanOfTransportation> ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Person> ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Place> ]
+}
+
+<PopulatedPlace> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/PopulatedPlace> ]
+}
+
+<Rocket> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Rocket> ]
+}

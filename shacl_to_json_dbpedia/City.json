@@ -1,0 +1,486 @@
+{
+  "shapes": [
+    {
+      "name": "City",
+      "targetClass": "http://dbpedia.org/ontology/City",
+      "closed": false,
+      "properties": [
+        {
+          "path": "http://dbpedia.org/ontology/PopulatedPlace/area",
+          "datatype": "http://dbpedia.org/datatype/squareKilometre",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/PopulatedPlace/areaMetro",
+          "datatype": "http://dbpedia.org/datatype/squareKilometre",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/PopulatedPlace/areaTotal",
+          "datatype": "http://dbpedia.org/datatype/squareKilometre",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/PopulatedPlace/populationDensity",
+          "datatype": "http://dbpedia.org/datatype/inhabitantsPerSquareKilometre",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/abstract",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/area",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/areaCode",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/areaLand",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/areaMetro",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/areaTotal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/areaWater",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/demonym",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/district",
+          "classRef": "http://dbpedia.org/ontology/PopulatedPlace",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/elevation",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/federalState",
+          "classRef": "http://dbpedia.org/ontology/PopulatedPlace",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/foundingDate",
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/governingBody",
+          "classRef": "http://dbpedia.org/ontology/Organisation",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/leaderName",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/leaderTitle",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/location",
+          "classRef": "http://dbpedia.org/ontology/Place",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/maximumElevation",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/mayor",
+          "classRef": "http://dbpedia.org/ontology/Mayor",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/motto",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/originalName",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/politicalLeader",
+          "classRef": "http://dbpedia.org/ontology/PersonFunction",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/populationAsOf",
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/populationDensity",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/populationDensity",
+          "datatype": "http://dbpedia.org/datatype/squareKilometre",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/populationMetro",
+          "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/populationMetroDensity",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/populationTotal",
+          "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/populationTotalRanking",
+          "datatype": "http://www.w3.org/2001/XMLSchema#positiveInteger",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/populationUrban",
+          "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/postalCode",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/predecessor",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/saint",
+          "classRef": "http://dbpedia.org/ontology/Saint",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/synonym",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/team",
+          "classRef": "http://dbpedia.org/ontology/SportsTeam",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/thumbnail",
+          "classRef": "http://dbpedia.org/ontology/Image",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/utcOffset",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageDisambiguates",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageExternalLink",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageID",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageInterLanguageLink",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageLength",
+          "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageRedirects",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageRevisionID",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageWikiLink",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://purl.org/dc/terms/subject",
+          "classRef": "http://www.w3.org/2004/02/skos/core#Concept",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://purl.org/linguistics/gold/hypernym",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#comment",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#label",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2002/07/owl#differentFrom",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2002/07/owl#sameAs",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2004/02/skos/core#exactMatch",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/ns/prov#wasDerivedFrom",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://xmlns.com/foaf/0.1/depiction",
+          "classRef": "http://dbpedia.org/ontology/Image",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        }
+      ]
+    }
+  ]
+}

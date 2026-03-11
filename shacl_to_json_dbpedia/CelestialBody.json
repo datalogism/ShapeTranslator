@@ -1,0 +1,362 @@
+{
+  "shapes": [
+    {
+      "name": "CelestialBody",
+      "targetClass": "http://dbpedia.org/ontology/CelestialBody",
+      "closed": false,
+      "properties": [
+        {
+          "path": "http://dbpedia.org/ontology/Planet/meanRadius",
+          "datatype": "http://dbpedia.org/datatype/kilometre",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/Planet/minimumTemperature",
+          "datatype": "http://dbpedia.org/datatype/kelvin",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/Planet/orbitalPeriod",
+          "datatype": "http://dbpedia.org/datatype/day",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/Planet/periapsis",
+          "datatype": "http://dbpedia.org/datatype/kilometre",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/Planet/surfaceArea",
+          "datatype": "http://dbpedia.org/datatype/squareKilometre",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/Planet/volume",
+          "datatype": "http://dbpedia.org/datatype/cubicKilometre",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/abbreviation",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/absoluteMagnitude",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/abstract",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/albedo",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/apoapsis",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/apparentMagnitude",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/averageSpeed",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/density",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/detectionMethod",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/discovered",
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/discoverer",
+          "classRef": "http://dbpedia.org/ontology/Person",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/epoch",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/escapeVelocity",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/formerName",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/meanRadius",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/neighbourConstellations",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/orbitalPeriod",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/orbitalPeriod",
+          "datatype": "http://dbpedia.org/datatype/day",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/periapsis",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/rotationPeriod",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/surfaceArea",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/thumbnail",
+          "classRef": "http://dbpedia.org/ontology/Image",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/volume",
+          "datatype": "http://www.w3.org/2001/XMLSchema#double",
+          "cardinality": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageExternalLink",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageID",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageLength",
+          "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageRevisionID",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://dbpedia.org/ontology/wikiPageWikiLink",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://purl.org/dc/terms/subject",
+          "classRef": "http://www.w3.org/2004/02/skos/core#Concept",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#comment",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#label",
+          "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2002/07/owl#differentFrom",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/2002/07/owl#sameAs",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://www.w3.org/ns/prov#wasDerivedFrom",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://xmlns.com/foaf/0.1/depiction",
+          "classRef": "http://dbpedia.org/ontology/Image",
+          "cardinality": {
+            "min": 1,
+            "max": -1
+          }
+        },
+        {
+          "path": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
+          "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+          "cardinality": {
+            "min": 0,
+            "max": -1
+          }
+        }
+      ]
+    }
+  ]
+}

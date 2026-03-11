@@ -1,0 +1,144 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbt: <http://dbpedia.org/datatype/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX shapes: <http://shaclshapes.org/>
+
+start = @<Building>
+
+<costValue> dbt:usDollar OR dbt:poundSterling OR dbt:euro OR dbt:japaneseYen OR dbt:canadianDollar OR dbt:swedishKrona OR dbt:norwegianKrone OR dbt:danishKrone OR dbt:swissFranc OR dbt:australianDollar OR dbt:malaysianRinggit OR dbt:russianRouble OR dbt:indonesianRupiah OR dbt:polishZłoty OR dbt:unitedArabEmiratesDirham OR dbt:renminbi OR dbt:czechKoruna OR dbt:indianRupee OR dbt:bulgarianLev OR dbt:sriLankanRupee OR dbt:hungarianForint OR dbt:southKoreanWon OR dbt:lithuanianLitas OR dbt:croatianKuna OR dbt:iraqiDinar OR dbt:mexicanPeso OR dbt:saudiRiyal OR dbt:turkishLira OR dbt:estonianKroon OR dbt:hongKongDollar OR dbt:newTaiwanDollar OR dbt:thaiBaht OR dbt:pakistaniRupee OR dbt:slovakKoruna OR dbt:chileanPeso OR dbt:kuwaitiDinar OR dbt:newZealandDollar OR dbt:bangladeshiTaka OR dbt:philippinePeso OR dbt:serbianDinar OR dbt:brazilianReal OR dbt:tanzanianShilling OR dbt:georgianLari OR dbt:algerianDinar OR dbt:armenianDram OR dbt:colombianPeso OR dbt:argentinePeso OR dbt:israeliNewSheqel OR dbt:moroccanDirham OR dbt:egyptianPound OR dbt:lebanesePound OR dbt:iranianRial OR dbt:capeVerdeEscudo OR dbt:kenyanShilling OR dbt:ugandaShilling OR dbt:bruneiDollar OR dbt:cambodianRiel
+
+<Building> EXTRA rdf:type {
+  rdf:type [ dbo:Building ] ;
+  dbo:abstract rdf:langString + ;
+  dbo:thumbnail @<Image> + ;
+  dbo:wikiPageExternalLink xsd:anyURI * ;
+  dbo:wikiPageID xsd:integer ;
+  dbo:wikiPageInterLanguageLink xsd:anyURI * ;
+  dbo:wikiPageLength xsd:nonNegativeInteger ;
+  dbo:wikiPageRedirects xsd:anyURI * ;
+  dbo:wikiPageRevisionID xsd:integer + ;
+  dbo:wikiPageWikiLink xsd:anyURI * ;
+  dct:subject @<core#Concept> * ;
+  rdf:type . + ;
+  rdfs:comment rdf:langString + ;
+  rdfs:label rdf:langString + ;
+  rdfs:seeAlso xsd:anyURI * ;
+  owl:differentFrom xsd:anyURI * ;
+  owl:sameAs xsd:anyURI * ;
+  prov:wasDerivedFrom xsd:anyURI * ;
+  foaf:depiction @<Image> + ;
+  foaf:isPrimaryTopicOf xsd:anyURI * ;
+  dbo:award @<Award> * ;
+  dbo:genre @<Genre> * ;
+  dbo:position . ;
+  dbo:completionDate xsd:date ? ;
+  dbo:openingDate xsd:date * ;
+  dbo:foundingDate xsd:date ;
+  dbo:closingDate xsd:date ? ;
+  dbo:yearOfConstruction xsd:gYear ;
+  dbo:foundingYear xsd:gYear ? ;
+  dbo:activeYearsStartYear xsd:gYear ? ;
+  dbo:buildingStartDate xsd:string ;
+  dbo:buildingEndDate xsd:string ;
+  dbo:cost @<http://shaclshapes.org/costValueShape> * ;
+  dbo:area xsd:double ? ;
+  dbo:numberOfRooms xsd:nonNegativeInteger + ;
+  dbo:elevatorCount xsd:nonNegativeInteger * ;
+  dbo:bedCount xsd:nonNegativeInteger * ;
+  dbo:numberOfSuites xsd:nonNegativeInteger * ;
+  dbo:numberOfRestaurants xsd:nonNegativeInteger * ;
+  dbo:numberOfParkingSpaces xsd:nonNegativeInteger * ;
+  dbo:numberOfVisitors xsd:nonNegativeInteger * ;
+  dbo:nrhpReferenceNumber xsd:string ? ;
+  dbo:originalName rdf:langString * ;
+  dbo:formerName rdf:langString * ;
+  dbo:alternativeName rdf:langString * ;
+  dbo:code xsd:string ? ;
+  dbo:city @<City> + ;
+  dbo:country @<Country> ;
+  dbo:location @<Place> ;
+  dbo:nearestCity @<PopulatedPlace> * ;
+  dbo:address rdf:langString + ;
+  dbo:chain @<Company> ? ;
+  dbo:highschool @<School> ? ;
+  dbo:owner @<Agent> * ;
+  dbo:developer @<Agent> * ;
+  dbo:architect @<Architect> + ;
+  dbo:tenant @<Organisation> * ;
+  dbo:height xsd:double ;
+  dbo:width xsd:double ? ;
+  dbo:seatingCapacity xsd:nonNegativeInteger * ;
+  dbo:governingBody @<Organisation> ? ;
+  dbo:isPartOf . ? ;
+  dbo:currentlyUsedFor xsd:string * ;
+  dbo:collection xsd:string * ;
+  dbo:cuisine xsd:string * ;
+  dbo:status xsd:string * ;
+  dbo:classification xsd:string * ;
+  dbo:floorCount xsd:positiveInteger ;
+  dbo:floorArea xsd:positiveInteger
+}
+
+<Agent> EXTRA rdf:type {
+  rdf:type [ dbo:Agent ]
+}
+
+<Architect> EXTRA rdf:type {
+  rdf:type [ dbo:Architect ]
+}
+
+<Award> EXTRA rdf:type {
+  rdf:type [ dbo:Award ]
+}
+
+<City> EXTRA rdf:type {
+  rdf:type [ dbo:City ]
+}
+
+<Company> EXTRA rdf:type {
+  rdf:type [ dbo:Company ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ dbo:Country ]
+}
+
+<Genre> EXTRA rdf:type {
+  rdf:type [ dbo:Genre ]
+}
+
+<Image> EXTRA rdf:type {
+  rdf:type [ dbo:Image ]
+}
+
+<Organisation> EXTRA rdf:type {
+  rdf:type [ dbo:Organisation ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ dbo:Place ]
+}
+
+<PopulatedPlace> EXTRA rdf:type {
+  rdf:type [ dbo:PopulatedPlace ]
+}
+
+<School> EXTRA rdf:type {
+  rdf:type [ dbo:School ]
+}
+
+<core#Concept> EXTRA rdf:type {
+  rdf:type [ skos:Concept ]
+}

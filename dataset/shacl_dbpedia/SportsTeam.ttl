@@ -1,0 +1,423 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbt: <http://dbpedia.org/datatype/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix umbel: <http://umbel.org/umbel/rc/> .
+@prefix shapes: <http://shaclshapes.org/> .
+
+
+<http://shaclshapes.org/SportsTeamShape> a sh:NodeShape ;
+    sh:targetClass dbo:SportsTeam ;
+
+    # === DBpedia Common Properties ===
+    sh:property [
+        sh:path dbo:abstract ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:thumbnail ;
+        sh:class dbo:Image ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageExternalLink ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageID ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageLength ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dct:subject ;
+        sh:class skos:Concept ;
+    ] ;
+
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:seeAlso ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path owl:differentFrom ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:depiction ;
+        sh:class dbo:Image ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:isPrimaryTopicOf ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    # === Cast, crew & creators ===
+    sh:property [
+        sh:path dbo:director ;
+        sh:class dbo:Person ;
+    ] ;
+
+    # === Dates & timeline ===
+    sh:property [
+        sh:path dbo:formationDate ;
+        sh:datatype xsd:date ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:foundingYear ;
+        sh:datatype xsd:gYear ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:dissolutionYear ;
+        sh:datatype xsd:gYear ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Economics & statistics ===
+    sh:property [
+        sh:path dbo:squadNumber ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    # === Identity & naming ===
+    sh:property [
+        sh:path dbo:colour ;
+        sh:class dbo:Colour ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:title ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:colourName ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:mascot ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:uciCode ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Location & geography ===
+    sh:property [
+        sh:path dbo:city ;
+        sh:class dbo:City ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:country ;
+        sh:class dbo:Country ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:location ;
+        sh:class dbo:Place ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Media & publications ===
+    sh:property [
+        sh:path dbo:logo ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] ;
+
+    # === Organization & affiliation ===
+    sh:property [
+        sh:path dbo:parentCompany ;
+        sh:class dbo:Company ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:commandStructure ;
+        sh:class dbo:MilitaryUnit ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:currentMember ;
+        sh:class dbo:Person ;
+    ] ;
+
+    # === People & family ===
+    sh:property [
+        sh:path dbo:owner ;
+        sh:class dbo:Agent ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:aircraftTrainer ;
+        sh:class dbo:MeanOfTransportation ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:coach ;
+        sh:class dbo:Person ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:manager ;
+        sh:class dbo:Person ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:generalManager ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:managerTitle ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # === Physical dimensions & specs ===
+    sh:property [
+        sh:path <http://dbpedia.org/ontology/Work/runtime> ;
+        sh:datatype dbt:minute ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:runtime ;
+        sh:datatype xsd:double ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:capacity ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Politics & governance ===
+    sh:property [
+        sh:path dbo:chairman ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:president ;
+        sh:class dbo:Person ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:chairmanTitle ;
+        sh:datatype rdf:langString ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === References & links ===
+    sh:property [
+        sh:path dbo:imdbId ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # === Sport & competitions ===
+    sh:property [
+        sh:path dbo:sport ;
+        sh:class dbo:Sport ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:league ;
+        sh:class dbo:SportsLeague ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:team ;
+        sh:class dbo:SportsTeam ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:stadium ;
+        sh:class dbo:Stadium ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:homeStadium ;
+        sh:class dbo:Stadium ;
+    ] ;
+
+    # === Technical & classification ===
+    sh:property [
+        sh:path dbo:status ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # === Dates & timeline (alternatives) ===
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:dissolved ;
+                sh:datatype xsd:date ;
+                sh:maxCount 1 ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path dbo:activeYearsEndYear ;
+                sh:datatype xsd:date ;
+                sh:maxCount 1 ;
+            ]
+        ]
+    ) ;
+
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:activeYearsStartYear ;
+                sh:datatype xsd:gYear ;
+                sh:maxCount 1 ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path dbo:foundingYear ;
+                sh:datatype xsd:gYear ;
+                sh:maxCount 1 ;
+            ]
+        ]
+    ) ;
+
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:activeYearsEndYear ;
+                sh:datatype xsd:gYear ;
+                sh:maxCount 1 ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path dbo:dissolved ;
+                sh:datatype xsd:gYear ;
+                sh:maxCount 1 ;
+            ]
+        ]
+    ) ;
+
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:startYear ;
+                sh:datatype xsd:gYear ;
+                sh:maxCount 1 ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path dbo:foundingYear ;
+                sh:datatype xsd:gYear ;
+                sh:maxCount 1 ;
+            ]
+        ]
+    ) ;
+
+    # === Location & geography (alternatives) ===
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:locationCity ;
+                sh:class dbo:City ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path dbo:location ;
+                sh:class dbo:City ;
+            ]
+        ]
+    ) ;
+
+    # === Sport & competitions (alternatives) ===
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:teamName ;
+                sh:datatype rdf:langString ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path foaf:name ;
+                sh:datatype rdf:langString ;
+            ]
+        ]
+    ) .
+

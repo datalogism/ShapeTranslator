@@ -1,0 +1,138 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbt: <http://dbpedia.org/datatype/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX shapes: <http://shaclshapes.org/>
+
+start = @<Film>
+
+<budgetValue> dbt:usDollar OR dbt:euro OR dbt:poundSterling OR dbt:indianRupee OR dbt:japaneseYen OR dbt:malaysianRinggit OR dbt:canadianDollar OR dbt:swedishKrona OR dbt:czechKoruna OR dbt:australianDollar OR dbt:sriLankanRupee OR dbt:norwegianKrone OR dbt:renminbi OR dbt:russianRouble OR dbt:danishKrone OR dbt:swissFranc OR dbt:croatianKuna OR dbt:maldivianRufiyaa OR dbt:bruneiDollar OR dbt:newZealandDollar OR dbt:indonesianRupiah OR dbt:polishZłoty OR dbt:bangladeshiTaka OR dbt:brazilianReal OR dbt:thaiBaht OR dbt:southKoreanWon OR dbt:egyptianPound OR dbt:nepaleseRupee OR dbt:hungarianForint OR dbt:southAfricanRand OR dbt:hongKongDollar OR dbt:pakistaniRupee OR dbt:argentinePeso OR dbt:moroccanDirham OR dbt:chileanPeso OR dbt:mongolianTögrög OR dbt:icelandKrona OR dbt:newTaiwanDollar OR dbt:philippinePeso OR dbt:latvianLats OR dbt:ukrainianHryvnia OR dbt:serbianDinar OR dbt:nigerianNaira OR dbt:unitedArabEmiratesDirham OR dbt:westAfricanCfaFranc OR dbt:eastCaribbeanDollar OR dbt:trinidadAndTobagoDollar OR dbt:macedonianDenar OR dbt:estonianKroon OR dbt:mexicanPeso OR dbt:fijiDollar OR dbt:bosniaAndHerzegovinaConvertibleMarks OR dbt:bulgarianLev OR dbt:singaporeDollar OR dbt:libyanDinar OR dbt:honduranLempira OR dbt:myanmaKyat OR dbt:georgianLari OR dbt:guineaFranc OR dbt:barbadosDollar OR dbt:israeliNewSheqel OR dbt:nicaraguanCórdoba OR dbt:haitiGourde OR dbt:bahrainiDinar OR dbt:botswanaPula OR dbt:namibianDollar OR dbt:ghanaianCedi
+
+<Film> EXTRA rdf:type {
+  rdf:type [ dbo:Film ] ;
+  dbo:abstract rdf:langString + ;
+  dbo:thumbnail @<Image> + ;
+  dbo:wikiPageExternalLink xsd:anyURI * ;
+  dbo:wikiPageID xsd:integer ;
+  dbo:wikiPageLength xsd:nonNegativeInteger ;
+  dbo:wikiPageRedirects xsd:anyURI * ;
+  dbo:wikiPageRevisionID xsd:integer + ;
+  dbo:wikiPageWikiLink xsd:anyURI * ;
+  dct:subject @<core#Concept> * ;
+  rdf:type . + ;
+  rdfs:comment rdf:langString + ;
+  rdfs:label rdf:langString + ;
+  rdfs:seeAlso xsd:anyURI * ;
+  owl:sameAs xsd:anyURI * ;
+  prov:wasDerivedFrom xsd:anyURI * ;
+  foaf:depiction @<Image> + ;
+  foaf:isPrimaryTopicOf xsd:anyURI * ;
+  dbo:award @<Award> * ;
+  dbo:genre @<Genre> + ;
+  dbo:starring @<Actor> + ;
+  dbo:producer @<Agent> ;
+  dbo:editor @<Agent> + ;
+  dbo:musicComposer @<MusicalArtist> * ;
+  dbo:director @<Person> + ;
+  dbo:writer @<Person> * ;
+  dbo:cinematography @<Person> ? ;
+  dbo:editing @<Person> + ;
+  dbo:narrator @<Person> * ;
+  dbo:author @<Person> + ;
+  dbo:composer @<Person> * ;
+  dbo:musicBy @<Person> * ;
+  dbo:lyrics @<Person> * ;
+  dbo:releaseDate xsd:date ;
+  dbo:gross xsd:double ;
+  dbo:budget @<http://shaclshapes.org/budgetValueShape> ;
+  dbo:numberOfEpisodes xsd:nonNegativeInteger * ;
+  dbo:numberOfSeasons xsd:nonNegativeInteger * ;
+  dbo:alias rdf:langString * ;
+  dbo:country @<Country> + ;
+  dbo:location @<Place> * ;
+  dbo:language @<Language> + ;
+  dbo:soundRecording @<Sound> * ;
+  dbo:openingTheme @<Work> * ;
+  dbo:publisher @<Agent> + ;
+  dbo:productionCompany @<Company> + ;
+  dbo:distributor @<Organisation> * ;
+  dbo:company @<Organisation> * ;
+  dbo:creator @<Agent> * ;
+  dbo:keyPerson @<Person> * ;
+  dbo:subsequentWork @<Work> * ;
+  dbo:previousWork @<Work> * ;
+  dbo:imdbId xsd:string ;
+  dbo:Work/runtime dbt:minute * ;
+  dbo:runtime dbt:minute *
+}
+
+<Actor> EXTRA rdf:type {
+  rdf:type [ dbo:Actor ]
+}
+
+<Agent> EXTRA rdf:type {
+  rdf:type [ dbo:Agent ]
+}
+
+<Award> EXTRA rdf:type {
+  rdf:type [ dbo:Award ]
+}
+
+<Company> EXTRA rdf:type {
+  rdf:type [ dbo:Company ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ dbo:Country ]
+}
+
+<Genre> EXTRA rdf:type {
+  rdf:type [ dbo:Genre ]
+}
+
+<Image> EXTRA rdf:type {
+  rdf:type [ dbo:Image ]
+}
+
+<Language> EXTRA rdf:type {
+  rdf:type [ dbo:Language ]
+}
+
+<MusicalArtist> EXTRA rdf:type {
+  rdf:type [ dbo:MusicalArtist ]
+}
+
+<Organisation> EXTRA rdf:type {
+  rdf:type [ dbo:Organisation ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ dbo:Person ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ dbo:Place ]
+}
+
+<Sound> EXTRA rdf:type {
+  rdf:type [ dbo:Sound ]
+}
+
+<Work> EXTRA rdf:type {
+  rdf:type [ dbo:Work ]
+}
+
+<core#Concept> EXTRA rdf:type {
+  rdf:type [ skos:Concept ]
+}

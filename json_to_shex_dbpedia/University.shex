@@ -1,0 +1,133 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+start = @<University>
+
+<University> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/University> ] ;
+  <http://dbpedia.org/ontology/abbreviation> xsd:string ? ;
+  <http://dbpedia.org/ontology/abstract> rdf:langString + ;
+  <http://dbpedia.org/ontology/address> rdf:langString ;
+  <http://dbpedia.org/ontology/affiliation> @<Organisation> ;
+  <http://dbpedia.org/ontology/barPassRate> xsd:float ? ;
+  <http://dbpedia.org/ontology/chairman> @<Person> * ;
+  <http://dbpedia.org/ontology/chancellor> @<Person> ? ;
+  <http://dbpedia.org/ontology/city> @<City> + ;
+  <http://dbpedia.org/ontology/closingYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/country> @<Country> ;
+  <http://dbpedia.org/ontology/county> @<PopulatedPlace> ;
+  <http://dbpedia.org/ontology/dean> @<Person> ? ;
+  <http://dbpedia.org/ontology/director> @<Person> ? ;
+  <http://dbpedia.org/ontology/endowment> @<http://shaclshapes.org/endowmentValueShape> ? ;
+  <http://dbpedia.org/ontology/facultySize> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/formationYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/formerName> rdf:langString * ;
+  <http://dbpedia.org/ontology/foundedBy> @<Agent> * ;
+  <http://dbpedia.org/ontology/foundingDate> xsd:date ? ;
+  <http://dbpedia.org/ontology/foundingYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/head> @<Person> ? ;
+  <http://dbpedia.org/ontology/headquarter> @<PopulatedPlace> ? ;
+  <http://dbpedia.org/ontology/highschool> @<School> * ;
+  <http://dbpedia.org/ontology/keyPerson> @<Person> * ;
+  <http://dbpedia.org/ontology/language> @<Language> * ;
+  <http://dbpedia.org/ontology/leader> @<Person> * ;
+  <http://dbpedia.org/ontology/leaderFunction> @<PersonFunction> * ;
+  <http://dbpedia.org/ontology/location> @<Place> ;
+  <http://dbpedia.org/ontology/lowerAge> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/mascot> xsd:string ? ;
+  <http://dbpedia.org/ontology/membership> rdf:langString * ;
+  <http://dbpedia.org/ontology/motto> xsd:string ? ;
+  <http://dbpedia.org/ontology/numberOfDoctoralStudents> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/numberOfEmployees> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/numberOfGraduateStudents> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/numberOfPostgraduateStudents> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/numberOfStudents> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/numberOfUndergraduateStudents> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/officialSchoolColour> xsd:string * ;
+  <http://dbpedia.org/ontology/originalName> rdf:langString ? ;
+  <http://dbpedia.org/ontology/parentOrganisation> @<Organisation> * ;
+  <http://dbpedia.org/ontology/patronSaint> @<Person> ? ;
+  <http://dbpedia.org/ontology/postalCode> xsd:string ;
+  <http://dbpedia.org/ontology/president> @<Person> ? ;
+  <http://dbpedia.org/ontology/principal> @<Person> ? ;
+  <http://dbpedia.org/ontology/provost> @<Person> ? ;
+  <http://dbpedia.org/ontology/purpose> xsd:string ? ;
+  <http://dbpedia.org/ontology/ranking> xsd:positiveInteger ? ;
+  <http://dbpedia.org/ontology/rector> @<Person> ? ;
+  <http://dbpedia.org/ontology/staff> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/state> @<PopulatedPlace> ;
+  <http://dbpedia.org/ontology/status> xsd:string ? ;
+  <http://dbpedia.org/ontology/thumbnail> @<Image> + ;
+  <http://dbpedia.org/ontology/upperAge> xsd:nonNegativeInteger ? ;
+  <http://dbpedia.org/ontology/viceChancellor> @<Person> ? ;
+  <http://dbpedia.org/ontology/wikiPageID> xsd:integer ;
+  <http://dbpedia.org/ontology/wikiPageLength> xsd:nonNegativeInteger ;
+  <http://dbpedia.org/ontology/wikiPageRevisionID> xsd:integer + ;
+  <http://dbpedia.org/ontology/wikiPageWikiLink> xsd:anyURI * ;
+  <http://purl.org/dc/terms/subject> @<core#Concept> * ;
+  rdf:type . + ;
+  rdfs:comment rdf:langString + ;
+  rdfs:label rdf:langString + ;
+  owl:sameAs xsd:anyURI * ;
+  <http://www.w3.org/ns/prov#wasDerivedFrom> xsd:anyURI * ;
+  <http://xmlns.com/foaf/0.1/depiction> @<Image> + ;
+  <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> xsd:anyURI *
+}
+
+<endowmentValue> <http://dbpedia.org/datatype/canadianDollar> OR <http://dbpedia.org/datatype/croatianKuna> OR <http://dbpedia.org/datatype/danishKrone> OR <http://dbpedia.org/datatype/euro> OR <http://dbpedia.org/datatype/hungarianForint> OR <http://dbpedia.org/datatype/indianRupee> OR <http://dbpedia.org/datatype/japaneseYen> OR <http://dbpedia.org/datatype/jordanianDinar> OR <http://dbpedia.org/datatype/lebanesePound> OR <http://dbpedia.org/datatype/malaysianRinggit> OR <http://dbpedia.org/datatype/nepaleseRupee> OR <http://dbpedia.org/datatype/netherlandsAntilleanGuilder> OR <http://dbpedia.org/datatype/pakistaniRupee> OR <http://dbpedia.org/datatype/peruvianNuevoSol> OR <http://dbpedia.org/datatype/philippinePeso> OR <http://dbpedia.org/datatype/poundSterling> OR <http://dbpedia.org/datatype/renminbi> OR <http://dbpedia.org/datatype/russianRouble> OR <http://dbpedia.org/datatype/southAfricanRand> OR <http://dbpedia.org/datatype/sriLankanRupee> OR <http://dbpedia.org/datatype/swedishKrona> OR <http://dbpedia.org/datatype/thaiBaht> OR <http://dbpedia.org/datatype/unitedArabEmiratesDirham> OR <http://dbpedia.org/datatype/usDollar>
+
+<Agent> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Agent> ]
+}
+
+<City> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/City> ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Country> ]
+}
+
+<Image> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Image> ]
+}
+
+<Language> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Language> ]
+}
+
+<Organisation> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Organisation> ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Person> ]
+}
+
+<PersonFunction> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/PersonFunction> ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Place> ]
+}
+
+<PopulatedPlace> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/PopulatedPlace> ]
+}
+
+<School> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/School> ]
+}
+
+<core#Concept> EXTRA rdf:type {
+  rdf:type [ skos:Concept ]
+}

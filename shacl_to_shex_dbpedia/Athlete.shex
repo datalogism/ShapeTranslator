@@ -1,0 +1,196 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbt: <http://dbpedia.org/datatype/>
+PREFIX shapes: <http://shaclshapes.org/>
+
+start = @<Athlete>
+
+<careerPrizeMoneyValue> dbt:usDollar OR dbt:poundSterling
+
+<Athlete> EXTRA rdf:type {
+  rdf:type [ dbo:Athlete ] ;
+  dbo:abstract rdf:langString + ;
+  dbo:thumbnail @<Image> + ;
+  dbo:wikiPageExternalLink xsd:anyURI * ;
+  dbo:wikiPageID xsd:integer ;
+  dbo:wikiPageLength xsd:nonNegativeInteger ;
+  dbo:wikiPageRevisionID xsd:integer + ;
+  dbo:wikiPageWikiLink xsd:anyURI * ;
+  rdf:type . + ;
+  rdfs:comment rdf:langString + ;
+  rdfs:label rdf:langString + ;
+  rdfs:seeAlso xsd:anyURI * ;
+  owl:differentFrom xsd:anyURI * ;
+  owl:sameAs xsd:anyURI * ;
+  foaf:depiction @<Image> + ;
+  dbo:award @<Award> * ;
+  dbo:careerStation @<CareerStation> + ;
+  dbo:nationality @<Country> + ;
+  dbo:genre @<Genre> ;
+  dbo:occupation @<PersonFunction> * ;
+  dbo:position . * ;
+  dbo:birthDate xsd:date ;
+  dbo:deathDate xsd:date ? ;
+  dbo:undraftedYear xsd:gYear ? ;
+  dbo:activeYearsStartYear xsd:gYear + ;
+  dbo:draftYear xsd:gYear ? ;
+  dbo:activeYearsEndYear xsd:gYear ? ;
+  dbo:birthYear xsd:gYear ;
+  dbo:number xsd:nonNegativeInteger * ;
+  dbo:title rdf:langString * ;
+  dbo:birthName rdf:langString ;
+  dbo:stateOfOrigin @<Country> + ;
+  dbo:country @<Country> + ;
+  dbo:birthPlace @<Place> ;
+  dbo:deathPlace @<Place> ? ;
+  dbo:residence @<Place> ;
+  dbo:hometown @<Settlement> ? ;
+  dbo:language @<Language> + ;
+  dbo:wikiPageDisambiguates . * ;
+  dbo:college @<EducationalInstitution> * ;
+  dbo:school @<EducationalInstitution> * ;
+  dbo:university @<EducationalInstitution> * ;
+  dbo:highschool @<School> * ;
+  dbo:formerPartner @<Person> * ;
+  dbo:currentPartner @<Person> * ;
+  dbo:relative @<Person> * ;
+  dbo:manager @<Person> * ;
+  dbo:trainer @<Person> * ;
+  dbo:formerCoach @<Person> * ;
+  dbo:coach @<Person> * ;
+  dbo:choreographer @<Person> * ;
+  dbo:formerChoreographer @<Person> * ;
+  dbo:Person/height dbt:centimetre ;
+  dbo:Person/weight dbt:kilogram ;
+  dbo:height xsd:double ;
+  dbo:weight xsd:double ;
+  dbo:bbr xsd:string ? ;
+  dbo:imdbId xsd:string * ;
+  dbo:firstRace @<GrandPrix> ? ;
+  dbo:lastRace @<GrandPrix> ? ;
+  dbo:whaDraftTeam @<HockeyTeam> * ;
+  dbo:raceHorse @<Horse> * ;
+  dbo:ground @<Place> * ;
+  dbo:billed @<PopulatedPlace> * ;
+  dbo:race @<Race> * ;
+  dbo:sport @<Sport> + ;
+  dbo:league @<SportsLeague> * ;
+  dbo:prospectLeague @<SportsLeague> ? ;
+  dbo:team @<SportsTeam> * ;
+  dbo:formerTeam @<SportsTeam> * ;
+  dbo:debutTeam @<SportsTeam> ? ;
+  dbo:draftTeam @<SportsTeam> * ;
+  dbo:club @<SportsTeam> * ;
+  dbo:managerClub @<SportsTeam> * ;
+  dbo:nationalTeam @<SportsTeam> * ;
+  dbo:careerPrizeMoney @<http://shaclshapes.org/careerPrizeMoneyValueShape> * ;
+  dbo:poles xsd:nonNegativeInteger ? ;
+  dbo:wins xsd:nonNegativeInteger * ;
+  dbo:championships xsd:nonNegativeInteger * ;
+  dbo:races xsd:nonNegativeInteger * ;
+  dbo:podiums xsd:nonNegativeInteger * ;
+  dbo:fastestLap xsd:nonNegativeInteger ? ;
+  dbo:draftPick xsd:string * ;
+  dbo:battingSide xsd:string * ;
+  dbo:draftRound xsd:string * ;
+  dbo:shoots xsd:string * ;
+  dbo:bowlingSide xsd:string * ;
+  dbo:draft xsd:string * ;
+  dbo:plays xsd:string * ;
+  dbo:overallRecord xsd:string * ;
+  dbo:draftLeague xsd:string * ;
+  dbo:spike xsd:string * ;
+  dbo:block xsd:string * ;
+  dbo:whaDraft xsd:string * ;
+  dbo:status xsd:string
+}
+
+<Award> EXTRA rdf:type {
+  rdf:type [ dbo:Award ]
+}
+
+<CareerStation> EXTRA rdf:type {
+  rdf:type [ dbo:CareerStation ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ dbo:Country ]
+}
+
+<EducationalInstitution> EXTRA rdf:type {
+  rdf:type [ dbo:EducationalInstitution ]
+}
+
+<Genre> EXTRA rdf:type {
+  rdf:type [ dbo:Genre ]
+}
+
+<GrandPrix> EXTRA rdf:type {
+  rdf:type [ dbo:GrandPrix ]
+}
+
+<HockeyTeam> EXTRA rdf:type {
+  rdf:type [ dbo:HockeyTeam ]
+}
+
+<Horse> EXTRA rdf:type {
+  rdf:type [ dbo:Horse ]
+}
+
+<Image> EXTRA rdf:type {
+  rdf:type [ dbo:Image ]
+}
+
+<Language> EXTRA rdf:type {
+  rdf:type [ dbo:Language ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ dbo:Person ]
+}
+
+<PersonFunction> EXTRA rdf:type {
+  rdf:type [ dbo:PersonFunction ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ dbo:Place ]
+}
+
+<PopulatedPlace> EXTRA rdf:type {
+  rdf:type [ dbo:PopulatedPlace ]
+}
+
+<Race> EXTRA rdf:type {
+  rdf:type [ dbo:Race ]
+}
+
+<School> EXTRA rdf:type {
+  rdf:type [ dbo:School ]
+}
+
+<Settlement> EXTRA rdf:type {
+  rdf:type [ dbo:Settlement ]
+}
+
+<Sport> EXTRA rdf:type {
+  rdf:type [ dbo:Sport ]
+}
+
+<SportsLeague> EXTRA rdf:type {
+  rdf:type [ dbo:SportsLeague ]
+}
+
+<SportsTeam> EXTRA rdf:type {
+  rdf:type [ dbo:SportsTeam ]
+}

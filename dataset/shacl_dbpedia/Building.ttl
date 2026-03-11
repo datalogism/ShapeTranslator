@@ -1,0 +1,522 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbt: <http://dbpedia.org/datatype/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix umbel: <http://umbel.org/umbel/rc/> .
+@prefix shapes: <http://shaclshapes.org/> .
+
+
+# ── Reusable value shapes (from SPARQL-inferred ranges) ──────────────────────
+
+shapes:costValueShape
+    a sh:NodeShape ;
+    sh:or (
+        [ sh:datatype dbt:usDollar ]
+        [ sh:datatype dbt:poundSterling ]
+        [ sh:datatype dbt:euro ]
+        [ sh:datatype dbt:japaneseYen ]
+        [ sh:datatype dbt:canadianDollar ]
+        [ sh:datatype dbt:swedishKrona ]
+        [ sh:datatype dbt:norwegianKrone ]
+        [ sh:datatype dbt:danishKrone ]
+        [ sh:datatype dbt:swissFranc ]
+        [ sh:datatype dbt:australianDollar ]
+        [ sh:datatype dbt:malaysianRinggit ]
+        [ sh:datatype dbt:russianRouble ]
+        [ sh:datatype dbt:indonesianRupiah ]
+        [ sh:datatype dbt:polishZłoty ]
+        [ sh:datatype dbt:unitedArabEmiratesDirham ]
+        [ sh:datatype dbt:renminbi ]
+        [ sh:datatype dbt:czechKoruna ]
+        [ sh:datatype dbt:indianRupee ]
+        [ sh:datatype dbt:bulgarianLev ]
+        [ sh:datatype dbt:sriLankanRupee ]
+        [ sh:datatype dbt:hungarianForint ]
+        [ sh:datatype dbt:southKoreanWon ]
+        [ sh:datatype dbt:lithuanianLitas ]
+        [ sh:datatype dbt:croatianKuna ]
+        [ sh:datatype dbt:iraqiDinar ]
+        [ sh:datatype dbt:mexicanPeso ]
+        [ sh:datatype dbt:saudiRiyal ]
+        [ sh:datatype dbt:turkishLira ]
+        [ sh:datatype dbt:estonianKroon ]
+        [ sh:datatype dbt:hongKongDollar ]
+        [ sh:datatype dbt:newTaiwanDollar ]
+        [ sh:datatype dbt:thaiBaht ]
+        [ sh:datatype dbt:pakistaniRupee ]
+        [ sh:datatype dbt:slovakKoruna ]
+        [ sh:datatype dbt:chileanPeso ]
+        [ sh:datatype dbt:kuwaitiDinar ]
+        [ sh:datatype dbt:newZealandDollar ]
+        [ sh:datatype dbt:bangladeshiTaka ]
+        [ sh:datatype dbt:philippinePeso ]
+        [ sh:datatype dbt:serbianDinar ]
+        [ sh:datatype dbt:brazilianReal ]
+        [ sh:datatype dbt:tanzanianShilling ]
+        [ sh:datatype dbt:georgianLari ]
+        [ sh:datatype dbt:algerianDinar ]
+        [ sh:datatype dbt:armenianDram ]
+        [ sh:datatype dbt:colombianPeso ]
+        [ sh:datatype dbt:argentinePeso ]
+        [ sh:datatype dbt:israeliNewSheqel ]
+        [ sh:datatype dbt:moroccanDirham ]
+        [ sh:datatype dbt:egyptianPound ]
+        [ sh:datatype dbt:lebanesePound ]
+        [ sh:datatype dbt:iranianRial ]
+        [ sh:datatype dbt:capeVerdeEscudo ]
+        [ sh:datatype dbt:kenyanShilling ]
+        [ sh:datatype dbt:ugandaShilling ]
+        [ sh:datatype dbt:bruneiDollar ]
+        [ sh:datatype dbt:cambodianRiel ]
+    ) .
+
+
+<http://shaclshapes.org/BuildingShape> a sh:NodeShape ;
+    sh:targetClass dbo:Building ;
+
+    # === DBpedia Common Properties ===
+    sh:property [
+        sh:path dbo:abstract ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:thumbnail ;
+        sh:class dbo:Image ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageExternalLink ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageID ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageInterLanguageLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageLength ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRedirects ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageWikiLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+    ] ;
+
+    sh:property [
+        sh:path dct:subject ;
+        sh:class skos:Concept ;
+    ] ;
+
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:seeAlso ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path owl:differentFrom ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:depiction ;
+        sh:class dbo:Image ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:isPrimaryTopicOf ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+
+    # === Career & achievements ===
+    sh:property [
+        sh:path dbo:award ;
+        sh:class dbo:Award ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:genre ;
+        sh:class dbo:Genre ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:position ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Dates & timeline ===
+    sh:property [
+        sh:path dbo:completionDate ;
+        sh:datatype xsd:date ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:openingDate ;
+        sh:datatype xsd:date ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:foundingDate ;
+        sh:datatype xsd:date ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:closingDate ;
+        sh:datatype xsd:date ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:yearOfConstruction ;
+        sh:datatype xsd:gYear ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:foundingYear ;
+        sh:datatype xsd:gYear ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:activeYearsStartYear ;
+        sh:datatype xsd:gYear ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:buildingStartDate ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:buildingEndDate ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Economics & statistics ===
+    sh:property [
+        sh:path dbo:cost ;
+        sh:node shapes:costValueShape ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:area ;
+        sh:datatype xsd:double ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfRooms ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:elevatorCount ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:bedCount ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfSuites ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfRestaurants ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfParkingSpaces ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfVisitors ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:nrhpReferenceNumber ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Identity & naming ===
+    sh:property [
+        sh:path dbo:originalName ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:formerName ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:alternativeName ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:code ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Location & geography ===
+    sh:property [
+        sh:path dbo:city ;
+        sh:class dbo:City ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:country ;
+        sh:class dbo:Country ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:location ;
+        sh:class dbo:Place ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:nearestCity ;
+        sh:class dbo:PopulatedPlace ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:address ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    # === Organization & affiliation ===
+    sh:property [
+        sh:path dbo:chain ;
+        sh:class dbo:Company ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:highschool ;
+        sh:class dbo:School ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === People & family ===
+    sh:property [
+        sh:path dbo:owner ;
+        sh:class dbo:Agent ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:developer ;
+        sh:class dbo:Agent ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:architect ;
+        sh:class dbo:Architect ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:tenant ;
+        sh:class dbo:Organisation ;
+    ] ;
+
+    # === Physical dimensions & specs ===
+    sh:property [
+        sh:path dbo:height ;
+        sh:datatype xsd:double ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:width ;
+        sh:datatype xsd:double ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:seatingCapacity ;
+        sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+
+    # === Politics & governance ===
+    sh:property [
+        sh:path dbo:governingBody ;
+        sh:class dbo:Organisation ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === References & links ===
+    sh:property [
+        sh:path dbo:isPartOf ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # === Technical & classification ===
+    sh:property [
+        sh:path dbo:currentlyUsedFor ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:collection ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:cuisine ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:status ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:classification ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # === Economics & statistics (alternatives) ===
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:floorCount ;
+                sh:datatype xsd:positiveInteger ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path dbo:floorArea ;
+                sh:datatype xsd:positiveInteger ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+            ]
+        ]
+    ) ;
+
+    # === Physical dimensions & specs (alternatives) ===
+    sh:or (
+        [
+            sh:property [
+                sh:path <http://dbpedia.org/ontology/Building/floorArea> ;
+                sh:datatype dbt:squareMetre ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path dbo:floorArea ;
+                sh:datatype dbt:squareMetre ;
+            ]
+        ]
+    ) ;
+
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:floorArea ;
+                sh:datatype xsd:double ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path dbo:floorCount ;
+                sh:datatype xsd:double ;
+            ]
+        ]
+    ) .
+
