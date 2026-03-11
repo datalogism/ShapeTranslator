@@ -14,6 +14,7 @@ from shaclex_py.schema.common import IRI, UNBOUNDED, Cardinality, IriStem, Liter
 from shaclex_py.schema.shex import (
     EachOf,
     NodeConstraint,
+    NodeConstraintShape,
     Shape,
     ShapeRef,
     ShExSchema,
@@ -352,6 +353,7 @@ def parse_shex(source: str) -> ShExSchema:
             continue
 
         # Shape definition: <Name> EXTRA/CLOSED? { ... }
+        #                or <Name> dtype1 OR dtype2 OR ... (NodeConstraintShape)
         if tok.peek() == '<':
             shape_iri = tok.read_iri_ref()
             tok._skip_ws_and_comments()
@@ -377,6 +379,43 @@ def parse_shex(source: str) -> ShExSchema:
                     continue
                 else:
                     break
+
+            # NodeConstraintShape: <Name> dtype1 OR dtype2 OR ...
+            # Detected when the next token is NOT '{' and not '.' (empty shape)
+            tok._skip_ws_and_comments()
+            if tok.peek() != '{' and not extra_preds and not closed:
+                # Could be: "dtype1 OR dtype2 OR ..." or just "."
+                # Consume alternatives separated by OR
+                datatypes: list[IRI] = []
+                while not tok.at_end():
+                    tok._skip_ws_and_comments()
+                    c = tok.peek()
+                    if c is None or c in ('{',):
+                        break
+                    # Check for OR keyword
+                    r = tok.text[tok.pos:]
+                    if r.startswith('OR') and not r[2:3].isalnum() and not r[2:3] == '_':
+                        tok.pos += 2
+                        continue
+                    # Try to read a datatype IRI
+                    try:
+                        iri = tok.read_iri_or_prefixed(prefixes_dict)
+                        datatypes.append(IRI(iri))
+                    except ShExParseError:
+                        break
+                    # Check if next is OR or start of new shape or EOF
+                    tok._skip_ws_and_comments()
+                    r2 = tok.text[tok.pos:]
+                    if not (r2.startswith('OR') and not r2[2:3].isalnum() and not r2[2:3] == '_'):
+                        break
+
+                if datatypes:
+                    shapes.append(NodeConstraintShape(
+                        name=IRI(shape_iri),
+                        datatypes=datatypes,
+                    ))
+                    continue
+                # Fall through to normal shape parsing if no datatypes found
 
             tok.expect('{')
 

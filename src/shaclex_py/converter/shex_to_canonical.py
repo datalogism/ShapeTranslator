@@ -15,6 +15,7 @@ from shaclex_py.schema.common import IRI, UNBOUNDED, IriStem, Literal, NodeKind
 from shaclex_py.schema.shex import (
     EachOf,
     NodeConstraint,
+    NodeConstraintShape,
     OneOf,
     Shape,
     ShapeRef,
@@ -34,8 +35,10 @@ WDT_P31 = "http://www.wikidata.org/prop/direct/P31"
 INSTANCE_OF_PREDICATES = {RDF_TYPE, WDT_P31}
 
 
-def _get_triple_constraints(shape: Shape) -> list[TripleConstraint]:
+def _get_triple_constraints(shape) -> list[TripleConstraint]:
     """Extract TripleConstraints from a shape expression."""
+    if isinstance(shape, NodeConstraintShape):
+        return []
     if shape.expression is None:
         return []
     if isinstance(shape.expression, TripleConstraint):
@@ -48,7 +51,7 @@ def _get_triple_constraints(shape: Shape) -> list[TripleConstraint]:
     return []
 
 
-def _find_shape(schema: ShExSchema, name: str) -> Optional[Shape]:
+def _find_shape(schema: ShExSchema, name: str):
     """Find a shape by name in the schema."""
     for shape in schema.shapes:
         if shape.name.value == name:
@@ -96,10 +99,17 @@ def _resolve_shape_ref(
 
     Returns:
         (classRef, classRefOr, resolved) — exactly one of classRef/classRefOr is set
-        if resolved is True. If resolved is False, both are None.
+        if resolved is True. If resolved is False, both are None (nodeRef kept).
+
+    NodeConstraintShape (datatypeOr) is intentionally not resolved here;
+    it stays as nodeRef so the property→shape link is preserved.
     """
     ref_shape = _find_shape(schema, ref_name)
     if ref_shape is None:
+        return None, None, False
+
+    # NodeConstraintShape → keep as nodeRef (not a class shape)
+    if isinstance(ref_shape, NodeConstraintShape):
         return None, None, False
 
     ref_tcs = _get_triple_constraints(ref_shape)
@@ -147,17 +157,37 @@ def _convert_cardinality(tc: TripleConstraint) -> CanonicalCardinality:
 
 
 def _identify_main_shapes(schema: ShExSchema) -> set[str]:
-    """Identify main (non-auxiliary) shape names."""
+    """Identify main (non-auxiliary) shape names.
+
+    NodeConstraintShapes are always included (they are reusable value shapes,
+    not auxiliary class shapes).  Among regular Shapes, the start shape and
+    shapes with more than one triple constraint are considered main.
+    """
     main_names: set[str] = set()
+
+    # Always include NodeConstraintShapes
+    for shape in schema.shapes:
+        if isinstance(shape, NodeConstraintShape):
+            main_names.add(shape.name.value)
+
     if schema.start:
         main_names.add(schema.start.value)
     else:
         for shape in schema.shapes:
+            if isinstance(shape, NodeConstraintShape):
+                continue
             tcs = _get_triple_constraints(shape)
             if len(tcs) > 1:
                 main_names.add(shape.name.value)
-    if not main_names and schema.shapes:
-        main_names.add(schema.shapes[0].name.value)
+
+    # Fallback: first non-NodeConstraintShape
+    if not any(not isinstance(s, NodeConstraintShape) and s.name.value in main_names
+               for s in schema.shapes):
+        for shape in schema.shapes:
+            if not isinstance(shape, NodeConstraintShape):
+                main_names.add(shape.name.value)
+                break
+
     return main_names
 
 
@@ -175,6 +205,14 @@ def convert_shex_to_canonical(shex: ShExSchema) -> CanonicalSchema:
 
     for shape in shex.shapes:
         if shape.name.value not in main_names:
+            continue
+
+        # NodeConstraintShape → CanonicalShape with datatypeOr
+        if isinstance(shape, NodeConstraintShape):
+            canonical_shapes.append(CanonicalShape(
+                name=shape.name.value,
+                datatypeOr=[dt.value for dt in shape.datatypes],
+            ))
             continue
 
         tcs = _get_triple_constraints(shape)
