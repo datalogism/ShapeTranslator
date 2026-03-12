@@ -20,7 +20,9 @@ The following patterns survive the SHACL→JSON→ShEx→JSON and ShEx→JSON→
 | Cardinality | `sh:minCount m ; sh:maxCount n` | `{m,n}`, `?`, `*`, `+` | 7.8 |
 | Single value | `sh:hasValue V` | `[V]` | 7.1 |
 | Enumeration | `sh:in (v1 v2)` | `[v1 v2]` | 7.1 |
-| IRI stem (URL prefix pattern) | `sh:pattern "^http://..."` | `[<http://...>~]` | 7.15 |
+| IRI stem (URL prefix pattern) | `sh:pattern "^http://..."` (sole constraint) | `[<http://...>~]` | 7.15 |
+| Datatype + pattern facet | `sh:datatype D ; sh:pattern "regex"` | `D /regex/` | 7.15 |
+| Standalone pattern facet | `sh:pattern "regex"` (non-URL, sole constraint) | `. /regex/` | 7.15 |
 | Named shape reference | `sh:node S` | `@<S>` | 7.1 |
 | Named value shapes (OR of datatypes) | `sh:NodeShape` with `sh:or ([sh:datatype D1]...)` | `<Name> D1 OR D2 OR ...` | 7.15 |
 | Closed shapes | `sh:closed true` | `CLOSED` | 7.14 |
@@ -37,10 +39,6 @@ Data is preserved; semantics are relaxed.
 The DBpedia pattern where `sh:or` appears on a `sh:NodeShape` with full `sh:property` blocks as alternatives (modelling two equivalent measurement paths) is **flattened into a union**. Every property path and its constraints are preserved, but the "exactly one branch must hold" exclusivity is not expressible in either ShEx or the canonical JSON model.
 
 See [Mapping Rules — Property alternative groups](mapping-rules.md#property-alternative-groups--sh:or-with-sh:property-items-at-nodeshape-level) for a full analysis.
-
-### `sh:pattern` — arbitrary regular expressions
-
-`sh:pattern` values that match a URL prefix (`^http://...`) are converted to a ShEx `IriStem`. Arbitrary regex patterns have no ShEx equivalent and are carried through the canonical model as a `pattern` string; ShEx validators may or may not support them.
 
 ---
 

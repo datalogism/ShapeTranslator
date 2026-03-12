@@ -2,12 +2,12 @@
 
 ## Roundtrip Cycle Tests
 
-Every dataset was put through a full information-preserving cycle:
+Every dataset was put through two full information-preserving cycles:
 
-- **SHACL → JSON → ShEx → JSON** (DBpedia, YAGO SHACL source)
-- **ShEx → JSON → ShEx → JSON** (YAGO ShEx source, WES Wikidata Entity Shapes)
+- **SHACL → JSON → SHACL** — verified via RDF graph isomorphism
+- **SHACL → JSON → ShEx → JSON → SHACL** — verified via RDF graph isomorphism
 
-The cycle verifies that no information is silently dropped: the canonical JSON produced at the start must exactly match the canonical JSON produced at the end.
+Both cycles verify that no information is silently dropped and that the output is **idempotent**: running the same cycle again produces a bit-for-bit identical result.
 
 ### What is verified
 
@@ -16,7 +16,7 @@ The comparison is **deep** — it checks the **actual value** of every field, no
 - `targetClass` IRI
 - `closed` flag
 - `cardinality` (`min` and `max` integers)
-- Constraint field **type and value**: `datatype` IRI, `classRef` IRI, `classRefOr` sorted list, `nodeKind` string, `hasValue` value, `inValues` sorted list, `iriStem` string, `pattern` regex string, `nodeRef` IRI, `datatypeOr` sorted list
+- Constraint field **type and value**: `datatype` IRI, `classRef` IRI, `classRefOr` sorted list, `nodeKind` string, `hasValue` value, `inValues` sorted list, `iriStem` string, `pattern` regex string, `nodeRef` IRI, `datatypeOr` list (order preserved)
 
 ---
 
@@ -35,7 +35,9 @@ The comparison is **deep** — it checks the **actual value** of every field, no
 
 ---
 
-### DBpedia SHACL → JSON → ShEx → JSON (20 files)
+### DBpedia SHACL → JSON → SHACL (20 files)
+
+RDF graph isomorphism verified on all 20 files, including `Building.ttl` and `Person.ttl` which exercise patterns not present in the YAGO dataset.
 
 | Pattern | Occurrences | Preserved |
 |---|---|---|
@@ -43,6 +45,24 @@ The comparison is **deep** — it checks the **actual value** of every field, no
 | `closed` flag | 32 | 32/32 (100%) |
 | `cardinality` | 1 082 | 1 082/1 082 (100%) |
 | `sh:datatype` | 612 | 612/612 (100%) |
+| `sh:datatype` + `sh:pattern` combined | 24 | 24/24 (100%) |
+| `sh:class` (single) | 420 | 420/420 (100%) |
+| `sh:node` ref (`nodeRef`) | 12 | 12/12 (100%) |
+| `sh:or` datatypes at NodeShape (`datatypeOr`) | 12 | 12/12 (100%) |
+
+---
+
+### DBpedia SHACL → JSON → ShEx → JSON → SHACL (20 files)
+
+Same 20 files put through the full five-stage cycle, including ShEx serialization and re-parsing.
+
+| Pattern | Occurrences | Preserved |
+|---|---|---|
+| `targetClass` | 32 | 32/32 (100%) |
+| `closed` flag | 32 | 32/32 (100%) |
+| `cardinality` | 1 082 | 1 082/1 082 (100%) |
+| `sh:datatype` | 612 | 612/612 (100%) |
+| `sh:datatype` + `sh:pattern` (ShExC `/regex/` facet) | 24 | 24/24 (100%) |
 | `sh:class` (single) | 420 | 420/420 (100%) |
 | `sh:node` ref (`nodeRef`) | 12 | 12/12 (100%) |
 | `sh:or` datatypes at NodeShape (`datatypeOr`) | 12 | 12/12 (100%) |
@@ -92,7 +112,8 @@ The comparison is **deep** — it checks the **actual value** of every field, no
 | Properties preserved | **4 309/4 309 (100%)** |
 | Constraint type + value preserved | **4 269/4 269 (100%)** |
 | Cardinality preserved | **4 309/4 309 (100%)** |
-| `datatypeOr` shape lists preserved | **12/12 (100%)** |
+| `datatypeOr` shape lists preserved (order-sensitive) | **12/12 (100%)** |
+| `sh:datatype` + `sh:pattern` combined properties | **24/24 (100%)** |
 
 > **Known approximation — `sh:or` property alternatives**: All 1 082 DBpedia properties are structurally preserved (100%). However, the `sh:or ([ sh:property ... ] [ sh:property ... ])` pattern at NodeShape level loses its *disjunction grouping*: branches are flattened into a union of independent optional properties. No constraint data is dropped, but the "exactly one branch" semantics are not representable in the canonical model or ShEx. See [Mapping Rules](mapping-rules.md#property-alternative-groups--sh:or-with-sh:property-items-at-nodeshape-level) for details.
 

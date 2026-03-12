@@ -103,19 +103,34 @@ The canonical JSON model is the lingua franca of the pipeline. It is designed to
 }
 ```
 
-### Constraint fields (mutually exclusive per property)
+### Constraint fields
 
-| Field | Meaning |
-|---|---|
-| `datatype` | `sh:datatype` / ShEx datatype NodeConstraint |
-| `classRef` | `sh:class` (single) / ShEx `@<Aux>` shape reference |
-| `classRefOr` | `sh:or` with classes / ShEx OR auxiliary shape |
-| `nodeKind` | `sh:nodeKind` / ShEx `IRI`, `LITERAL`, etc. |
-| `hasValue` | `sh:hasValue` / ShEx `[V]` |
-| `inValues` | `sh:in` / ShEx `[v1 v2]` |
-| `iriStem` | `sh:pattern "^http://..."` / ShEx `[<stem>~]` |
-| `pattern` | `sh:pattern` (arbitrary regex) |
-| `nodeRef` | `sh:node` / ShEx `@<ShapeRef>` |
+The primary constraint fields are mutually exclusive — at most one is set per property. `pattern` is the exception: it is **additive** and may accompany any primary constraint (most commonly `datatype`).
+
+| Field | Mutually exclusive? | Meaning |
+|---|---|---|
+| `datatype` | yes | `sh:datatype` / ShEx datatype NodeConstraint |
+| `classRef` | yes | `sh:class` (single) / ShEx `@<Aux>` shape reference |
+| `classRefOr` | yes | `sh:or` with classes / ShEx OR auxiliary shape |
+| `nodeKind` | yes | `sh:nodeKind` / ShEx `IRI`, `LITERAL`, etc. |
+| `hasValue` | yes | `sh:hasValue` / ShEx `[V]` |
+| `inValues` | yes | `sh:in` / ShEx `[v1 v2]` |
+| `iriStem` | yes | standalone `sh:pattern "^http://..."` / ShEx `[<stem>~]` |
+| `pattern` | **no** | `sh:pattern` regex — may accompany `datatype` or stand alone |
+| `nodeRef` | yes | `sh:node` / ShEx `@<ShapeRef>` |
+
+When `datatype` and `pattern` are both present, the canonical JSON carries both fields:
+
+```json
+{
+  "path": "http://dbpedia.org/ontology/wikiPageRedirects",
+  "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+  "pattern": "^http://dbpedia.org/resource/",
+  "cardinality": { "min": 0, "max": -1 }
+}
+```
+
+This combination is preserved across both the SHACL and ShEx directions. In ShExC it is serialised using the `/regex/` pattern facet (e.g. `xsd:anyURI /^http:\/\/dbpedia.org\/resource\//`).
 
 ### Shape-level fields
 
@@ -123,4 +138,4 @@ The canonical JSON model is the lingua franca of the pipeline. It is designed to
 |---|---|
 | `targetClass` | `sh:targetClass` / ShEx `rdf:type [C]` absorbed |
 | `closed` | `sh:closed` / ShEx `CLOSED` |
-| `datatypeOr` | `sh:or ([sh:datatype D1]...)` at NodeShape level (DBpedia pattern) |
+| `datatypeOr` | `sh:or ([sh:datatype D1]...)` at NodeShape level (DBpedia pattern) — order preserved |

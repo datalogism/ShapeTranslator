@@ -203,9 +203,9 @@ schema:gender [ schema:Male schema:Female ] *
 
 ---
 
-## IRI stem pattern (`sh:pattern` matching a URL prefix)
+## IRI stem pattern (`sh:pattern` as the sole constraint, matching a URL prefix)
 
-Patterns of the form `^http://...` are converted to a ShEx IRI stem.
+When `sh:pattern` is the only constraint on a property and its value matches `^http://...`, it is converted to a ShEx IRI stem.
 
 **SHACL**
 ```turtle
@@ -225,7 +225,39 @@ sh:property [
 schema:sameAs [ <http://www.wikidata.org/entity>~ ] *
 ```
 
-Arbitrary regex patterns that do not match a URL prefix are kept as `pattern` in the canonical JSON. They have no ShEx equivalent — see [Translation Coverage](translation-coverage.md).
+Arbitrary regex patterns that do not match a URL prefix are kept as `pattern` in the canonical JSON and serialised as a `.  /regex/` pattern facet in ShExC.
+
+---
+
+## Combined datatype + pattern constraint (`sh:datatype` + `sh:pattern`)
+
+When both `sh:datatype` and `sh:pattern` appear on the same property shape, both constraints are preserved throughout the full pipeline. The `pattern` field is **additive** — it accompanies the primary `datatype` constraint rather than replacing it.
+
+**SHACL**
+```turtle
+sh:property [
+    sh:path dbo:wikiPageRedirects ;
+    sh:datatype xsd:anyURI ;
+    sh:pattern "^http://dbpedia.org/resource/" ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{
+  "path": "http://dbpedia.org/ontology/wikiPageRedirects",
+  "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+  "pattern": "^http://dbpedia.org/resource/",
+  "cardinality": {"min": 0, "max": -1}
+}
+```
+
+**ShEx**
+```shex
+dbo:wikiPageRedirects xsd:anyURI /^http:\/\/dbpedia.org\/resource\// *
+```
+
+The `/regex/` pattern facet in ShExC combines the datatype and the regex in a single constraint expression. Forward slashes inside the regex are escaped as `\/`. The parser and serializer both handle this encoding transparently.
 
 ---
 
@@ -287,7 +319,7 @@ sh:property [
 <costValue> dbt:usDollar OR dbt:euro OR dbt:poundSterling
 ```
 
-The datatype list is sorted alphabetically in the canonical JSON. The ShEx uses valid `NodeConstraint OR NodeConstraint` syntax (ShEx 2.0 `ShapeOr`).
+The **declaration order** of the datatype list is preserved in the canonical JSON (not sorted). The ShEx uses valid `NodeConstraint OR NodeConstraint` syntax (ShEx 2.0 `ShapeOr`).
 
 ---
 
@@ -360,5 +392,6 @@ The translator flattens all alternatives into the parent shape's property list (
 | Default cardinality | ShEx defaults to `{1,1}`; SHACL defaults to `{0,*}`. Always emitted explicitly to avoid ambiguity. |
 | `rdf:type` vs `sh:targetClass` | SHACL uses `sh:targetClass`; ShEx uses `rdf:type [C]` inside the shape body. Promoted/demoted on conversion. |
 | Auxiliary shapes | `sh:class` and `sh:or` with classes produce auto-generated auxiliary shapes in ShEx. |
-| `sh:pattern` (arbitrary regex) | Preserved in canonical JSON as `pattern`; no ShEx equivalent for non-URL patterns. |
+| `sh:pattern` (standalone arbitrary regex) | Preserved as `pattern` in canonical JSON; emitted as `. /regex/` pattern facet in ShExC. |
+| `sh:datatype` + `sh:pattern` combined | Both fields carried through canonical JSON; emitted as `dtype /regex/` pattern facet in ShExC. |
 | `sh:or` property alternatives | Flattened to union; disjunction grouping is lost. |
