@@ -67,7 +67,7 @@ def _convert_property(ps: PropertyShape) -> Optional[CanonicalProperty]:
 
     prop = CanonicalProperty(path=path, cardinality=cardinality)
 
-    # Constraint mapping (mutually exclusive, first match wins)
+    # Primary constraint (mutually exclusive, first match wins)
     if ps.has_value is not None:
         prop.hasValue = _value_to_canonical(ps.has_value)
     elif ps.in_values is not None:
@@ -88,6 +88,10 @@ def _convert_property(ps: PropertyShape) -> Optional[CanonicalProperty]:
             prop.pattern = ps.pattern
     elif ps.node:
         prop.nodeRef = ps.node.value
+
+    # Secondary: sh:pattern can accompany a primary type constraint (e.g. sh:datatype + sh:pattern)
+    if ps.pattern is not None and prop.pattern is None and prop.iriStem is None:
+        prop.pattern = ps.pattern
 
     return prop
 

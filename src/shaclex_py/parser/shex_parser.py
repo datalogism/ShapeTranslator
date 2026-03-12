@@ -232,6 +232,32 @@ def _parse_literal(tok: ShExCTokenizer, prefixes: dict[str, str]) -> Literal:
     return Literal(value=value, datatype=datatype, language=language)
 
 
+def _parse_pattern_facet(tok: ShExCTokenizer) -> Optional[str]:
+    """Parse an optional /regex/ pattern facet. Returns None if not present."""
+    tok._skip_ws_and_comments()
+    if tok.pos >= len(tok.text) or tok.text[tok.pos] != '/':
+        return None
+    tok.pos += 1  # skip opening '/'
+    chars = []
+    while tok.pos < len(tok.text):
+        ch = tok.text[tok.pos]
+        if ch == '\\' and tok.pos + 1 < len(tok.text):
+            next_ch = tok.text[tok.pos + 1]
+            tok.pos += 2
+            if next_ch == '/':
+                chars.append('/')
+            else:
+                chars.append('\\')
+                chars.append(next_ch)
+        elif ch == '/':
+            tok.pos += 1  # skip closing '/'
+            break
+        else:
+            chars.append(ch)
+            tok.pos += 1
+    return ''.join(chars)
+
+
 def _parse_node_constraint(
     tok: ShExCTokenizer, prefixes: dict[str, str]
 ) -> Union[NodeConstraint, ShapeRef]:
@@ -260,16 +286,19 @@ def _parse_node_constraint(
             'BNODE': NodeKind.BLANK_NODE,
             'NONLITERAL': NodeKind.BLANK_NODE_OR_IRI,
         }
-        return NodeConstraint(node_kind=nk_map[kw])
+        pattern = _parse_pattern_facet(tok)
+        return NodeConstraint(node_kind=nk_map[kw], pattern=pattern)
 
-    # Dot (wildcard / no constraint)
+    # Dot (wildcard / no constraint) — may be followed by a pattern facet
     if c == '.':
         tok.pos += 1
-        return NodeConstraint()
+        pattern = _parse_pattern_facet(tok)
+        return NodeConstraint(pattern=pattern)
 
-    # Datatype: prefix:local or <iri>
+    # Datatype: prefix:local or <iri> — may be followed by a pattern facet
     iri = tok.read_iri_or_prefixed(prefixes)
-    return NodeConstraint(datatype=IRI(iri))
+    pattern = _parse_pattern_facet(tok)
+    return NodeConstraint(datatype=IRI(iri), pattern=pattern)
 
 
 def _parse_triple_constraint(

@@ -270,6 +270,10 @@ def convert_shex_to_canonical(shex: ShExSchema) -> CanonicalSchema:
                 elif nc.pattern:
                     prop.pattern = nc.pattern
 
+                # pattern can accompany a primary constraint (e.g. datatype + pattern)
+                if nc.pattern is not None and prop.pattern is None:
+                    prop.pattern = nc.pattern
+
             properties.append(prop)
 
         canonical_shapes.append(CanonicalShape(

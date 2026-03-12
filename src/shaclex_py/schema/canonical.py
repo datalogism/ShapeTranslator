@@ -57,10 +57,12 @@ class CanonicalProperty:
             )
         elif self.iriStem is not None:
             d["iriStem"] = self.iriStem
-        elif self.pattern is not None:
-            d["pattern"] = self.pattern
         elif self.nodeRef is not None:
             d["nodeRef"] = self.nodeRef
+
+        # pattern is output independently: it can accompany a primary constraint
+        if self.pattern is not None:
+            d["pattern"] = self.pattern
 
         d["cardinality"] = self.cardinality.to_dict()
         return d
@@ -81,7 +83,7 @@ class CanonicalShape:
             d["targetClass"] = self.targetClass
         d["closed"] = self.closed
         if self.datatypeOr is not None:
-            d["datatypeOr"] = sorted(self.datatypeOr)
+            d["datatypeOr"] = self.datatypeOr
         d["properties"] = sorted(
             [p.to_dict() for p in self.properties],
             key=lambda p: p["path"],

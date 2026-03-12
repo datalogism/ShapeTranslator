@@ -1,7 +1,7 @@
 """Convert canonical JSON model to SHACL model.
 
 Reverse mapping of shacl_to_canonical:
-- targetClass → sh:targetClass + rdf:type hasValue property
+- targetClass → sh:targetClass
 - classRef → sh:class
 - classRefOr → sh:class [ sh:or (...) ]
 - iriStem → sh:pattern (^stem/)
@@ -20,7 +20,6 @@ from shaclex_py.schema.canonical import (
 )
 
 SHACL_SHAPES_BASE = "http://shaclshapes.org/"
-RDF_TYPE_IRI = IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
 
 NODE_KIND_MAP = {
     "IRI": NodeKind.IRI,
@@ -85,10 +84,12 @@ def _convert_property(prop: CanonicalProperty) -> PropertyShape:
         in_values = [_canonical_value_to_model(v) for v in prop.inValues]
     elif prop.iriStem is not None:
         pattern = f"^{prop.iriStem}/"
-    elif prop.pattern is not None:
-        pattern = prop.pattern
     elif prop.nodeRef is not None:
         node = IRI(prop.nodeRef)
+
+    # pattern is applied independently: it can accompany a primary constraint
+    if prop.pattern is not None:
+        pattern = prop.pattern
 
     return PropertyShape(
         path=path,
@@ -121,17 +122,6 @@ def convert_canonical_to_shacl(canonical: CanonicalSchema) -> SHACLSchema:
         target_class = IRI(cshape.targetClass) if cshape.targetClass else None
 
         properties: list[PropertyShape] = []
-
-        # Re-add rdf:type hasValue when targetClass is present
-        # (shacl_to_canonical strips it; we restore it for faithful SHACL)
-        if target_class:
-            rdf_type_prop = PropertyShape(
-                path=Path(iri=RDF_TYPE_IRI),
-                has_value=target_class,
-                min_count=1,
-                max_count=1,
-            )
-            properties.append(rdf_type_prop)
 
         for cprop in cshape.properties:
             ps = _convert_property(cprop)

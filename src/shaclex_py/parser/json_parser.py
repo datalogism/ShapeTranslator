@@ -33,10 +33,12 @@ def _parse_property(d: dict) -> CanonicalProperty:
         prop.inValues = d["inValues"]
     elif "iriStem" in d:
         prop.iriStem = d["iriStem"]
-    elif "pattern" in d:
-        prop.pattern = d["pattern"]
     elif "nodeRef" in d:
         prop.nodeRef = d["nodeRef"]
+
+    # pattern is read independently: it can accompany a primary constraint
+    if "pattern" in d:
+        prop.pattern = d["pattern"]
 
     return prop
 

@@ -183,7 +183,10 @@ def _convert_property(
     constraint: Optional[Union[NodeConstraint, ShapeRef]] = None
 
     if cprop.datatype is not None:
-        constraint = NodeConstraint(datatype=IRI(cprop.datatype))
+        constraint = NodeConstraint(
+            datatype=IRI(cprop.datatype),
+            pattern=cprop.pattern,  # may be None; coexists with datatype in ShExC
+        )
 
     elif cprop.classRef is not None:
         # For Wikidata: prefer class label, then property label, then local name.

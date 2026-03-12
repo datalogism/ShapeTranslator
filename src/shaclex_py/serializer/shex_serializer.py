@@ -85,6 +85,12 @@ def _serialize_value_set_value(v: ValueSetValue, pm: PrefixMap) -> str:
     return str(val)
 
 
+def _serialize_pattern_facet(pattern: str) -> str:
+    """Serialize a regex pattern as a ShExC pattern facet /regex/."""
+    escaped = pattern.replace("\\", "\\\\").replace("/", "\\/")
+    return f" /{escaped}/"
+
+
 def _serialize_node_constraint(nc: NodeConstraint, pm: PrefixMap) -> str:
     if nc.values is not None:
         items = " ".join(_serialize_value_set_value(v, pm) for v in nc.values)
@@ -96,9 +102,17 @@ def _serialize_node_constraint(nc: NodeConstraint, pm: PrefixMap) -> str:
             NodeKind.BLANK_NODE: "BNODE",
             NodeKind.BLANK_NODE_OR_IRI: "NONLITERAL",
         }
-        return kind_map.get(nc.node_kind, ".")
+        base = kind_map.get(nc.node_kind, ".")
+        if nc.pattern:
+            base += _serialize_pattern_facet(nc.pattern)
+        return base
     if nc.datatype is not None:
-        return pm.compact_iri(nc.datatype)
+        base = pm.compact_iri(nc.datatype)
+        if nc.pattern:
+            base += _serialize_pattern_facet(nc.pattern)
+        return base
+    if nc.pattern is not None:
+        return "." + _serialize_pattern_facet(nc.pattern)
     return "."
 
 
