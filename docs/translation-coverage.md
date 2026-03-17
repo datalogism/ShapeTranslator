@@ -2,6 +2,15 @@
 
 This document catalogues which constructs from [Validating RDF Data, Ch. 13](https://book.validatingrdf.com/bookHtml013.html) are fully translated, which are approximated, and which are currently out of scope.
 
+Two intermediate formats are available:
+
+| Format | Scope | Notes |
+|--------|-------|-------|
+| **Canonical JSON** | Simplified subset — 16 pattern types | Backward-compatible; deterministic |
+| **ShexJE** | Full ShexJ superset + complete SHACL | New canonical format; see [ShexJE Spec](shexje-spec.md) |
+
+ShexJE fully expresses all constructs listed as "known gaps" in the Canonical JSON pipeline (see §4).
+
 ---
 
 ## Fully supported translations

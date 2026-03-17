@@ -86,7 +86,7 @@ class CanonicalShape:
             d["datatypeOr"] = self.datatypeOr
         d["properties"] = sorted(
             [p.to_dict() for p in self.properties],
-            key=lambda p: p["path"],
+            key=lambda p: (p["path"], str(sorted(p.items()))),
         )
         return d
 

@@ -1,9 +1,22 @@
-"""SHACL <-> ShEx Translator -- CLI entry point.
+"""SHACL <-> ShEx <-> ShexJE Translator -- CLI entry point.
 
 Usage:
-    shaclex-py --input FILE --direction shacl2shex|shex2shacl|shacl2json|shex2json [--output FILE]
-    shaclex-py --input-dir DIR --output-dir DIR --direction shacl2shex|shex2shacl|shacl2json|shex2json
+    shaclex-py --input FILE --direction DIRECTION [--output FILE]
+    shaclex-py --input-dir DIR --output-dir DIR --direction DIRECTION
     shaclex-py --batch   # Run full YAGO batch in both directions
+
+Directions:
+    shacl2shex      SHACL (Turtle) → ShEx (ShExC)
+    shex2shacl      ShEx  (ShExC)  → SHACL (Turtle)
+    shacl2json      SHACL (Turtle) → Canonical JSON
+    shex2json       ShEx  (ShExC)  → Canonical JSON
+    json2shacl      Canonical JSON → SHACL (Turtle)
+    json2shex       Canonical JSON → ShEx (ShExC)
+    shacl2shexje    SHACL (Turtle) → ShexJE JSON
+    shex2shexje     ShEx  (ShExC)  → ShexJE JSON
+    shexje2shacl    ShexJE JSON    → SHACL (Turtle)
+    shexje2shex     ShexJE JSON    → ShEx (ShExC)
+    json2shexje     Canonical JSON → ShexJE JSON
 """
 from __future__ import annotations
 
@@ -121,6 +134,54 @@ def convert_file(
         label_map = _maybe_fetch_labels(canonical, direction, wikidata_labels)
         shex = convert_canonical_to_shex(canonical, label_map=label_map or None)
         result = serialize_shex(shex, label_map=label_map or None)
+    elif direction == "shacl2shexje":
+        from shaclex_py.parser.shacl_parser import parse_shacl_file
+        from shaclex_py.converter.shacl_to_canonical import convert_shacl_to_canonical
+        from shaclex_py.converter.canonical_to_shexje import convert_canonical_to_shexje
+        from shaclex_py.serializer.shexje_serializer import serialize_shexje
+
+        shacl = parse_shacl_file(input_path)
+        canonical = convert_shacl_to_canonical(shacl)
+        shexje = convert_canonical_to_shexje(canonical)
+        result = serialize_shexje(shexje)
+    elif direction == "shex2shexje":
+        from shaclex_py.parser.shex_parser import parse_shex_file
+        from shaclex_py.converter.shex_to_canonical import convert_shex_to_canonical
+        from shaclex_py.converter.canonical_to_shexje import convert_canonical_to_shexje
+        from shaclex_py.serializer.shexje_serializer import serialize_shexje
+
+        shex = parse_shex_file(input_path)
+        canonical = convert_shex_to_canonical(shex)
+        shexje = convert_canonical_to_shexje(canonical)
+        result = serialize_shexje(shexje)
+    elif direction == "shexje2shacl":
+        from shaclex_py.parser.shexje_parser import parse_shexje_file
+        from shaclex_py.converter.shexje_to_canonical import convert_shexje_to_canonical
+        from shaclex_py.converter.canonical_to_shacl import convert_canonical_to_shacl
+        from shaclex_py.serializer.shacl_serializer import serialize_shacl
+
+        shexje = parse_shexje_file(input_path)
+        canonical = convert_shexje_to_canonical(shexje)
+        shacl = convert_canonical_to_shacl(canonical)
+        result = serialize_shacl(shacl)
+    elif direction == "shexje2shex":
+        from shaclex_py.parser.shexje_parser import parse_shexje_file
+        from shaclex_py.converter.shexje_to_canonical import convert_shexje_to_canonical
+        from shaclex_py.converter.canonical_to_shex import convert_canonical_to_shex
+        from shaclex_py.serializer.shex_serializer import serialize_shex
+
+        shexje = parse_shexje_file(input_path)
+        canonical = convert_shexje_to_canonical(shexje)
+        shex = convert_canonical_to_shex(canonical)
+        result = serialize_shex(shex)
+    elif direction == "json2shexje":
+        from shaclex_py.parser.json_parser import parse_canonical_file
+        from shaclex_py.converter.canonical_to_shexje import convert_canonical_to_shexje
+        from shaclex_py.serializer.shexje_serializer import serialize_shexje
+
+        canonical = parse_canonical_file(input_path)
+        shexje = convert_canonical_to_shexje(canonical)
+        result = serialize_shexje(shexje)
     else:
         raise ValueError(f"Unknown direction: {direction!r}")
 
@@ -146,12 +207,17 @@ def convert_batch(
     os.makedirs(output_dir, exist_ok=True)
 
     ext_map = {
-        "shacl2shex": (".ttl", ".shex"),
-        "shex2shacl": (".shex", ".ttl"),
-        "shacl2json": (".ttl", ".json"),
-        "shex2json": (".shex", ".json"),
-        "json2shacl": (".json", ".ttl"),
-        "json2shex": (".json", ".shex"),
+        "shacl2shex":   (".ttl",    ".shex"),
+        "shex2shacl":   (".shex",   ".ttl"),
+        "shacl2json":   (".ttl",    ".json"),
+        "shex2json":    (".shex",   ".json"),
+        "json2shacl":   (".json",   ".ttl"),
+        "json2shex":    (".json",   ".shex"),
+        "shacl2shexje": (".ttl",    ".shexje"),
+        "shex2shexje":  (".shex",   ".shexje"),
+        "shexje2shacl": (".shexje", ".ttl"),
+        "shexje2shex":  (".shexje", ".shex"),
+        "json2shexje":  (".json",   ".shexje"),
     }
     ext_in, ext_out = ext_map[direction]
 
@@ -216,7 +282,11 @@ def main():
     )
     parser.add_argument(
         "--direction", "-d",
-        choices=["shacl2shex", "shex2shacl", "shacl2json", "shex2json", "json2shacl", "json2shex"],
+        choices=[
+            "shacl2shex", "shex2shacl",
+            "shacl2json", "shex2json", "json2shacl", "json2shex",
+            "shacl2shexje", "shex2shexje", "shexje2shacl", "shexje2shex", "json2shexje",
+        ],
         help="Conversion direction",
     )
     parser.add_argument(
