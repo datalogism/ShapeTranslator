@@ -24,6 +24,7 @@ from shaclex_py.schema.shex import (
     EachOf,
     NodeConstraint,
     NodeConstraintShape,
+    OneOf,
     Shape,
     ShapeRef,
     ShExSchema,
@@ -301,6 +302,23 @@ def convert_canonical_to_shex(
             nc_shape = NodeConstraintShape(
                 name=IRI(shape_name),
                 datatypes=[IRI(d) for d in cshape.datatypeOr],
+            )
+            shapes.append(nc_shape)
+            continue
+
+        # Node-level constraints (LangStringShape, TimeZoneShape patterns)
+        if cshape.nodeKind is not None or cshape.datatype is not None or cshape.inValues is not None:
+            nk = NODE_KIND_MAP.get(cshape.nodeKind) if cshape.nodeKind else None
+            dt = IRI(cshape.datatype) if cshape.datatype else None
+            vals = (
+                [ValueSetValue(value=_canonical_value_to_model(v)) for v in cshape.inValues]
+                if cshape.inValues else None
+            )
+            nc_shape = NodeConstraintShape(
+                name=IRI(shape_name),
+                node_kind=nk,
+                datatype=dt,
+                values=vals,
             )
             shapes.append(nc_shape)
             continue

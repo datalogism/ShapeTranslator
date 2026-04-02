@@ -92,8 +92,9 @@ def _convert_decl(decl: ShapeDecl) -> Optional[CanonicalShape]:
         return _convert_shape(decl)
     if isinstance(decl, ShapeOrE):
         return _convert_shape_or_as_datatype_or(decl)
-    # ShapeAnd / ShapeNot / ShapeXone / NodeConstraintE at top level
-    # are beyond canonical expressivity — skip.
+    if isinstance(decl, NodeConstraintE):
+        return _convert_node_constraint_decl(decl)
+    # ShapeAnd / ShapeNot / ShapeXone at top level are beyond canonical — skip.
     return None
 
 
@@ -109,6 +110,23 @@ def _convert_shape(shape: ShapeE) -> CanonicalShape:
         targetClass=_normalize_target_class(shape.targetClass),
         closed=shape.closed,
         properties=properties,
+    )
+
+
+def _convert_node_constraint_decl(nc: NodeConstraintE) -> Optional[CanonicalShape]:
+    """Map a top-level NodeConstraintE to a CanonicalShape with node-level constraints."""
+    if not nc.id:
+        return None
+    in_vals = None
+    if nc.in_values is not None:
+        in_vals = [_normalise_value(v) for v in nc.in_values]
+    elif nc.values is not None:
+        in_vals = [_normalise_value(v) for v in nc.values]
+    return CanonicalShape(
+        name=nc.id,
+        nodeKind=nc.nodeKind,
+        datatype=nc.datatype,
+        inValues=in_vals,
     )
 
 
@@ -244,11 +262,8 @@ def _resolve_node_constraint(nc: NodeConstraintE, cp: CanonicalProperty) -> None
         if len(nc.values) == 1 and isinstance(nc.values[0], IriStemValue):
             cp.iriStem = nc.values[0].stem
             return
-        # Single IRI → hasValue
-        if len(nc.values) == 1 and isinstance(nc.values[0], str):
-            cp.hasValue = nc.values[0]
-            return
-        # Multiple values → inValues
+        # Value set → inValues (single-element sets stay as inValues, not hasValue,
+        # because hasValue is routed through tc.hasValue shorthand, not nc.values)
         cp.inValues = [_normalise_value(v) for v in nc.values]
         return
 

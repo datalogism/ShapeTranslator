@@ -5,299 +5,174 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dbo: <http://dbpedia.org/ontology/> .
 @prefix dbt: <http://dbpedia.org/datatype/> .
-@prefix dbr: <http://dbpedia.org/resource/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
-@prefix umbel: <http://umbel.org/umbel/rc/> .
 @prefix shapes: <http://shaclshapes.org/> .
-
-
-# ── Reusable value shapes (from SPARQL-inferred ranges) ──────────────────────
-
-shapes:endowmentValueShape
-    a sh:NodeShape ;
-    sh:or (
-        [ sh:datatype dbt:usDollar ]
-        [ sh:datatype dbt:poundSterling ]
-        [ sh:datatype dbt:euro ]
-        [ sh:datatype dbt:canadianDollar ]
-        [ sh:datatype dbt:japaneseYen ]
-        [ sh:datatype dbt:russianRouble ]
-        [ sh:datatype dbt:sriLankanRupee ]
-        [ sh:datatype dbt:croatianKuna ]
-        [ sh:datatype dbt:jordanianDinar ]
-        [ sh:datatype dbt:southAfricanRand ]
-        [ sh:datatype dbt:philippinePeso ]
-        [ sh:datatype dbt:indianRupee ]
-        [ sh:datatype dbt:renminbi ]
-        [ sh:datatype dbt:netherlandsAntilleanGuilder ]
-        [ sh:datatype dbt:pakistaniRupee ]
-        [ sh:datatype dbt:malaysianRinggit ]
-        [ sh:datatype dbt:nepaleseRupee ]
-        [ sh:datatype dbt:unitedArabEmiratesDirham ]
-        [ sh:datatype dbt:lebanesePound ]
-        [ sh:datatype dbt:peruvianNuevoSol ]
-        [ sh:datatype dbt:hungarianForint ]
-        [ sh:datatype dbt:swedishKrona ]
-        [ sh:datatype dbt:danishKrone ]
-        [ sh:datatype dbt:thaiBaht ]
-    ) .
 
 
 <http://shaclshapes.org/UniversityShape> a sh:NodeShape ;
     sh:targetClass dbo:University ;
 
-    # === DBpedia Common Properties ===
-    sh:property [
-        sh:path dbo:abstract ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:thumbnail ;
-        sh:class dbo:Image ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageID ;
-        sh:datatype xsd:integer ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageLength ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageRevisionID ;
-        sh:datatype xsd:integer ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageWikiLink ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
-    ] ;
-
-    sh:property [
-        sh:path dct:subject ;
-        sh:class skos:Concept ;
-    ] ;
-
-    sh:property [
-        sh:path rdf:type ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path rdfs:comment ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # IDENTITY & NAMING
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
         sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path owl:sameAs ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path prov:wasDerivedFrom ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:depiction ;
-        sh:class dbo:Image ;
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
         sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:isPrimaryTopicOf ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    # === Cast, crew & creators ===
-    sh:property [
-        sh:path dbo:director ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Dates & timeline ===
-    sh:property [
-        sh:path dbo:foundingDate ;
-        sh:datatype xsd:date ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:foundingYear ;
-        sh:datatype xsd:gYear ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:formationYear ;
-        sh:datatype xsd:gYear ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:closingYear ;
-        sh:datatype xsd:gYear ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Economics & statistics ===
-    sh:property [
-        sh:path dbo:endowment ;
-        sh:node shapes:endowmentValueShape ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:barPassRate ;
-        sh:datatype xsd:float ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:numberOfStudents ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:numberOfUndergraduateStudents ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:numberOfPostgraduateStudents ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:numberOfDoctoralStudents ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:staff ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:facultySize ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:lowerAge ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:upperAge ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:numberOfGraduateStudents ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:numberOfEmployees ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:ranking ;
-        sh:datatype xsd:positiveInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Identity & naming ===
-    sh:property [
-        sh:path dbo:formerName ;
-        sh:datatype rdf:langString ;
     ] ;
 
     sh:property [
         sh:path dbo:originalName ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:formerName ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:nick ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:abbreviation ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:motto ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:mascot ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:abbreviation ;
+        sh:path dbo:namedAfter ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:officialSchoolColour ;
         sh:datatype xsd:string ;
-        sh:maxCount 1 ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
-    # === Location & geography ===
+    # ═══════════════════════════════════════════════════════════════════════════
+    # DESCRIPTION & ABSTRACT
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
-        sh:path dbo:city ;
-        sh:class dbo:City ;
+        sh:path dbo:abstract ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:country ;
-        sh:class dbo:Country ;
+        sh:path rdfs:comment ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
         sh:minCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # DATES & TIMELINE
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:foundingDate ;
+        sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
+
+    sh:property [
+        sh:path dbo:foundingYear ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:formationYear ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:closingYear ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # LOCATION & GEOGRAPHY
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
         sh:path dbo:location ;
         sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:city ;
+        sh:class dbo:City ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:state ;
         sh:class dbo:PopulatedPlace ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:county ;
+        sh:class dbo:PopulatedPlace ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:country ;
+        sh:class dbo:Country ;
+        sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -305,18 +180,19 @@ shapes:endowmentValueShape
     sh:property [
         sh:path dbo:headquarter ;
         sh:class dbo:PopulatedPlace ;
+        sh:nodeKind sh:IRI ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:county ;
-        sh:class dbo:PopulatedPlace ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
+        sh:path dbo:campus ;
+        sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path dbo:address ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
@@ -325,20 +201,250 @@ shapes:endowmentValueShape
     sh:property [
         sh:path dbo:postalCode ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
 
-    # === Media & publications ===
+    # ═══════════════════════════════════════════════════════════════════════════
+    # GEOSPATIAL COORDINATES
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
-        sh:path dbo:language ;
-        sh:class dbo:Language ;
+        sh:path geo:lat ;
+        sh:datatype xsd:float ;
+        sh:maxCount 1 ;
     ] ;
 
-    # === Organization & affiliation ===
+    sh:property [
+        sh:path geo:long ;
+        sh:datatype xsd:float ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path geo:geometry ;
+        sh:datatype geosparql:wktLiteral ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # STUDENT & STAFF STATISTICS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:numberOfStudents ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfUndergraduateStudents ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfPostgraduateStudents ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfGraduateStudents ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfDoctoralStudents ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:staff ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:facultySize ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfEmployees ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # AGE REQUIREMENTS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:lowerAge ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:upperAge ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # FINANCIAL & RANKINGS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:endowment ;
+        sh:node shapes:CostUnitShape ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:ranking ;
+        sh:datatype xsd:positiveInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:barPassRate ;
+        sh:datatype xsd:float ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # LEADERSHIP & GOVERNANCE
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:president ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:chancellor ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:viceChancellor ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:rector ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:dean ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:provost ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:principal ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:head ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:chairman ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:director ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:leader ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:leaderFunction ;
+        sh:class dbo:PersonFunction ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:patronSaint ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # FOUNDERS & KEY PEOPLE
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:foundedBy ;
+        sh:class dbo:Agent ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:keyPerson ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # AFFILIATIONS & ORGANIZATIONS
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
         sh:path dbo:affiliation ;
         sh:class dbo:Organisation ;
+        sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -346,114 +452,164 @@ shapes:endowmentValueShape
     sh:property [
         sh:path dbo:parentOrganisation ;
         sh:class dbo:Organisation ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path dbo:highschool ;
         sh:class dbo:School ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path dbo:membership ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
     ] ;
 
-    sh:property [
-        sh:path dbo:officialSchoolColour ;
-        sh:datatype xsd:string ;
-    ] ;
-
-    # === People & family ===
-    sh:property [
-        sh:path dbo:foundedBy ;
-        sh:class dbo:Agent ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # LANGUAGE
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
-        sh:path dbo:keyPerson ;
-        sh:class dbo:Person ;
+        sh:path dbo:language ;
+        sh:class dbo:Language ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
-    # === Politics & governance ===
-    sh:property [
-        sh:path dbo:president ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # STATUS & CLASSIFICATION
+    # ═══════════════════════════════════════════════════════════════════════════
 
-    sh:property [
-        sh:path dbo:dean ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:rector ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:leader ;
-        sh:class dbo:Person ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:patronSaint ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:chancellor ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:viceChancellor ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:head ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:chairman ;
-        sh:class dbo:Person ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:principal ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:provost ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:leaderFunction ;
-        sh:class dbo:PersonFunction ;
-    ] ;
-
-    # === Technical & classification ===
     sh:property [
         sh:path dbo:status ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:purpose ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # MEDIA & IMAGES
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:thumbnail ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:depiction ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # EXTERNAL REFERENCES & LINKS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path foaf:homepage ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:isPrimaryTopicOf ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dct:subject ;
+        sh:class skos:Concept ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # WIKIPEDIA & DBPEDIA METADATA
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:wikiPageID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageLength ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageWikiLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:nodeKind sh:Literal ;
     ] .
 
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# REUSABLE VALUE SHAPES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+shapes:CostUnitShape a sh:NodeShape ;
+    sh:or (
+        [ sh:datatype dbt:usDollar ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:poundSterling ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:euro ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:canadianDollar ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:japaneseYen ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:russianRouble ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:sriLankanRupee ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:croatianKuna ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:jordanianDinar ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:southAfricanRand ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:philippinePeso ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:indianRupee ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:renminbi ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:netherlandsAntilleanGuilder ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:pakistaniRupee ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:malaysianRinggit ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:nepaleseRupee ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:unitedArabEmiratesDirham ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:lebanesePound ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:peruvianNuevoSol ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:hungarianForint ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:swedishKrona ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:danishKrone ; sh:nodeKind sh:Literal ]
+        [ sh:datatype dbt:thaiBaht ; sh:nodeKind sh:Literal ]
+    ) .

@@ -4,252 +4,60 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dbo: <http://dbpedia.org/ontology/> .
-@prefix dbt: <http://dbpedia.org/datatype/> .
-@prefix dbr: <http://dbpedia.org/resource/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
-@prefix umbel: <http://umbel.org/umbel/rc/> .
 @prefix shapes: <http://shaclshapes.org/> .
 
 
 <http://shaclshapes.org/WrittenWorkShape> a sh:NodeShape ;
     sh:targetClass dbo:WrittenWork ;
 
-    # === DBpedia Common Properties ===
-    sh:property [
-        sh:path dbo:abstract ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:thumbnail ;
-        sh:class dbo:Image ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageExternalLink ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageID ;
-        sh:datatype xsd:integer ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageInterLanguageLink ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageRedirects ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageRevisionID ;
-        sh:datatype xsd:integer ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dct:subject ;
-        sh:class skos:Concept ;
-    ] ;
-
-    sh:property [
-        sh:path rdf:type ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path rdfs:comment ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # IDENTITY & NAMING
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
         sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path rdfs:seeAlso ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path owl:differentFrom ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:depiction ;
-        sh:class dbo:Image ;
-        sh:minCount 1 ;
-    ] ;
-
-    # === Career & achievements ===
-    sh:property [
-        sh:path dbo:genre ;
-        sh:class dbo:Genre ;
-    ] ;
-
-    # === Cast, crew & creators ===
-    sh:property [
-        sh:path dbo:editor ;
-        sh:class dbo:Agent ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:author ;
-        sh:class dbo:Person ;
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:coverArtist ;
-        sh:class dbo:Person ;
+        sh:path dbo:formerName ;
+        sh:datatype xsd:string ;
     ] ;
 
-    sh:property [
-        sh:path dbo:illustrator ;
-        sh:class dbo:Person ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:writer ;
-        sh:class dbo:Person ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:translator ;
-        sh:class dbo:Person ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:previousEditor ;
-        sh:class dbo:Person ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:chiefEditor ;
-        sh:class dbo:Person ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:editorTitle ;
-        sh:datatype rdf:langString ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Dates & timeline ===
-    sh:property [
-        sh:path dbo:releaseDate ;
-        sh:datatype xsd:date ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:publicationDate ;
-        sh:datatype xsd:date ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:firstPublicationDate ;
-        sh:datatype xsd:date ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:lastPublicationDate ;
-        sh:datatype xsd:date ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:foundingDate ;
-        sh:datatype xsd:date ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:premiereDate ;
-        sh:datatype xsd:date ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:firstPublicationYear ;
-        sh:datatype xsd:gYear ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:premiereYear ;
-        sh:datatype xsd:gYear ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:finalPublicationYear ;
-        sh:datatype xsd:gYear ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Economics & statistics ===
-    sh:property [
-        sh:path dbo:impactFactor ;
-        sh:datatype xsd:double ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:circulation ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:numberOfVolumes ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:numberOfPages ;
-        sh:datatype xsd:positiveInteger ;
-    ] ;
-
-    # === Identity & naming ===
     sh:property [
         sh:path dbo:abbreviation ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # IDENTIFIERS (ISBN, ISSN, etc.)
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
         sh:path dbo:isbn ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:issn ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -257,161 +65,548 @@
     sh:property [
         sh:path dbo:oclc ;
         sh:datatype xsd:string ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:issn ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:lcc ;
         sh:datatype xsd:string ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:dcc ;
-        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:lccn ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:dcc ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:coden ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
-    # === Location & geography ===
-    sh:property [
-        sh:path dbo:city ;
-        sh:class dbo:City ;
-        sh:maxCount 1 ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # DESCRIPTION & ABSTRACT
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
-        sh:path dbo:country ;
-        sh:class dbo:Country ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:location ;
-        sh:class dbo:Place ;
-    ] ;
-
-    # === Media & publications ===
-    sh:property [
-        sh:path dbo:language ;
-        sh:class dbo:Language ;
+        sh:path dbo:abstract ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:originalLanguage ;
-        sh:class dbo:Language ;
-        sh:maxCount 1 ;
+        sh:path rdfs:comment ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:depictionDescription ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
 
+    # ═══════════════════════════════════════════════════════════════════════════
+    # GENRE & CLASSIFICATION
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
-        sh:path dbo:imageSize ;
-        sh:datatype xsd:integer ;
+        sh:path [ sh:alternativePath ( dbo:literaryGenre dbo:genre ) ] ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:academicDiscipline ;
+        sh:nodeKind sh:IRI ;
+        sh:or (
+            [ sh:class dbo:AcademicSubject ]
+            [ sh:class dbo:MedicalSpecialty ]
+        ) ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:nonFictionSubject ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # AUTHORS & WRITERS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:author ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:writer ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:translator ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # EDITORS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:editor ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:chiefEditor ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:previousEditor ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:editorTitle ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # ILLUSTRATORS & ARTISTS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:illustrator ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:coverArtist ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PUBLICATION DATES
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:publicationDate ;
+        sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:releaseDate ;
+        sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:firstPublicationDate ;
+        sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:lastPublicationDate ;
+        sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:foundingDate ;
+        sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:firstPublicationYear ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:finalPublicationYear ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PREMIERE & PERFORMANCE
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:premiereDate ;
+        sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:premiereYear ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:premierePlace ;
+        sh:class dbo:Venue ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PUBLISHER & OWNERSHIP
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:publisher ;
+        sh:class dbo:Agent ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:owner ;
+        sh:class dbo:Agent ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PUBLICATION STATISTICS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:numberOfPages ;
+        sh:datatype xsd:positiveInteger ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:numberOfVolumes ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:circulation ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:impactFactor ;
+        sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:frequencyOfPublication ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
         sh:path dbo:openAccessContent ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
     ] ;
 
+    # ═══════════════════════════════════════════════════════════════════════════
+    # LOCATION & GEOGRAPHY
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
-        sh:path dbo:logo ;
-        sh:datatype xsd:string ;
+        sh:path dbo:city ;
+        sh:class dbo:City ;
+        sh:nodeKind sh:IRI ;
         sh:maxCount 1 ;
     ] ;
 
-    # === Organization & affiliation ===
     sh:property [
-        sh:path dbo:publisher ;
-        sh:class dbo:Agent ;
+        sh:path dbo:country ;
+        sh:class dbo:Country ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:location ;
+        sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # LANGUAGE
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:language ;
+        sh:class dbo:Language ;
+        sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
     ] ;
+
+    sh:property [
+        sh:path dbo:originalLanguage ;
+        sh:class dbo:Language ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # FORMAT & MEDIA TYPE
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:format ;
+        sh:nodeKind sh:IRI ;
+        sh:or (
+            [ sh:class dbo:Media ]
+            [ sh:class dbo:Work ]
+            [ sh:class dbo:Website ]
+        ) ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:mediaType ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:or (
+            [ sh:class dbo:InformationAppliance ]
+            [ sh:class dbo:Device ]
+            [ sh:class dbo:Work ]
+            [ sh:class dbo:Software ]
+            [ sh:class dbo:ProgrammingLanguage ]
+            [ sh:class dbo:Newspaper ]
+            [ sh:class dbo:Artwork ]
+        ) ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:license ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # SERIES & RELATED WORKS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:series ;
+        sh:class dbo:Work ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:previousWork ;
+        sh:class dbo:Work ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:subsequentWork ;
+        sh:class dbo:Work ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # RELATED PUBLICATIONS
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
         sh:path dbo:magazine ;
         sh:class dbo:Magazine ;
+        sh:nodeKind sh:IRI ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:sisterNewspaper ;
         sh:class dbo:Newspaper ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
-    # === People & family ===
-    sh:property [
-        sh:path dbo:owner ;
-        sh:class dbo:Agent ;
-    ] ;
-
-    # === References & links ===
-    sh:property [
-        sh:path dbo:subsequentWork ;
-        sh:class dbo:Work ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:previousWork ;
-        sh:class dbo:Work ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PLAY & STORY CONTENT
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
         sh:path dbo:settingOfPlay ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:characterInPlay ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
         sh:path dbo:subjectOfPlay ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # MEDIA & IMAGES
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:thumbnail ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:jstor ;
+        sh:path foaf:depiction ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:logo ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:imageSize ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # EXTERNAL REFERENCES & LINKS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path foaf:homepage ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path dbo:imdbId ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
-    ] .
+    ] ;
 
+    sh:property [
+        sh:path dbo:jstor ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path owl:differentFrom ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:seeAlso ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dct:subject ;
+        sh:class skos:Concept ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # WIKIPEDIA & DBPEDIA METADATA
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:wikiPageID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageExternalLink ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageInterLanguageLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRedirects ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:nodeKind sh:Literal ;
+    ] .

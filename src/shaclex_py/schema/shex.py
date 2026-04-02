@@ -64,13 +64,20 @@ class Shape:
 
 @dataclass
 class NodeConstraintShape:
-    """A top-level shape that is an OR of NodeConstraints (datatype alternatives).
+    """A top-level named node constraint shape.
 
-    Represents ``sh:or ([sh:datatype D1] [sh:datatype D2] ...)`` at NodeShape
-    level.  Serialized in ShExC as ``<Name> dtype1 OR dtype2 OR ...``.
+    Three representations:
+    - OR-of-datatypes: ``<Name> dtype1 OR dtype2 OR ...``  (datatypes list)
+    - Single nodeKind:  ``<Name> LITERAL``                  (node_kind set)
+    - Value set:        ``<Name> [ v1 v2 ... ]``             (values set)
+    - Single datatype:  ``<Name> xsd:string``               (datatype set, datatypes empty)
+    - Combined:         ``<Name> rdf:langString``            (nodeKind + datatype → use datatype)
     """
     name: IRI
-    datatypes: list[IRI] = field(default_factory=list)
+    datatypes: list[IRI] = field(default_factory=list)       # OR-of-datatypes (existing)
+    node_kind: Optional[NodeKind] = None                      # node-level nodeKind
+    datatype: Optional[IRI] = None                            # single datatype (no OR)
+    values: Optional[list[ValueSetValue]] = None              # value set
 
 
 @dataclass

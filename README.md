@@ -86,4 +86,4 @@ Tested across 147 files (YAGO, DBpedia, Wikidata WES) using deep value-compariso
 | Properties preserved | **4 309/4 309 (100%)** |
 | Constraint type + value preserved | **4 269/4 269 (100%)** |
 
-> The only known approximation is `sh:or` property-alternative groups at NodeShape level (DBpedia pattern), which are flattened to a union — all property data is kept but disjunction grouping is lost. See [Translation Coverage](docs/translation-coverage.md#approximated-translations).
+> Known approximations: `sh:or` property-alternative groups (flattened to union) and `sh:alternativePath` (translated to ShEx `|`). All property data is preserved in both cases. See [Translation Coverage](docs/translation-coverage.md#approximated-translations).

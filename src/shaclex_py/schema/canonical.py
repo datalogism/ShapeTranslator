@@ -32,6 +32,8 @@ class CanonicalProperty:
     iriStem: Optional[str] = None
     pattern: Optional[str] = None
     nodeRef: Optional[str] = None
+    # sh:alternativePath: first path stored in `path`, full list here
+    pathAlternatives: Optional[list[str]] = None
 
     cardinality: CanonicalCardinality = field(
         default_factory=lambda: CanonicalCardinality(0, -1)
@@ -39,6 +41,8 @@ class CanonicalProperty:
 
     def to_dict(self) -> dict:
         d: dict = {"path": self.path}
+        if self.pathAlternatives is not None:
+            d["pathAlternatives"] = self.pathAlternatives
 
         if self.datatype is not None:
             d["datatype"] = self.datatype
@@ -76,6 +80,10 @@ class CanonicalShape:
     properties: list[CanonicalProperty] = field(default_factory=list)
     # OR-of-datatypes at NodeShape level (DBpedia named value shapes)
     datatypeOr: Optional[list[str]] = None
+    # Node-level constraints (reusable value shapes, e.g. LangStringShape, TimeZoneShape)
+    nodeKind: Optional[str] = None          # sh:nodeKind at NodeShape level
+    datatype: Optional[str] = None          # sh:datatype at NodeShape level
+    inValues: Optional[list] = None         # sh:in at NodeShape level
 
     def to_dict(self) -> dict:
         d: dict = {"name": self.name}
@@ -84,6 +92,15 @@ class CanonicalShape:
         d["closed"] = self.closed
         if self.datatypeOr is not None:
             d["datatypeOr"] = self.datatypeOr
+        if self.nodeKind is not None:
+            d["nodeKind"] = self.nodeKind
+        if self.datatype is not None:
+            d["datatype"] = self.datatype
+        if self.inValues is not None:
+            d["inValues"] = sorted(
+                self.inValues,
+                key=lambda v: v if isinstance(v, str) else str(v),
+            )
         d["properties"] = sorted(
             [p.to_dict() for p in self.properties],
             key=lambda p: (p["path"], str(sorted(p.items()))),

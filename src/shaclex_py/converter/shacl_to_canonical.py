@@ -93,6 +93,10 @@ def _convert_property(ps: PropertyShape) -> Optional[CanonicalProperty]:
     if ps.pattern is not None and prop.pattern is None and prop.iriStem is None:
         prop.pattern = ps.pattern
 
+    # sh:alternativePath: store full list of alternative paths
+    if ps.alternative_paths:
+        prop.pathAlternatives = [p.value for p in ps.alternative_paths]
+
     return prop
 
 
@@ -131,12 +135,22 @@ def convert_shacl_to_canonical(shacl: SHACLSchema) -> CanonicalSchema:
             if node_shape.or_datatypes else None
         )
 
+        shape_node_kind = node_shape.node_kind.value if node_shape.node_kind else None
+        shape_datatype = node_shape.node_datatype.value if node_shape.node_datatype else None
+        shape_in_values = (
+            [_value_to_canonical(v) for v in node_shape.node_in_values]
+            if node_shape.node_in_values else None
+        )
+
         canonical_shapes.append(CanonicalShape(
             name=shape_name,
             targetClass=target_class,
             closed=node_shape.closed,
             properties=properties,
             datatypeOr=datatype_or,
+            nodeKind=shape_node_kind,
+            datatype=shape_datatype,
+            inValues=shape_in_values,
         ))
 
     return CanonicalSchema(shapes=canonical_shapes)

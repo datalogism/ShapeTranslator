@@ -67,13 +67,23 @@ def _parse_or_classes(g: Graph, prop_node: BNode) -> Optional[list[IRI]]:
 
 def _parse_property_shape(g: Graph, prop_node) -> PropertyShape:
     """Parse a single property shape blank node."""
-    # sh:path
+    # sh:path — may be a plain IRI or a blank node with sh:alternativePath
     path_node = g.value(prop_node, SH.path)
-    path_iri = _uri_to_iri(path_node) if isinstance(path_node, URIRef) else IRI(str(path_node))
+    alternative_paths = None
+    if isinstance(path_node, BNode):
+        alt_head = g.value(path_node, SH.alternativePath)
+        if alt_head is not None:
+            alt_items = _parse_rdf_list(g, alt_head)
+            alternative_paths = [_uri_to_iri(i) for i in alt_items if isinstance(i, URIRef)]
+            path_iri = alternative_paths[0] if alternative_paths else IRI(str(path_node))
+        else:
+            path_iri = IRI(str(path_node))
+    else:
+        path_iri = _uri_to_iri(path_node) if isinstance(path_node, URIRef) else IRI(str(path_node))
     path = Path(iri=path_iri)
 
-    # sh:datatype
-    dt = g.value(prop_node, SH.datatype)
+    # sh:datatype (also accept sh:dataType — non-standard capitalization used by shexer)
+    dt = g.value(prop_node, SH.datatype) or g.value(prop_node, SH["dataType"])
     datatype = _uri_to_iri(dt) if dt else None
 
     # sh:class — simple class or sh:or pattern
@@ -144,6 +154,7 @@ def _parse_property_shape(g: Graph, prop_node) -> PropertyShape:
         in_values=in_values,
         node=node,
         or_constraints=or_constraints,
+        alternative_paths=alternative_paths,
     )
 
 
@@ -223,6 +234,19 @@ def parse_shacl(source: str, format: str = "turtle") -> SHACLSchema:
                         ps = _parse_property_shape(g, prop_node)
                         properties.append(ps)
 
+        # Node-level constraints (reusable value shapes without sh:property)
+        shape_nk = g.value(shape_node, SH.nodeKind)
+        shape_node_kind = NODE_KIND_MAP.get(shape_nk) if shape_nk else None
+
+        shape_dt = g.value(shape_node, SH.datatype) or g.value(shape_node, SH["dataType"])
+        shape_node_datatype = _uri_to_iri(shape_dt) if shape_dt else None
+
+        shape_in_head = g.value(shape_node, SH["in"])
+        shape_node_in_values = None
+        if shape_in_head is not None:
+            shape_in_items = _parse_rdf_list(g, shape_in_head)
+            shape_node_in_values = [_rdf_to_value(g, item) for item in shape_in_items]
+
         shapes.append(NodeShape(
             iri=shape_iri,
             target_class=target_class,
@@ -230,6 +254,9 @@ def parse_shacl(source: str, format: str = "turtle") -> SHACLSchema:
             closed=closed,
             ignored_properties=ignored_properties,
             or_datatypes=or_datatypes,
+            node_kind=shape_node_kind,
+            node_datatype=shape_node_datatype,
+            node_in_values=shape_node_in_values,
         ))
 
     return SHACLSchema(shapes=shapes, prefixes=prefixes)

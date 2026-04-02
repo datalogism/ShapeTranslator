@@ -67,6 +67,9 @@ def parse_canonical(source: str) -> CanonicalSchema:
             closed=shape_d.get("closed", False),
             properties=properties,
             datatypeOr=shape_d.get("datatypeOr"),
+            nodeKind=shape_d.get("nodeKind"),
+            datatype=shape_d.get("datatype"),
+            inValues=shape_d.get("inValues"),
         ))
 
     return CanonicalSchema(shapes=shapes)

@@ -139,7 +139,8 @@ def _serialize_triple_constraint(tc: TripleConstraint, pm: PrefixMap) -> str:
 # ── Expression serialisation (no label_map — plain mode) ────────────────────
 
 def _serialize_expression(
-    expr: Union[EachOf, OneOf, TripleConstraint, None], pm: PrefixMap
+    expr: Union[EachOf, OneOf, TripleConstraint, None], pm: PrefixMap,
+    _inside_each_of: bool = False,
 ) -> str:
     """Serialize a triple expression (plain, no comments)."""
     if expr is None:
@@ -147,13 +148,18 @@ def _serialize_expression(
     if isinstance(expr, TripleConstraint):
         return _serialize_triple_constraint(expr, pm)
     if isinstance(expr, EachOf):
-        return " ;\n".join(
-            _serialize_expression(sub, pm) for sub in expr.expressions
-        )
+        parts = []
+        for sub in expr.expressions:
+            s = _serialize_expression(sub, pm, _inside_each_of=True)
+            parts.append(s)
+        return " ;\n".join(parts)
     if isinstance(expr, OneOf):
-        return " |\n".join(
+        inner = " |\n".join(
             _serialize_expression(sub, pm) for sub in expr.expressions
         )
+        if _inside_each_of:
+            return f"(\n{inner}\n)"
+        return inner
     return ""
 
 
@@ -347,11 +353,28 @@ def serialize_shex(
 
     # Shape definitions
     for shape in schema.shapes:
-        # NodeConstraintShape: OR-of-datatypes, serialized as `<Name> D1 OR D2 OR ...`
+        # NodeConstraintShape: various forms
         if isinstance(shape, NodeConstraintShape):
-            if shape.datatypes:
+            if shape.values is not None:
+                # Value set: <Name> [ v1 v2 ... ]
+                items = " ".join(_serialize_value_set_value(v, pm) for v in shape.values)
+                lines.append(f"<{shape.name.value}> [ {items} ]")
+            elif shape.datatypes:
+                # OR-of-datatypes: <Name> D1 OR D2 OR ...
                 parts = " OR ".join(pm.compact_iri(dt) for dt in shape.datatypes)
                 lines.append(f"<{shape.name.value}> {parts}")
+            elif shape.datatype is not None:
+                # Single datatype (nodeKind is implicit/redundant): <Name> xsd:string
+                lines.append(f"<{shape.name.value}> {pm.compact_iri(shape.datatype)}")
+            elif shape.node_kind is not None:
+                # nodeKind only: <Name> LITERAL / IRI / BNODE / NONLITERAL
+                kind_map = {
+                    NodeKind.IRI: "IRI",
+                    NodeKind.LITERAL: "LITERAL",
+                    NodeKind.BLANK_NODE: "BNODE",
+                    NodeKind.BLANK_NODE_OR_IRI: "NONLITERAL",
+                }
+                lines.append(f"<{shape.name.value}> {kind_map.get(shape.node_kind, '.')}")
             else:
                 lines.append(f"<{shape.name.value}> .")
             lines.append("")

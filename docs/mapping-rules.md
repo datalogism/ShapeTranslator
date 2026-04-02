@@ -261,6 +261,108 @@ The `/regex/` pattern facet in ShExC combines the datatype and the regex in a si
 
 ---
 
+## Non-standard `sh:dataType` (capital T) — shexer compatibility
+
+Shexer-generated files use `sh:dataType` (capital T), which is not standard SHACL but occurs in real-world datasets.  The parser accepts both spellings and normalises them to the same canonical `datatype` field.
+
+**SHACL (shexer form — accepted)**
+```turtle
+sh:property [
+    sh:path dbo:populationTotal ;
+    sh:dataType xsd:integer ;
+] ;
+```
+
+**Canonical JSON** (identical to standard `sh:datatype`)
+```json
+{ "path": "http://dbpedia.org/ontology/populationTotal", "datatype": "http://www.w3.org/2001/XMLSchema#integer", "cardinality": {"min": 0, "max": -1} }
+```
+
+---
+
+## Reusable value shapes — node-level constraints
+
+A `sh:NodeShape` may carry constraints **directly** (without `sh:property`) to act as a reusable value shape referenced elsewhere via `sh:node`.  Three patterns are supported:
+
+### Node-level datatype + nodeKind (`LangStringShape` pattern)
+
+**SHACL**
+```turtle
+shapes:LangStringShape a sh:NodeShape ;
+    sh:nodeKind sh:Literal ;
+    sh:datatype rdf:langString .
+
+sh:property [ sh:path dbo:abstract ; sh:node shapes:LangStringShape ; sh:minCount 1 ] ;
+```
+
+**Canonical JSON**
+```json
+{
+  "name": "LangString",
+  "nodeKind": "Literal",
+  "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+  "closed": false,
+  "properties": []
+}
+```
+
+**ShEx**
+```shex
+<LangString> rdf:langString
+```
+
+**ShExJE**
+```json
+{ "type": "NodeConstraint", "id": "LangString", "nodeKind": "Literal", "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString" }
+```
+
+The `nodeKind` is preserved in canonical and ShExJE. In ShExC only the datatype is serialized (the `Literal` nodeKind is implicit for any datatype constraint).
+
+### Node-level value set (`TimeZoneShape` pattern)
+
+**SHACL**
+```turtle
+shapes:TimeZoneShape a sh:NodeShape ;
+    sh:in ( dbr:Eastern_Time_Zone dbr:Indian_Standard_Time dbr:Central_Time_Zone ) .
+
+sh:property [ sh:path dbo:timeZone ; sh:node shapes:TimeZoneShape ] ;
+```
+
+**Canonical JSON**
+```json
+{
+  "name": "TimeZone",
+  "inValues": ["http://dbpedia.org/resource/Central_Time_Zone", "http://dbpedia.org/resource/Eastern_Time_Zone", "http://dbpedia.org/resource/Indian_Standard_Time"],
+  "closed": false,
+  "properties": []
+}
+```
+
+**ShEx**
+```shex
+<TimeZone> [ dbr:Eastern_Time_Zone dbr:Indian_Standard_Time dbr:Central_Time_Zone ]
+```
+
+**ShExJE**
+```json
+{ "type": "NodeConstraint", "id": "TimeZone", "values": ["http://dbpedia.org/resource/Eastern_Time_Zone", ...] }
+```
+
+### Node-level nodeKind only
+
+**SHACL**
+```turtle
+shapes:IRIShape a sh:NodeShape ;
+    sh:nodeKind sh:IRI .
+```
+
+**ShEx**
+```shex
+<IRIShape> IRI
+```
+
+---
+
 ## Named shape reference (`sh:node`)
 
 `sh:node` links a property to a separately declared NodeShape.
@@ -385,6 +487,46 @@ The translator flattens all alternatives into the parent shape's property list (
 
 ---
 
+## Alternative path (`sh:alternativePath`)
+
+`sh:alternativePath` expresses that any one of multiple predicates may satisfy the property constraint.
+
+**SHACL**
+```turtle
+sh:property [
+    sh:path [ sh:alternativePath ( dbo:foundingDate dbo:formationDate dbo:openingDate ) ] ;
+    sh:datatype xsd:date ;
+    sh:minCount 1 ;
+] ;
+```
+
+**Canonical JSON**
+```json
+{
+  "path": "http://dbpedia.org/ontology/foundingDate",
+  "pathAlternatives": [
+    "http://dbpedia.org/ontology/foundingDate",
+    "http://dbpedia.org/ontology/formationDate",
+    "http://dbpedia.org/ontology/openingDate"
+  ],
+  "datatype": "http://www.w3.org/2001/XMLSchema#date",
+  "cardinality": {"min": 1, "max": -1}
+}
+```
+
+**ShEx**
+```shex
+(
+  dbo:foundingDate xsd:date {1,} |
+  dbo:formationDate xsd:date {1,} |
+  dbo:openingDate xsd:date {1,}
+)
+```
+
+The canonical JSON stores the primary path (first alternative) in `path` for sorting and display; `pathAlternatives` holds the complete ordered list. In ShEx the constraint becomes a `OneOf` expression (using `|`) with one `TripleConstraint` per alternative path, wrapped in parentheses when embedded inside a larger `EachOf`. This is a slight over-approximation: ShEx `|` requires at least one branch to match, while SHACL `sh:alternativePath` means the constraint applies to whichever path(s) have triples. See [Translation Coverage — approximated translations](translation-coverage.md#approximated-translations) for the full analysis.
+
+---
+
 ## Semantic differences summary
 
 | Difference | Details |
@@ -395,3 +537,4 @@ The translator flattens all alternatives into the parent shape's property list (
 | `sh:pattern` (standalone arbitrary regex) | Preserved as `pattern` in canonical JSON; emitted as `. /regex/` pattern facet in ShExC. |
 | `sh:datatype` + `sh:pattern` combined | Both fields carried through canonical JSON; emitted as `dtype /regex/` pattern facet in ShExC. |
 | `sh:or` property alternatives | Flattened to union; disjunction grouping is lost. |
+| `sh:alternativePath` | Translated to ShEx `OneOf` (`\|`); semantics slightly differ (ShEx requires at least one branch to match; SHACL applies constraint to any present path). |

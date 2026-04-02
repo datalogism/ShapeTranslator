@@ -43,7 +43,17 @@ def _add_property_shape(g: Graph, shape_node: URIRef, ps: PropertyShape):
     """Add a property shape as a blank node to the graph."""
     prop = BNode()
     g.add((shape_node, SH.property, prop))
-    g.add((prop, SH.path, _iri_to_uri(ps.path.iri)))
+
+    if ps.alternative_paths:
+        # sh:path [ sh:alternativePath ( path1 path2 ... ) ]
+        alt_items = [_iri_to_uri(p) for p in ps.alternative_paths]
+        alt_list = BNode()
+        Collection(g, alt_list, alt_items)
+        path_bn = BNode()
+        g.add((path_bn, SH.alternativePath, alt_list))
+        g.add((prop, SH.path, path_bn))
+    else:
+        g.add((prop, SH.path, _iri_to_uri(ps.path.iri)))
 
     if ps.datatype:
         g.add((prop, SH.datatype, _iri_to_uri(ps.datatype)))
@@ -140,6 +150,19 @@ def serialize_shacl(schema: SHACLSchema) -> str:
             or_list = BNode()
             Collection(g, or_list, or_items)
             g.add((shape_uri, SH["or"], or_list))
+
+        # Node-level constraints (reusable value shapes)
+        if shape.node_kind is not None:
+            g.add((shape_uri, SH.nodeKind, NODE_KIND_MAP[shape.node_kind]))
+
+        if shape.node_datatype is not None:
+            g.add((shape_uri, SH.datatype, _iri_to_uri(shape.node_datatype)))
+
+        if shape.node_in_values is not None:
+            items = [_value_to_rdf(v) for v in shape.node_in_values]
+            collection = BNode()
+            Collection(g, collection, items)
+            g.add((shape_uri, SH["in"], collection))
 
         for ps in shape.properties:
             _add_property_shape(g, shape_uri, ps)

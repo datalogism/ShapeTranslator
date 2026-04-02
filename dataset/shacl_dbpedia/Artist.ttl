@@ -5,171 +5,102 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dbo: <http://dbpedia.org/ontology/> .
 @prefix dbt: <http://dbpedia.org/datatype/> .
-@prefix dbr: <http://dbpedia.org/resource/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
-@prefix umbel: <http://umbel.org/umbel/rc/> .
 @prefix shapes: <http://shaclshapes.org/> .
 
 
 <http://shaclshapes.org/ArtistShape> a sh:NodeShape ;
     sh:targetClass dbo:Artist ;
 
-    # === DBpedia Common Properties ===
+    # ═══════════════════════════════════════════════════════════════════════════
+    # IDENTITY & NAMING
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
-        sh:path dbo:abstract ;
+        sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:thumbnail ;
-        sh:class dbo:Image ;
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:wikiPageExternalLink ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageID ;
-        sh:datatype xsd:integer ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageLength ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageRevisionID ;
-        sh:datatype xsd:integer ;
+        sh:path foaf:givenName ;
+        sh:datatype xsd:string ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:wikiPageWikiLink ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:path foaf:nick ;
+        sh:datatype xsd:string ;
     ] ;
 
     sh:property [
-        sh:path dct:subject ;
-        sh:class skos:Concept ;
+        sh:path dbo:birthName ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path rdf:type ;
+        sh:path dbo:originalName ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:alias ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:pseudonym ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # DESCRIPTION & ABSTRACT
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:abstract ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
         sh:path rdfs:comment ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path rdfs:label ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path rdfs:seeAlso ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path prov:wasDerivedFrom ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:depiction ;
-        sh:class dbo:Image ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:isPrimaryTopicOf ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    # === Career & achievements ===
-    sh:property [
-        sh:path dbo:award ;
-        sh:class dbo:Award ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:nationality ;
-        sh:class dbo:Country ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:genre ;
-        sh:class dbo:Genre ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:instrument ;
-        sh:class dbo:Instrument ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:notableWork ;
-        sh:class dbo:Work ;
     ] ;
 
     sh:property [
         sh:path dbo:background ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
-    sh:property [
-        sh:path dbo:field ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # DATES & TIMELINE
+    # ═══════════════════════════════════════════════════════════════════════════
 
-    sh:property [
-        sh:path dbo:movement ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:academicDiscipline ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:education ;
-    ] ;
-
-    # === Cast, crew & creators ===
-    sh:property [
-        sh:path dbo:associatedMusicalArtist ;
-        sh:class dbo:MusicalArtist ;
-    ] ;
-
-    # === Dates & timeline ===
     sh:property [
         sh:path dbo:birthDate ;
         sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -177,70 +108,46 @@
     sh:property [
         sh:path dbo:deathDate ;
         sh:datatype xsd:date ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:activeYearsStartYear ;
-        sh:datatype xsd:gYear ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:activeYearsEndYear ;
-        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:birthYear ;
         sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:deathYear ;
         sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
-    # === Identity & naming ===
     sh:property [
-        sh:path dbo:alias ;
-        sh:datatype rdf:langString ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:birthName ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:pseudonym ;
-        sh:datatype rdf:langString ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:originalName ;
-        sh:datatype rdf:langString ;
-    ] ;
-
-    sh:property [
-        sh:path <http://purl.org/linguistics/gold/hypernym> ;
+        sh:path dbo:activeYearsStartYear ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
-    # === Location & geography ===
     sh:property [
-        sh:path dbo:stateOfOrigin ;
-        sh:class dbo:Country ;
+        sh:path dbo:activeYearsEndYear ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # LOCATION & GEOGRAPHY
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
         sh:path dbo:birthPlace ;
         sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -248,120 +155,367 @@
     sh:property [
         sh:path dbo:deathPlace ;
         sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:restingPlace ;
         sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:residence ;
         sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path dbo:hometown ;
         sh:class dbo:Settlement ;
+        sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
 
-    # === Media & publications ===
     sh:property [
-        sh:path dbo:soundRecording ;
-        sh:class dbo:Sound ;
-    ] ;
-
-    # === Organization & affiliation ===
-    sh:property [
-        sh:path dbo:associatedBand ;
-        sh:class dbo:Band ;
+        sh:path dbo:stateOfOrigin ;
+        sh:class dbo:Country ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:institution ;
-        sh:class dbo:Organisation ;
+        sh:path dbo:nationality ;
+        sh:class dbo:Country ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:recordLabel ;
-        sh:class dbo:RecordLabel ;
+        sh:path dbo:citizenship ;
+        sh:class dbo:Country ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
-    # === People & family ===
-    sh:property [
-        sh:path dbo:spouse ;
-        sh:class dbo:Person ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PROFESSION & ARTISTIC DOMAIN
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
-        sh:path dbo:child ;
-        sh:class dbo:Person ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:relative ;
-        sh:class dbo:Person ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:partner ;
-        sh:class dbo:Person ;
+        sh:path dbo:occupation ;
+        sh:minCount 1 ;
+        sh:or (
+            [ sh:class dbo:PersonFunction ]
+            [ sh:class dbo:Profession ]
+        ) ;
     ] ;
 
     sh:property [
-        sh:path dbo:parent ;
-        sh:class dbo:Person ;
-        sh:maxCount 2 ;
+        sh:path dbo:genre ;
+        sh:class dbo:Genre ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:instrument ;
+        sh:class dbo:Instrument ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:field ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:movement ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:academicDiscipline ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # EDUCATION & TRAINING
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:education ;
+        sh:class dbo:EducationalInstitution ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:almaMater ;
+        sh:or (
+            [ sh:class dbo:EducationalInstitution ]
+            [ sh:class dbo:University ]
+        ) ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:training ;
+        sh:or (
+            [ sh:class dbo:EducationalInstitution ]
+            [ sh:class dbo:Organisation ]
+            [ sh:class dbo:University ]
+        ) ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path dbo:doctoralAdvisor ;
         sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
-    # === References & links ===
+    # ═══════════════════════════════════════════════════════════════════════════
+    # CAREER, ACHIEVEMENTS & NOTABLE WORKS
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
-        sh:path dbo:imdbId ;
-        sh:datatype xsd:string ;
-        sh:maxCount 1 ;
+        sh:path dbo:notableWork ;
+        sh:class dbo:Work ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
-    # === Physical dimensions & specs (alternatives) ===
+    sh:property [
+        sh:path dbo:knownFor ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:award ;
+        sh:class dbo:Award ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # INFLUENCES & ARTISTIC RELATIONSHIPS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:influencedBy ;
+        sh:nodeKind sh:IRI ;
+        sh:or (
+            [ sh:class dbo:Agent ]
+            [ sh:class dbo:Work ]
+        ) ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:influenced ;
+        sh:nodeKind sh:IRI ;
+        sh:or (
+            [ sh:class dbo:Agent ]
+            [ sh:class dbo:Work ]
+        ) ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:associatedMusicalArtist ;
+        sh:class dbo:MusicalArtist ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:associatedBand ;
+        sh:class dbo:Band ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # ORGANIZATION & AFFILIATION
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:institution ;
+        sh:class dbo:Organisation ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:recordLabel ;
+        sh:class dbo:RecordLabel ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PEOPLE & FAMILY
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:parent ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 2 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:child ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:spouse ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:partner ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:relative ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHYSICAL CHARACTERISTICS
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:or (
         [
             sh:property [
                 sh:path <http://dbpedia.org/ontology/Person/height> ;
                 sh:datatype dbt:centimetre ;
+                sh:nodeKind sh:Literal ;
                 sh:maxCount 1 ;
             ]
         ]
         [
             sh:property [
                 sh:path dbo:height ;
-                sh:datatype dbt:centimetre ;
+                sh:datatype xsd:double ;
+                sh:nodeKind sh:Literal ;
                 sh:maxCount 1 ;
             ]
         ]
     ) ;
 
-    sh:or (
-        [
-            sh:property [
-                sh:path dbo:height ;
-                sh:datatype xsd:double ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/Person/height> ;
-                sh:datatype xsd:double ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) .
+    # ═══════════════════════════════════════════════════════════════════════════
+    # MEDIA & RECORDINGS
+    # ═══════════════════════════════════════════════════════════════════════════
 
+    sh:property [
+        sh:path dbo:thumbnail ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:depiction ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:soundRecording ;
+        sh:class dbo:Sound ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # EXTERNAL REFERENCES & LINKS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path foaf:homepage ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:imdbId ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path <http://schema.org/sameAs> ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:seeAlso ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dct:subject ;
+        sh:class skos:Concept ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:isPrimaryTopicOf ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # WIKIPEDIA & DBPEDIA METADATA
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:wikiPageID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageLength ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageExternalLink ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageWikiLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:nodeKind sh:Literal ;
+    ] .

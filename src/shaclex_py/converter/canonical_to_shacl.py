@@ -55,7 +55,12 @@ def _canonical_value_to_model(val: Union[str, dict]) -> Union[IRI, Literal]:
 
 def _convert_property(prop: CanonicalProperty) -> PropertyShape:
     """Convert a CanonicalProperty to a SHACL PropertyShape."""
-    path = Path(iri=IRI(prop.path))
+    alternative_paths = None
+    if prop.pathAlternatives is not None:
+        alternative_paths = [IRI(p) for p in prop.pathAlternatives]
+        path = Path(iri=alternative_paths[0])
+    else:
+        path = Path(iri=IRI(prop.path))
 
     # Cardinality → min/maxCount
     mn = prop.cardinality.min if prop.cardinality.min > 0 else None
@@ -103,6 +108,7 @@ def _convert_property(prop: CanonicalProperty) -> PropertyShape:
         in_values=in_values,
         node=node,
         or_constraints=or_constraints,
+        alternative_paths=alternative_paths,
     )
 
 
@@ -132,12 +138,22 @@ def convert_canonical_to_shacl(canonical: CanonicalSchema) -> SHACLSchema:
             if cshape.datatypeOr else None
         )
 
+        shape_node_kind = NODE_KIND_MAP.get(cshape.nodeKind) if cshape.nodeKind else None
+        shape_node_datatype = IRI(cshape.datatype) if cshape.datatype else None
+        shape_node_in_values = (
+            [_canonical_value_to_model(v) for v in cshape.inValues]
+            if cshape.inValues else None
+        )
+
         shapes.append(NodeShape(
             iri=shape_iri,
             target_class=target_class,
             properties=properties,
             closed=cshape.closed,
             or_datatypes=or_datatypes,
+            node_kind=shape_node_kind,
+            node_datatype=shape_node_datatype,
+            node_in_values=shape_node_in_values,
         ))
 
     return SHACLSchema(shapes=shapes, prefixes=list(STANDARD_SHACL_PREFIXES))

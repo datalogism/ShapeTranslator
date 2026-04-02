@@ -12,160 +12,245 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
-@prefix umbel: <http://umbel.org/umbel/rc/> .
 @prefix shapes: <http://shaclshapes.org/> .
 
 
 <http://shaclshapes.org/CityShape> a sh:NodeShape ;
     sh:targetClass dbo:City ;
 
-    # === DBpedia Common Properties ===
+    # ═══════════════════════════════════════════════════════════════════════════
+    # IDENTITY & NAMING
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
-        sh:path dbo:abstract ;
+        sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:thumbnail ;
-        sh:class dbo:Image ;
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:wikiPageExternalLink ;
-        sh:datatype xsd:anyURI ;
+        sh:path foaf:nick ;
+        sh:datatype xsd:string ;
     ] ;
 
     sh:property [
-        sh:path dbo:wikiPageID ;
-        sh:datatype xsd:integer ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
+        sh:path dbo:originalName ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
     ] ;
 
     sh:property [
-        sh:path dbo:wikiPageInterLanguageLink ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:path dbo:demonym ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
     ] ;
 
     sh:property [
-        sh:path dbo:wikiPageLength ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
+        sh:path dbo:motto ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
-        sh:path dbo:wikiPageRedirects ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:path dbo:synonym ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
-    sh:property [
-        sh:path dbo:wikiPageRevisionID ;
-        sh:datatype xsd:integer ;
-        sh:minCount 1 ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # DESCRIPTION & ABSTRACT
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
-        sh:path dbo:wikiPageWikiLink ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
-    ] ;
-
-    sh:property [
-        sh:path dct:subject ;
-        sh:class skos:Concept ;
-    ] ;
-
-    sh:property [
-        sh:path rdf:type ;
+        sh:path dbo:abstract ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
         sh:path rdfs:comment ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
-    sh:property [
-        sh:path rdfs:label ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # DATES & TIMELINE
+    # ═══════════════════════════════════════════════════════════════════════════
 
-    sh:property [
-        sh:path rdfs:seeAlso ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path owl:differentFrom ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path prov:wasDerivedFrom ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:depiction ;
-        sh:class dbo:Image ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:isPrimaryTopicOf ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    # === Career & achievements ===
-    sh:property [
-        sh:path dbo:saint ;
-        sh:class dbo:Saint ;
-    ] ;
-
-    # === Dates & timeline ===
     sh:property [
         sh:path dbo:foundingDate ;
         sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
 
-    # === Economics & statistics ===
     sh:property [
-        sh:path dbo:populationMetro ;
-        sh:datatype xsd:nonNegativeInteger ;
+        sh:path dbo:founder ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # LOCATION & GEOGRAPHY
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:country ;
+        sh:class dbo:Country ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
+
+    sh:property [
+        sh:path dbo:location ;
+        sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:district ;
+        sh:class dbo:PopulatedPlace ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:federalState ;
+        sh:class dbo:PopulatedPlace ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:subdivision ;
+        sh:class dbo:AdministrativeRegion ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:isoCodeRegion ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:postalCode ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:areaCode ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:licenceNumber ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # GEOSPATIAL COORDINATES
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path geo:lat ;
+        sh:datatype xsd:float ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path geo:long ;
+        sh:datatype xsd:float ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path geo:geometry ;
+        sh:datatype geosparql:wktLiteral ;
+        sh:minCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # TIME ZONE
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:timeZone ;
+        sh:node shapes:TimeZoneShape ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:utcOffset ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # ELEVATION & TOPOGRAPHY
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:elevation ;
+        sh:datatype xsd:double ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:minimumElevation ;
+        sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:maximumElevation ;
+        sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # AREA MEASUREMENTS
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
         sh:path dbo:areaTotal ;
-        sh:datatype xsd:double ;
+        sh:or (
+            [ sh:datatype xsd:double ]
+            [ sh:datatype dbt:squareKilometre ]
+        ) ;
         sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:populationTotal ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:areaLand ;
         sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
     ] ;
 
@@ -175,292 +260,33 @@
     ] ;
 
     sh:property [
-        sh:path dbo:populationUrban ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:minCount 1 ;
+        sh:path dbo:percentageOfAreaWater ;
+        sh:datatype xsd:float ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:populationTotalRanking ;
-        sh:datatype xsd:positiveInteger ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:populationAsOf ;
-        sh:datatype xsd:date ;
     ] ;
 
     sh:property [
         sh:path <http://dbpedia.org/ontology/PopulatedPlace/areaMetro> ;
         sh:datatype dbt:squareKilometre ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:areaMetro ;
         sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
-    sh:property [
-        sh:path dbo:area ;
-        sh:datatype xsd:double ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path <http://dbpedia.org/ontology/PopulatedPlace/area> ;
-        sh:datatype dbt:squareKilometre ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Identity & naming ===
-    sh:property [
-        sh:path dbo:demonym ;
-        sh:datatype rdf:langString ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:originalName ;
-        sh:datatype rdf:langString ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:motto ;
-        sh:datatype xsd:string ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:synonym ;
-        sh:datatype xsd:string ;
-    ] ;
-
-    sh:property [
-        sh:path <http://purl.org/linguistics/gold/hypernym> ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Location & geography ===
-    sh:property [
-        sh:path dbo:utcOffset ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:postalCode ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:areaCode ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:location ;
-        sh:class dbo:Place ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:district ;
-        sh:class dbo:PopulatedPlace ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:federalState ;
-        sh:class dbo:PopulatedPlace ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Media & publications ===
-    sh:property [
-        sh:path dbo:wikiPageDisambiguates ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Physical dimensions & specs ===
-    sh:property [
-        sh:path dbo:populationDensity ;
-        sh:datatype xsd:double ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:elevation ;
-        sh:datatype xsd:double ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path <http://dbpedia.org/ontology/PopulatedPlace/populationDensity> ;
-        sh:datatype dbt:inhabitantsPerSquareKilometre ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:maximumElevation ;
-        sh:datatype xsd:double ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:populationMetroDensity ;
-        sh:datatype xsd:double ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Politics & governance ===
-    sh:property [
-        sh:path dbo:leaderTitle ;
-        sh:datatype rdf:langString ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:politicalLeader ;
-        sh:class dbo:PersonFunction ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:governingBody ;
-        sh:class dbo:Organisation ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:leaderName ;
-        sh:class dbo:Person ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:mayor ;
-        sh:class dbo:Mayor ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === References & links ===
-    sh:property [
-        sh:path skos:exactMatch ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:predecessor ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Sport & competitions ===
-    sh:property [
-        sh:path dbo:team ;
-        sh:class dbo:SportsTeam ;
-    ] ;
-
-    # === Economics & statistics (alternatives) ===
+    # --- Area Total (alternative representations) ---
     sh:or (
         [
             sh:property [
                 sh:path <http://dbpedia.org/ontology/PopulatedPlace/areaTotal> ;
                 sh:datatype dbt:squareKilometre ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:populationDensity ;
-                sh:datatype dbt:squareKilometre ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    sh:or (
-        [
-            sh:property [
-                sh:path dbo:percentageOfAreaWater ;
-                sh:datatype xsd:float ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:areaUrban ;
-                sh:datatype xsd:float ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    sh:or (
-        [
-            sh:property [
-                sh:path dbo:areaUrban ;
-                sh:datatype xsd:double ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:areaMetro ;
-                sh:datatype xsd:double ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    sh:or (
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/PopulatedPlace/areaUrban> ;
-                sh:datatype dbt:squareKilometre ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/PopulatedPlace/areaMetro> ;
-                sh:datatype dbt:squareKilometre ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    sh:or (
-        [
-            sh:property [
-                sh:path dbo:licenceNumber ;
-                sh:datatype xsd:string ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:populationMetroDensity ;
-                sh:datatype xsd:string ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    # === Location & geography (alternatives) ===
-    sh:or (
-        [
-            sh:property [
-                sh:path dbo:country ;
-                sh:class dbo:Country ;
+                sh:nodeKind sh:Literal ;
                 sh:minCount 1 ;
                 sh:maxCount 1 ;
             ]
@@ -468,132 +294,658 @@
         [
             sh:property [
                 sh:path dbo:areaTotal ;
-                sh:class dbo:Country ;
+                sh:datatype xsd:double ;
+                sh:nodeKind sh:Literal ;
                 sh:minCount 1 ;
                 sh:maxCount 1 ;
             ]
         ]
     ) ;
 
+    # --- Area Urban (alternative representations) ---
     sh:or (
-        [
-            sh:property [
-                sh:path dbo:isoCodeRegion ;
-                sh:datatype xsd:string ;
-                sh:maxCount 1 ;
-            ]
-        ]
         [
             sh:property [
                 sh:path <http://dbpedia.org/ontology/PopulatedPlace/areaUrban> ;
-                sh:datatype xsd:string ;
+                sh:datatype dbt:squareKilometre ;
+                sh:nodeKind sh:Literal ;
+                sh:maxCount 1 ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path dbo:areaUrban ;
+                sh:datatype xsd:double ;
+                sh:nodeKind sh:Literal ;
                 sh:maxCount 1 ;
             ]
         ]
     ) ;
 
-    # === People & family (alternatives) ===
+    # --- Area Metro (alternative representations) ---
     sh:or (
         [
             sh:property [
-                sh:path dbo:founder ;
-                sh:class dbo:Person ;
+                sh:path <http://dbpedia.org/ontology/PopulatedPlace/areaMetro> ;
+                sh:datatype dbt:squareKilometre ;
+                sh:nodeKind sh:Literal ;
                 sh:maxCount 1 ;
             ]
         ]
+        [
+            sh:property [
+                sh:path dbo:areaMetro ;
+                sh:datatype xsd:double ;
+                sh:nodeKind sh:Literal ;
+                sh:maxCount 1 ;
+            ]
+        ]
+    ) ;
+
+    # --- Area (alternative representations) ---
+    sh:or (
         [
             sh:property [
                 sh:path dbo:area ;
-                sh:class dbo:Person ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    # === Physical dimensions & specs (alternatives) ===
-    sh:or (
-        [
-            sh:property [
-                sh:path dbo:minimumElevation ;
                 sh:datatype xsd:double ;
+                sh:nodeKind sh:Literal ;
                 sh:maxCount 1 ;
             ]
         ]
         [
             sh:property [
                 sh:path <http://dbpedia.org/ontology/PopulatedPlace/area> ;
-                sh:datatype xsd:double ;
+                sh:datatype dbt:squareKilometre ;
+                sh:nodeKind sh:Literal ;
                 sh:maxCount 1 ;
             ]
         ]
     ) ;
 
+    # ═══════════════════════════════════════════════════════════════════════════
+    # POPULATION STATISTICS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:populationTotal ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:populationUrban ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:populationMetro ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:populationAsOf ;
+        sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    # --- Population Density (alternative representations) ---
+    sh:or (
+        [
+            sh:property [
+                sh:path dbo:populationDensity ;
+                sh:datatype xsd:double ;
+                sh:nodeKind sh:Literal ;
+                sh:minCount 1 ;
+            ]
+        ]
+        [
+            sh:property [
+                sh:path <http://dbpedia.org/ontology/PopulatedPlace/populationDensity> ;
+                sh:datatype dbt:inhabitantsPerSquareKilometre ;
+                sh:nodeKind sh:Literal ;
+                sh:minCount 1 ;
+            ]
+        ]
+    ) ;
+
+    # --- Population Metro Density (alternative representations) ---
     sh:or (
         [
             sh:property [
                 sh:path <http://dbpedia.org/ontology/PopulatedPlace/populationMetroDensity> ;
                 sh:datatype dbt:inhabitantsPerSquareKilometre ;
+                sh:nodeKind sh:Literal ;
                 sh:maxCount 1 ;
             ]
         ]
         [
             sh:property [
-                sh:path <http://dbpedia.org/ontology/PopulatedPlace/populationMetroDensity> ;
-                sh:datatype dbt:inhabitantsPerSquareKilometre ;
+                sh:path dbo:populationMetroDensity ;
+                sh:datatype xsd:double ;
+                sh:nodeKind sh:Literal ;
                 sh:maxCount 1 ;
             ]
         ]
     ) ;
 
+    # --- Population Urban Density (alternative representations) ---
     sh:or (
         [
             sh:property [
                 sh:path dbo:populationUrbanDensity ;
                 sh:datatype xsd:double ;
+                sh:nodeKind sh:Literal ;
                 sh:maxCount 1 ;
             ]
         ]
         [
             sh:property [
                 sh:path <http://dbpedia.org/ontology/PopulatedPlace/populationUrbanDensity> ;
-                sh:datatype xsd:double ;
+                sh:datatype dbt:inhabitantsPerSquareKilometre ;
+                sh:nodeKind sh:Literal ;
                 sh:maxCount 1 ;
             ]
         ]
     ) ;
 
-    sh:or (
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/PopulatedPlace/populationUrbanDensity> ;
-                sh:datatype dbt:inhabitantsPerSquareKilometre ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:populationUrbanDensity ;
-                sh:datatype dbt:inhabitantsPerSquareKilometre ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # POLITICS & GOVERNANCE
+    # ═══════════════════════════════════════════════════════════════════════════
 
-    # === Politics & governance (alternatives) ===
-    sh:or (
-        [
-            sh:property [
-                sh:path dbo:governmentType ;
-                sh:class dbo:GovernmentType ;
-                sh:minCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/PopulatedPlace/areaTotal> ;
-                sh:class dbo:GovernmentType ;
-                sh:minCount 1 ;
-            ]
-        ]
+    sh:property [
+        sh:path dbo:governmentType ;
+        sh:class dbo:GovernmentType ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:governingBody ;
+        sh:class dbo:Legislature ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:mayor ;
+        sh:class dbo:Mayor ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:leaderName ;
+        sh:class dbo:Person ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:leaderTitle ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:leaderParty ;
+        sh:class dbo:PoliticalParty ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:politicalLeader ;
+        sh:class dbo:PoliticalFunction ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # CULTURAL & RELIGIOUS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:saint ;
+        sh:class dbo:Saint ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:namedAfter ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # SPORTS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:team ;
+        sh:class dbo:SportsTeam ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # MEDIA & IMAGES
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:thumbnail ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:depiction ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # EXTERNAL REFERENCES & LINKS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path foaf:homepage ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:isPrimaryTopicOf ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path owl:differentFrom ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:seeAlso ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dct:subject ;
+        sh:class skos:Concept ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path skos:exactMatch ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # WIKIPEDIA & DBPEDIA METADATA
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:wikiPageID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageLength ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageExternalLink ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageWikiLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageInterLanguageLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRedirects ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageDisambiguates ;
+        sh:maxCount 1 ;
+    ] .
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# REUSABLE VALUE SHAPES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+shapes:TimeZoneShape a sh:NodeShape ;
+    sh:in (
+        dbr:Eastern_Time_Zone
+        dbr:Indian_Standard_Time
+        dbr:East_Africa_Time
+        dbr:Iran_Standard_Time
+        dbr:Time_in_Madagascar
+        dbr:UTC%2B03:00
+        dbr:Central_Time_Zone
+        dbr:Pakistan_Standard_Time
+        dbr:Mountain_Time_Zone
+        dbr:Eastern_European_Summer_Time
+        dbr:Eastern_European_Time
+        dbr:Time_in_Malaysia
+        dbr:Sri_Lanka_Standard_Time
+        dbr:Central_European_Summer_Time
+        dbr:Central_European_Time
+        dbr:Central_Africa_Time
+        dbr:South_Africa_Standard_Time
+        dbr:Myanmar_Standard_Time
+        dbr:Time_in_the_Republic_of_Ireland
+        dbr:Western_European_Time
+        dbr:Bangladesh_Standard_Time
+        dbr:Bhutan_Time
+        dbr:Time_in_Thailand
+        dbr:UTC%2B10:00
+        dbr:UTC%2B11:00
+        dbr:Greenwich_Mean_Time
+        dbr:Coordinated_Universal_Time
+        dbr:West_Africa_Time
+        dbr:Pacific_Time_Zone
+        dbr:Time_in_Indonesia
+        dbr:Time_in_Pakistan
+        dbr:Azerbaijan_Time
+        dbr:Saudi_Arabia_Standard_Time
+        dbr:UTC%2B04:00
+        dbr:Western_European_Summer_Time
+        dbr:Nepal_Standard_Time
+        dbr:Moscow_Time
+        dbr:Eastern_Daylight_Time__%28North_America%29
+        dbr:Time_in_Afghanistan
+        dbr:Hawaii%E2%80%93Aleutian_Time_Zone
+        dbr:Time_in_Brazil
+        dbr:Time_in_Argentina
+        dbr:Time_in_Mexico
+        dbr:Atlantic_Time_Zone
+        dbr:Japan_Standard_Time
+        dbr:UTC%2B07:00
+        dbr:Time_in_Tajikistan
+        dbr:China_Standard_Time
+        dbr:List_of_time_zones_by_country
+        dbr:UTC%2B04:30
+        dbr:Georgia_Time
+        dbr:Time_in_Turkey
+        dbr:UTC%E2%88%9204:00
+        dbr:Alaska_Time_Zone
+        dbr:Alaska
+        dbr:Time_in_China
+        dbr:Philippine_Standard_Time
+        dbr:British_Summer_Time
+        dbr:UTC%E2%88%9202:00
+        dbr:UTC%E2%88%9203:00
+        dbr:UTC%E2%88%9205:00
+        dbr:UTC%2B06:00
+        dbr:Daylight_saving_time
+        dbr:Central_Alabama
+        dbr:Summer_time_in_Europe
+        dbr:Egypt_Standard_Time
+        dbr:Armenia_Time
+        dbr:Time_in_Chile
+        dbr:Daylight_saving_time_in_Brazil
+        dbr:Time_in_Colombia
+        dbr:Time_in_Venezuela
+        dbr:Time_in_Papua_New_Guinea
+        dbr:Time_in_Australia
+        dbr:Time_in_South_Korea
+        dbr:Lists_of_time_zones
+        dbr:Time_in_Taiwan
+        dbr:UTC%2B01:00
+        dbr:UTC%2B08:00
+        dbr:Time_in_Peru
+        dbr:Time_in_Antarctica
+        dbr:Time_in_the_Danish_Realm
+        dbr:Samoa_Time_Zone
+        dbr:Time_in_New_Zealand
+        dbr:Time_in_Paraguay
+        dbr:Time_in_Ecuador
+        dbr:UTC%2B09:00
+        dbr:UTC%E2%88%9206:00
+        dbr:Time_in_the_Falkland_Islands
+        dbr:Newfoundland_Time_Zone
+        dbr:UTC%2B00:00
+        dbr:Time_in_Uzbekistan
+        dbr:Macau_Standard_Time
+        dbr:Time_in_Cambodia
+        dbr:UTC%2B02:00
+        dbr:Time_in_Brunei
+        dbr:Omsk_Time
+        dbr:Time_zone
+        dbr:Seychelles_Time
+        dbr:Thailand
+        dbr:Hong_Kong_Time
+        dbr:Mauritius_Time
+        dbr:Beirut
+        dbr:Time_in_Laos
+        dbr:Chamorro_Time_Zone
+        dbr:UTC%E2%88%9207:00
+        dbr:UTC%2B12:00
+        dbr:UTC%2B06:30
+        dbr:Time_in_Kazakhstan
+        dbr:China
+        dbr:Yemen_Standard_Time
+        dbr:Iran_Standardm%C3%A4%C3%9Fig_Time
+        dbr:Africa
+        dbr:Kigali
+        dbr:Yekaterinburg_Time
+        dbr:Time_in_Chad
+        dbr:Krasnoyarsk_Time
+        dbr:Time_in_Malawi
+        dbr:Eastern_European_Standard_Time
+        dbr:Sri_Lanka_Standard_Time_Zone
+        dbr:UTC%2B05:00
+        dbr:Cambodia
+        dbr:CNorthern_Time_Zone
+        dbr:Time_in_France
+        dbr:UTC%2B05:30
+        dbr:Bolivia
+        dbr:Time_in_the_United_Arab_Emirates
+        dbr:Cape_Verde_Time
+        dbr:Chihuahua_City
+        dbr:Time_in_East_Timor
+        dbr:Time_in_Vietnam
+        dbr:Israel_Standard_Time
+        dbr:Israel_Summer_Time
+        dbr:Palestine_Summer_Time
+        dbr:Time_in_the_State_of_Palestine
+        dbr:Kyrgyzstan_Time
+        dbr:Time_in_Maldives
+        dbr:Time_in_Uruguay
+        dbr:Time_in_North_Korea
+        dbr:Persian_Gulf_Standard_Time
+        dbr:Time_in_Portugal
+        dbr:UTC%2B13:00
+        dbr:Singapore_Time
+        dbr:Time_in_Turkmenistan
+        dbr:Time_in_Vanuatu
+        dbr:Vietnam
+        dbr:Pacific_County%2C_Washington
+        dbr:Central_America
+        dbr:Pacific_Ocean
+        dbr:Douala
+        dbr:Time_in_Zimbabwe
+        dbr:Time_in_Honduras
+        dbr:Greenwhich_Mean_Time
+        dbr:Hindustan
+        dbr:Aest_Africa_Time
+        dbr:Taimoor_Ahmed_DarStandard_Time
+        dbr:Greenwich_Summer_Time
+        dbr:Time_in_Sri_Lanka
+        dbr:Sri_Lanka
+        dbr:Irkutsk_Time
+        dbr:Yakutsk_Time
+        dbr:UTC%E2%88%9208:00
+        dbr:Coordinated_Universal_Time_%28India%29
+        dbr:Time_in__Afghanistan
+        dbr:Pacific%2C_Washington
+        dbr:Turkish_Time
+        dbr:UTC%E2%88%9201:00
+        dbr:Time_in_Fiji
+        dbr:Time_in_Nauru
+        dbr:Central_Township%2C_Bond_County%2C_Illinois
+        dbr:Western_Time_Zone
+        dbr:Brasil_Time
+        dbr:Atlantic_Daylight_Time_Zone
+        dbr:Chatham_Standard_Time_Zone
+        dbr:UTC%2B14:00
+        dbr:Time_in_India
+        dbr:West_Africa_standard_Time
+        dbr:UTC_%2B3
+        dbr:Pokhara
+        dbr:Central%2C_Alabama
+        dbr:Eastern%2C_Kentucky
+        dbr:Central_Township%2C_Jefferson_County%2C_Missouri
+        dbr:Hawaii
+        dbr:Xinjiang_Time
+        dbr:Time_in_Spain
+        dbr:Central_Township%2C_Perry_County%2C_Missouri
+        dbr:Daylight_saving_time_in_Canada
+        dbr:Wake_Island_Time_Zone
+        dbr:De_facto
+        dbr:De_jure
+        dbr:Central_Oklahoma
+        dbr:GMT0
+        dbr:Further-eastern_European_Time
+        dbr:Central_Township%2C_Nelson_County%2C_North_Dakota
+        dbr:Casablanca_Time
+        dbr:Central%2C_Angelina_County%2C_Texas
+        dbr:Australia
+        dbr:Kiribati
+        dbr:Palau
+        dbr:UTC%E2%88%9209:00
+        dbr:UTC%E2%88%9209:30
+        dbr:UTC%E2%88%9210:00
+        dbr:Vanuatu
+        dbr:UTC%2B09:30
+        dbr:French_Polynesia
+        dbr:Pitcairn_Islands
+        dbr:Eastern__Daylight_Time_%28North_America%29
+        dbr:Vladivostok_Time
+        dbr:Azores
+        dbr:Universal_Time
+        dbr:Afghanistan
+        dbr:Peru_time
+        dbr:Eastern_District%2C_Jackson_County%2C_West_Virginia
+        dbr:Central_Township%2C_Knox_County%2C_Nebraska
+        dbr:Central_European_Summer__Time
+        dbr:Historical_time_zones_of_China
+        dbr:Daylight_saving_time_in_the_United_States
+        dbr:Kathmandu_Time
+        dbr:UTC%2B03:30
+        dbr:Mountain_Daight_Time
+        dbr:Central_United_States
+        dbr:Central_Township%2C_Barton_County%2C_Missouri
+        dbr:Quintana_Roo
+        dbr:Central%2C_Minnesota
+        dbr:Mountain
+        dbr:East_Kazakhstan_Region
+        dbr:Eastern_Europe
+        dbr:CentralEuropean_Summer_Time
+        dbr:INDIAN_STANDARD_TIME
+        dbr:Indian_Standard_Times
+        dbr:Ghana
+        dbr:Nigeria
+        dbr:Togo
+        dbr:East_European_Summer_Time
+        dbr:Venezuela
+        dbr:Bahrain_Standard_Time
+        dbr:Puerto_Rico
+        dbr:United_States_Virgin_Islands
+        dbr:Astana_Time
+        dbr:Bhutan
+        dbr:Waktu_Piawai_Iran
+        dbr:Waktu_Siang_Iran
+        dbr:Iraq_Standard_Time
+        dbr:Daylight_saving_time_in_Mexico
+        dbr:Indian_Standard_Ti%255Cme
+        dbr:Time_in_Ghana
+        dbr:Arizona_Time_Zone
+        dbr:Arabia_Standard_Time_Time
+        dbr:Mountain_Time_Zone%28Americas%29
+        dbr:Kyiv_Time
+        dbr:Latvija
+        dbr:Time_in_Tanzania
+        dbr:Time_in_Albania
+        dbr:Brasil_Time_Zone
+        dbr:Central%2C_Arkansas
+        dbr:Samara_Time
+        dbr:Time_in_Russia
+        dbr:Brunei
+        dbr:Magadan_Time
+        dbr:Time_in_Yemen
+        dbr:Time_in_Mali
+        dbr:Guatemala
+        dbr:Daylight_saving_time_in_Australia
+        dbr:North_American_Central_Daylight_Time_Zone
+        dbr:%E0%A4%AD%E0%A4%BE%E0%A4%B0%E0%A4%A4%E0%A5%80%E0%A4%AF_%E0%A4%AE%E0%A4%BE%E0%A4%A8%E0%A4%95_%E0%A4%B8%E0%A4%AE%E0%A4%AF
+        dbr:South_East_Alabama_Central_Time_Zone
+        dbr:Oman_Standard_Time
+        dbr:Mountain_Standard_Time%28MST%29
+        dbr:North_Carolina_Central_Time_Zone
+        dbr:Central_Daylight_Time__%28North_America%29
+        dbr:Azkaban_Time
+        dbr:Indian_Standard_Time_Zone
+        dbr:Indian_Standa
+        dbr:Time_in_Canada
+        dbr:Almaty_time
+        dbr:India
+        dbr:UTC%2B3:30_%28IRST%29
+        dbr:%E0%A8%AD%E0%A8%BE%E0%A8%B0%E0%A8%A4%E0%A9%80_%E0%A8%AE%E0%A8%BF%E0%A8%86%E0%A8%B0%E0%A9%80_%E0%A8%B8%E0%A8%AE%E0%A8%BE%E0%A8%82
+        dbr:Time_in_Oman
+        dbr:Eastern_Time_Zone_%28EST%29
+        dbr:Bogot%C3%A1
+        dbr:North_Eastern_Time_Zone
+        dbr:Central__Time_Zone_%28North_America%29
+        dbr:Pakistan_Time
     ) .
-

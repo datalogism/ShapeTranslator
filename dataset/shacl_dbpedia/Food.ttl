@@ -4,236 +4,363 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dbo: <http://dbpedia.org/ontology/> .
-@prefix dbt: <http://dbpedia.org/datatype/> .
-@prefix dbr: <http://dbpedia.org/resource/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 @prefix umbel: <http://umbel.org/umbel/rc/> .
 @prefix shapes: <http://shaclshapes.org/> .
+
 
 
 <http://shaclshapes.org/FoodShape> a sh:NodeShape ;
     sh:targetClass dbo:Food ;
 
-    # === DBpedia Common Properties ===
+    # ═══════════════════════════════════════════════════════════════════════════
+    # IDENTITY & NAMING
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
-        sh:path dbo:abstract ;
+        sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:thumbnail ;
-        sh:class dbo:Image ;
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:wikiPageExternalLink ;
-        sh:datatype xsd:anyURI ;
+        sh:path dbo:alias ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
     ] ;
 
     sh:property [
-        sh:path dbo:wikiPageID ;
-        sh:datatype xsd:integer ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
+        sh:path dbo:iupacName ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
     ] ;
 
-    sh:property [
-        sh:path dbo:wikiPageLength ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # DESCRIPTION & ABSTRACT
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
-        sh:path dbo:wikiPageRedirects ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageRevisionID ;
-        sh:datatype xsd:integer ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageWikiLink ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
-    ] ;
-
-    sh:property [
-        sh:path dct:subject ;
-        sh:class skos:Concept ;
-    ] ;
-
-    sh:property [
-        sh:path rdf:type ;
+        sh:path dbo:abstract ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
         sh:path rdfs:comment ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path rdfs:label ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
+        sh:path dbo:notes ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:datatype xsd:anyURI ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # DATES & TIMELINE
+    # ═══════════════════════════════════════════════════════════════════════════
 
-    sh:property [
-        sh:path prov:wasDerivedFrom ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:depiction ;
-        sh:class dbo:Image ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:isPrimaryTopicOf ;
-        sh:datatype xsd:anyURI ;
-    ] ;
-
-    # === Dates & timeline ===
     sh:property [
         sh:path dbo:year ;
         sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:foundingYear ;
         sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
-    # === Identity & naming ===
-    sh:property [
-        sh:path dbo:alias ;
-        sh:datatype rdf:langString ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # ORIGIN & GEOGRAPHY
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
-        sh:path dbo:iupacName ;
-        sh:datatype rdf:langString ;
+        sh:path dbo:origin ;
+        sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
-    sh:property [
-        sh:path dbo:ingredientName ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-    ] ;
-
-    # === Location & geography ===
     sh:property [
         sh:path dbo:country ;
         sh:class dbo:Country ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path dbo:region ;
         sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path dbo:location ;
         sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path dbo:regionServed ;
         sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
-    sh:property [
-        sh:path dbo:origin ;
-        sh:class dbo:PopulatedPlace ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # CUISINE & CLASSIFICATION
+    # ═══════════════════════════════════════════════════════════════════════════
 
-    # === Media & publications ===
     sh:property [
-        sh:path dbo:notes ;
+        sh:path dbo:cuisine ;
         sh:datatype xsd:string ;
-    ] ;
-
-    # === Organization & affiliation ===
-    sh:property [
-        sh:path dbo:owningCompany ;
-        sh:class dbo:Company ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
-        sh:path dbo:manufacturer ;
-        sh:class dbo:Organisation ;
+        sh:path dbo:species ;
+        sh:class dbo:Species ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # CREATOR & ORIGIN
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:creatorOfDish ;
+        sh:nodeKind sh:IRI ;
+        sh:or (
+            [ sh:class dbo:Agent ]
+            [ sh:class dbo:EthnicGroup ]
+            [ sh:class owl:Thing ]
+        ) ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # INGREDIENTS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:ingredient ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:or (
+            [ sh:class dbo:Food ]
+            [ sh:class dbo:Taxon ]
+            [ sh:class umbel:BiologicalLivingObject ]
+        ) ;
     ] ;
 
     sh:property [
-        sh:path dbo:distributor ;
-        sh:class dbo:Organisation ;
+        sh:path dbo:ingredientName ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
     ] ;
 
-    # === People & family ===
+    # ═══════════════════════════════════════════════════════════════════════════
+    # RELATED FOODS & VARIANTS
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
-        sh:path dbo:owner ;
-        sh:class dbo:Agent ;
+        sh:path dbo:related ;
+        sh:nodeKind sh:IRI ;
+        sh:class dbo:Food ;
     ] ;
 
     sh:property [
-        sh:path dbo:keyPerson ;
-        sh:class dbo:Person ;
+        sh:path dbo:hasVariant ;
+        sh:nodeKind sh:IRI ;
+        sh:class dbo:Food ;
     ] ;
 
-    # === Physical dimensions & specs ===
+    sh:property [
+        sh:path dct:isPartOf ;
+        sh:nodeKind sh:IRI ;
+        sh:class dbo:Food ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # NUTRITIONAL INFORMATION
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
         sh:path dbo:protein ;
         sh:datatype xsd:double ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:servingSize ;
-        sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:approximateCalories ;
         sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # SERVING INFORMATION
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:servingSize ;
+        sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:servingTemperature ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
-    # === Technical & classification ===
+    # ═══════════════════════════════════════════════════════════════════════════
+    # OWNERSHIP & MANUFACTURING
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
-        sh:path dbo:species ;
-        sh:class dbo:Species ;
+        sh:path dbo:owner ;
+        sh:class dbo:Agent ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
-        sh:path dbo:cuisine ;
-        sh:datatype xsd:string ;
-    ] .
+        sh:path dbo:owningCompany ;
+        sh:class dbo:Company ;
+        sh:nodeKind sh:IRI ;
+    ] ;
 
+    sh:property [
+        sh:path dbo:manufacturer ;
+        sh:class dbo:Agent ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:distributor ;
+        sh:class dbo:Organisation ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:keyPerson ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # MEDIA & IMAGES
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:thumbnail ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:depiction ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:picture ;
+        sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # EXTERNAL REFERENCES & LINKS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path foaf:isPrimaryTopicOf ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dct:subject ;
+        sh:class skos:Concept ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # WIKIPEDIA & DBPEDIA METADATA
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:wikiPageID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageLength ;
+        sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageExternalLink ;
+        sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageWikiLink ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRedirects ;
+        sh:datatype xsd:anyURI ;
+        sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:nodeKind sh:Literal ;
+    ] .

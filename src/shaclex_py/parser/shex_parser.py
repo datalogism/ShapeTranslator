@@ -409,12 +409,39 @@ def parse_shex(source: str) -> ShExSchema:
                 else:
                     break
 
-            # NodeConstraintShape: <Name> dtype1 OR dtype2 OR ...
-            # Detected when the next token is NOT '{' and not '.' (empty shape)
+            # NodeConstraintShape: various forms when not followed by '{'
+            # - <Name> dtype1 OR dtype2 ...   (OR-of-datatypes)
+            # - <Name> LITERAL / IRI / BNODE  (nodeKind)
+            # - <Name> [ v1 v2 ... ]          (value set)
+            # - <Name> xsd:string             (single datatype)
             tok._skip_ws_and_comments()
             if tok.peek() != '{' and not extra_preds and not closed:
-                # Could be: "dtype1 OR dtype2 OR ..." or just "."
-                # Consume alternatives separated by OR
+                # Value set: [ ... ]
+                if tok.peek() == '[':
+                    values = _parse_value_set(tok, prefixes_dict)
+                    shapes.append(NodeConstraintShape(
+                        name=IRI(shape_iri),
+                        values=[ValueSetValue(value=v.value) for v in values],
+                    ))
+                    continue
+
+                # nodeKind keyword: LITERAL, IRI, BNODE, NONLITERAL
+                nk_map = {
+                    'IRI': NodeKind.IRI,
+                    'LITERAL': NodeKind.LITERAL,
+                    'BNODE': NodeKind.BLANK_NODE,
+                    'NONLITERAL': NodeKind.BLANK_NODE_OR_IRI,
+                }
+                kw = tok.read_keyword()
+                if kw in nk_map:
+                    tok.consume_keyword(kw)
+                    shapes.append(NodeConstraintShape(
+                        name=IRI(shape_iri),
+                        node_kind=nk_map[kw],
+                    ))
+                    continue
+
+                # OR-of-datatypes or single datatype
                 datatypes: list[IRI] = []
                 while not tok.at_end():
                     tok._skip_ws_and_comments()
@@ -439,10 +466,16 @@ def parse_shex(source: str) -> ShExSchema:
                         break
 
                 if datatypes:
-                    shapes.append(NodeConstraintShape(
-                        name=IRI(shape_iri),
-                        datatypes=datatypes,
-                    ))
+                    if len(datatypes) == 1:
+                        shapes.append(NodeConstraintShape(
+                            name=IRI(shape_iri),
+                            datatype=datatypes[0],
+                        ))
+                    else:
+                        shapes.append(NodeConstraintShape(
+                            name=IRI(shape_iri),
+                            datatypes=datatypes,
+                        ))
                     continue
                 # Fall through to normal shape parsing if no datatypes found
 

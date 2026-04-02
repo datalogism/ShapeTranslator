@@ -66,6 +66,9 @@ def convert_canonical_to_shexje(canonical: CanonicalSchema) -> ShexJESchema:
         if cs.datatypeOr:
             # DBpedia-style value shape: OR of NodeConstraints
             shape_decls.append(_make_datatype_or_shape(cs))
+        elif cs.nodeKind is not None or cs.datatype is not None or cs.inValues is not None:
+            # Node-level constraint shape → top-level NodeConstraintE
+            shape_decls.append(_make_node_constraint_shape(cs))
         else:
             shape_decls.append(_make_shape(cs))
 
@@ -96,6 +99,28 @@ def _make_datatype_or_shape(cs: CanonicalShape) -> ShapeOrE:
     """Map ``datatypeOr`` to a top-level ``ShapeOr`` of ``NodeConstraint``s."""
     nc_list = [NodeConstraintE(datatype=dt) for dt in cs.datatypeOr]  # type: ignore[union-attr]
     return ShapeOrE(id=cs.name, shapeExprs=nc_list)
+
+
+def _make_node_constraint_shape(cs: CanonicalShape) -> NodeConstraintE:
+    """Map node-level constraints to a top-level ``NodeConstraint``."""
+    values = None
+    if cs.inValues is not None:
+        values = [_canonical_value_to_shexje(v) for v in cs.inValues]
+    return NodeConstraintE(
+        id=cs.name,
+        nodeKind=cs.nodeKind,
+        datatype=cs.datatype,
+        values=values,
+    )
+
+
+def _canonical_value_to_shexje(v) -> object:
+    """Convert a canonical value (str or dict) to a ShexJE value-set entry."""
+    if isinstance(v, str):
+        return v
+    if isinstance(v, dict):
+        return v
+    return str(v)
 
 
 # ── Property helpers ──────────────────────────────────────────────────────────

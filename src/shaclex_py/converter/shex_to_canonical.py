@@ -207,12 +207,33 @@ def convert_shex_to_canonical(shex: ShExSchema) -> CanonicalSchema:
         if shape.name.value not in main_names:
             continue
 
-        # NodeConstraintShape → CanonicalShape with datatypeOr
+        # NodeConstraintShape → CanonicalShape
         if isinstance(shape, NodeConstraintShape):
-            canonical_shapes.append(CanonicalShape(
-                name=shape.name.value,
-                datatypeOr=[dt.value for dt in shape.datatypes],
-            ))
+            if shape.values is not None:
+                # Value set: inValues at shape level
+                in_vals = [
+                    _value_to_canonical(v.value) for v in shape.values
+                    if isinstance(v.value, (IRI, Literal))
+                ]
+                canonical_shapes.append(CanonicalShape(
+                    name=shape.name.value,
+                    inValues=in_vals,
+                ))
+            elif shape.datatypes:
+                # OR-of-datatypes (existing behaviour)
+                canonical_shapes.append(CanonicalShape(
+                    name=shape.name.value,
+                    datatypeOr=[dt.value for dt in shape.datatypes],
+                ))
+            else:
+                # Single datatype and/or nodeKind
+                nk = shape.node_kind.value if shape.node_kind else None
+                dt = shape.datatype.value if shape.datatype else None
+                canonical_shapes.append(CanonicalShape(
+                    name=shape.name.value,
+                    nodeKind=nk,
+                    datatype=dt,
+                ))
             continue
 
         tcs = _get_triple_constraints(shape)

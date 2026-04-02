@@ -9,6 +9,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix georss: <http://www.georss.org/georss/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
@@ -22,6 +23,7 @@
     # === DBpedia Common Properties ===
     sh:property [
         sh:path dbo:abstract ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
@@ -29,17 +31,20 @@
     sh:property [
         sh:path dbo:thumbnail ;
         sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:wikiPageExternalLink ;
         sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
         sh:path dbo:wikiPageID ;
         sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -47,6 +52,7 @@
     sh:property [
         sh:path dbo:wikiPageLength ;
         sh:datatype xsd:nonNegativeInteger ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -54,6 +60,7 @@
     sh:property [
         sh:path dbo:wikiPageRevisionID ;
         sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
     ] ;
 
@@ -61,26 +68,25 @@
         sh:path dbo:wikiPageWikiLink ;
         sh:datatype xsd:anyURI ;
         sh:pattern "^http://dbpedia.org/resource/" ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
         sh:path dct:subject ;
         sh:class skos:Concept ;
-    ] ;
-
-    sh:property [
-        sh:path rdf:type ;
-        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path rdfs:comment ;
-        sh:datatype rdf:langString ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
         sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
@@ -88,45 +94,75 @@
     sh:property [
         sh:path rdfs:seeAlso ;
         sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
         sh:path owl:differentFrom ;
         sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
         sh:path owl:sameAs ;
         sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
         sh:path prov:wasDerivedFrom ;
         sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
         sh:path foaf:depiction ;
         sh:class dbo:Image ;
+        sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
         sh:path foaf:isPrimaryTopicOf ;
         sh:datatype xsd:anyURI ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     # === Location & geography ===
     sh:property [
         sh:path dbo:location ;
         sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
-
+sh:property [
+        sh:path geo:lat ;
+        sh:datatype xsd:float ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path geo:long ;
+        sh:datatype xsd:float ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path georss:point ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path geo:geometry ;
+        sh:datatype geosparql:wktLiteral ;
+        sh:minCount 1 ;
+    ] ;
     # === People & family ===
     sh:property [
         sh:path dbo:designer ;
-        sh:class dbo:Person ;
+        sh:class dbo:Agent ;
+        sh:nodeKind sh:IRI ;
     ] .
 

@@ -2,194 +2,65 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dbo: <http://dbpedia.org/ontology/> .
 @prefix dbt: <http://dbpedia.org/datatype/> .
-@prefix dbr: <http://dbpedia.org/resource/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
-@prefix umbel: <http://umbel.org/umbel/rc/> .
 @prefix shapes: <http://shaclshapes.org/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 
 
 <http://shaclshapes.org/AirportShape> a sh:NodeShape ;
     sh:targetClass dbo:Airport ;
 
-    # === DBpedia Common Properties ===
-    sh:property [
-        sh:path dbo:abstract ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageRevisionID ;
-        sh:datatype xsd:integer ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path rdf:type ;
-        sh:minCount 1 ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # IDENTITY & NAMING
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
         sh:path rdfs:label ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
-    # === Dates & timeline ===
     sh:property [
-        sh:path dbo:foundingDate ;
-        sh:datatype xsd:date ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:openingDate ;
-        sh:datatype xsd:date ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:yearOfConstruction ;
-        sh:datatype xsd:gYear ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:openingYear ;
-        sh:datatype xsd:gYear ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:foundingYear ;
-        sh:datatype xsd:gYear ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:buildingEndDate ;
+        sh:path foaf:name ;
         sh:datatype xsd:string ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Economics & statistics ===
-    sh:property [
-        sh:path <http://dbpedia.org/ontology/PopulatedPlace/areaTotal> ;
-        sh:datatype dbt:squareKilometre ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:areaTotal ;
-        sh:datatype xsd:double ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:area ;
-        sh:datatype xsd:double ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:areaLand ;
-        sh:datatype xsd:double ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:nrhpReferenceNumber ;
-        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
-        sh:maxCount 1 ;
     ] ;
 
-    # === Identity & naming ===
     sh:property [
         sh:path dbo:originalName ;
+        sh:nodeKind sh:Literal ;
         sh:datatype rdf:langString ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:agencyStationCode ;
-        sh:datatype xsd:string ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === Location & geography ===
-    sh:property [
-        sh:path dbo:city ;
-        sh:class dbo:City ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:country ;
-        sh:class dbo:Country ;
+        sh:path dbo:abstract ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:location ;
-        sh:class dbo:Place ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:locatedInArea ;
-        sh:class dbo:Place ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:district ;
-        sh:class dbo:PopulatedPlace ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:nearestCity ;
-        sh:class dbo:PopulatedPlace ;
+        sh:path rdfs:comment ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype rdf:langString ;
         sh:minCount 1 ;
     ] ;
 
-    sh:property [
-        sh:path dbo:principalArea ;
-        sh:class dbo:PopulatedPlace ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:routeEnd ;
-        sh:class dbo:Station ;
-        sh:maxCount 5 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:routeStart ;
-        sh:class dbo:Station ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:routeJunction ;
-        sh:class dbo:Station ;
-    ] ;
+    # ═══════════════════════════════════════════════════════════════════════════
+    # AIRPORT IDENTIFIERS & CODES
+    # ═══════════════════════════════════════════════════════════════════════════
 
     sh:property [
         sh:path dbo:icaoLocationIdentifier ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -197,6 +68,7 @@
     sh:property [
         sh:path dbo:iataLocationIdentifier ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -204,18 +76,141 @@
     sh:property [
         sh:path dbo:faaLocationIdentifier ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:locationIdentifier ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:agencyStationCode ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:nrhpReferenceNumber ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # DATES & TIMELINE
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:foundingDate ;
+        sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:openingDate ;
+        sh:datatype xsd:date ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:yearOfConstruction ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:openingYear ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:foundingYear ;
+        sh:datatype xsd:gYear ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:buildingEndDate ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # LOCATION & GEOGRAPHY
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:city ;
+        sh:class dbo:City ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:country ;
+        sh:class dbo:Country ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:location ;
+        sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:locatedInArea ;
+        sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:district ;
+        sh:class dbo:PopulatedPlace ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:nearestCity ;
+        sh:class dbo:PopulatedPlace ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:principalArea ;
+        sh:class dbo:PopulatedPlace ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:subdivision ;
+        sh:class dbo:Place ;
+        sh:nodeKind sh:IRI ;
     ] ;
 
     sh:property [
         sh:path dbo:postalCode ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -223,88 +218,235 @@
     sh:property [
         sh:path dbo:areaCode ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:gridReference ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # GEOSPATIAL COORDINATES
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path geo:lat ;
+        sh:datatype xsd:float ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path geo:long ;
+        sh:datatype xsd:float ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path geo:geometry ;
+        sh:datatype geosparql:wktLiteral ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path georss:point ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # TIME ZONE
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:timeZone ;
+        sh:class dbo:timeZone ;
+        sh:nodeKind sh:IRI ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:utcOffset ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHYSICAL DIMENSIONS & SPECIFICATIONS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path <http://dbpedia.org/ontology/PopulatedPlace/areaTotal> ;
+        sh:datatype dbt:squareKilometre ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:routeNumber ;
-        sh:datatype xsd:string ;
+        sh:path dbo:areaTotal ;
+        sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
-        sh:path dbo:routeTypeAbbreviation ;
-        sh:datatype xsd:string ;
-        sh:maxCount 1 ;
+        sh:path dbo:area ;
+        sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
     ] ;
 
     sh:property [
-        sh:path dbo:routeStartDirection ;
-        sh:datatype xsd:string ;
+        sh:path dbo:areaLand ;
+        sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
-    sh:property [
-        sh:path dbo:routeEndDirection ;
-        sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # === People & family ===
-    sh:property [
-        sh:path dbo:owner ;
-        sh:class dbo:Agent ;
-    ] ;
-
-    # === Physical dimensions & specs ===
     sh:property [
         sh:path <http://dbpedia.org/ontology/Infrastructure/length> ;
         sh:datatype dbt:kilometre ;
+        sh:nodeKind sh:Literal ;
         sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:elevation ;
         sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
 
+    # ═══════════════════════════════════════════════════════════════════════════
+    # RUNWAY SPECIFICATIONS
+    # ═══════════════════════════════════════════════════════════════════════════
+
     sh:property [
         sh:path dbo:runwayLength ;
         sh:datatype xsd:double ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
     ] ;
 
-    # === Politics & governance ===
-    sh:property [
-        sh:path dbo:commander ;
-        sh:class dbo:Person ;
-    ] ;
-
-    # === Technical & classification ===
     sh:property [
         sh:path dbo:runwaySurface ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
     ] ;
 
     sh:property [
         sh:path dbo:runwayDesignation ;
         sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # ROUTES & CONNECTIONS
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:routeStart ;
+        sh:class dbo:Station ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:routeEnd ;
+        sh:class dbo:Station ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 5 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:routeJunction ;
+        sh:class dbo:Station ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:routeNumber ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:routeTypeAbbreviation ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:routeStartDirection ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:routeEndDirection ;
+        sh:datatype xsd:string ;
+        sh:nodeKind sh:Literal ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # OWNERSHIP & MANAGEMENT
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path dbo:owner ;
+        sh:class dbo:Agent ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:operator ;
+        sh:class dbo:Organisation ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:builder ;
+        sh:class dbo:Country ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:commander ;
+        sh:class dbo:Person ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # EXTERNAL LINKS & METADATA
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    sh:property [
+        sh:path foaf:homepage ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path dbo:wikiPageRevisionID ;
+        sh:datatype xsd:integer ;
+        sh:nodeKind sh:Literal ;
         sh:minCount 1 ;
     ] .
-

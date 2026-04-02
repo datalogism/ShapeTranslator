@@ -6,7 +6,7 @@ Two intermediate formats are available:
 
 | Format | Scope | Notes |
 |--------|-------|-------|
-| **Canonical JSON** | Simplified subset — 16 pattern types | Backward-compatible; deterministic |
+| **Canonical JSON** | Simplified subset — 17 pattern types | Backward-compatible; deterministic |
 | **ShexJE** | Full ShexJ superset + complete SHACL | New canonical format; see [ShexJE Spec](shexje-spec.md) |
 
 ShexJE fully expresses all constructs listed as "known gaps" in the Canonical JSON pipeline (see §4).
@@ -34,6 +34,10 @@ The following patterns survive the SHACL→JSON→ShEx→JSON and ShEx→JSON→
 | Standalone pattern facet | `sh:pattern "regex"` (non-URL, sole constraint) | `. /regex/` | 7.15 |
 | Named shape reference | `sh:node S` | `@<S>` | 7.1 |
 | Named value shapes (OR of datatypes) | `sh:NodeShape` with `sh:or ([sh:datatype D1]...)` | `<Name> D1 OR D2 OR ...` | 7.15 |
+| Reusable value shapes — node-level datatype | `sh:NodeShape` with `sh:datatype D` (no `sh:property`) | `<Name> D` (NodeConstraintShape) | — |
+| Reusable value shapes — node-level nodeKind | `sh:NodeShape` with `sh:nodeKind sh:Literal/IRI/…` | `<Name> LITERAL / IRI / BNODE` | — |
+| Reusable value shapes — node-level value set | `sh:NodeShape` with `sh:in (v1 v2 …)` | `<Name> [ v1 v2 … ]` | — |
+| Non-standard `sh:dataType` (shexer) | `sh:dataType D` (capital T) | normalised to `datatype` | — |
 | Closed shapes | `sh:closed true` | `CLOSED` | 7.14 |
 | Default cardinality mismatch | explicit `{0,*}` vs `{1,1}` | always emitted explicitly | 7.8 |
 
@@ -42,6 +46,22 @@ The following patterns survive the SHACL→JSON→ShEx→JSON and ShEx→JSON→
 ## Approximated translations
 
 Data is preserved; semantics are relaxed.
+
+### `sh:alternativePath` — alternative predicates
+
+`sh:alternativePath ( p1 p2 ... )` means the constraint applies to any matching triple regardless of which predicate it uses. The translator maps this to a ShEx `OneOf` expression (`|`), one `TripleConstraint` per alternative path:
+
+```shex
+(
+  p1 xsd:date {1,} |
+  p2 xsd:date {1,} |
+  p3 xsd:date {1,}
+)
+```
+
+ShEx `|` requires at least one branch to be satisfied (branch semantics); SHACL `sh:alternativePath` treats all alternatives as a union and applies the constraint across the combined set of triples. In practice this distinction rarely matters for DBpedia-style patterns where entities carry either one predicate or the other. All paths and constraint values are fully preserved in the canonical `pathAlternatives` field and round-trip faithfully through SHACL.
+
+Affects: Company, Person, SportsTeam, WrittenWork shapes (4 files, 4 properties).
 
 ### `sh:or` with `sh:property` alternative groups at NodeShape level
 
@@ -61,18 +81,18 @@ When present in input these constructs are silently ignored and do not appear in
 ```turtle
 sh:property [ sh:path [ sh:zeroOrMorePath schema:knows ] ]
 sh:property [ sh:path ( schema:child schema:child ) ]       # sequence path
-sh:property [ sh:path [ sh:alternativePath ( schema:name foaf:name ) ] ]
 sh:property [ sh:path [ sh:inversePath schema:parent ] ]
 ```
 
+> **Note:** `sh:alternativePath` is now supported — see [Approximated translations](#approximated-translations) above.
+
 **ShEx equivalent:** None for the path algebra. ShEx supports only direct predicates and inverse predicates (`^pred`).
 
-**Current behaviour:** The entire `sh:property` block is silently dropped if the path is not a plain IRI.
+**Current behaviour:** The entire `sh:property` block is silently dropped if the path is not a plain IRI or `sh:alternativePath`.
 
 **To fix:**
 - Detect complex paths in the SHACL parser and carry them as an opaque `pathExpr` field.
 - Map `sh:inversePath` → ShEx inverse constraint (`^pred`).
-- Map `sh:alternativePath` → multiple independent properties (over-approximation).
 - For `sh:zeroOrMorePath` and sequence paths, emit a warning comment; no loss-free translation exists per the book.
 
 ---
@@ -185,6 +205,6 @@ sh:targetSubjectsOf schema:knows    # targets all subjects of this predicate
 | `sh:xone` | Medium | Medium | No — semantic mismatch with ShEx `\|` |
 | Qualified value shapes | Medium — DBpedia, enterprise shapes | Medium | Yes |
 | Property pair constraints | Low in KG schemas, high in enterprise | Low — opaque carry-through | No (ShEx has no equivalent) |
-| Complex property paths | High in DBpedia/enterprise | High — path algebra in both models | Partial (`sh:inversePath` only) |
+| Complex property paths (inverse, sequence, zero-or-more) | Medium in DBpedia/enterprise | High — path algebra in both models | Partial (`sh:inversePath` only) |
 | Recursion (ShEx→SHACL) | Low — rare in practice | Medium | No — SHACL recursion is undefined |
 | Non-class target types | Low — rare in dataset schemas | Low — opaque carry-through | Partial |
