@@ -2,9 +2,22 @@
 
 Supports:
 * Full native ShexJE / ShexJ constructs (``type`` discriminator).
-* Shorthand fields on TripleConstraintE (``classRef``, ``classRefOr``,
-  ``iriStem``, ``hasValue``, ``in``).
+* Value-shape shorthand on ShapeE (``predicate``, ``values``).
 * Compact or full IRI strings everywhere.
+
+Backward compatibility
+----------------------
+Older ShexJE documents may carry the removed shorthand fields
+``classRef``, ``classRefOr``, ``iriStem``, ``hasValue``, ``in`` directly on
+``TripleConstraint`` objects.  The parser silently converts these to proper
+``valueExpr`` forms so legacy files continue to work:
+
+* ``classRef: X``         → ``valueExpr: NodeConstraintE(values=[X])``
+  (inline; full value-shape generation requires schema context)
+* ``classRefOr: [X, Y]``  → ``valueExpr: NodeConstraintE(values=[X, Y])``
+* ``iriStem: S``           → ``valueExpr: NodeConstraintE(values=[IriStemValue(S)])``
+* ``hasValue: V``          → ``valueExpr: NodeConstraintE(values=[V])``
+* ``in: [...]``            → ``valueExpr: NodeConstraintE(values=[...])``
 """
 from __future__ import annotations
 
@@ -37,6 +50,9 @@ from shaclex_py.schema.shexje import (
     ZeroOrMorePath,
     ZeroOrOnePath,
 )
+
+# Re-export for backward compatibility (external code may import from here)
+__all__ = ["parse_shexje", "parse_shexje_file"]
 
 
 # ── Public API ────────────────────────────────────────────────────────────────
@@ -113,6 +129,10 @@ def _parse_shape(d: dict) -> ShapeE:
     xone_raw = d.get("xone")
     sparql_raw = d.get("sparql")
 
+    # Value-shape shorthand: "predicate" + "values" fields on Shape
+    values_raw = d.get("values")
+    values = [_parse_value_set_entry(v) for v in values_raw] if values_raw else None
+
     return ShapeE(
         id=d["id"],
         closed=d.get("closed", False),
@@ -137,6 +157,9 @@ def _parse_shape(d: dict) -> ShapeE:
         not_=_parse_shape_expr(not_raw) if not_raw is not None else None,
         xone=[_parse_shape_expr(e) for e in xone_raw] if xone_raw else None,
         sparql=[_parse_sparql_constraint(c) for c in sparql_raw] if sparql_raw else None,
+        # ShexJE value-shape shorthand
+        predicate=d.get("predicate"),
+        values=values,
     )
 
 
@@ -243,6 +266,7 @@ def _parse_triple_expr(v: Any) -> TripleExpression:
             max=v.get("max"),
             semActs=v.get("semActs"),
             annotations=v.get("annotations"),
+            alternativeGroups=v.get("alternativeGroups"),
         )
     if t == "OneOf":
         return OneOfE(
@@ -259,11 +283,40 @@ def _parse_triple_constraint(d: dict) -> TripleConstraintE:
     ve_raw = d.get("valueExpr")
     qvs_raw = d.get("qualifiedValueShape")
     path_raw = d.get("path")
-    in_raw = d.get("in")
+
+    # Resolve valueExpr (native shexJ/shexJE form)
+    value_expr = _parse_shape_expr(ve_raw) if ve_raw is not None else None
+
+    # ── Backward-compat: convert legacy shorthand fields to valueExpr ─────
+    # These fields were removed from TripleConstraintE in ShexJE v2 (shexJ
+    # alignment).  Legacy documents that still carry them are silently
+    # upgraded to the canonical valueExpr form.
+    if value_expr is None:
+        if d.get("classRef") is not None:
+            # Single class IRI → inline NodeConstraint with that IRI as value.
+            # Full value-shape generation (with rdf:type TripleConstraint)
+            # requires schema context; the inline form preserves the IRI for
+            # downstream processing.
+            value_expr = NodeConstraintE(values=[d["classRef"]])
+
+        elif d.get("classRefOr") is not None:
+            value_expr = NodeConstraintE(values=list(d["classRefOr"]))
+
+        elif d.get("iriStem") is not None:
+            value_expr = NodeConstraintE(values=[IriStemValue(stem=d["iriStem"])])
+
+        elif d.get("hasValue") is not None:
+            value_expr = NodeConstraintE(values=[d["hasValue"]])
+
+        elif d.get("in") is not None:
+            in_raw = d["in"]
+            value_expr = NodeConstraintE(
+                values=[_parse_value_set_entry(v) for v in in_raw]
+            )
 
     return TripleConstraintE(
         predicate=d.get("predicate"),
-        valueExpr=_parse_shape_expr(ve_raw) if ve_raw is not None else None,
+        valueExpr=value_expr,
         inverse=d.get("inverse", False),
         min=d.get("min"),
         max=d.get("max"),
@@ -282,11 +335,6 @@ def _parse_triple_constraint(d: dict) -> TripleConstraintE:
         qualifiedMaxCount=d.get("qualifiedMaxCount"),
         qualifiedValueShapesDisjoint=d.get("qualifiedValueShapesDisjoint"),
         uniqueLang=d.get("uniqueLang"),
-        classRef=d.get("classRef"),
-        classRefOr=d.get("classRefOr"),
-        iriStem=d.get("iriStem"),
-        hasValue=d.get("hasValue"),
-        in_values=[_parse_value_set_entry(v) for v in in_raw] if in_raw is not None else None,
     )
 
 

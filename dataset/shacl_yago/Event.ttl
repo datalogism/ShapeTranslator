@@ -16,10 +16,6 @@
     ############################## schema:Thing property
     # schema:Thing properties
     sh:property [
-        sh:path rdf:type ;
-        sh:hasValue schema:Event ;
-    ] ;
-    sh:property [
         sh:path rdfs:label ;
         sh:datatype xsd:string ;
     ] ;
@@ -63,13 +59,19 @@
         sh:class schema:Place ;
     ] ;
     sh:property [
-        sh:path schema:organizer ;
-        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+         sh:path schema:organizer ;
+         sh:or (
+                    [ sh:class schema:Organization ]
+                    [ sh:class schema:Person ]
+                );
 
     ] ;
     sh:property [
-        sh:path schema:sponsor ;
-        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+         sh:path schema:sponsor ;
+         sh:or (
+                    [ sh:class schema:Organization ]
+                    [ sh:class schema:Person ]
+                );
 
     ] ;
     sh:property [
@@ -88,9 +90,12 @@
         sh:class schema:Event ;
     ] ;
     sh:property [
-        sh:path yago:participant ;
-        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
-        sh:maxCount 1 ;
+         sh:path yago:participant ;
+         sh:or (
+                    [ sh:class schema:Organization ]
+                    [ sh:class schema:Person ]
+                );
+         sh:maxCount 1 ;
 
     ] ;
 

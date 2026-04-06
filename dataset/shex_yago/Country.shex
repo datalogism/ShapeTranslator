@@ -12,7 +12,6 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Country>
 
 <Country> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:Country ] ;
   rdfs:comment rdf:langString + ;
   rdfs:label rdf:langString + ;
@@ -21,30 +20,24 @@ start = @<Country>
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI + ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
-  schema:dateCreated xsd:dateTime ? ;  # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  schema:memberOf @<Organization> * ;  # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  schema:slogan xsd:string * ;         # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  schema:geo geo:wktLiteral ? ;        # From YAGO Schema design document, inherit from @<Place>
-  schema:location @<Place> * ;         # From YAGO Schema design document, inherit from @<Place>
-
-  # yago property
-  yago:humanDevelopmentIndex xsd:decimal * ;  # From YAGO Schema design document
-  yago:officialLanguage @<Language> * ;       # From YAGO Schema design document
-  yago:unemploymentRate xsd:decimal * ;       # From YAGO Schema design document
-  yago:demonym xsd:string * ;                 # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  yago:leader @<Person> * ;                   # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  yago:populationNumber xsd:decimal ? ;       # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  yago:capital @<City> * ;                    # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  yago:replaces @<AdministrativeArea> * ;     # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  yago:area xsd:decimal ? ;                   # From YAGO Schema design document, inherit from @<Place>
-  yago:highestPoint @<Landform> ? ;           # From YAGO Schema design document, inherit from @<Place>
-  yago:lowestPoint @<Landform> ? ;            # From YAGO Schema design document, inherit from @<Place>
-  yago:neighbors @<Place> * ;                 # From YAGO Schema design document, inherit from @<Place>
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  schema:dateCreated xsd:dateTime ? ;
+  schema:memberOf @<Organization> * ;
+  schema:slogan xsd:string * ;
+  schema:geo geo:wktLiteral ? ;
+  schema:location @<Place> * ;
+  yago:humanDevelopmentIndex xsd:decimal * ;
+  yago:officialLanguage @<Human_Language_Q20162172> * ;
+  yago:unemploymentRate xsd:decimal * ;
+  yago:demonym xsd:string * ;
+  yago:leader @<Person> * ;
+  yago:populationNumber xsd:decimal ? ;
+  yago:capital @<City> * ;
+  yago:replaces @<AdministrativeArea> * ;
+  yago:area xsd:decimal ? ;
+  yago:highestPoint @<Landform> ? ;
+  yago:lowestPoint @<Landform> ? ;
+  yago:neighbors @<Place> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <AdministrativeArea> EXTRA rdf:type {
@@ -55,12 +48,12 @@ start = @<Country>
   rdf:type [ schema:City ]
 }
 
-<Landform> EXTRA rdf:type {
-  rdf:type [ schema:Landform ]
+<Human_Language_Q20162172> EXTRA rdf:type {
+  rdf:type [ yago:Human_Language_Q20162172 ]
 }
 
-<Language> EXTRA rdf:type {
-  rdf:type [ yago:Human_Language_Q20162172 ]
+<Landform> EXTRA rdf:type {
+  rdf:type [ schema:Landform ]
 }
 
 <Organization> EXTRA rdf:type {

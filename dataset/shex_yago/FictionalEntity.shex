@@ -12,24 +12,17 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<FictionalEntity>
 
 <FictionalEntity> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ yago:FictionalEntity ] ;
-  rdfs:comment rdf:langString * ;
   rdfs:label rdf:langString + ;
+  rdfs:comment rdf:langString * ;
   schema:alternateName rdf:langString * ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
-
-  # schema.org property
-  schema:author @<Author> ? ;     # From YAGO Schema design document
-  schema:performer @<Person> * ;  # From YAGO Schema design document
-
-  # yago property
-  yago:appearsIn @<CreativeWork> ? ;  # From YAGO Schema design document
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  schema:author @<Author> ? ;
+  schema:performer @<Person> * ;
+  yago:appearsIn @<CreativeWork> ? ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Author> EXTRA rdf:type {

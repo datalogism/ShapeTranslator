@@ -62,6 +62,7 @@
   sh:property [
     sh:path schema:musicBy ;
     sh:or ( [ sh:class schema:MusicGroup ] [ sh:class schema:Person ] ) ;
+
   ] ;
   sh:property [
     sh:path schema:numberOfEpisodes ;

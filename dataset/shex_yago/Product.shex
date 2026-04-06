@@ -12,25 +12,20 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Product>
 
 <Product> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:Product ] ;
-  rdfs:comment rdf:langString * ;
-  rdfs:label rdf:langString + ;
-  schema:alternateName rdf:langString * ;
+  rdfs:label xsd:string + ;
+  rdfs:comment xsd:string * ;
+  schema:alternateName xsd:string * ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
-  schema:url xsd:anyURI ? ;
-
-  # schema.org property
-  schema:award @<Award> * ;               # From YAGO Schema design document
-  schema:dateCreated xsd:dateTime ? ;     # From YAGO Schema design document
-  schema:gtin xsd:string * ;              # From YAGO Schema design document
-  schema:manufacturer @<Corporation> * ;  # From YAGO Schema design document
-  schema:material @<Material> * ;         # From YAGO Schema design document
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  schema:url xsd:anyURI * ;
+  schema:award @<Award> * ;
+  schema:dateCreated xsd:dateTime ? ;
+  schema:gtin xsd:string * ;
+  schema:manufacturer @<Corporation> * ;
+  schema:material @<Material> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Award> EXTRA rdf:type {

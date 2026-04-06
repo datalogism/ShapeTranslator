@@ -2,7 +2,7 @@
 
 A bidirectional translator between **SHACL** (Shapes Constraint Language, Turtle format) and **ShEx** (Shape Expressions, ShExC compact syntax), built from scratch in Python.
 
-Uses a language-neutral canonical JSON model as an intermediate representation, handling the semantic differences documented in [Validating RDF Data, Ch. 13](https://book.validatingrdf.com/bookHtml013.html).
+Uses **ShexJE** (ShEx JSON Extended) as the canonical intermediate format, handling the semantic differences documented in [Validating RDF Data, Ch. 13](https://book.validatingrdf.com/bookHtml013.html). ShexJE is a lossless superset of W3C ShexJ extended for full SHACL compatibility.
 
 A Python companion to [weso/shaclex](https://github.com/weso/shaclex) — the module layout mirrors the Scala reference implementation.
 
@@ -10,8 +10,8 @@ A Python companion to [weso/shaclex](https://github.com/weso/shaclex) — the mo
 
 | Document | Description |
 |---|---|
-| [Architecture](docs/architecture.md) | Pipeline diagram, project structure, canonical JSON format |
-| [Mapping Rules](docs/mapping-rules.md) | Every supported pattern with SHACL / JSON / ShEx examples |
+| [Architecture](docs/architecture.md) | Pipeline diagram, project structure, ShexJE canonical format |
+| [Mapping Rules](docs/mapping-rules.md) | Every supported pattern with SHACL / ShexJE / ShEx examples |
 | [Translation Coverage](docs/translation-coverage.md) | Fully supported, approximated, and known gaps with fix guidance |
 | [Evaluation](docs/evaluation.md) | Roundtrip cycle results (147 files, 4 309 properties, 0 differences) |
 | [Wikidata Labels](docs/wikidata-labels.md) | Label-aware ShEx generation for Wikidata schemas |
@@ -38,13 +38,13 @@ pip install -e ".[validation]"      # + both validators
 # SHACL → ShEx
 shaclex-py --input shapes.ttl --direction shacl2shex
 
-# ShEx → SHACL (output to file)
-shaclex-py --input shapes.shex --direction shex2shacl --output shapes.ttl
+# ShEx → SHACL (output_old to file)
+shaclex-py --input shapes.shex --direction shex2shacl --output_old shapes.ttl
 
 # Convert a whole directory
-shaclex-py --input-dir my_shacl/ --output-dir my_shex/ --direction shacl2shex
+shaclex-py --input-dir my_shacl/ --output_old-dir my_shex/ --direction shacl2shex
 
-# Wikidata label-aware output
+# Wikidata label-aware output_old
 shaclex-py --input Q1172284.ttl --direction shacl2shex --wikidata-labels
 ```
 

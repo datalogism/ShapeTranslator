@@ -12,32 +12,27 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Book>
 
 <Book> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:Book ] ;
-  rdfs:comment rdf:langString * ;
   rdfs:label rdf:langString + ;
+  rdfs:comment rdf:langString * ;
   schema:alternateName rdf:langString * ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
-  schema:editor @<Person> * ;           # From YAGO Schema design document
-  schema:illustrator @<Person> * ;      # From YAGO Schema design document
-  schema:isbn xsd:string ? ;            # From YAGO Schema design document
-  schema:numberOfPages xsd:decimal ? ;  # From YAGO Schema design document
-  schema:publisher @<Publisher> ? ;     # From YAGO Schema design document
-  schema:about IRI * ;                  # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:author @<Author> * ;           # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:award @<Award> * ;             # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:contentLocation @<Place> * ;   # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:dateCreated xsd:dateTime ? ;   # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:inLanguage @<Language> * ;     # From YAGO Schema design document, inherit from @<CreativeWork>
+  schema:editor @<Person> * ;
+  schema:illustrator @<Person> * ;
+  schema:isbn xsd:string ? ;
+  schema:numberOfPages xsd:decimal ? ;
+  schema:publisher @<Publisher> * ;
+  schema:about . * ;
+  schema:author @<Author> * ;
+  schema:award @<Award> * ;
+  schema:contentLocation @<Place> * ;
+  schema:dateCreated xsd:dateTime ? ;
+  schema:inLanguage @<LanguageShape> * ;
   schema:locationCreated @<Place> ? ;
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Author> EXTRA rdf:type {
@@ -48,8 +43,8 @@ start = @<Book>
   rdf:type [ yago:Award ]
 }
 
-<Language> EXTRA rdf:type {
-  rdf:type [ schema:Language ]
+<LanguageShape> EXTRA rdf:type {
+  rdf:type [ <http://shaclshapes.org/LanguageShape> ]
 }
 
 <Person> EXTRA rdf:type {

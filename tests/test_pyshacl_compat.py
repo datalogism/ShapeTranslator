@@ -1,6 +1,6 @@
 """Integration tests for pySHACL compatibility.
 
-These tests verify that SHACL output produced by shaclex-py can be loaded
+These tests verify that SHACL output_old produced by shaclex-py can be loaded
 and used by pySHACL (https://github.com/RDFLib/pySHACL) without errors.
 
 Requires: pip install "shaclex-py[pyshacl]"
@@ -13,13 +13,11 @@ import pytest
 pyshacl = pytest.importorskip("pyshacl", reason="pyshacl not installed; run: pip install pyshacl")
 
 from shaclex_py.parser.shacl_parser import parse_shacl_file
-from shaclex_py.parser.json_parser import parse_canonical_file
-from shaclex_py.converter.shacl_to_canonical import convert_shacl_to_canonical
-from shaclex_py.converter.canonical_to_shacl import convert_canonical_to_shacl
+from shaclex_py.converter.shacl_to_shexje import convert_shacl_to_shexje
+from shaclex_py.converter.shexje_to_shacl import convert_shexje_to_shacl
 from shaclex_py.serializer.shacl_serializer import serialize_shacl
 
 SHACL_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shacl_yago")
-SHACL_JSON_DIR = os.path.join(os.path.dirname(__file__), "..", "shacl_to_json")
 
 # Minimal RDF instances used as data graphs for validation smoke-tests.
 # These are intentionally simple; the goal is to confirm pyshacl can *use*
@@ -32,7 +30,7 @@ _LANGUAGE_DATA = """
 
 <http://example.org/lang/en> a schema:Language ;
     rdfs:label "English"@en ;
-    schema:mainEntityOfPage <http://example.org/en> .
+    schema:mainEntityOfPage "http://example.org/en"^^xsd:anyURI .
 """
 
 _AIRLINE_DATA = """
@@ -54,18 +52,11 @@ def _shapes_turtle(name: str) -> str:
 
 
 def _roundtrip_shapes_turtle(name: str) -> str:
-    """Return Turtle after a canonical roundtrip (exercises canonical_to_shacl)."""
+    """Return Turtle after a ShexJE roundtrip (exercises shexje_to_shacl)."""
     schema = parse_shacl_file(os.path.join(SHACL_DIR, f"{name}.ttl"))
-    canonical = convert_shacl_to_canonical(schema)
-    roundtrip = convert_canonical_to_shacl(canonical)
+    shexje = convert_shacl_to_shexje(schema)
+    roundtrip = convert_shexje_to_shacl(shexje)
     return serialize_shacl(roundtrip)
-
-
-def _json_shapes_turtle(name: str) -> str:
-    """Return Turtle converted from a canonical JSON file."""
-    canonical = parse_canonical_file(os.path.join(SHACL_JSON_DIR, f"{name}.json"))
-    schema = convert_canonical_to_shacl(canonical)
-    return serialize_shacl(schema)
 
 
 # ---------------------------------------------------------------------------
@@ -88,7 +79,7 @@ def _validate(data: str, shapes: str) -> tuple[bool, str]:
 
 
 # ---------------------------------------------------------------------------
-# Shapes loading: verify pyshacl can parse our shapes output without errors
+# Shapes loading: verify pyshacl can parse our shapes output_old without errors
 # ---------------------------------------------------------------------------
 
 class TestShapesLoadable:
@@ -130,9 +121,9 @@ class TestOrConstraints:
         assert "sh:or" in turtle
         _validate(_AIRLINE_DATA, turtle)
 
-    def test_json_roundtrip_or_class_loadable(self):
-        """canonical JSON -> SHACL with classRefOr produces valid sh:or."""
-        turtle = _json_shapes_turtle("Airline")
+    def test_shexje_roundtrip_or_class_loadable(self):
+        """ShexJE -> SHACL roundtrip with classRefOr produces valid sh:or."""
+        turtle = _roundtrip_shapes_turtle("Airline")
         assert "sh:or" in turtle
         _validate(_AIRLINE_DATA, turtle)
 

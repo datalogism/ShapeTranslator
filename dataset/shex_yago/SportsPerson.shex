@@ -12,7 +12,6 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<SportsPerson>
 
 <SportsPerson> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ yago:SportsPerson ] ;
   rdfs:comment rdf:langString * ;
   rdfs:label rdf:langString + ;
@@ -21,30 +20,24 @@ start = @<SportsPerson>
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:string * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
-  schema:alumniOf @<Organization> * ;   # From YAGO Schema design document, inherit from @<Person>
-  schema:award @<Award> * ;             # From YAGO Schema design document, inherit from @<Person>
-  schema:birthDate xsd:dateTime ? ;     # From YAGO Schema design document, inherit from @<Person>
-  schema:birthPlace @<Place> ? ;        # From YAGO Schema design document, inherit from @<Person>
-  schema:children @<Person> * ;         # From YAGO Schema design document, inherit from @<Person>
-  schema:deathDate xsd:dateTime ? ;     # From YAGO Schema design document, inherit from @<Person>
-  schema:deathPlace @<Place> ? ;        # From YAGO Schema design document, inherit from @<Person>
-  schema:gender @<Gender> ;             # From YAGO Schema design document, inherit from @<Person>
-  schema:homeLocation @<Place> * ;      # From YAGO Schema design document, inherit from @<Person>
-  schema:knowsLanguage @<Language> * ;  # From YAGO Schema design document, inherit from @<Person>
-  schema:memberOf @<Organization> * ;   # From YAGO Schema design document, inherit from @<Person>
-  schema:nationality @<Country> ? ;     # From YAGO Schema design document, inherit from @<Person>
-  schema:spouse @<Person> * ;           # From YAGO Schema design document, inherit from @<Person>
-  schema:worksFor @<Organization> * ;   # From YAGO Schema design document, inherit from @<Person>
-
-  # yago property
-  yago:playsIn @<Event> * ;              # From YAGO Schema design document
-  yago:sportNumber xsd:string * ;        # From YAGO Schema design document
-  yago:beliefSystem @<BeliefSystem> * ;  # From YAGO Schema design document, inherit from @<Person>
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  schema:alumniOf @<Organization> * ;
+  schema:award @<Award> * ;
+  schema:birthDate xsd:dateTime ? ;
+  schema:birthPlace @<Place> ? ;
+  schema:children @<Person> * ;
+  schema:deathDate xsd:dateTime ? ;
+  schema:deathPlace @<Place> ? ;
+  schema:gender @<Gender> ;
+  schema:homeLocation @<Place> * ;
+  schema:knowsLanguage @<Human_Language_Q20162172> * ;
+  schema:memberOf @<Organization> * ;
+  schema:nationality @<Country> ? ;
+  schema:spouse @<Person> * ;
+  schema:worksFor @<Organization> * ;
+  yago:playsIn @<Event> * ;
+  yago:sportNumber xsd:string * ;
+  yago:beliefSystem @<BeliefSystem> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Award> EXTRA rdf:type {
@@ -67,7 +60,7 @@ start = @<SportsPerson>
   rdf:type [ yago:Gender ]
 }
 
-<Language> EXTRA rdf:type {
+<Human_Language_Q20162172> EXTRA rdf:type {
   rdf:type [ yago:Human_Language_Q20162172 ]
 }
 

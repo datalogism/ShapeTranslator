@@ -12,49 +12,42 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Politician>
 
 <Politician> EXTRA rdf:type {
-  # schema:Thing property
-  rdf:type [ yago:Politician ] ;
-  rdfs:comment rdf:langString * ;
+  rdf:type [ schema:Politician ] ;
   rdfs:label rdf:langString + ;
+  rdfs:comment rdf:langString * ;
   schema:alternateName rdf:langString * ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
-  schema:affiliation @<Organization> * ;          # From YAGO Schema design document, inherit from @<Person>
-  schema:alumniOf @<EducationalOrganization> * ;  # From YAGO Schema design document, inherit from @<Person>
-  schema:award @<Award> * ;                       # From YAGO Schema design document, inherit from @<Person>
-  schema:birthDate xsd:dateTime ? ;               # From YAGO Schema design document, inherit from @<Person>
-  schema:birthPlace @<Place> ? ;                  # From YAGO Schema design document, inherit from @<Person>
-  schema:children @<Person> * ;                   # From YAGO Schema design document, inherit from @<Person>
-  schema:deathDate xsd:dateTime ? ;               # From YAGO Schema design document, inherit from @<Person>
-  schema:deathPlace @<Place> ? ;                  # From YAGO Schema design document, inherit from @<Person>
-  schema:gender @<Gender> ? ;                     # From YAGO Schema design document, inherit from @<Person>
-  schema:homeLocation @<Place> * ;                # From YAGO Schema design document, inherit from @<Person>
-  schema:knowsLanguage @<Language> * ;            # From YAGO Schema design document, inherit from @<Person>
-  schema:memberOf @<Organization> * ;             # From YAGO Schema design document, inherit from @<Person>
-  schema:nationality @<Country> * ;               # From YAGO Schema design document, inherit from @<Person>
-  schema:owns IRI * ;                             # From YAGO Schema design document, inherit from @<Person>
-  schema:spouse @<Place> * ;                      # From YAGO Schema design document, inherit from @<Person>
-  schema:worksFor @<Organization> * ;             # From YAGO Schema design document, inherit from @<Person>
-
-  # yago property
-  yago:candidateIn @<Event> * ;              # From YAGO Schema design document
-  yago:academicDegree @<AcademicDegree> * ;  # From YAGO Schema design document, inherit from @<Person>
-  yago:beliefSystem @<BeliefSystem> * ;      # From YAGO Schema design document, inherit from @<Person>
+  schema:affiliation @<Organization> * ;
+  schema:alumniOf @<EducationalOrganization> * ;
+  schema:award @<Award> * ;
+  schema:birthDate xsd:dateTime ? ;
+  schema:birthPlace @<Place> ? ;
+  schema:children @<Person> * ;
+  schema:deathDate xsd:dateTime ? ;
+  schema:deathPlace @<Place> ? ;
+  schema:gender @<Gender> ? ;
+  schema:homeLocation @<Place> * ;
+  schema:knowsLanguage @<Human_Language_Q20162172> * ;
+  schema:memberOf @<EducationalOrganization> * ;
+  schema:nationality @<Country> * ;
+  schema:owns IRI * ;
+  schema:spouse @<Place> * ;
+  schema:worksFor @<EducationalOrganization> * ;
+  yago:candidateIn @<Event> * ;
+  yago:academicDegree @<Academic_degree> * ;
+  yago:beliefSystem @<BeliefSystem> * ;
   yago:appearsIn @<CreativeWork> * ;
   yago:doctoralAdvisor @<Person> * ;
   yago:influencedBy @<Person> * ;
   yago:notableWork @<CreativeWork> * ;
   yago:studentOf @<Person> * ;
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
-<AcademicDegree> EXTRA rdf:type {
+<Academic_degree> EXTRA rdf:type {
   rdf:type [ yago:Academic_degree ]
 }
 
@@ -86,7 +79,7 @@ start = @<Politician>
   rdf:type [ yago:Gender ]
 }
 
-<Language> EXTRA rdf:type {
+<Human_Language_Q20162172> EXTRA rdf:type {
   rdf:type [ yago:Human_Language_Q20162172 ]
 }
 

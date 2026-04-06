@@ -336,10 +336,30 @@ def convert_canonical_to_shex(
             )
             triple_constraints.append(tc_type)
 
-        # Convert each property
+        # Convert each property; expand pathAlternatives to separate TCs
         for cprop in cshape.properties:
-            tc = _convert_property(cprop, auxiliary_shapes, main_shape_names, label_map)
-            triple_constraints.append(tc)
+            if cprop.pathAlternatives is not None:
+                for path_iri in cprop.pathAlternatives:
+                    from shaclex_py.schema.canonical import CanonicalProperty as _CP
+                    alt = _CP(
+                        path=path_iri,
+                        datatype=cprop.datatype,
+                        classRef=cprop.classRef,
+                        classRefOr=cprop.classRefOr,
+                        nodeKind=cprop.nodeKind,
+                        hasValue=cprop.hasValue,
+                        inValues=cprop.inValues,
+                        iriStem=cprop.iriStem,
+                        pattern=cprop.pattern,
+                        nodeRef=cprop.nodeRef,
+                        cardinality=cprop.cardinality,
+                    )
+                    triple_constraints.append(
+                        _convert_property(alt, auxiliary_shapes, main_shape_names, label_map)
+                    )
+            else:
+                tc = _convert_property(cprop, auxiliary_shapes, main_shape_names, label_map)
+                triple_constraints.append(tc)
 
         # Build expression
         expr = None

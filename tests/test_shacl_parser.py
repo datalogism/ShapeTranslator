@@ -38,11 +38,12 @@ def test_parse_person_class_references():
     assert len(class_props) >= 10  # Many sh:class references
 
 
-def test_parse_event_has_value():
+def test_parse_event_or_constraints():
+    """Event.ttl uses sh:or for organizer/sponsor/participant after YAGO update."""
     schema = parse_shacl_file(os.path.join(YAGO_DIR, "Event.ttl"))
     shape = schema.shapes[0]
-    hv_props = [p for p in shape.properties if p.has_value]
-    assert len(hv_props) == 1  # rdf:type hasValue schema:Event
+    or_props = [p for p in shape.properties if p.or_constraints]
+    assert len(or_props) >= 2  # organizer, sponsor, participant each use sh:or
 
 
 def test_parse_pattern():

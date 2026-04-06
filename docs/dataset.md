@@ -13,6 +13,13 @@ The `dataset/` directory contains reference files used for testing and evaluatio
 
 Paired SHACL and ShEx files covering a range of complexity from simple shapes (Gender, Language) to complex ones with class references, OR constraints, and IRI stems (Person, Politician, Event). Used for ground-truth evaluation — see [Evaluation](evaluation.md#evaluation-against-yago-ground-truth).
 
+**Shape corrections (2025):** The SHACL files were updated to fix two issues present in the original export:
+
+- **`sh:or` syntax standardised** — Properties using the non-standard `sh:class [ sh:or ( C1 C2 ) ]` form (where `sh:or` appeared as the value of `sh:class`) were rewritten to the correct SHACL form: `sh:or ( [ sh:class C1 ] [ sh:class C2 ] )`. Both forms are still accepted by the parser, but the dataset now uses only the standard form.
+- **Redundant `rdf:type sh:hasValue` removed** — Four shapes (Country, Election, Event, Product) previously had a `sh:property [ sh:path rdf:type ; sh:hasValue <Class> ]` block that duplicated the `sh:targetClass` declaration. These redundant entries were removed.
+
+One non-standard term appears in `Book.ttl`: `sh:classKind sh:IRI` (not in the SHACL spec). The parser silently ignores unknown predicates, so this property is treated as unconstrained.
+
 ## Wikidata Entity Shapes — WES (53 files)
 
 ShEx files using Wikidata Q-codes as filenames. These test the [Wikidata label-aware ShEx generation](wikidata-labels.md) feature — shape references and comments use human-readable English labels resolved via SPARQL.

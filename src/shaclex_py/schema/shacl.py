@@ -42,6 +42,9 @@ class NodeShape:
     node_kind: Optional[NodeKind] = None                      # sh:nodeKind at NodeShape level
     node_datatype: Optional[IRI] = None                       # sh:datatype at NodeShape level
     node_in_values: Optional[list[Union[IRI, Literal]]] = None  # sh:in at NodeShape level
+    # sh:or with sh:property groups — alternative mutually-exclusive property sets.
+    # Each inner list is one alternative; properties are also included in ``properties`` (flattened).
+    or_property_groups: Optional[list[list[PropertyShape]]] = None
 
 
 @dataclass

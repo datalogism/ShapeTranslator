@@ -1,6 +1,6 @@
 # Wikidata Label-Aware ShEx Generation
 
-When generating ShEx for Wikidata-based schemas, shape references and comments use human-readable English labels instead of raw QIDs/PIDs. The feature is **disabled by default** (no network calls are made) and only applies to ShEx output directions (`shacl2shex`, `json2shex`).
+When generating ShEx for Wikidata-based schemas, shape references and comments use human-readable English labels instead of raw QIDs/PIDs. The feature is **disabled by default** (no network calls are made) and only applies to the `shacl2shex` direction.
 
 ## CLI
 

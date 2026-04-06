@@ -12,7 +12,6 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Taxon>
 
 <Taxon> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:Taxon ] ;
   rdfs:comment rdf:langString * ;
   rdfs:label rdf:langString + ;
@@ -20,13 +19,15 @@ start = @<Taxon>
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI ? ;
+  schema:parentTaxon @<Taxon_class> * ;
+  yago:consumes @<Taxon_class2> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
+}
 
-  # schema.org property
-  schema:parentTaxon @<Taxon> * ;  # From YAGO Schema design document
+<Taxon_class> EXTRA rdf:type {
+  rdf:type [ schema:Taxon ]
+}
 
-  # yago property
-  yago:consumes @<Taxon> * ;  # From YAGO Schema design document
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+<Taxon_class2> EXTRA rdf:type {
+  rdf:type [ schema:Taxon ]
 }

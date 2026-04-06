@@ -15,10 +15,6 @@
 
     ############################## schema:Thing property
     sh:property [
-        sh:path rdf:type ;
-        sh:hasValue yago:Election ;
-    ] ;
-    sh:property [
         sh:path rdfs:label ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
@@ -54,9 +50,12 @@
         sh:class schema:Place ;
     ] ;
     sh:property [
-        sh:path schema:organizer ;
-        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
-        sh:maxCount 1 ;
+         sh:path schema:organizer ;
+         sh:or (
+                    [ sh:class schema:Organization ]
+                    [ sh:class schema:Person ]
+                ) ;
+         sh:maxCount 1 ;
     ] ;
     sh:property [
         sh:path schema:sponsor ;
@@ -80,8 +79,11 @@
         sh:class schema:Event ;
     ] ;
     sh:property [
-        sh:path yago:participant ;
-        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+         sh:path yago:participant ;
+         sh:or (
+                    [ sh:class schema:Organization ]
+                    [ sh:class schema:Person ]
+                )
     ] ;
 
 

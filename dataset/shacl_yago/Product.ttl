@@ -15,10 +15,6 @@
 
     ############################## schema:Thing property
     sh:property [
-        sh:path rdf:type ;
-        sh:hasValue schema:Product ;
-    ] ;
-    sh:property [
         sh:path rdfs:label ;
         sh:minCount 1 ;
         sh:datatype xsd:string ;

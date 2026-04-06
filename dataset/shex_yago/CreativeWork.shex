@@ -12,26 +12,21 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<CreativeWork>
 
 <CreativeWork> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:CreativeWork ] ;
-  rdfs:comment rdf:langString * ;
-  rdfs:label rdf:langString + ;
-  schema:alternateName rdf:langString * ;
+  rdfs:label xsd:string + ;
+  rdfs:comment xsd:string * ;
+  schema:alternateName xsd:string * ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
-  schema:about IRI * ;                 # From YAGO Schema design document
-  schema:author @<Author> * ;          # From YAGO Schema design document
-  schema:award @<Award> * ;            # From YAGO Schema design document
-  schema:contentLocation @<Place> * ;  # From YAGO Schema design document
-  schema:dateCreated xsd:dateTime ? ;  # From YAGO Schema design document
-  schema:inLanguage @<Language> * ;    # From YAGO Schema design document
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  schema:about IRI * ;
+  schema:author @<Author> * ;
+  schema:award @<Award> * ;
+  schema:contentLocation @<Place> * ;
+  schema:dateCreated xsd:dateTime * ;
+  schema:inLanguage @<Language> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Author> EXTRA rdf:type {

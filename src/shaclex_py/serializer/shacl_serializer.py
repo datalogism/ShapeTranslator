@@ -39,11 +39,8 @@ def _value_to_rdf(val) -> rdflib.term.Node:
     return rdflib.Literal(str(val))
 
 
-def _add_property_shape(g: Graph, shape_node: URIRef, ps: PropertyShape):
-    """Add a property shape as a blank node to the graph."""
-    prop = BNode()
-    g.add((shape_node, SH.property, prop))
-
+def _fill_property_shape(g: Graph, prop: BNode, ps: PropertyShape):
+    """Fill an existing blank node with property shape triples."""
     if ps.alternative_paths:
         # sh:path [ sh:alternativePath ( path1 path2 ... ) ]
         alt_items = [_iri_to_uri(p) for p in ps.alternative_paths]
@@ -98,6 +95,13 @@ def _add_property_shape(g: Graph, shape_node: URIRef, ps: PropertyShape):
         or_list = BNode()
         Collection(g, or_list, or_items)
         g.add((prop, SH["or"], or_list))
+
+
+def _add_property_shape(g: Graph, shape_node: URIRef, ps: PropertyShape):
+    """Add a property shape as a blank node to the graph."""
+    prop = BNode()
+    g.add((shape_node, SH.property, prop))
+    _fill_property_shape(g, prop, ps)
 
 
 def serialize_shacl(schema: SHACLSchema) -> str:
@@ -166,6 +170,20 @@ def serialize_shacl(schema: SHACLSchema) -> str:
 
         for ps in shape.properties:
             _add_property_shape(g, shape_uri, ps)
+
+        # sh:or at NodeShape level with sh:property groups (alternative property sets)
+        if shape.or_property_groups:
+            or_items = []
+            for group in shape.or_property_groups:
+                item_node = BNode()
+                for ps in group:
+                    prop = BNode()
+                    g.add((item_node, SH.property, prop))
+                    _fill_property_shape(g, prop, ps)
+                or_items.append(item_node)
+            or_list = BNode()
+            Collection(g, or_list, or_items)
+            g.add((shape_uri, SH["or"], or_list))
 
     result = g.serialize(format="turtle")
     # Fix rdflib's schema prefix issue (it uses schema1 for http://schema.org/

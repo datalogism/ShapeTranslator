@@ -1,6 +1,6 @@
 # Mapping Rules
 
-This document covers every pattern the converter handles. For each pattern the SHACL source, canonical JSON representation, and ShEx output are shown.
+This document covers every pattern the converter handles. For each pattern the SHACL source and ShEx output are shown. ShexJE is the internal canonical format used during conversion.
 
 Based on [Validating RDF Data, Ch. 13](https://book.validatingrdf.com/bookHtml013.html).
 
@@ -12,11 +12,6 @@ Based on [Validating RDF Data, Ch. 13](https://book.validatingrdf.com/bookHtml01
 ```turtle
 <http://shaclshapes.org/PersonShape> a sh:NodeShape ;
     sh:targetClass schema:Person .
-```
-
-**Canonical JSON**
-```json
-{ "name": "Person", "targetClass": "http://schema.org/Person", "closed": false, "properties": [] }
 ```
 
 **ShEx**
@@ -41,11 +36,6 @@ sh:property [
 ] ;
 ```
 
-**Canonical JSON**
-```json
-{ "path": "http://schema.org/birthDate", "datatype": "http://www.w3.org/2001/XMLSchema#date", "cardinality": {"min": 0, "max": 1} }
-```
-
 **ShEx**
 ```shex
 schema:birthDate xsd:date ?
@@ -65,9 +55,25 @@ sh:property [
 ] ;
 ```
 
-**Canonical JSON**
+**ShexJE**
 ```json
-{ "path": "http://schema.org/founder", "classRef": "http://schema.org/Person", "cardinality": {"min": 0, "max": -1} }
+{
+  "type": "TripleConstraint",
+  "predicate": "http://schema.org/founder",
+  "valueExpr": "Person",
+  "min": 0, "max": -1
+}
+```
+
+with companion value shape appended to the schema's `shapes` array:
+```json
+{
+  "type": "Shape",
+  "id": "Person",
+  "extra": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"],
+  "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+  "values": ["http://schema.org/Person"]
+}
 ```
 
 **ShEx**
@@ -79,7 +85,7 @@ schema:founder @<Person> *
 }
 ```
 
-Multiple properties pointing to the same class share one auxiliary shape (e.g., `@<Human>` for all properties whose range is `wd:Q5`).
+Multiple properties pointing to the same class share one companion value shape.
 
 ---
 
@@ -87,7 +93,7 @@ Multiple properties pointing to the same class share one auxiliary shape (e.g., 
 
 Two surface forms are parsed identically; both round-trip as the standard pySHACL-compatible form.
 
-**SHACL (standard — recommended)**
+**SHACL (standard form)**
 ```turtle
 sh:property [
     sh:path schema:founder ;
@@ -95,7 +101,7 @@ sh:property [
 ] ;
 ```
 
-**SHACL (custom YAGO form — also accepted)**
+**SHACL (legacy form — also accepted)**
 ```turtle
 sh:property [
     sh:path schema:founder ;
@@ -103,9 +109,30 @@ sh:property [
 ] ;
 ```
 
-**Canonical JSON**
+> **Note:** The legacy `sh:class [ sh:or (...) ]` form is not standard SHACL. Earlier versions of the YAGO dataset used this form; the current dataset uses only the standard form. The parser accepts both for backwards compatibility.
+
+**ShexJE**
 ```json
-{ "path": "http://schema.org/founder", "classRefOr": ["http://schema.org/Organization","http://schema.org/Person"], "cardinality": {"min": 0, "max": -1} }
+{
+  "type": "TripleConstraint",
+  "predicate": "http://schema.org/founder",
+  "valueExpr": "OrganizationOrPerson",
+  "min": 0, "max": -1
+}
+```
+
+with companion value shape:
+```json
+{
+  "type": "Shape",
+  "id": "OrganizationOrPerson",
+  "extra": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"],
+  "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+  "values": [
+    "http://schema.org/Organization",
+    "http://schema.org/Person"
+  ]
+}
 ```
 
 **ShEx**
@@ -117,7 +144,8 @@ schema:founder @<Founder> *
 }
 ```
 
-The auxiliary shape name is derived from the property label (Wikidata mode) or the property IRI local name.
+The companion shape ID is derived from the local names of the class IRIs joined with `"Or"`.
+Multiple properties pointing to the same combination share one companion shape.
 
 ---
 
@@ -129,11 +157,6 @@ sh:property [
     sh:path schema:url ;
     sh:nodeKind sh:IRI ;
 ] ;
-```
-
-**Canonical JSON**
-```json
-{ "path": "http://schema.org/url", "nodeKind": "IRI", "cardinality": {"min": 0, "max": -1} }
 ```
 
 **ShEx**
@@ -169,11 +192,6 @@ sh:property [
 ] ;
 ```
 
-**Canonical JSON**
-```json
-{ "path": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "hasValue": "http://schema.org/Person", "cardinality": {"min": 0, "max": -1} }
-```
-
 **ShEx**
 ```shex
 rdf:type [ schema:Person ] *
@@ -189,11 +207,6 @@ sh:property [
     sh:path schema:gender ;
     sh:in ( schema:Male schema:Female ) ;
 ] ;
-```
-
-**Canonical JSON**
-```json
-{ "path": "http://schema.org/gender", "inValues": ["http://schema.org/Female","http://schema.org/Male"], "cardinality": {"min": 0, "max": -1} }
 ```
 
 **ShEx**
@@ -215,17 +228,12 @@ sh:property [
 ] ;
 ```
 
-**Canonical JSON**
-```json
-{ "path": "http://schema.org/sameAs", "iriStem": "http://www.wikidata.org/entity", "cardinality": {"min": 0, "max": -1} }
-```
-
 **ShEx**
 ```shex
 schema:sameAs [ <http://www.wikidata.org/entity>~ ] *
 ```
 
-Arbitrary regex patterns that do not match a URL prefix are kept as `pattern` in the canonical JSON and serialised as a `.  /regex/` pattern facet in ShExC.
+Arbitrary regex patterns that do not match a URL prefix are kept as a `pattern` field internally and serialised as a `.  /regex/` pattern facet in ShExC.
 
 ---
 
@@ -240,16 +248,6 @@ sh:property [
     sh:datatype xsd:anyURI ;
     sh:pattern "^http://dbpedia.org/resource/" ;
 ] ;
-```
-
-**Canonical JSON**
-```json
-{
-  "path": "http://dbpedia.org/ontology/wikiPageRedirects",
-  "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
-  "pattern": "^http://dbpedia.org/resource/",
-  "cardinality": {"min": 0, "max": -1}
-}
 ```
 
 **ShEx**
@@ -273,11 +271,6 @@ sh:property [
 ] ;
 ```
 
-**Canonical JSON** (identical to standard `sh:datatype`)
-```json
-{ "path": "http://dbpedia.org/ontology/populationTotal", "datatype": "http://www.w3.org/2001/XMLSchema#integer", "cardinality": {"min": 0, "max": -1} }
-```
-
 ---
 
 ## Reusable value shapes — node-level constraints
@@ -295,28 +288,17 @@ shapes:LangStringShape a sh:NodeShape ;
 sh:property [ sh:path dbo:abstract ; sh:node shapes:LangStringShape ; sh:minCount 1 ] ;
 ```
 
-**Canonical JSON**
-```json
-{
-  "name": "LangString",
-  "nodeKind": "Literal",
-  "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
-  "closed": false,
-  "properties": []
-}
-```
-
 **ShEx**
 ```shex
 <LangString> rdf:langString
 ```
 
-**ShExJE**
+**ShexJE**
 ```json
 { "type": "NodeConstraint", "id": "LangString", "nodeKind": "Literal", "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString" }
 ```
 
-The `nodeKind` is preserved in canonical and ShExJE. In ShExC only the datatype is serialized (the `Literal` nodeKind is implicit for any datatype constraint).
+The `nodeKind` is preserved in ShexJE. In ShExC only the datatype is serialized (the `Literal` nodeKind is implicit for any datatype constraint).
 
 ### Node-level value set (`TimeZoneShape` pattern)
 
@@ -326,16 +308,6 @@ shapes:TimeZoneShape a sh:NodeShape ;
     sh:in ( dbr:Eastern_Time_Zone dbr:Indian_Standard_Time dbr:Central_Time_Zone ) .
 
 sh:property [ sh:path dbo:timeZone ; sh:node shapes:TimeZoneShape ] ;
-```
-
-**Canonical JSON**
-```json
-{
-  "name": "TimeZone",
-  "inValues": ["http://dbpedia.org/resource/Central_Time_Zone", "http://dbpedia.org/resource/Eastern_Time_Zone", "http://dbpedia.org/resource/Indian_Standard_Time"],
-  "closed": false,
-  "properties": []
-}
 ```
 
 **ShEx**
@@ -375,11 +347,6 @@ sh:property [
 ] ;
 ```
 
-**Canonical JSON**
-```json
-{ "path": "http://dbpedia.org/ontology/cost", "nodeRef": "http://shaclshapes.org/costValueShape", "cardinality": {"min": 0, "max": -1} }
-```
-
 **ShEx**
 ```shex
 dbo:cost @<costValue> *
@@ -406,22 +373,12 @@ sh:property [
 ] ;
 ```
 
-**Canonical JSON**
-```json
-{
-  "name": "costValue",
-  "datatypeOr": ["http://dbpedia.org/datatype/euro", "http://dbpedia.org/datatype/poundSterling", "http://dbpedia.org/datatype/usDollar"],
-  "closed": false,
-  "properties": []
-}
-```
-
 **ShEx**
 ```shex
 <costValue> dbt:usDollar OR dbt:euro OR dbt:poundSterling
 ```
 
-The **declaration order** of the datatype list is preserved in the canonical JSON (not sorted). The ShEx uses valid `NodeConstraint OR NodeConstraint` syntax (ShEx 2.0 `ShapeOr`).
+The **declaration order** of the datatype list is preserved (not sorted). The ShEx uses valid `NodeConstraint OR NodeConstraint` syntax (ShEx 2.0 `ShapeOr`).
 
 ---
 
@@ -449,21 +406,34 @@ sh:or (
 ) ;
 ```
 
-**Canonical JSON** (union of all branches)
+**ShexJE**
 ```json
-[
-  { "path": "http://dbpedia.org/ontology/height",        "datatype": "http://dbpedia.org/datatype/centimetre", "cardinality": {"min": 0, "max": 1} },
-  { "path": "http://dbpedia.org/ontology/Person/height", "datatype": "http://dbpedia.org/datatype/centimetre", "cardinality": {"min": 0, "max": 1} }
-]
+{
+  "type": "EachOf",
+  "expressions": [
+    { "type": "TripleConstraint", "predicate": "http://dbpedia.org/ontology/height",
+      "valueExpr": { "type": "NodeConstraint", "datatype": "dbt:centimetre" }, "max": 1 },
+    { "type": "TripleConstraint", "predicate": "http://dbpedia.org/ontology/Person/height",
+      "valueExpr": { "type": "NodeConstraint", "datatype": "dbt:centimetre" }, "max": 1 }
+  ],
+  "alternativeGroups": [
+    [
+      "http://dbpedia.org/ontology/height",
+      "http://dbpedia.org/ontology/Person/height"
+    ]
+  ]
+}
 ```
 
-**ShEx**
+The `alternativeGroups` annotation records which predicates are mutually exclusive. All property paths and constraint values are fully preserved. Round-tripping through SHACL reconstructs the original `sh:or` blocks. See the ShexJE spec §4.2.1 for the full definition.
+
+**ShEx** (when the chain includes a ShEx step — `alternativeGroups` is not expressible in ShExC)
 ```shex
 dbo:height        dbt:centimetre ? ;
 dbo:Person/height dbt:centimetre ?
 ```
 
-The translator flattens all alternatives into the parent shape's property list (union / over-approximation). All property paths and constraint values are preserved; the strict "exactly one branch" disjunction semantics are relaxed to "any combination allowed". See [Translation Coverage — approximated translations](translation-coverage.md#approximated-translations) for the full analysis.
+When the ShEx step is included, the grouping annotation is preserved in the ShexJE intermediates but lost in the ShExC text. The strict "exactly one branch" disjunction semantics cannot be expressed in ShEx. See [Translation Coverage — approximated translations](translation-coverage.md#approximated-translations) for the full analysis.
 
 ---
 
@@ -500,20 +470,6 @@ sh:property [
 ] ;
 ```
 
-**Canonical JSON**
-```json
-{
-  "path": "http://dbpedia.org/ontology/foundingDate",
-  "pathAlternatives": [
-    "http://dbpedia.org/ontology/foundingDate",
-    "http://dbpedia.org/ontology/formationDate",
-    "http://dbpedia.org/ontology/openingDate"
-  ],
-  "datatype": "http://www.w3.org/2001/XMLSchema#date",
-  "cardinality": {"min": 1, "max": -1}
-}
-```
-
 **ShEx**
 ```shex
 (
@@ -523,7 +479,7 @@ sh:property [
 )
 ```
 
-The canonical JSON stores the primary path (first alternative) in `path` for sorting and display; `pathAlternatives` holds the complete ordered list. In ShEx the constraint becomes a `OneOf` expression (using `|`) with one `TripleConstraint` per alternative path, wrapped in parentheses when embedded inside a larger `EachOf`. This is a slight over-approximation: ShEx `|` requires at least one branch to match, while SHACL `sh:alternativePath` means the constraint applies to whichever path(s) have triples. See [Translation Coverage — approximated translations](translation-coverage.md#approximated-translations) for the full analysis.
+ShexJE stores the primary path (first alternative) in `predicate` and the full ordered list in `pathAlternatives`. In ShEx the constraint becomes a `OneOf` expression (using `|`) with one `TripleConstraint` per alternative path, wrapped in parentheses when embedded inside a larger `EachOf`. This is a slight over-approximation: ShEx `|` requires at least one branch to match, while SHACL `sh:alternativePath` means the constraint applies to whichever path(s) have triples. See [Translation Coverage — approximated translations](translation-coverage.md#approximated-translations) for the full analysis.
 
 ---
 
@@ -534,7 +490,7 @@ The canonical JSON stores the primary path (first alternative) in `path` for sor
 | Default cardinality | ShEx defaults to `{1,1}`; SHACL defaults to `{0,*}`. Always emitted explicitly to avoid ambiguity. |
 | `rdf:type` vs `sh:targetClass` | SHACL uses `sh:targetClass`; ShEx uses `rdf:type [C]` inside the shape body. Promoted/demoted on conversion. |
 | Auxiliary shapes | `sh:class` and `sh:or` with classes produce auto-generated auxiliary shapes in ShEx. |
-| `sh:pattern` (standalone arbitrary regex) | Preserved as `pattern` in canonical JSON; emitted as `. /regex/` pattern facet in ShExC. |
-| `sh:datatype` + `sh:pattern` combined | Both fields carried through canonical JSON; emitted as `dtype /regex/` pattern facet in ShExC. |
-| `sh:or` property alternatives | Flattened to union; disjunction grouping is lost. |
+| `sh:pattern` (standalone arbitrary regex) | Preserved as `pattern` in ShexJE; emitted as `. /regex/` pattern facet in ShExC. |
+| `sh:datatype` + `sh:pattern` combined | Both fields carried through ShexJE; emitted as `dtype /regex/` pattern facet in ShExC. |
+| `sh:or` property alternatives | Preserved via `alternativeGroups` on `EachOf` in ShexJE. Grouping is lost only when the chain passes through ShExC (no ShEx equivalent). |
 | `sh:alternativePath` | Translated to ShEx `OneOf` (`\|`); semantics slightly differ (ShEx requires at least one branch to match; SHACL applies constraint to any present path). |

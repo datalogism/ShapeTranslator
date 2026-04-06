@@ -81,8 +81,6 @@ def _convert_property(prop: CanonicalProperty) -> PropertyShape:
         class_ = IRI(prop.classRef)
     elif prop.classRefOr is not None:
         or_constraints = [IRI(c) for c in prop.classRefOr]
-    elif prop.nodeKind is not None:
-        node_kind = NODE_KIND_MAP.get(prop.nodeKind)
     elif prop.hasValue is not None:
         has_value = _canonical_value_to_model(prop.hasValue)
     elif prop.inValues is not None:
@@ -90,7 +88,12 @@ def _convert_property(prop: CanonicalProperty) -> PropertyShape:
     elif prop.iriStem is not None:
         pattern = f"^{prop.iriStem}/"
     elif prop.nodeRef is not None:
-        node = IRI(prop.nodeRef)
+        # Reconstruct the full shape IRI (strip was done in shacl_to_canonical)
+        node = IRI(f"{SHACL_SHAPES_BASE}{prop.nodeRef}Shape")
+
+    # nodeKind is emitted independently — it can accompany datatype, classRef, etc.
+    if prop.nodeKind is not None:
+        node_kind = NODE_KIND_MAP.get(prop.nodeKind)
 
     # pattern is applied independently: it can accompany a primary constraint
     if prop.pattern is not None:
@@ -127,11 +130,34 @@ def convert_canonical_to_shacl(canonical: CanonicalSchema) -> SHACLSchema:
         shape_iri = IRI(f"{SHACL_SHAPES_BASE}{cshape.name}Shape")
         target_class = IRI(cshape.targetClass) if cshape.targetClass else None
 
-        properties: list[PropertyShape] = []
+        # Identify predicates that belong to alternative groups so they can be
+        # reconstructed as sh:or blocks rather than flat sh:property entries.
+        # Each predicate in a group becomes its own sh:or branch (one property per branch).
+        grouped_preds: set[str] = set()
+        or_property_groups: Optional[list[list[PropertyShape]]] = None
+        if cshape.property_alternative_groups:
+            grouped_preds = {
+                pred
+                for group in cshape.property_alternative_groups
+                for pred in group
+            }
+            pred_to_ps: dict[str, PropertyShape] = {
+                cprop.path: _convert_property(cprop)
+                for cprop in cshape.properties
+                if cprop.path in grouped_preds
+            }
+            # One branch per predicate (mirrors the original sh:or structure)
+            or_property_groups = [
+                [pred_to_ps[pred]]
+                for group in cshape.property_alternative_groups
+                for pred in group
+                if pred in pred_to_ps
+            ]
 
+        properties: list[PropertyShape] = []
         for cprop in cshape.properties:
-            ps = _convert_property(cprop)
-            properties.append(ps)
+            if cprop.path not in grouped_preds:
+                properties.append(_convert_property(cprop))
 
         or_datatypes = (
             [IRI(d) for d in cshape.datatypeOr]
@@ -154,6 +180,7 @@ def convert_canonical_to_shacl(canonical: CanonicalSchema) -> SHACLSchema:
             node_kind=shape_node_kind,
             node_datatype=shape_node_datatype,
             node_in_values=shape_node_in_values,
+            or_property_groups=or_property_groups,
         ))
 
     return SHACLSchema(shapes=shapes, prefixes=list(STANDARD_SHACL_PREFIXES))

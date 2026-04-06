@@ -12,7 +12,6 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<TVSeries>
 
 <TVSeries> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:TVSeries ] ;
   rdfs:comment rdf:langString * ;
   rdfs:label rdf:langString + ;
@@ -21,24 +20,20 @@ start = @<TVSeries>
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
-  schema:actor @<Person> * ;                    # From YAGO Schema design document
-  schema:director @<Person> * ;                 # From YAGO Schema design document
-  schema:locationCreated @<Place> * ;           # From YAGO Schema design document
-  schema:musicBy @<MusicBy> * ;                 # From YAGO Schema design document
-  schema:numberOfEpisodes xsd:decimal ? ;       # From YAGO Schema design document
-  schema:numberOfSeasons xsd:decimal ? ;        # From YAGO Schema design document
-  schema:productionCompany @<Organization> * ;  # From YAGO Schema design document
-  schema:about IRI * ;                          # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:author @<Author> * ;                   # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:award @<Award> * ;                     # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:contentLocation @<Place> * ;           # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:dateCreated xsd:dateTime ? ;           # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:inLanguage @<Language> * ;             # From YAGO Schema design document, inherit from @<CreativeWork>
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  schema:actor @<Person> * ;
+  schema:director @<Person> * ;
+  schema:locationCreated @<Place> * ;
+  schema:musicBy @<MusicBy> * ;
+  schema:numberOfEpisodes xsd:decimal ? ;
+  schema:numberOfSeasons xsd:decimal ? ;
+  schema:productionCompany @<Organization> * ;
+  schema:about IRI * ;
+  schema:author @<Author> * ;
+  schema:award @<Award> * ;
+  schema:contentLocation @<Place> * ;
+  schema:dateCreated xsd:dateTime ? ;
+  schema:inLanguage @<Language> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Author> EXTRA rdf:type {
