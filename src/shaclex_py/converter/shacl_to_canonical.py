@@ -67,7 +67,7 @@ def _convert_property(ps: PropertyShape) -> Optional[CanonicalProperty]:
 
     prop = CanonicalProperty(path=path, cardinality=cardinality)
 
-    # Primary constraint (mutually exclusive, first match wins)
+    # Primary constraint (mutually exclusive, first match wins; nodeKind is handled separately)
     if ps.has_value is not None:
         prop.hasValue = _value_to_canonical(ps.has_value)
     elif ps.in_values is not None:
@@ -76,8 +76,6 @@ def _convert_property(ps: PropertyShape) -> Optional[CanonicalProperty]:
         prop.classRefOr = sorted([c.value for c in ps.or_constraints])
     elif ps.class_:
         prop.classRef = ps.class_.value
-    elif ps.node_kind:
-        prop.nodeKind = ps.node_kind.value
     elif ps.datatype:
         prop.datatype = ps.datatype.value
     elif ps.pattern:
@@ -87,7 +85,14 @@ def _convert_property(ps: PropertyShape) -> Optional[CanonicalProperty]:
         else:
             prop.pattern = ps.pattern
     elif ps.node:
-        prop.nodeRef = ps.node.value
+        # Normalise using the same logic as shape names so that nodeRef IDs
+        # are consistent with the canonical shape names they point to.
+        prop.nodeRef = _shape_name_from_iri(ps.node)
+
+    # nodeKind is captured independently — it can accompany datatype, classRef, etc.
+    # (e.g. DBpedia: sh:datatype xsd:string ; sh:nodeKind sh:Literal — both must round-trip)
+    if ps.node_kind is not None:
+        prop.nodeKind = ps.node_kind.value
 
     # Secondary: sh:pattern can accompany a primary type constraint (e.g. sh:datatype + sh:pattern)
     if ps.pattern is not None and prop.pattern is None and prop.iriStem is None:
@@ -142,6 +147,19 @@ def convert_shacl_to_canonical(shacl: SHACLSchema) -> CanonicalSchema:
             if node_shape.node_in_values else None
         )
 
+        property_alternative_groups = None
+        if node_shape.or_property_groups:
+            # All branches of the sh:or together form one alternative group.
+            # Each branch contributes its predicate(s) to a single flat list,
+            # because the alternatives are mutually exclusive across ALL branches.
+            all_preds = [
+                ps.path.iri.value
+                for group in node_shape.or_property_groups
+                for ps in group
+            ]
+            if all_preds:
+                property_alternative_groups = [all_preds]
+
         canonical_shapes.append(CanonicalShape(
             name=shape_name,
             targetClass=target_class,
@@ -151,6 +169,7 @@ def convert_shacl_to_canonical(shacl: SHACLSchema) -> CanonicalSchema:
             nodeKind=shape_node_kind,
             datatype=shape_datatype,
             inValues=shape_in_values,
+            property_alternative_groups=property_alternative_groups,
         ))
 
     return CanonicalSchema(shapes=canonical_shapes)

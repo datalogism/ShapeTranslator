@@ -12,29 +12,22 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Election>
 
 <Election> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ yago:Election ] ;
-  rdfs:comment rdf:langString * ;
-  rdfs:label rdf:langString + ;
-  schema:alternateName rdf:langString * ;
+  rdfs:label xsd:string + ;
+  rdfs:comment xsd:string * ;
+  schema:alternateName xsd:string * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:string * ;
-
-  # schema.org property
-  schema:about IRI * ;               # From YAGO Schema design document, inherit from @<Event>
-  schema:endDate xsd:dateTime ? ;    # From YAGO Schema design document, inherit from @<Event>
-  schema:location @<Place> * ;       # From YAGO Schema design document, inherit from @<Event>
-  schema:organizer @<Organizer> ? ;  # From YAGO Schema design document, inherit from @<Event>
-  schema:sponsor @<Sponsor> * ;      # From YAGO Schema design document, inherit from @<Event>
-  schema:startDate xsd:dateTime ? ;  # From YAGO Schema design document, inherit from @<Event>
-  schema:superEvent @<Event> * ;     # From YAGO Schema design document, inherit from @<Event>
-
-  # yago property
-  yago:follows @<Event> * ;            # From YAGO Schema design document, inherit from @<Event>
-  yago:participant @<Participant> * ;  # From YAGO Schema design document, inherit from @<Event>
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  schema:about . * ;
+  schema:endDate xsd:dateTime ? ;
+  schema:location @<Place> * ;
+  schema:organizer @<Organizer> ? ;
+  schema:sponsor @<Person> * ;
+  schema:startDate xsd:dateTime ? ;
+  schema:superEvent @<Event> * ;
+  yago:follows @<Event> * ;
+  yago:participant @<Participant> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Event> EXTRA rdf:type {
@@ -42,17 +35,17 @@ start = @<Election>
 }
 
 <Organizer> EXTRA rdf:type {
-  rdf:type [ schema:Person schema:Organization ]
+  rdf:type [ schema:Organization schema:Person ]
 }
 
 <Participant> EXTRA rdf:type {
-  rdf:type [ schema:Person schema:Organization ]
+  rdf:type [ schema:Organization schema:Person ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ schema:Person ]
 }
 
 <Place> EXTRA rdf:type {
   rdf:type [ schema:Place ]
-}
-
-<Sponsor> EXTRA rdf:type {
-  rdf:type [ schema:Person schema:Organization ]
 }

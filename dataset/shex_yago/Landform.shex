@@ -12,7 +12,6 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Landform>
 
 <Landform> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:Landform ] ;
   rdfs:label rdf:langString + ;
   rdfs:comment rdf:langString * ;
@@ -21,19 +20,13 @@ start = @<Landform>
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI ? ;
-
-  # schema.org property
-  schema:geo geo:wktLiteral ? ;  # From YAGO Schema design document, inherit from @<Place>
-  schema:location @<Place> * ;   # From YAGO Schema design document, inherit from @<Place>
-
-  # yago property
-  yago:area xsd:decimal ? ;       # From YAGO Schema design document, inherit from @<Place>
-  yago:elevation xsd:decimal * ;  # From YAGO Schema design document, inherit from @<Place>
-  yago:highestPoint @<Place> ? ;  # From YAGO Schema design document, inherit from @<Place>
-  yago:neighbors @<Place> * ;     # From YAGO Schema design document, inherit from @<Place>
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  schema:geo geo:wktLiteral ? ;
+  schema:location @<Place> * ;
+  yago:area xsd:decimal ? ;
+  yago:elevation xsd:decimal * ;
+  yago:highestPoint @<Place> ? ;
+  yago:neighbors @<Place> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Place> EXTRA rdf:type {

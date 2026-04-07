@@ -66,8 +66,11 @@
         sh:class schema:Place ;
     ] ;
     sh:property [
-        sh:path schema:musicBy ;
-        sh:class [ sh:or ( schema:MusicGroup schema:Person ) ] ;
+         sh:path schema:musicBy ;
+         sh:or (
+                    [ sh:class schema:Organization ]
+                    [ sh:class schema:Person ]
+                );
     ] ;
     sh:property [
         sh:path schema:productionCompany ;
@@ -78,8 +81,11 @@
         sh:nodeKind sh:IRI ;
     ] ;
     sh:property [
-        sh:path schema:author ;
-        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+         sh:path schema:author ;
+         sh:or (
+                    [ sh:class schema:Organization ]
+                    [ sh:class schema:Person ]
+                );
     ] ;
     sh:property [
         sh:path schema:award ;

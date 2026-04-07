@@ -448,7 +448,7 @@ def convert_shacl_to_shex(
         if start is None:
             start = IRI(shape_name)
 
-    # Add auxiliary shapes (sorted by name for consistent output)
+    # Add auxiliary shapes (sorted by name for consistent output_old)
     main_names = {s.name.value for s in shapes}
     for name in sorted(auxiliary_shapes):
         if name not in main_names:

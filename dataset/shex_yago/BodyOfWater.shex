@@ -12,7 +12,6 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<BodyOfWater>
 
 <BodyOfWater> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:BodyOfWater ] ;
   rdfs:comment rdf:langString * ;
   rdfs:label rdf:langString + ;
@@ -20,19 +19,17 @@ start = @<BodyOfWater>
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI ? ;
   schema:image xsd:anyURI ? ;
+  schema:geo geo:wktLiteral ? ;
+  schema:location @<Place> * ;
+  yago:flowsInto @<BodyOfWater_class> ? ;
+  yago:area xsd:decimal * ;
+  yago:elevation xsd:decimal * ;
+  yago:neighbors @<Place> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
+}
 
-  # schema.org property
-  schema:geo geo:wktLiteral ? ;  # From YAGO Schema design document, inherit from @<Place>
-  schema:location @<Place> * ;   # From YAGO Schema design document, inherit from @<Place>
-
-  # yago property
-  yago:flowsInto @<BodyOfWater> ? ;  # From YAGO Schema design document
-  yago:area xsd:decimal * ;          # From YAGO Schema design document, inherit from @<Place>
-  yago:elevation xsd:decimal * ;     # From YAGO Schema design document, inherit from @<Place>
-  yago:neighbors @<Place> * ;        # From YAGO Schema design document, inherit from @<Place>
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+<BodyOfWater_class> EXTRA rdf:type {
+  rdf:type [ schema:BodyOfWater ]
 }
 
 <Place> EXTRA rdf:type {

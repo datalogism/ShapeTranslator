@@ -12,39 +12,32 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<City>
 
 <City> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:City ] ;
-  rdfs:comment rdf:langString * ;
   rdfs:label rdf:langString + ;
+  rdfs:comment rdf:langString * ;
   schema:alternateName rdf:langString * ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
-  schema:geo geo:wktLiteral ? ;        # From YAGO Schema design document, inherit from @<Place>
-  schema:location @<Place> * ;         # From YAGO Schema design document, inherit from @<Place>
-  schema:dateCreated xsd:dateTime ? ;  # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  schema:memberOf @<Organization> ? ;  # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  schema:postalCode xsd:string * ;     # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  schema:slogan xsd:string ? ;         # From YAGO Schema design document, inherit from @<AdministrativeArea>
+  schema:geo geo:wktLiteral ? ;
+  schema:location @<Place> * ;
+  schema:dateCreated xsd:dateTime ? ;
+  schema:memberOf @<Organization> ? ;
+  schema:postalCode xsd:string * ;
+  schema:slogan xsd:string ? ;
   schema:logo xsd:anyURI ? ;
   schema:award @<Award> * ;
   schema:founder @<Person> ? ;
-  
-  # yago property
-  yago:area xsd:decimal * ;                # From YAGO Schema design document, inherit from @<Place>
-  yago:elevation xsd:decimal * ;           # From YAGO Schema design document, inherit from @<Place>
-  yago:highestPoint @<Place> ? ;           # From YAGO Schema design document, inherit from @<Place>
-  yago:neighbors @<Place> * ;              # From YAGO Schema design document, inherit from @<Place>
-  yago:demonym xsd:string * ;              # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  yago:leader @<Person> * ;                # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  yago:populationNumber xsd:decimal * ;    # From YAGO Schema design document, inherit from @<AdministrativeArea>
-  yago:replaces @<AdministrativeArea> * ;  # From YAGO Schema design document, inherit from @<AdministrativeArea>
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  yago:area xsd:decimal * ;
+  yago:elevation xsd:decimal * ;
+  yago:highestPoint @<Place> ? ;
+  yago:neighbors @<Place> * ;
+  yago:demonym xsd:string * ;
+  yago:leader @<Person> * ;
+  yago:populationNumber xsd:decimal * ;
+  yago:replaces @<AdministrativeArea> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <AdministrativeArea> EXTRA rdf:type {
@@ -66,7 +59,3 @@ start = @<City>
 <Place> EXTRA rdf:type {
   rdf:type [ schema:Place ]
 }
-
-# <Mountain> EXTRA rdf:type {
-#   rdf:type [ yago:Mountain ]
-# }

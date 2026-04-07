@@ -12,35 +12,36 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Event>
 
 <Event> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:Event ] ;
-  rdfs:label rdf:langString * ;
-  rdfs:comment rdf:langString * ;
-  schema:alternateName rdf:langString * ;
+  rdfs:label xsd:string * ;
+  rdfs:comment xsd:string * ;
+  schema:alternateName xsd:string * ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
+  schema:about . * ;
+  schema:endDate xsd:dateTime ? ;
+  schema:location @<Place> * ;
+  schema:organizer @<Organizer> * ;
+  schema:sponsor @<Sponsor> * ;
+  schema:startDate xsd:dateTime ? ;
+  schema:superEvent @<Event_class> * ;
+  yago:follows @<Event_class2> * ;
+  yago:participant @<Participant> ? ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
+}
 
-  # schema.org property
-  schema:about IRI * ;               # From YAGO Schema design document
-  schema:endDate xsd:dateTime ? ;    # From YAGO Schema design document
-  schema:location @<Place> * ;       # From YAGO Schema design document
-  schema:organizer @<Organizer> * ;  # From YAGO Schema design document
-  schema:sponsor @<Sponsor> * ;      # From YAGO Schema design document
-  schema:startDate xsd:dateTime ? ;  # From YAGO Schema design document
-  schema:superEvent @<Event> * ;     # From YAGO Schema design document
+<Event_class> EXTRA rdf:type {
+  rdf:type [ schema:Event ]
+}
 
-  # yago property
-  yago:follows @<Event> * ;            # From YAGO Schema design document
-  yago:participant @<Participant> ? ;  # From YAGO Schema design document
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+<Event_class2> EXTRA rdf:type {
+  rdf:type [ schema:Event ]
 }
 
 <Organizer> EXTRA rdf:type {
-  rdf:type [ schema:Person schema:Organization ]
+  rdf:type [ schema:Organization schema:Person ]
 }
 
 <Participant> EXTRA rdf:type {

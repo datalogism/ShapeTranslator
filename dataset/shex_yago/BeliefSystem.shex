@@ -12,14 +12,11 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<BeliefSystem>
 
 <BeliefSystem> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ yago:BeliefSystem ] ;
   rdfs:comment rdf:langString + ;
   rdfs:label rdf:langString + ;
   schema:alternateName rdf:langString ? ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:string ;
-  
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }

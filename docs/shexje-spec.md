@@ -1,8 +1,8 @@
 # ShexJE — ShEx JSON Extended Specification
 
-**Version**: 1.0
+**Version**: 2.0
 **Status**: Draft
-**Supersedes**: Canonical JSON (internal interchange format)
+**Supersedes**: ShexJE 1.0 (prior internal format with JSON shorthand fields on TripleConstraint)
 
 ---
 
@@ -17,13 +17,32 @@ interchange language for this library.  It is designed around three goals:
 2. **SHACL-completeness** — every SHACL construct (targets, severity,
    qualified value shapes, property paths, SPARQL constraints, …) can be
    expressed in ShexJE.
-3. **Canonical-JSON compatibility** — the simplified shorthand fields used by
-   the previous canonical JSON format (`classRef`, `iriStem`, `hasValue`, …)
-   are retained as first-class fields so existing tooling migrates with
-   zero friction.
+3. **ShexJ-first extension model** — ShexJE only adds SHACL-specific features
+   on top of ShexJ.  All property constraints use the standard ShexJ
+   ``valueExpr`` field; there are no non-ShexJ shorthands on
+   ``TripleConstraint``.
 
 ShexJE uses the same `"type"` discriminator pattern as ShexJ and produces
 deterministic, human-readable JSON.
+
+### 1.1 Changes from ShexJE 1.0
+
+ShexJE 2.0 removes the following non-ShexJ shorthand fields that were
+previously allowed on `TripleConstraint`:
+
+| Removed field | Replacement |
+|---|---|
+| `classRef: "IRI"` | `valueExpr: "ShapeId"` (see §3.1.1) |
+| `classRefOr: ["IRI", …]` | `valueExpr: "ShapeId"` with multiple `values` |
+| `iriStem: "IRI"` | `valueExpr: {type:"NodeConstraint", values:[{type:"IriStem", stem:"IRI"}]}` |
+| `hasValue: V` on TC | `valueExpr: {type:"NodeConstraint", values:[V]}` |
+| `in: […]` on TC | `valueExpr: {type:"NodeConstraint", values:[…]}` |
+
+The parser silently upgrades legacy documents that still carry these fields.
+New documents **must** use the `valueExpr` forms.
+
+A new **value-shape shorthand** was added to `Shape` (§3.1.1) for the common
+pattern of constraining the type of a linked node.
 
 ---
 
@@ -114,6 +133,71 @@ Extends ShexJ `Shape`.  All ShexJ fields are preserved verbatim.
 | `not`              | ShapeExpression       | `sh:not`                   | Must not match                     |
 | `xone`             | ShapeExpression[]     | `sh:xone`                  | Exactly one must match             |
 | `sparql`           | SparqlConstraint[]    | `sh:sparql`                | See §3.6                           |
+| `predicate`        | IRI string            | (value-shape shorthand)    | See §3.1.1                         |
+| `values`           | (IRI or literal)[]    | (value-shape shorthand)    | See §3.1.1                         |
+
+#### 3.1.1 Value-shape shorthand
+
+When a `Shape` is used exclusively to constrain the type of a linked node
+(i.e. it encodes a `sh:class` constraint), the full `expression` form:
+
+```json
+{
+  "type": "Shape",
+  "id":   "Country",
+  "extra": ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"],
+  "expression": {
+    "type": "TripleConstraint",
+    "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+    "valueExpr": {
+      "type": "NodeConstraint",
+      "values": ["http://dbpedia.org/ontology/Country"]
+    }
+  }
+}
+```
+
+can be written more compactly using the `predicate` + `values` shorthand:
+
+```json
+{
+  "type":      "Shape",
+  "id":        "Country",
+  "extra":     ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"],
+  "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+  "values":    ["http://dbpedia.org/ontology/Country"]
+}
+```
+
+For OR-of-classes (formerly `classRefOr`), list all class IRIs in `values`:
+
+```json
+{
+  "type":      "Shape",
+  "id":        "AcademicSubjectOrMedicalSpecialty",
+  "extra":     ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"],
+  "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+  "values":    [
+    "http://dbpedia.org/ontology/AcademicSubject",
+    "http://dbpedia.org/ontology/MedicalSpecialty"
+  ]
+}
+```
+
+These value shapes are referenced from `TripleConstraint.valueExpr` using a
+plain string (the shape `id`):
+
+```json
+{
+  "type":      "TripleConstraint",
+  "predicate": "http://dbpedia.org/ontology/academicDiscipline",
+  "valueExpr": "AcademicSubjectOrMedicalSpecialty"
+}
+```
+
+The `predicate` and `values` fields are mutually exclusive with `expression`.
+The `extra` array should list the type predicate so the shape does not
+*require* the triple (open-world assumption).
 
 ### 3.2 NodeConstraint (`type: "NodeConstraint"`)
 
@@ -216,19 +300,13 @@ Extends ShexJ `TripleConstraint`.
   "qualifiedMaxCount":            3,
   "qualifiedValueShapesDisjoint": false,
 
-  "uniqueLang": false,
-
-  "classRef":   "schema:Person",
-  "classRefOr": ["schema:Person", "schema:Organization"],
-  "iriStem":    "https://www.wikidata.org/wiki/",
-  "hasValue":   "ex:specificValue",
-  "in":         ["active", "inactive"]
+  "uniqueLang": false
 }
 ```
 
 #### ShexJE extensions
 
-| Field                            | Type               | SHACL / canonical equivalent            |
+| Field                            | Type               | SHACL equivalent                        |
 |----------------------------------|--------------------|-----------------------------------------|
 | `path`                           | PropertyPath       | sh:path (complex paths) — see §5        |
 | `severity`                       | IRI string         | `sh:severity` (overrides shape-level)   |
@@ -243,25 +321,77 @@ Extends ShexJ `TripleConstraint`.
 | `qualifiedMaxCount`              | integer            | `sh:qualifiedMaxCount`                  |
 | `qualifiedValueShapesDisjoint`   | boolean            | `sh:qualifiedValueShapesDisjoint`       |
 | `uniqueLang`                     | boolean            | `sh:uniqueLang`                         |
-| **`classRef`**                   | IRI string         | Canonical shorthand → `ShapeRef`        |
-| **`classRefOr`**                 | IRI[]              | Canonical shorthand → OR of classes     |
-| **`iriStem`**                    | IRI string         | Canonical shorthand → IriStem value-set |
-| **`hasValue`**                   | IRI or literal     | Canonical shorthand → `sh:hasValue`     |
-| **`in`**                         | value[]            | Canonical shorthand → `sh:in`           |
 
-> **Shorthand precedence**: shorthand fields (`classRef`, `classRefOr`,
-> `iriStem`, `hasValue`, `in`) take priority over `valueExpr` when both are
-> present.  Prefer native `valueExpr` forms for new documents; shorthands are
-> provided for migration from canonical JSON.
+#### Class / type constraints via valueExpr
+
+All type/class constraints are expressed using the standard ShexJ `valueExpr`
+field:
+
+| Pattern                  | `valueExpr`                                                         |
+|--------------------------|---------------------------------------------------------------------|
+| Single class             | `"ShapeId"` (string — see §3.1.1)                                   |
+| OR of classes            | `"ShapeId"` (string, shape has multiple `values`)                   |
+| IRI stem                 | `{type:"NodeConstraint", values:[{type:"IriStem", stem:"…"}]}`      |
+| hasValue (single)        | `{type:"NodeConstraint", values:["ex:value"]}`                      |
+| Enumeration              | `{type:"NodeConstraint", values:["ex:v1","ex:v2"]}`                 |
+| Named shape reference    | `"ShapeId"` or `{type:"ShapeRef", reference:"ShapeId"}`             |
+
+> **Deprecated**: `classRef`, `classRefOr`, `iriStem`, `hasValue`, `in`
+> directly on `TripleConstraint` were removed in ShexJE 2.0.  The parser
+> still accepts them for backward compatibility and automatically converts
+> them to `valueExpr` forms.
 
 ### 4.2 EachOf / OneOf
 
-Unchanged from ShexJ (`"type": "EachOf"` / `"type": "OneOf"`).
+Mostly unchanged from ShexJ (`"type": "EachOf"` / `"type": "OneOf"`), with one ShexJE extension on `EachOf`:
 
 ```json
 { "type": "EachOf", "expressions": [ ... ], "min": 1, "max": 1 }
 { "type": "OneOf",  "expressions": [ ... ] }
 ```
+
+#### 4.2.1 `alternativeGroups` (new in ShexJE 2.1)
+
+`EachOf` may carry an optional `"alternativeGroups"` field — an array of arrays of predicate IRI strings.  Each inner array names a group of predicates that are **mutually exclusive alternatives** in the source schema (originating from a SHACL `sh:or` with `sh:property` blocks at `NodeShape` level).
+
+The predicates named in `alternativeGroups` are still expressed as regular `TripleConstraint` entries inside `"expressions"` with their full constraints.  The `alternativeGroups` field is a **pure annotation** added for round-trip fidelity; it does not change the ShexJE validation semantics.
+
+```json
+{
+  "type": "EachOf",
+  "expressions": [
+    {
+      "type": "TripleConstraint",
+      "predicate": "http://dbpedia.org/ontology/timeInSpace",
+      "valueExpr": { "type": "NodeConstraint", "nodeKind": "Literal" },
+      "min": 1, "max": -1
+    },
+    {
+      "type": "TripleConstraint",
+      "predicate": "http://dbpedia.org/ontology/Astronaut/timeInSpace",
+      "valueExpr": { "type": "NodeConstraint", "nodeKind": "Literal" },
+      "min": 1, "max": -1
+    }
+  ],
+  "alternativeGroups": [
+    [
+      "http://dbpedia.org/ontology/timeInSpace",
+      "http://dbpedia.org/ontology/Astronaut/timeInSpace"
+    ]
+  ]
+}
+```
+
+When converting back to SHACL, each predicate in an `alternativeGroups` entry becomes its own `sh:or` branch:
+
+```turtle
+sh:or (
+  [ sh:property [ sh:path dbo:timeInSpace ;        sh:nodeKind sh:Literal ; sh:minCount 1 ] ]
+  [ sh:property [ sh:path dbo:Astronaut/timeInSpace ; sh:nodeKind sh:Literal ; sh:minCount 1 ] ]
+) ;
+```
+
+This is distinct from `sh:alternativePath` (same constraint on multiple predicates), which is represented via `AlternativePath` on `TripleConstraint.path` — see §5.
 
 ### 4.3 Cardinality
 
@@ -342,27 +472,27 @@ ShexJ conventions, extended with SHACL language stems:
 
 ---
 
-## 8. Canonical JSON → ShexJE mapping
+## 8. Internal canonical model → ShexJE mapping
 
-The previous internal canonical JSON format maps cleanly to ShexJE:
+The internal canonical representation used during conversion maps to ShexJE as follows:
 
-| Canonical JSON field          | ShexJE equivalent                                    |
-|-------------------------------|------------------------------------------------------|
-| `shapes[].name`               | `shapes[].id`                                        |
-| `shapes[].targetClass`        | `shapes[].targetClass`                               |
-| `shapes[].closed`             | `shapes[].closed`                                    |
-| `shapes[].datatypeOr`         | `ShapeOrE` with `NodeConstraintE(datatype=…)` items  |
-| `properties[].path`           | `TripleConstraintE.predicate`                        |
-| `properties[].datatype`       | `valueExpr: {type:"NodeConstraint", datatype:…}`     |
-| `properties[].classRef`       | `TripleConstraintE.classRef` shorthand               |
-| `properties[].classRefOr`     | `TripleConstraintE.classRefOr` shorthand             |
-| `properties[].nodeKind`       | `valueExpr: {type:"NodeConstraint", nodeKind:…}`     |
-| `properties[].hasValue`       | `TripleConstraintE.hasValue` shorthand               |
-| `properties[].inValues`       | `valueExpr: {type:"NodeConstraint", values:[…]}`     |
-| `properties[].iriStem`        | `TripleConstraintE.iriStem` shorthand                |
-| `properties[].nodeRef`        | `valueExpr: {type:"ShapeRef", reference:…}`          |
-| `properties[].pattern`        | added to `NodeConstraintE.pattern`                   |
-| `properties[].cardinality`    | `TripleConstraintE.min` / `TripleConstraintE.max`    |
+| Internal canonical field      | ShexJE equivalent                                                     |
+|-------------------------------|-----------------------------------------------------------------------|
+| `shapes[].name`               | `shapes[].id`                                                         |
+| `shapes[].targetClass`        | `shapes[].targetClass`                                                |
+| `shapes[].closed`             | `shapes[].closed`                                                     |
+| `shapes[].datatypeOr`         | `ShapeOrE` with `NodeConstraintE(datatype=…)` items                   |
+| `properties[].path`           | `TripleConstraintE.predicate`                                         |
+| `properties[].datatype`       | `valueExpr: {type:"NodeConstraint", datatype:…}`                      |
+| `properties[].classRef`       | `valueExpr: "ShapeId"` + companion `ShapeE(predicate, values)`        |
+| `properties[].classRefOr`     | `valueExpr: "ShapeId"` + companion `ShapeE(predicate, values:[…])`    |
+| `properties[].nodeKind`       | `valueExpr: {type:"NodeConstraint", nodeKind:…}`                      |
+| `properties[].hasValue`       | `valueExpr: {type:"NodeConstraint", values:[value]}`                  |
+| `properties[].inValues`       | `valueExpr: {type:"NodeConstraint", values:[…]}`                      |
+| `properties[].iriStem`        | `valueExpr: {type:"NodeConstraint", values:[{type:"IriStem",stem:…}]}`|
+| `properties[].nodeRef`        | `valueExpr: "ShapeId"` (string reference)                             |
+| `properties[].pattern`        | added to `NodeConstraintE.pattern`                                    |
+| `properties[].cardinality`    | `TripleConstraintE.min` / `TripleConstraintE.max`                     |
 
 ---
 
@@ -403,8 +533,8 @@ New in ShexJE only: `ShapeXoneE`, `SparqlConstraintE`, `InversePath`,
 | `sh:property [ sh:path p … ]`              | `TripleConstraintE(predicate=p, …)`                     |
 | `sh:datatype D`                            | `valueExpr: NodeConstraintE(datatype=D)`                |
 | `sh:nodeKind sh:IRI`                       | `valueExpr: NodeConstraintE(nodeKind="iri")`            |
-| `sh:class C`                               | `classRef: C` shorthand                                 |
-| `sh:or ([sh:class C1][sh:class C2])`       | `classRefOr: [C1, C2]` shorthand                        |
+| `sh:class C`                               | `valueExpr: "ShapeId"` + `ShapeE(predicate, values:[C])` |
+| `sh:or ([sh:class C1][sh:class C2])`       | `valueExpr: "ShapeId"` + `ShapeE(predicate, values:[C1,C2])` |
 | `sh:pattern "regex"`                       | `valueExpr: NodeConstraintE(pattern="regex")`           |
 | `sh:hasValue V`                            | `hasValue: V` shorthand                                 |
 | `sh:in (v1 v2)`                            | `in: [v1, v2]` shorthand                                |
@@ -425,7 +555,7 @@ New in ShexJE only: `ShapeXoneE`, `SparqlConstraintE`, `InversePath`,
 | `sh:sparql [ sh:select "…" ]`              | `ShapeE.sparql: [{type:"SparqlConstraint", select:"…"}]`|
 | `sh:languageIn ("en" "fr")`                | `NodeConstraintE.languageIn: ["en","fr"]`               |
 | `sh:uniqueLang true`                       | `uniqueLang: true`                                      |
-| `sh:node S`                                | `valueExpr: {type:"ShapeRef", reference:S}`             |
+| `sh:node S`                                | `valueExpr: "S"` (string) or `{type:"ShapeRef", reference:S}` |
 | Top-level `sh:or ([sh:datatype D1]…)`      | `ShapeOrE` with `NodeConstraintE(datatype=…)` items     |
 
 ---
@@ -439,6 +569,7 @@ New in ShexJE only: `ShapeXoneE`, `SparqlConstraintE`, `InversePath`,
   "prefixes": {
     "schema": "http://schema.org/",
     "xsd":    "http://www.w3.org/2001/XMLSchema#",
+    "rdf":    "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "ex":     "http://example.org/"
   },
   "shapes": [
@@ -451,40 +582,46 @@ New in ShexJE only: `ShapeXoneE`, `SparqlConstraintE`, `InversePath`,
         "type": "EachOf",
         "expressions": [
           {
-            "type":     "TripleConstraint",
+            "type":      "TripleConstraint",
             "predicate": "schema:name",
             "valueExpr": { "type": "NodeConstraint", "datatype": "xsd:string" },
             "min": 1, "max": 1
           },
           {
-            "type":     "TripleConstraint",
+            "type":      "TripleConstraint",
             "predicate": "schema:birthDate",
             "valueExpr": { "type": "NodeConstraint", "datatype": "xsd:date" },
             "min": 0, "max": 1,
-            "severity": "sh:Warning"
+            "severity":  "sh:Warning"
           },
           {
             "type":      "TripleConstraint",
             "predicate": "schema:knows",
-            "classRef":  "PersonShape",
+            "valueExpr": "PersonShape",
             "min": 0, "max": -1
           },
           {
             "type":      "TripleConstraint",
             "predicate": "schema:alumniOf",
-            "classRefOr": ["schema:CollegeOrUniversity", "schema:HighSchool"],
+            "valueExpr": "CollegeOrUniversityOrHighSchool",
             "min": 0, "max": -1
           },
           {
             "type":      "TripleConstraint",
             "predicate": "schema:url",
-            "iriStem":   "https://",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "values": [{ "type": "IriStem", "stem": "https://" }]
+            },
             "min": 0, "max": -1
           },
           {
             "type":      "TripleConstraint",
             "predicate": "schema:gender",
-            "in":        ["Male", "Female", "NonBinary"],
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "values": ["ex:Male", "ex:Female", "ex:NonBinary"]
+            },
             "min": 0, "max": 1
           }
         ]
@@ -497,6 +634,16 @@ New in ShexJE only: `ShapeXoneE`, `SparqlConstraintE`, `InversePath`,
           "message":  "Birth date must not be in the future",
           "severity": "sh:Violation"
         }
+      ]
+    },
+    {
+      "type": "Shape",
+      "id":   "CollegeOrUniversityOrHighSchool",
+      "extra": ["rdf:type"],
+      "predicate": "rdf:type",
+      "values": [
+        "http://schema.org/CollegeOrUniversity",
+        "http://schema.org/HighSchool"
       ]
     },
     {
@@ -523,12 +670,12 @@ SHACL (Turtle)          ShExC               ShexJE JSON
  parse_shacl()       parse_shex()          parse_shexje()
       ↓                   ↓                      ↓
   SHACLSchema         ShExSchema            ShexJESchema
-      ↓    ↘          ↙    ↓               ↙       ↓
-      ↓  convert_*_to_canonical()    convert_shexje_to_canonical()
-      ↓              ↓                              ↓
-      ↓         CanonicalSchema ←──────────────────→ CanonicalSchema
-      ↓              ↓                convert_canonical_to_shexje()
-      ↓    convert_canonical_to_shacl/shex()
+      ↓                   ↓               ↙       ↓
+ convert_shacl_to_shexje()  convert_shex_to_shexje()
+              ↓                              ↓
+         ShexJESchema ←───────────────── ShexJESchema
+              ↓                    (canonical format)
+ convert_shexje_to_shacl/shex()
       ↓              ↓
  serialize_shacl()  serialize_shex()       serialize_shexje()
       ↓                   ↓                      ↓
@@ -537,49 +684,35 @@ SHACL (Turtle)          ShExC               ShexJE JSON
 
 ### Feature support matrix
 
-| Feature                        | Canonical JSON | ShexJE | SHACL | ShExC |
-|--------------------------------|:--------------:|:------:|:-----:|:-----:|
-| Shape + properties             | ✓              | ✓      | ✓     | ✓     |
-| `targetClass`                  | ✓              | ✓      | ✓     | ✓*    |
-| Closed shapes                  | ✓              | ✓      | ✓     | ✓     |
-| Datatype constraint            | ✓              | ✓      | ✓     | ✓     |
-| Class reference (`sh:class`)   | ✓              | ✓      | ✓     | ✓     |
-| OR of classes                  | ✓              | ✓      | ✓     | ✓     |
-| NodeKind constraint            | ✓              | ✓      | ✓     | ✓     |
-| IRI stem                       | ✓              | ✓      | ✓*    | ✓     |
-| Cardinality                    | ✓              | ✓      | ✓     | ✓     |
-| hasValue / sh:in               | ✓              | ✓      | ✓     | ✓     |
-| Named shape reference          | ✓              | ✓      | ✓     | ✓     |
-| DatatypeOr (DBpedia)           | ✓              | ✓      | ✓     | ✓     |
-| Pattern / regex                | ✓              | ✓      | ✓     | ✓     |
-| Shape-level `sh:and/or/not`    | —              | ✓      | ✓     | ✓     |
-| `sh:xone`                      | —              | ✓      | ✓     | —     |
-| `sh:targetNode/SubjectsOf/…`   | —              | ✓      | ✓     | —     |
-| Severity / message             | —              | ✓      | ✓     | —     |
-| Deactivated                    | —              | ✓      | ✓     | —     |
-| Property-pair constraints      | —              | ✓      | ✓     | —     |
-| Qualified value shapes         | —              | ✓      | ✓     | —     |
-| SPARQL constraints             | —              | ✓      | ✓     | —     |
-| Property paths (inverse, …)    | —              | ✓      | ✓     | ✓     |
-| `sh:languageIn` / `uniqueLang` | —              | ✓      | ✓     | —     |
-| `sh:extends`                   | —              | ✓      | —     | ✓     |
-| Numeric facets                 | —              | ✓      | ✓     | ✓     |
-| Semantic actions               | —              | ✓      | —     | ✓     |
-| Annotations                    | —              | ✓      | —     | ✓     |
+| Feature                        | ShexJE | SHACL | ShExC |
+|--------------------------------|:------:|:-----:|:-----:|
+| Shape + properties             | ✓      | ✓     | ✓     |
+| `targetClass`                  | ✓      | ✓     | ✓*    |
+| Closed shapes                  | ✓      | ✓     | ✓     |
+| Datatype constraint            | ✓      | ✓     | ✓     |
+| Class reference (`sh:class`)   | ✓      | ✓     | ✓     |
+| OR of classes                  | ✓      | ✓     | ✓     |
+| NodeKind constraint            | ✓      | ✓     | ✓     |
+| IRI stem                       | ✓      | ✓*    | ✓     |
+| Cardinality                    | ✓      | ✓     | ✓     |
+| hasValue / sh:in               | ✓      | ✓     | ✓     |
+| Named shape reference          | ✓      | ✓     | ✓     |
+| DatatypeOr (DBpedia)           | ✓      | ✓     | ✓     |
+| Pattern / regex                | ✓      | ✓     | ✓     |
+| Shape-level `sh:and/or/not`    | ✓      | ✓     | ✓     |
+| `sh:xone`                      | ✓      | ✓     | —     |
+| `sh:targetNode/SubjectsOf/…`   | ✓      | ✓     | —     |
+| Severity / message             | ✓      | ✓     | —     |
+| Deactivated                    | ✓      | ✓     | —     |
+| Property-pair constraints      | ✓      | ✓     | —     |
+| Qualified value shapes         | ✓      | ✓     | —     |
+| SPARQL constraints             | ✓      | ✓     | —     |
+| Property paths (inverse, …)    | ✓      | ✓     | ✓     |
+| `sh:languageIn` / `uniqueLang` | ✓      | ✓     | —     |
+| `sh:extends`                   | ✓      | —     | ✓     |
+| Numeric facets                 | ✓      | ✓     | ✓     |
+| Semantic actions               | ✓      | —     | ✓     |
+| Annotations                    | ✓      | —     | ✓     |
 
 (*) via approximation
 
-### Canonical JSON migration
-
-Existing canonical JSON files continue to work unchanged via `parse_canonical()`.
-To migrate to ShexJE:
-
-```python
-from shaclex_py import (
-    parse_canonical, convert_canonical_to_shexje, serialize_shexje
-)
-
-canonical = parse_canonical("my_schema.json")
-shexje    = convert_canonical_to_shexje(canonical)
-print(serialize_shexje(shexje))
-```

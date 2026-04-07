@@ -12,36 +12,29 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Creator>
 
 <Creator> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ yago:Creator ] ;
-  rdfs:comment rdf:langString + ;
-  rdfs:label rdf:langString + ;
-  schema:alternateName rdf:langString + ;
+  rdfs:label xsd:string + ;
+  rdfs:comment xsd:string + ;
+  schema:alternateName xsd:string + ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI ;
-
-  # schema.org property
-  schema:award @<Award> * ;             # From YAGO Schema design document, inherit from @<Person>
-  schema:birthDate xsd:dateTime ? ;     # From YAGO Schema design document, inherit from @<Person>
-  schema:birthPlace @<Place> ? ;        # From YAGO Schema design document, inherit from @<Person>
-  schema:children @<Person> * ;         # From YAGO Schema design document, inherit from @<Person>
-  schema:deathDate xsd:dateTime ? ;     # From YAGO Schema design document, inherit from @<Person>
-  schema:deathPlace @<Place> ? ;        # From YAGO Schema design document, inherit from @<Person>
-  schema:gender @<Gender> ;             # From YAGO Schema design document, inherit from @<Person>
-  schema:knowsLanguage @<Language> * ;  # From YAGO Schema design document, inherit from @<Person>
-  schema:memberOf @<Organization> * ;   # From YAGO Schema design document, inherit from @<Person>
-  schema:nationality @<Country> * ;     # From YAGO Schema design document, inherit from @<Person>
-  schema:owns IRI * ;                   # From YAGO Schema design document, inherit from @<Person>
-  schema:spouse @<Person> * ;           # From YAGO Schema design document, inherit from @<Person>
-
-  # yago property
-  yago:influencedBy IRI * ;             # From YAGO Schema design document
-  yago:notableWork @<CreativeWork> * ;  # From YAGO Schema design document
+  schema:award @<Award> * ;
+  schema:birthDate xsd:dateTime ? ;
+  schema:birthPlace @<Place> ? ;
+  schema:children @<Person> * ;
+  schema:deathDate xsd:dateTime ? ;
+  schema:deathPlace @<Place> ? ;
+  schema:gender @<Gender> * ;
+  schema:knowsLanguage @<Language> * ;
+  schema:memberOf @<Organization> * ;
+  schema:nationality @<Country> * ;
+  schema:owns IRI * ;
+  schema:spouse @<Person> * ;
+  yago:influencedBy IRI * ;
+  yago:notableWork @<CreativeWork> * ;
   yago:appearsIn @<CreativeWork> * ;
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Award> EXTRA rdf:type {

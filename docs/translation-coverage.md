@@ -2,20 +2,13 @@
 
 This document catalogues which constructs from [Validating RDF Data, Ch. 13](https://book.validatingrdf.com/bookHtml013.html) are fully translated, which are approximated, and which are currently out of scope.
 
-Two intermediate formats are available:
-
-| Format | Scope | Notes |
-|--------|-------|-------|
-| **Canonical JSON** | Simplified subset — 17 pattern types | Backward-compatible; deterministic |
-| **ShexJE** | Full ShexJ superset + complete SHACL | New canonical format; see [ShexJE Spec](shexje-spec.md) |
-
-ShexJE fully expresses all constructs listed as "known gaps" in the Canonical JSON pipeline (see §4).
+All conversions use **ShexJE** as the canonical intermediate format.  See [ShexJE Spec](shexje-spec.md) for the full language reference.
 
 ---
 
 ## Fully supported translations
 
-The following patterns survive the SHACL→JSON→ShEx→JSON and ShEx→JSON→ShEx→JSON cycles with **zero data loss** (verified across 147 files, 4 309 properties — see [Evaluation](evaluation.md)).
+The following patterns survive SHACL→ShexJE→ShEx→ShexJE and ShEx→ShexJE→ShEx cycles with **zero data loss** (verified across 167 files, 4 990 properties — see [Evaluation](evaluation.md)).
 
 | Construct | SHACL side | ShEx side | Book § |
 |---|---|---|---|
@@ -59,15 +52,19 @@ Data is preserved; semantics are relaxed.
 )
 ```
 
-ShEx `|` requires at least one branch to be satisfied (branch semantics); SHACL `sh:alternativePath` treats all alternatives as a union and applies the constraint across the combined set of triples. In practice this distinction rarely matters for DBpedia-style patterns where entities carry either one predicate or the other. All paths and constraint values are fully preserved in the canonical `pathAlternatives` field and round-trip faithfully through SHACL.
+ShEx `|` requires at least one branch to be satisfied (branch semantics); SHACL `sh:alternativePath` treats all alternatives as a union and applies the constraint across the combined set of triples. In practice this distinction rarely matters for DBpedia-style patterns where entities carry either one predicate or the other. All paths and constraint values are fully preserved in the ShexJE `pathAlternatives` field and round-trip faithfully through SHACL.
 
 Affects: Company, Person, SportsTeam, WrittenWork shapes (4 files, 4 properties).
 
 ### `sh:or` with `sh:property` alternative groups at NodeShape level
 
-The DBpedia pattern where `sh:or` appears on a `sh:NodeShape` with full `sh:property` blocks as alternatives (modelling two equivalent measurement paths) is **flattened into a union**. Every property path and its constraints are preserved, but the "exactly one branch must hold" exclusivity is not expressible in either ShEx or the canonical JSON model.
+The DBpedia pattern where `sh:or` appears on a `sh:NodeShape` with full `sh:property` blocks as alternatives (modelling two equivalent measurement paths) is preserved losslessly via the `alternativeGroups` field on `EachOf` in ShexJE.
 
-See [Mapping Rules — Property alternative groups](mapping-rules.md#property-alternative-groups--sh:or-with-sh:property-items-at-nodeshape-level) for a full analysis.
+Every property path and its constraints survive the full SHACL → ShexJE → SHACL cycle. The ShexJE `alternativeGroups` annotation records which predicates are mutually exclusive; round-tripping back to SHACL reconstructs the original `sh:or` blocks.
+
+The "exactly one branch must hold" exclusivity **is not expressible in ShEx** — when the chain includes a ShEx step (SHACL → ShexJE → ShEx → ShexJE → SHACL), the grouping is still preserved in the ShexJE intermediate but the ShEx text loses the disjunction.
+
+See [Mapping Rules — Property alternative groups](mapping-rules.md#property-alternative-groups--sh:or-with-sh:property-items-at-nodeshape-level) for full details.
 
 ---
 
@@ -129,7 +126,7 @@ sh:property [
 
 **Current behaviour:** `sh:qualifiedValueShape`, `sh:qualifiedMinCount`, and `sh:qualifiedMaxCount` are not parsed. The constraints are silently dropped.
 
-**To fix:** Add `qualified_constraints` to `PropertyShape` and `CanonicalProperty`. Parse the three SHACL fields. In the ShEx serializer, emit one `TripleConstraint` per qualified block. This is the correct translation direction per the book.
+**To fix:** Add `qualified_constraints` to `PropertyShape`. Parse the three SHACL fields. In the ShEx serializer, emit one `TripleConstraint` per qualified block. This is the correct translation direction per the book.
 
 ---
 
@@ -163,7 +160,7 @@ sh:property [ sh:path schema:givenName ; sh:disjoint schema:lastName ] .
 
 **Current behaviour:** `sh:lessThan`, `sh:equals`, and `sh:disjoint` are silently dropped.
 
-**To fix:** Parse them and carry as opaque annotations in the canonical model. Preserve in SHACL roundtrips. Emit warning comments on ShEx output.
+**To fix:** Parse them and carry as opaque annotations in the ShexJE model. Preserve in SHACL roundtrips. Emit warning comments on ShEx output.
 
 ---
 
@@ -175,7 +172,7 @@ ShEx: `MININCLUSIVE`, `MAXINCLUSIVE`, `MINEXCLUSIVE`, `MAXEXCLUSIVE`, `MINLENGTH
 
 **Current behaviour:** None of these facets are parsed or emitted. They are silently dropped on both sides.
 
-**To fix:** Add facet fields to `PropertyShape`, `NodeConstraint`, and `CanonicalProperty`. Wire through all parsers, converters, and serializers. The SHACL↔ShEx mapping is 1-to-1 for the six numeric/length facets. (`sh:languageIn` and `sh:uniqueLang` have no ShEx equivalent.)
+**To fix:** Add facet fields to `PropertyShape` and `NodeConstraint`. Wire through all parsers, converters, and serializers. The SHACL↔ShEx mapping is 1-to-1 for the six numeric/length facets. (`sh:languageIn` and `sh:uniqueLang` have no ShEx equivalent.)
 
 ---
 
@@ -192,7 +189,7 @@ sh:targetSubjectsOf schema:knows    # targets all subjects of this predicate
 
 **Current behaviour:** Only `sh:targetClass` is parsed. The other three target types are silently ignored.
 
-**To fix:** Parse them and carry as annotations in the canonical model. Preserve in SHACL roundtrips. Emit `# NOTE: target scope cannot be expressed inline in ShEx` comments in ShEx output.
+**To fix:** Parse them and carry as annotations in the ShexJE model. Preserve in SHACL roundtrips. Emit `# NOTE: target scope cannot be expressed inline in ShEx` comments in ShEx output.
 
 ---
 

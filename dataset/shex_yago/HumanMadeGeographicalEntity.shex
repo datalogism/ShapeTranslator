@@ -12,30 +12,23 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<HumanMadeGeographicalEntity>
 
 <HumanMadeGeographicalEntity> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ yago:HumanMadeGeographicalEntity ] ;
-  rdfs:comment rdf:langString * ;
   rdfs:label rdf:langString + ;
+  rdfs:comment rdf:langString * ;
   schema:alternateName rdf:langString * ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
-  schema:dateCreated xsd:dateTime ? ;  # dateCreated is used on CreativeWork, DataFeedItem types, foundingDate is recommended
-  schema:geo geo:wktLiteral ? ;        # From YAGO Schema design document, inherit from @<Place>
-  schema:location @<Place> * ;         # From YAGO Schema design document, inherit from @<Place>
+  schema:dateCreated xsd:dateTime ? ;
+  schema:geo geo:wktLiteral ? ;
+  schema:location @<Place> * ;
   schema:address xsd:string * ;
-
-  # yago property
-  yago:ownedBy @<OwnedBy> * ;     # From YAGO Schema design document
-  yago:area xsd:decimal * ;       # From YAGO Schema design document, inherit from @<Place>
-  yago:elevation xsd:decimal ? ;  # From YAGO Schema design document, inherit from @<Place>
-  yago:neighbors @<Place> * ;     # From YAGO Schema design document, inherit from @<Place>
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  yago:ownedBy @<OwnedBy> * ;
+  yago:area xsd:decimal * ;
+  yago:elevation xsd:decimal ? ;
+  yago:neighbors @<Place> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <OwnedBy> EXTRA rdf:type {

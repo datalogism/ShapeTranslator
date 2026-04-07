@@ -12,38 +12,30 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<EducationalOrganization>
 
 <EducationalOrganization> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:EducationalOrganization ] ;
-  rdfs:comment rdf:langString * ;
-  rdfs:label rdf:langString + ;
-  schema:alternateName rdf:langString * ;
+  rdfs:label xsd:string + ;
+  rdfs:comment xsd:string * ;
+  schema:alternateName xsd:string * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
   schema:address xsd:string ? ;
   schema:award @<Award> * ;
-  schema:dateCreated xsd:dateTime ? ;  # dateCreated is used on CreativeWork, DataFeedItem types, foundingDate is recommended
+  schema:dateCreated xsd:dateTime ? ;
   schema:dissolutionDate xsd:dateTime ? ;
   schema:founder @<Person> * ;
   schema:leiCode xsd:string ? ;
   schema:location @<Place> * ;
-  schema:locationCreated @<Place> ? ;  # locationCreated is used on CreativeWork types, foundingLocation is recommended
+  schema:locationCreated @<Place> ? ;
   schema:logo xsd:anyURI ? ;
   schema:slogan xsd:string ? ;
   schema:memberOf @<Organization> * ;
   schema:numberOfEmployees xsd:decimal * ;
   schema:geo geo:wktLiteral ? ;
-
-  # yago property
-  yago:studentsCount xsd:decimal * ;  # From YAGO Schema design document
+  yago:studentsCount xsd:decimal * ;
   yago:leader @<Person> * ;
   yago:ownedBy @<OwnedBy> * ;
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
-
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Award> EXTRA rdf:type {

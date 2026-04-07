@@ -214,6 +214,7 @@ def parse_shacl(source: str, format: str = "turtle") -> SHACLSchema:
         # (a) sh:or ([ sh:datatype D1 ] [ sh:datatype D2 ] ...) — named value shape
         # (b) sh:or ([ sh:property [...] ] [ sh:property [...] ] ...) — property alternatives
         or_datatypes = None
+        or_property_groups = None
         or_head = g.value(shape_node, SH["or"])
         if or_head is not None:
             or_items = _parse_rdf_list(g, or_head)
@@ -228,11 +229,17 @@ def parse_shacl(source: str, format: str = "turtle") -> SHACLSchema:
             else:
                 # Pattern (b): alternatives may contain sh:property blocks.
                 # Flatten all property alternatives into the shape's property list
-                # (union/over-approximation — preserves all constraint information).
+                # AND record the groups for round-trip fidelity via alternativeGroups.
+                groups: list[list] = []
                 for item in or_items:
+                    group: list = []
                     for prop_node in g.objects(item, SH.property):
                         ps = _parse_property_shape(g, prop_node)
                         properties.append(ps)
+                        group.append(ps)
+                    if group:
+                        groups.append(group)
+                or_property_groups = groups or None
 
         # Node-level constraints (reusable value shapes without sh:property)
         shape_nk = g.value(shape_node, SH.nodeKind)
@@ -257,6 +264,7 @@ def parse_shacl(source: str, format: str = "turtle") -> SHACLSchema:
             node_kind=shape_node_kind,
             node_datatype=shape_node_datatype,
             node_in_values=shape_node_in_values,
+            or_property_groups=or_property_groups,
         ))
 
     return SHACLSchema(shapes=shapes, prefixes=prefixes)

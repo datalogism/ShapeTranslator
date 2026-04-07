@@ -111,7 +111,10 @@
     ] ;
     sh:property [
         sh:path yago:ownedBy ;
-        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+        sh:or (
+            [ sh:class schema:Organization ]
+            [ sh:class schema:Person ]
+        )
     ] ;
     ############################## owl:sameAs restricted to Wikidata
     sh:property [

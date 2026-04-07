@@ -12,35 +12,28 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Award>
 
 <Award> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ yago:Award ] ;
   rdfs:comment rdf:langString * ;
   rdfs:label rdf:langString + ;
   schema:alternateName rdf:langString * ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
-  schema:sameAs xsd:string * ;
+  schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
   schema:about IRI ? ;
   schema:dateCreated xsd:dateTime ? ;
   schema:locationCreated @<Place> ? ;
   schema:inLanguage @<Language> * ;
-
-  # yago property
-  yago:conferredBy @<ConferredBy> * ;  # From YAGO Schema design document
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
-}
-
-<ConferredBy> EXTRA rdf:type {
-  rdf:type [ schema:Organization schema:Person ]
+  yago:ownedBy @<OwnedBy> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Language> EXTRA rdf:type {
   rdf:type [ schema:Language ]
+}
+
+<OwnedBy> EXTRA rdf:type {
+  rdf:type [ schema:Organization schema:Person ]
 }
 
 <Place> EXTRA rdf:type {

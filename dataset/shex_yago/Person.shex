@@ -12,49 +12,42 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Person>
 
 <Person> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:Person ] ;
-  rdfs:comment rdf:langString * ;
-  rdfs:label rdf:langString + ;
-  schema:alternateName rdf:langString * ;
+  rdfs:label xsd:string + ;
+  rdfs:comment xsd:string * ;
+  schema:alternateName xsd:string * ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
-  schema:affiliation @<Organization> * ;  # From YAGO Schema design document
-  schema:alumniOf @<Organization> * ;     # From YAGO Schema design document
-  schema:award @<Award> * ;               # From YAGO Schema design document
-  schema:birthDate xsd:dateTime ? ;       # From YAGO Schema design document
-  schema:birthPlace @<Place> ? ;          # From YAGO Schema design document
-  schema:children @<Person> * ;           # From YAGO Schema design document
-  schema:deathDate xsd:dateTime ? ;       # From YAGO Schema design document
-  schema:deathPlace @<Place> ? ;          # From YAGO Schema design document
-  schema:gender @<Gender> ? ;             # From YAGO Schema design document
-  schema:homeLocation @<Place> * ;        # From YAGO Schema design document
-  schema:knowsLanguage @<Language> * ;    # From YAGO Schema design document
-  schema:memberOf @<Organization> * ;     # From YAGO Schema design document
-  schema:nationality @<Country> * ;       # From YAGO Schema design document
-  schema:owns IRI * ;                     # From YAGO Schema design document
-  schema:spouse @<Person> * ;             # From YAGO Schema design document
-  schema:worksFor @<Organization> * ;     # From YAGO Schema design document
-
-  # yago property
-  yago:academicDegree @<AcademicDegree> * ;  # From YAGO Schema design document
-  yago:beliefSystem @<BeliefSystem> * ;      # From YAGO Schema design document
-  yago:appearsIn @<CreativeWork> * ;         # From YAGO Schema design document
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  schema:affiliation @<Organization> * ;
+  schema:alumniOf @<Organization> * ;
+  schema:award @<Award> * ;
+  schema:birthDate xsd:dateTime ? ;
+  schema:birthPlace @<Place> ? ;
+  schema:children @<Person_class> * ;
+  schema:deathDate xsd:dateTime ? ;
+  schema:deathPlace @<Place> ? ;
+  schema:gender @<Gender> ? ;
+  schema:homeLocation @<Place> * ;
+  schema:knowsLanguage @<Language> * ;
+  schema:memberOf @<Organization> * ;
+  schema:nationality @<Country> * ;
+  schema:owns IRI * ;
+  schema:spouse @<Person_class2> * ;
+  schema:worksFor @<Organization> * ;
+  yago:academicDegree @<Academic_degree> * ;
+  yago:beliefSystem @<BeliefSystem> * ;
+  yago:appearsIn @<CreativeWork> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
-<AcademicDegree> {
+<Academic_degree> EXTRA rdf:type {
   rdf:type [ yago:Academic_degree ]
 }
 
 <Award> EXTRA rdf:type {
-  rdfs:type [ yago:Award ]
+  rdf:type [ yago:Award ]
 }
 
 <BeliefSystem> EXTRA rdf:type {
@@ -81,14 +74,14 @@ start = @<Person>
   rdf:type [ schema:Organization ]
 }
 
-<Person> EXTRA rdf:type {
+<Person_class> EXTRA rdf:type {
+  rdf:type [ schema:Person ]
+}
+
+<Person_class2> EXTRA rdf:type {
   rdf:type [ schema:Person ]
 }
 
 <Place> EXTRA rdf:type {
   rdf:type [ schema:Place ]
 }
-
-# <Religion> EXTRA rdf:type {
-#   rdf:type [ yago:Religion ]
-# }

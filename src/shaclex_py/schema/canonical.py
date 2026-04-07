@@ -1,6 +1,6 @@
 """Canonical JSON intermediate representation for SHACL/ShEx shapes.
 
-Language-neutral dataclasses that produce deterministic, sorted JSON output.
+Language-neutral dataclasses that produce deterministic, sorted JSON output_old.
 Semantically equivalent SHACL and ShEx shapes produce identical canonical JSON.
 """
 from __future__ import annotations
@@ -64,7 +64,7 @@ class CanonicalProperty:
         elif self.nodeRef is not None:
             d["nodeRef"] = self.nodeRef
 
-        # pattern is output independently: it can accompany a primary constraint
+        # pattern is output_old independently: it can accompany a primary constraint
         if self.pattern is not None:
             d["pattern"] = self.pattern
 
@@ -84,6 +84,9 @@ class CanonicalShape:
     nodeKind: Optional[str] = None          # sh:nodeKind at NodeShape level
     datatype: Optional[str] = None          # sh:datatype at NodeShape level
     inValues: Optional[list] = None         # sh:in at NodeShape level
+    # sh:or with sh:property groups — groups of mutually exclusive predicate URIs.
+    # Each inner list is one alternative group; properties remain in ``properties`` (flattened).
+    property_alternative_groups: Optional[list[list[str]]] = None
 
     def to_dict(self) -> dict:
         d: dict = {"name": self.name}

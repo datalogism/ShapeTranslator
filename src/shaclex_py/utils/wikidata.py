@@ -141,30 +141,6 @@ def collect_iris_from_shacl(schema) -> list[str]:
     return [iri for iri in iris if is_wikidata_iri(iri)]
 
 
-def collect_iris_from_canonical(schema) -> list[str]:
-    """Collect all Wikidata IRIs from a :class:`CanonicalSchema`."""
-    from shaclex_py.schema.canonical import CanonicalSchema
-
-    iris: set[str] = set()
-    if not isinstance(schema, CanonicalSchema):
-        return []
-
-    for shape in schema.shapes:
-        if shape.targetClass:
-            iris.add(shape.targetClass)
-        for prop in shape.properties:
-            iris.add(prop.path)
-            if prop.datatype:
-                iris.add(prop.datatype)
-            if prop.classRef:
-                iris.add(prop.classRef)
-            if prop.classRefOr:
-                for c in prop.classRefOr:
-                    iris.add(c)
-
-    return [iri for iri in iris if is_wikidata_iri(iri)]
-
-
 # ── Internal helpers ─────────────────────────────────────────────────────────
 
 def _collect_from_expr(expr, iris: set[str]) -> None:

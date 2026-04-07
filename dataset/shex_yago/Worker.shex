@@ -12,7 +12,6 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<Worker>
 
 <Worker> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ yago:Worker ] ;
   rdfs:comment rdf:langString + ;
   rdfs:label rdf:langString + ;
@@ -20,28 +19,22 @@ start = @<Worker>
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI ;
-
-  # schema.org property
-  schema:alumniOf @<EducationalOrganization> * ;  # From YAGO Schema design document, inherit from @<Person>
-  schema:award @<Award> * ;                       # From YAGO Schema design document, inherit from @<Person>
-  schema:birthDate xsd:dateTime ? ;               # From YAGO Schema design document, inherit from @<Person>
-  schema:birthPlace @<Place> ? ;                  # From YAGO Schema design document, inherit from @<Person>
-  schema:deathDate xsd:dateTime ? ;               # From YAGO Schema design document, inherit from @<Person>
-  schema:deathPlace @<Place> ? ;                  # From YAGO Schema design document, inherit from @<Person>
-  schema:gender @<Gender> ? ;                     # From YAGO Schema design document, inherit from @<Person>
-  schema:homeLocation @<Place> ? ;                # From YAGO Schema design document, inherit from @<Person>
-  schema:knowsLanguage @<Language> * ;            # From YAGO Schema design document, inherit from @<Person>
-  schema:memberOf @<Organization> * ;             # From YAGO Schema design document, inherit from @<Person>
-  schema:nationality @<Country> * ;               # From YAGO Schema design document, inherit from @<Person>
-  schema:spouse @<Person> * ;                     # From YAGO Schema design document, inherit from @<Person>
-  schema:worksFor @<Organization> * ;             # From YAGO Schema design document, inherit from @<Person>
-
-  # yago property
-  yago:beliefSystem @<BeliefSystem> * ;  # From YAGO Schema design document, inherit from @<Person>
+  schema:alumniOf @<EducationalOrganization> * ;
+  schema:award @<Award> * ;
+  schema:birthDate xsd:dateTime ? ;
+  schema:birthPlace @<Place> ? ;
+  schema:deathDate xsd:dateTime ? ;
+  schema:deathPlace @<Place> ? ;
+  schema:gender @<Gender> ? ;
+  schema:homeLocation @<Place> ? ;
+  schema:knowsLanguage @<Language> * ;
+  schema:memberOf @<Organization> * ;
+  schema:nationality @<Country> * ;
+  schema:spouse @<Person> * ;
+  schema:worksFor @<Organization> * ;
+  yago:beliefSystem @<BeliefSystem> * ;
   yago:appearsIn @<CreativeWork> * ;
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Award> EXTRA rdf:type {

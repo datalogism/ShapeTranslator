@@ -16,10 +16,6 @@
 
     ############################## schema:Thing property
     sh:property [
-        sh:path rdf:type ;
-        sh:hasValue schema:Country ;
-    ] ;
-    sh:property [
         sh:path rdfs:comment ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;

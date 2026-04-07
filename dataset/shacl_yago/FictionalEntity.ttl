@@ -42,9 +42,13 @@
 
     ########## schema.org properties 
     sh:property [
-        sh:path schema:author ;
-        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
-        sh:maxCount 1 ;
+         sh:path schema:author ;
+
+         sh:or (
+                    [ sh:class schema:Organization ]
+                    [ sh:class schema:Person ]
+                );
+         sh:maxCount 1 ;
     ] ;
 
     sh:property [

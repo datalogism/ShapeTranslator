@@ -74,8 +74,11 @@
     
     ############################## Yago property
     sh:property [
-        sh:path yago:ownedBy ;
-        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+    sh:path yago:ownedBy ;
+        sh:or (
+            [ sh:class schema:Organization ]
+            [ sh:class schema:Person ]
+        )
     ] ;
     sh:property [
         sh:path yago:area ;

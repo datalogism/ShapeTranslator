@@ -9,11 +9,9 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX yago: <http://yago-knowledge.org/resource/>
 
-# TODO: disambiguate CivicStructure and Organization in their definitions of Airport
 start = @<Airport>
 
 <Airport> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:Airport ] ;
   rdfs:label rdf:langString + ;
   rdfs:comment rdf:langString * ;
@@ -22,22 +20,16 @@ start = @<Airport>
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
   schema:url xsd:anyURI * ;
-
-  # schema.org property
-  schema:iataCode xsd:string ? ;       # From YAGO Schema design document
-  schema:icaoCode xsd:string ? ;       # From YAGO Schema design document
-  schema:dateCreated xsd:dateTime ? ;  # dateCreated is used on CreativeWork, DataFeedItem types, foundingDate is recommended
-  schema:geo geo:wktLiteral ? ;        # From YAGO Schema design document, inherit from @<Place>
-  schema:location @<Place> * ;         # From YAGO Schema design document, inherit from @<Place>
-
-  # yago property
-  yago:ownedBy @<OwnedBy> * ;     # From YAGO Schema design document, inherit from @<HumanMadeGeographicalEntity>
-  yago:area xsd:decimal * ;       # From YAGO Schema design document, inherit from @<Place>
-  yago:elevation xsd:decimal * ;  # From YAGO Schema design document, inherit from @<Place>
-  yago:neighbors @<Place> * ;     # From YAGO Schema design document, inherit from @<Place>
-  
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  schema:iataCode xsd:string ? ;
+  schema:icaoCode xsd:string ? ;
+  schema:dateCreated xsd:dateTime ? ;
+  schema:geo geo:wktLiteral ? ;
+  schema:location @<Place> * ;
+  yago:ownedBy @<OwnedBy> * ;
+  yago:area xsd:decimal * ;
+  yago:elevation xsd:decimal * ;
+  yago:neighbors @<Place> * ;
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <OwnedBy> EXTRA rdf:type {

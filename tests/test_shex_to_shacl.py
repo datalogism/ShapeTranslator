@@ -76,7 +76,7 @@ def test_all_37_files_convert():
 
 
 def test_serializable():
-    """Ensure converted output can be serialized to valid Turtle."""
+    """Ensure converted output_old can be serialized to valid Turtle."""
     result = _convert("Event")
     output = serialize_shacl(result)
     assert "@prefix sh:" in output

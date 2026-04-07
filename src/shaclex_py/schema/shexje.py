@@ -8,9 +8,10 @@ Design principles
 -----------------
 * **ShexJ backward-compatible**: every valid ShexJ document is valid ShexJE.
 * **SHACL-complete**: every SHACL feature can be expressed in ShexJE.
-* **Canonical-JSON compatible**: the existing simplified canonical JSON
-  constructs (classRef, iriStem, hasValue, …) are supported as first-class
-  shorthand fields on TripleConstraintE.
+* **ShexJ-only extensions**: ShexJE only adds SHACL-specific features on top
+  of ShexJ (targets, severity, property paths, SPARQL constraints, value-shape
+  shorthands on Shape).  Non-ShexJ shorthands on TripleConstraint (classRef,
+  classRefOr, iriStem) have been removed; use ``valueExpr`` instead.
 * Same ``"type"`` discriminator pattern as ShexJ.
 * Compact IRI strings (``"ex:foo"``) or full IRIs everywhere.
 
@@ -351,8 +352,15 @@ class TripleConstraintE:
       ``lessThanOrEquals``.
     * **Qualified value shapes**: ``qualifiedValueShape``, ``qualifiedMinCount``,
       ``qualifiedMaxCount``, ``qualifiedValueShapesDisjoint``.
-    * **Canonical-JSON shorthands**: ``classRef``, ``classRefOr``, ``iriStem``,
-      ``hasValue``, ``in`` — for compact representation of common patterns.
+
+    All class/type constraints use the standard ShexJ ``valueExpr`` field:
+
+    * Single class  → ``valueExpr: "ShapeName"`` (string ref to a ShapeE with
+      the value-shape shorthand ``predicate`` / ``values``).
+    * OR of classes → same pattern, shape has multiple ``values`` entries.
+    * IRI stem      → ``valueExpr: NodeConstraintE(values=[IriStemValue(...)])``.
+    * hasValue      → ``valueExpr: NodeConstraintE(values=[value])``.
+    * Enumeration   → ``valueExpr: NodeConstraintE(values=[v1, v2, ...])``.
     """
     # ---- ShexJ fields -------------------------------------------------------
     predicate: Optional[str] = None          # simple IRI predicate
@@ -386,14 +394,6 @@ class TripleConstraintE:
 
     # ---- ShexJE SHACL language facets ---------------------------------------
     uniqueLang: Optional[bool] = None        # sh:uniqueLang
-
-    # ---- ShexJE canonical-JSON shorthand fields -----------------------------
-    # These are convenience alternatives to fully expanded ``valueExpr`` forms.
-    classRef: Optional[str] = None           # → ShapeRef to a single-class shape
-    classRefOr: Optional[list[str]] = None   # → OR of class-instance shapes
-    iriStem: Optional[str] = None            # → IriStem value-set constraint
-    hasValue: Optional[Union[str, dict]] = None  # → sh:hasValue (IRI or literal)
-    in_values: Optional[list] = None         # → sh:in enumeration (JSON key: "in")
 
     def to_dict(self) -> dict:
         d: dict = {"type": "TripleConstraint"}
@@ -434,17 +434,6 @@ class TripleConstraintE:
             d["qualifiedValueShapesDisjoint"] = self.qualifiedValueShapesDisjoint
         if self.uniqueLang is not None:
             d["uniqueLang"] = self.uniqueLang
-        # Shorthand fields
-        if self.classRef is not None:
-            d["classRef"] = self.classRef
-        if self.classRefOr is not None:
-            d["classRefOr"] = sorted(self.classRefOr)
-        if self.iriStem is not None:
-            d["iriStem"] = self.iriStem
-        if self.hasValue is not None:
-            d["hasValue"] = self.hasValue
-        if self.in_values is not None:
-            d["in"] = list(self.in_values)
         return d
 
 
@@ -456,6 +445,10 @@ class EachOfE:
     max: Optional[int] = None
     semActs: Optional[list[dict]] = None
     annotations: Optional[list[dict]] = None
+    # Groups of mutually exclusive predicate URIs (from sh:or with sh:property alternatives).
+    # Each inner list is one alternative group; the predicates remain in ``expressions``
+    # as regular TripleConstraints — this field is purely an annotation for round-trip fidelity.
+    alternativeGroups: Optional[list[list[str]]] = None
 
     def to_dict(self) -> dict:
         d: dict = {
@@ -466,6 +459,8 @@ class EachOfE:
             d["min"] = self.min
         if self.max is not None:
             d["max"] = self.max
+        if self.alternativeGroups is not None:
+            d["alternativeGroups"] = self.alternativeGroups
         return d
 
 
@@ -498,7 +493,26 @@ class ShapeE:
 
     Extends ShexJ Shape with SHACL target declarations, validation metadata,
     logical operators at the shape level (``and``, ``or``, ``not``, ``xone``),
-    and SPARQL constraints.
+    SPARQL constraints, and a compact value-shape shorthand.
+
+    **Value-shape shorthand** (ShexJE extension):
+    When a shape is used purely to constrain the type of a linked node (i.e.
+    to encode a ``sh:class`` / ``classRef`` constraint), the common pattern::
+
+        "expression": {
+            "type": "TripleConstraint",
+            "predicate": "rdf:type",
+            "valueExpr": {"type": "NodeConstraint", "values": ["dbo:City"]}
+        }
+
+    can be written compactly as::
+
+        "predicate": "rdf:type",
+        "values":    ["dbo:City"]
+
+    (with ``extra: ["rdf:type"]`` so the shape does not require the triple).
+    The full ``expression`` form is still accepted; the shorthand is emitted
+    when ``predicate`` / ``values`` are set and ``expression`` is ``None``.
 
     All ShexJ Shape fields are preserved verbatim; new fields are omitted from
     JSON output when ``None`` / empty.
@@ -535,6 +549,14 @@ class ShapeE:
 
     # ---- ShexJE SHACL SPARQL constraints ------------------------------------
     sparql: Optional[list[SparqlConstraintE]] = None
+
+    # ---- ShexJE value-shape shorthand (replaces classRef / classRefOr) ------
+    # Compact form for "node must have <predicate> with value in <values>".
+    # Used when this shape is a value-type constraint shape (formerly classRef).
+    # Mutually exclusive with ``expression``; if both are set, ``expression``
+    # takes precedence on read, but only ``predicate``/``values`` are emitted.
+    predicate: Optional[str] = None            # type predicate IRI (e.g. rdf:type)
+    values: Optional[list[ValueSetEntry]] = None  # allowed class / value IRIs
 
     def to_dict(self) -> dict:
         d: dict = {"type": "Shape", "id": self.id}
@@ -574,6 +596,11 @@ class ShapeE:
             d["xone"] = [_se_to_dict(e) for e in self.xone]
         if self.sparql:
             d["sparql"] = [c.to_dict() for c in self.sparql]
+        # ShexJE value-shape shorthand
+        if self.predicate is not None:
+            d["predicate"] = self.predicate
+        if self.values is not None:
+            d["values"] = [_vse_to_dict(v) for v in self.values]
         return d
 
 

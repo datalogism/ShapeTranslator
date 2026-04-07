@@ -1,6 +1,6 @@
 """Serialize ShEx model to ShExC compact syntax.
 
-Pass ``label_map`` to ``serialize_shex`` to enable Wikidata-friendly output:
+Pass ``label_map`` to ``serialize_shex`` to enable Wikidata-friendly output_old:
 
 * Shape references use human-readable labels (``@<Human>``, not ``@<Q5>``).
 * Every triple constraint gets an aligned ``# property label`` comment.
@@ -325,11 +325,11 @@ def serialize_shex(
         schema:    The ShEx schema to serialize.
         label_map: Optional mapping of Wikidata IRI → English label.  When
                    provided **and** the schema uses ``wdt:`` prefixes, the
-                   output will include aligned ``# comments`` for every triple
+                   output_old will include aligned ``# comments`` for every triple
                    constraint and section-header comments separating
                    WikibaseItem from literal/IRI properties.  Build this map
                    with :func:`shaclex_py.utils.wikidata.fetch_labels`.
-                   Pass ``None`` (default) for plain output without labels.
+                   Pass ``None`` (default) for plain output_old without labels.
 
     Returns:
         ShExC string.

@@ -6,11 +6,12 @@
 @prefix schema: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix yago: <http://yago-knowledge.org/resource/> .
+@prefix : <http://shaclshapes.org/> .
 
 #################################################################
 # MusicGroup Shape
 #################################################################
-<http://shaclshapes.org/MusicGroupShape>
+:MusicGroupShape
     a sh:NodeShape ;
     sh:targetClass schema:MusicGroup ;
     ############################## schema:Thing property
@@ -53,7 +54,7 @@
     ] ;
     sh:property [
         sh:path yago:Human_Language_Q20162172 ;
-        sh:class schema:Language ;
+        sh:class :LanguageShape ;
     ] ;
     sh:property [
         sh:path schema:award ;
@@ -106,7 +107,10 @@
     ] ;
     sh:property [
         sh:path yago:ownedBy ;
-        sh:class [ sh:or ( schema:Organization schema:Person ) ] ;
+        sh:or (
+            [ sh:class schema:Organization ]
+            [ sh:class schema:Person ]
+        );
     ] ;
 
     ############################## owl:sameAs restricted to Wikidata

@@ -12,30 +12,25 @@ PREFIX yago: <http://yago-knowledge.org/resource/>
 start = @<MusicComposition>
 
 <MusicComposition> EXTRA rdf:type {
-  # schema:Thing property
   rdf:type [ schema:MusicComposition ] ;
-  rdfs:comment rdf:langString * ;
   rdfs:label rdf:langString + ;
+  rdfs:comment rdf:langString * ;
   schema:alternateName rdf:langString ? ;
   schema:image xsd:anyURI * ;
   schema:mainEntityOfPage xsd:anyURI + ;
   schema:sameAs xsd:anyURI * ;
-
-  # schema.org property
-  schema:iswcCode xsd:string ? ;       # From YAGO Schema design document
-  schema:lyricist @<Lyricist> * ;      # From YAGO Schema design document
-  schema:musicBy @<MusicBy> * ;        # From YAGO Schema design document
-  schema:author @<Author> * ;          # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:dateCreated xsd:dateTime ? ;  # From YAGO Schema design document, inherit from @<CreativeWork>
-  schema:inLanguage @<Language> * ;    # From YAGO Schema design document, inherit from @<CreativeWork>
+  schema:iswcCode xsd:string ? ;
+  schema:lyricist @<Lyricist> * ;
+  schema:musicBy @<MusicBy> * ;
+  schema:author @<Author> * ;
+  schema:dateCreated xsd:dateTime ? ;
+  schema:inLanguage @<Language> * ;
   schema:editor @<Person> * ;
-
-  # owl:sameAs
-  owl:sameAs [ <http://www.wikidata.org/entity>~ ]
+  owl:sameAs [ <http://www.wikidata.org/entity>~ ] *
 }
 
 <Author> EXTRA rdf:type {
-  rdf:type [ schema:Person schema:Organization ]
+  rdf:type [ schema:Organization schema:Person ]
 }
 
 <Language> EXTRA rdf:type {
@@ -43,13 +38,13 @@ start = @<MusicComposition>
 }
 
 <Lyricist> EXTRA rdf:type {
-  rdf:type [ schema:Person schema:MusicGroup ]
+  rdf:type [ schema:Organization schema:Person ]
+}
+
+<MusicBy> EXTRA rdf:type {
+  rdf:type [ schema:Organization schema:Person ]
 }
 
 <Person> EXTRA rdf:type {
   rdf:type [ schema:Person ]
-}
-
-<MusicBy> EXTRA rdf:type {
-  rdf:type [ schema:Person schema:MusicGroup ]
 }

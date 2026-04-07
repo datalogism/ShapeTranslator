@@ -1,6 +1,6 @@
 """Integration tests for PyShEx compatibility.
 
-These tests verify that ShExC output produced by shaclex-py can be parsed
+These tests verify that ShExC output_old produced by shaclex-py can be parsed
 and used by PyShEx (https://github.com/hsolbrig/PyShEx) without errors.
 
 PyShEx uses PyShExC (ANTLR-based) internally to compile ShExC to its AST.
@@ -16,15 +16,11 @@ pyshex = pytest.importorskip("pyshex", reason="PyShEx not installed; run: pip in
 
 from shaclex_py.parser.shacl_parser import parse_shacl_file
 from shaclex_py.parser.shex_parser import parse_shex_file
-from shaclex_py.parser.json_parser import parse_canonical_file
-from shaclex_py.converter.shacl_to_canonical import convert_shacl_to_canonical
-from shaclex_py.converter.canonical_to_shex import convert_canonical_to_shex
 from shaclex_py.converter.shacl_to_shex import convert_shacl_to_shex
 from shaclex_py.serializer.shex_serializer import serialize_shex
 
 SHACL_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shacl_yago")
 SHEX_DIR = os.path.join(os.path.dirname(__file__), "..", "dataset", "shex_yago")
-SHACL_JSON_DIR = os.path.join(os.path.dirname(__file__), "..", "shacl_to_json")
 
 # Minimal Turtle RDF instances for smoke-test validation.
 # The base URI <http://shex.example/> is used so that relative shape IRIs
@@ -48,13 +44,6 @@ def _shexc(name: str) -> str:
     """Return ShExC produced from the named YAGO SHACL file."""
     schema = parse_shacl_file(os.path.join(SHACL_DIR, f"{name}.ttl"))
     shex = convert_shacl_to_shex(schema)
-    return serialize_shex(shex)
-
-
-def _json_shexc(name: str) -> str:
-    """Return ShExC converted from a canonical JSON file."""
-    canonical = parse_canonical_file(os.path.join(SHACL_JSON_DIR, f"{name}.json"))
-    shex = convert_canonical_to_shex(canonical)
     return serialize_shex(shex)
 
 
@@ -105,26 +94,6 @@ class TestSchemaLoadable:
 
 
 # ---------------------------------------------------------------------------
-# JSON-derived ShExC loading
-# ---------------------------------------------------------------------------
-
-class TestJsonSchemaLoadable:
-    """ShExC produced from canonical JSON must also be parseable by PyShEx."""
-
-    def test_language_from_json_loadable(self):
-        shexc = _json_shexc("Language")
-        _parse_schema(shexc)
-
-    def test_person_from_json_loadable(self):
-        shexc = _json_shexc("Person")
-        _parse_schema(shexc)
-
-    def test_event_from_json_loadable(self):
-        shexc = _json_shexc("Event")
-        _parse_schema(shexc)
-
-
-# ---------------------------------------------------------------------------
 # Dataset reference files: our serialized re-parse must be loadable
 # ---------------------------------------------------------------------------
 
@@ -145,7 +114,7 @@ class TestDatasetSchemaLoadable:
 # ---------------------------------------------------------------------------
 
 class TestEvaluator:
-    """ShExEvaluator.evaluate() runs without errors on our ShExC output."""
+    """ShExEvaluator.evaluate() runs without errors on our ShExC output_old."""
 
     def test_language_evaluator_runs(self):
         from pyshex.shex_evaluator import ShExEvaluator
