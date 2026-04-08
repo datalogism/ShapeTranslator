@@ -21,6 +21,11 @@ from shaclex_py.schema.canonical import (
 
 SHACL_SHAPES_BASE = "http://shaclshapes.org/"
 
+
+def _sanitize_local_name(name: str) -> str:
+    """Replace characters that are invalid in a URI local name with underscores."""
+    return name.replace(" ", "_")
+
 NODE_KIND_MAP = {
     "IRI": NodeKind.IRI,
     "BlankNode": NodeKind.BLANK_NODE,
@@ -89,7 +94,7 @@ def _convert_property(prop: CanonicalProperty) -> PropertyShape:
         pattern = f"^{prop.iriStem}/"
     elif prop.nodeRef is not None:
         # Reconstruct the full shape IRI (strip was done in shacl_to_canonical)
-        node = IRI(f"{SHACL_SHAPES_BASE}{prop.nodeRef}Shape")
+        node = IRI(f"{SHACL_SHAPES_BASE}{_sanitize_local_name(prop.nodeRef)}Shape")
 
     # nodeKind is emitted independently — it can accompany datatype, classRef, etc.
     if prop.nodeKind is not None:
@@ -127,7 +132,7 @@ def convert_canonical_to_shacl(canonical: CanonicalSchema) -> SHACLSchema:
     shapes: list[NodeShape] = []
 
     for cshape in canonical.shapes:
-        shape_iri = IRI(f"{SHACL_SHAPES_BASE}{cshape.name}Shape")
+        shape_iri = IRI(f"{SHACL_SHAPES_BASE}{_sanitize_local_name(cshape.name)}Shape")
         target_class = IRI(cshape.targetClass) if cshape.targetClass else None
 
         # Identify predicates that belong to alternative groups so they can be
