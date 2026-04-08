@@ -270,12 +270,20 @@ def main():
         return
 
     if args.input and args.direction:
-        result = convert_file(
-            args.input, args.direction, args.output,
-            wikidata_labels=wikidata_labels,
-        )
-        if not args.output:
-            print(result)
+        if os.path.isdir(args.input):
+            output_dir = args.output or os.path.join("output", os.path.basename(args.input.rstrip("/\\")))
+            ok, fail = convert_batch(
+                args.input, output_dir, args.direction,
+                wikidata_labels=wikidata_labels,
+            )
+            print(f"\nConverted {ok} files, {fail} failed")
+        else:
+            result = convert_file(
+                args.input, args.direction, args.output,
+                wikidata_labels=wikidata_labels,
+            )
+            if not args.output:
+                print(result)
         return
 
     parser.print_help()

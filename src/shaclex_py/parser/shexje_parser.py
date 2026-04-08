@@ -55,6 +55,19 @@ from shaclex_py.schema.shexje import (
 __all__ = ["parse_shexje", "parse_shexje_file"]
 
 
+def _strip_brackets(s: Optional[str]) -> Optional[str]:
+    """Strip leading ``<`` / trailing ``>`` from ShEx-style IRI references.
+
+    DeepSeek-generated ShexJE files sometimes embed ShEx angle-bracket
+    notation (``<SomeName>``) directly inside JSON string fields such as
+    ``"id"`` and ``"datatype"``.  Strip those brackets so that the value is a
+    plain IRI or local name that can be safely embedded in a URI later.
+    """
+    if s and s.startswith("<") and s.endswith(">"):
+        return s[1:-1]
+    return s
+
+
 # ── Public API ────────────────────────────────────────────────────────────────
 
 def parse_shexje(source: str) -> ShexJESchema:
@@ -134,7 +147,7 @@ def _parse_shape(d: dict) -> ShapeE:
     values = [_parse_value_set_entry(v) for v in values_raw] if values_raw else None
 
     return ShapeE(
-        id=d["id"],
+        id=_strip_brackets(d["id"]),
         closed=d.get("closed", False),
         extra=d.get("extra", []),
         expression=expression,
@@ -167,9 +180,9 @@ def _parse_node_constraint(d: dict) -> NodeConstraintE:
     values_raw = d.get("values")
     in_raw = d.get("in")
     return NodeConstraintE(
-        id=d.get("id"),
+        id=_strip_brackets(d.get("id")),
         nodeKind=d.get("nodeKind"),
-        datatype=d.get("datatype"),
+        datatype=_strip_brackets(d.get("datatype")),
         values=[_parse_value_set_entry(v) for v in values_raw] if values_raw else None,
         pattern=d.get("pattern"),
         flags=d.get("flags"),
@@ -190,7 +203,7 @@ def _parse_node_constraint(d: dict) -> NodeConstraintE:
 
 def _parse_shape_or(d: dict) -> ShapeOrE:
     return ShapeOrE(
-        id=d.get("id"),
+        id=_strip_brackets(d.get("id")),
         shapeExprs=[_parse_shape_expr(e) for e in d.get("shapeExprs", [])],
         severity=d.get("severity"),
         message=d.get("message"),
@@ -200,7 +213,7 @@ def _parse_shape_or(d: dict) -> ShapeOrE:
 
 def _parse_shape_and(d: dict) -> ShapeAndE:
     return ShapeAndE(
-        id=d.get("id"),
+        id=_strip_brackets(d.get("id")),
         shapeExprs=[_parse_shape_expr(e) for e in d.get("shapeExprs", [])],
         severity=d.get("severity"),
         message=d.get("message"),
@@ -233,12 +246,12 @@ def _parse_shape_xone(d: dict) -> ShapeXoneE:
 def _parse_shape_expr(v: Any) -> ShapeExpression:
     """Parse a shape expression value (dict or bare IRI string)."""
     if isinstance(v, str):
-        return ShapeRefE(reference=v)
+        return ShapeRefE(reference=_strip_brackets(v))
     t = v.get("type", "Shape")
     dispatch = {
         "Shape":          _parse_shape,
         "NodeConstraint": _parse_node_constraint,
-        "ShapeRef":       lambda d: ShapeRefE(reference=d["reference"]),
+        "ShapeRef":       lambda d: ShapeRefE(reference=_strip_brackets(d["reference"])),
         "ShapeOr":        _parse_shape_or,
         "ShapeAnd":       _parse_shape_and,
         "ShapeNot":       _parse_shape_not,
