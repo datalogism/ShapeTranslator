@@ -1,6 +1,8 @@
 """Serialize SHACL model to Turtle string using rdflib."""
 from __future__ import annotations
 
+import re
+
 import rdflib
 from rdflib import BNode, Graph, Namespace, URIRef
 from rdflib.collection import Collection
@@ -191,7 +193,33 @@ def serialize_shacl(schema: SHACLSchema) -> str:
     result = result.replace("@prefix schema1: <http://schema.org/> .",
                             "@prefix schema: <http://schema.org/> .")
     result = result.replace("schema1:", "schema:")
+    # Ensure sh:path is the leading predicate in property shape blank nodes.
+    result = _fix_property_shape_ordering(result)
     return result
+
+
+def _fix_property_shape_ordering(turtle: str) -> str:
+    """Post-process Turtle to put sh:path first when sh:or precedes it.
+
+    rdflib sorts predicates alphabetically, so ``sh:or`` (o) comes before
+    ``sh:path`` (p).  This function swaps blank nodes of the form::
+
+        [ sh:or ( EXPR ) ;\n    sh:path IRI ]
+
+    to::
+
+        [ sh:path IRI ;\n    sh:or ( EXPR ) ]
+
+    Note: EXPR is an RDF list using () with items ``[ sh:class <IRI> ]`` which
+    contain ``[`` / ``]`` but not unbalanced ``)``.  ``[^)]+`` safely matches
+    the list without crossing blank-node boundaries.
+    """
+    turtle = re.sub(
+        r'\[ (sh:or \([^)]+\)) ;\n(\s+)(sh:path \S+) \]',
+        r'[ \3 ;\n\2\1 ]',
+        turtle,
+    )
+    return turtle
 
 
 def serialize_shacl_to_file(schema: SHACLSchema, filepath: str):

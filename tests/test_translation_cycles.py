@@ -16,16 +16,16 @@ ShEx-starting chains (datasets: Wikidata WES + YAGO)
 
 Comparison strategy
 ───────────────────
-All chain outputs are projected through the internal canonical representation
-for deterministic comparison.  Properties and shapes must be preserved across
-every full round-trip.
+Chain outputs are returned as ShexJESchema objects and compared by counting
+shapes and properties — ShexJE is the single source of truth.
 """
 from __future__ import annotations
 
-import json
 import os
 
 import pytest
+
+from shaclex_py.schema.shexje import ShexJESchema, ShapeE, EachOfE, TripleConstraintE
 
 # ── Paths to dataset directories ──────────────────────────────────────────────
 
@@ -36,91 +36,95 @@ SHEX_YAGO_DIR     = os.path.join(_ROOT, "dataset", "shex_yago")
 SHEX_WES_DIR      = os.path.join(_ROOT, "dataset", "shex_wes")
 
 
-# ── Chain helpers ─────────────────────────────────────────────────────────────
-# Each function returns a canonical dict for deterministic comparison.
-# The internal canonical representation is used as the comparison projection.
+# ── ShexJE counting helpers ───────────────────────────────────────────────────
 
-def _chain_A(shacl_path: str) -> dict:
-    """SHACL → ShexJE → SHACL → (canonical dict)."""
+def _shape_count(shexje: ShexJESchema) -> int:
+    """Count top-level ShapeE declarations (main shapes with targetClass or expression)."""
+    return sum(
+        1 for s in shexje.shapes
+        if isinstance(s, ShapeE) and (s.targetClass is not None or s.expression is not None)
+    )
+
+
+def _prop_count(shexje: ShexJESchema) -> int:
+    """Count TripleConstraints across all shapes."""
+    count = 0
+    for s in shexje.shapes:
+        if not isinstance(s, ShapeE):
+            continue
+        expr = s.expression
+        if isinstance(expr, EachOfE):
+            count += sum(1 for e in expr.expressions if isinstance(e, TripleConstraintE))
+        elif isinstance(expr, TripleConstraintE):
+            count += 1
+    return count
+
+
+# ── Chain helpers ─────────────────────────────────────────────────────────────
+# Each function returns a ShexJESchema for shape/property counting.
+
+def _chain_A(shacl_path: str) -> ShexJESchema:
+    """SHACL → ShexJE → SHACL → ShexJE."""
     from shaclex_py.parser.shacl_parser import parse_shacl_file
     from shaclex_py.converter.shacl_to_shexje import convert_shacl_to_shexje
     from shaclex_py.converter.shexje_to_shacl import convert_shexje_to_shacl
-    from shaclex_py.converter.shacl_to_canonical import convert_shacl_to_canonical
     from shaclex_py.serializer.shacl_serializer import serialize_shacl
-    from shaclex_py.serializer.json_serializer import serialize_json
 
     shacl  = parse_shacl_file(shacl_path)
     shexje = convert_shacl_to_shexje(shacl)
     shacl2 = parse_shacl_file(serialize_shacl(convert_shexje_to_shacl(shexje)))
-    return json.loads(serialize_json(convert_shacl_to_canonical(shacl2)))
+    return convert_shacl_to_shexje(shacl2)
 
 
-def _chain_B(shacl_path: str) -> dict:
-    """SHACL → ShexJE → ShEx → ShexJE → SHACL → (canonical dict)."""
+def _chain_B(shacl_path: str) -> ShexJESchema:
+    """SHACL → ShexJE → ShEx → ShexJE → SHACL → ShexJE."""
     from shaclex_py.parser.shacl_parser import parse_shacl_file
     from shaclex_py.parser.shex_parser import parse_shex_file
     from shaclex_py.converter.shacl_to_shexje import convert_shacl_to_shexje
     from shaclex_py.converter.shexje_to_shex import convert_shexje_to_shex
     from shaclex_py.converter.shex_to_shexje import convert_shex_to_shexje
     from shaclex_py.converter.shexje_to_shacl import convert_shexje_to_shacl
-    from shaclex_py.converter.shacl_to_canonical import convert_shacl_to_canonical
     from shaclex_py.serializer.shacl_serializer import serialize_shacl
     from shaclex_py.serializer.shex_serializer import serialize_shex
-    from shaclex_py.serializer.json_serializer import serialize_json
 
     shacl   = parse_shacl_file(shacl_path)
     shexje1 = convert_shacl_to_shexje(shacl)
     shex    = parse_shex_file(serialize_shex(convert_shexje_to_shex(shexje1)))
     shexje2 = convert_shex_to_shexje(shex)
     shacl2  = parse_shacl_file(serialize_shacl(convert_shexje_to_shacl(shexje2)))
-    return json.loads(serialize_json(convert_shacl_to_canonical(shacl2)))
+    return convert_shacl_to_shexje(shacl2)
 
 
-def _chain_C(shex_path: str) -> dict:
-    """ShEx → ShexJE → ShEx → (canonical dict)."""
+def _chain_C(shex_path: str) -> ShexJESchema:
+    """ShEx → ShexJE → ShEx → ShexJE."""
     from shaclex_py.parser.shex_parser import parse_shex_file
     from shaclex_py.converter.shex_to_shexje import convert_shex_to_shexje
     from shaclex_py.converter.shexje_to_shex import convert_shexje_to_shex
-    from shaclex_py.converter.shex_to_canonical import convert_shex_to_canonical
     from shaclex_py.serializer.shex_serializer import serialize_shex
-    from shaclex_py.serializer.json_serializer import serialize_json
 
     shex   = parse_shex_file(shex_path)
     shexje = convert_shex_to_shexje(shex)
     shex2  = parse_shex_file(serialize_shex(convert_shexje_to_shex(shexje)))
-    return json.loads(serialize_json(convert_shex_to_canonical(shex2)))
+    return convert_shex_to_shexje(shex2)
 
 
-def _chain_D(shex_path: str) -> dict:
-    """ShEx → ShexJE → SHACL → ShexJE → ShEx → (canonical dict)."""
+def _chain_D(shex_path: str) -> ShexJESchema:
+    """ShEx → ShexJE → SHACL → ShexJE → ShEx → ShexJE."""
     from shaclex_py.parser.shacl_parser import parse_shacl_file
     from shaclex_py.parser.shex_parser import parse_shex_file
     from shaclex_py.converter.shex_to_shexje import convert_shex_to_shexje
     from shaclex_py.converter.shexje_to_shacl import convert_shexje_to_shacl
     from shaclex_py.converter.shacl_to_shexje import convert_shacl_to_shexje
     from shaclex_py.converter.shexje_to_shex import convert_shexje_to_shex
-    from shaclex_py.converter.shex_to_canonical import convert_shex_to_canonical
     from shaclex_py.serializer.shacl_serializer import serialize_shacl
     from shaclex_py.serializer.shex_serializer import serialize_shex
-    from shaclex_py.serializer.json_serializer import serialize_json
 
-    shex      = parse_shex_file(shex_path)
-    shexje1   = convert_shex_to_shexje(shex)
-    shacl     = parse_shacl_file(serialize_shacl(convert_shexje_to_shacl(shexje1)))
-    shexje2   = convert_shacl_to_shexje(shacl)
-    shex2_str = serialize_shex(convert_shexje_to_shex(shexje2))
-    shex2     = parse_shex_file(shex2_str)
-    return json.loads(serialize_json(convert_shex_to_canonical(shex2)))
-
-
-# ── Utility helpers ───────────────────────────────────────────────────────────
-
-def _prop_count(canonical_dict: dict) -> int:
-    return sum(len(s.get("properties", [])) for s in canonical_dict.get("shapes", []))
-
-
-def _shape_count(canonical_dict: dict) -> int:
-    return len(canonical_dict.get("shapes", []))
+    shex    = parse_shex_file(shex_path)
+    shexje1 = convert_shex_to_shexje(shex)
+    shacl   = parse_shacl_file(serialize_shacl(convert_shexje_to_shacl(shexje1)))
+    shexje2 = convert_shacl_to_shexje(shacl)
+    shex2   = parse_shex_file(serialize_shex(convert_shexje_to_shex(shexje2)))
+    return convert_shex_to_shexje(shex2)
 
 
 # ── Dataset file lists ────────────────────────────────────────────────────────
