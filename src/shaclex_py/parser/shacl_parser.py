@@ -166,6 +166,34 @@ def _extract_prefixes(g: Graph) -> list[Prefix]:
     return prefixes
 
 
+def _load_graph(g: Graph, source: str, format: str) -> None:
+    """Load *source* into *g*, routing to file or inline-data parse.
+
+    The original try-except approach (``g.parse(source=source)`` first,
+    then ``g.parse(data=source)`` on failure) causes rdflib to build a
+    synthetic ``file:///CWD/<turtle_text>`` URI from the raw Turtle string,
+    firing a spurious "does not look like a valid URI" warning for every
+    inline-text parse.
+
+    Instead, we inspect the source string up-front:
+    - If it looks like an existing file path → ``source=`` (rdflib reads it).
+    - Otherwise → ``data=`` (rdflib treats it as inline data).
+    """
+    from pathlib import Path as _Path
+    is_file = False
+    try:
+        # Path.exists() raises on strings with null bytes or platform
+        # path-length violations; treat those as inline data.
+        is_file = _Path(source).is_file()
+    except (OSError, ValueError):
+        pass
+
+    if is_file:
+        g.parse(source=source, format=format)
+    else:
+        g.parse(data=source, format=format)
+
+
 def parse_shacl(source: str, format: str = "turtle") -> SHACLSchema:
     """Parse a SHACL file (Turtle string or file path) into SHACLSchema.
 
@@ -177,11 +205,7 @@ def parse_shacl(source: str, format: str = "turtle") -> SHACLSchema:
         SHACLSchema with parsed shapes and prefixes.
     """
     g = Graph()
-    # Try as file path first, then as data
-    try:
-        g.parse(source=source, format=format)
-    except Exception:
-        g.parse(data=source, format=format)
+    _load_graph(g, source, format)
 
     prefixes = _extract_prefixes(g)
     shapes = []

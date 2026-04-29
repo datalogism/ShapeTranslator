@@ -13,6 +13,7 @@ from shaclex_py.schema.shexje import (
     AlternativePath,
     EachOfE,
     IriStemValue,
+    LiteralValue,
     NodeConstraintE,
     ShapeAndE,
     ShapeDecl,
@@ -31,6 +32,16 @@ from shaclex_py.schema.shexje import (
 _RDF_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 _UNBOUNDED = -1
 _SHACL_SHAPES_BASE = "http://shaclshapes.org/"
+
+def _clean_iri(s: str) -> str:
+    """Strip leading '<' / trailing '>' that LLMs sometimes embed in IRI strings.
+
+    e.g. "<http://dbpedia.org/datatype/usDollar>" → "http://dbpedia.org/datatype/usDollar"
+    """
+    if s and s.startswith("<") and s.endswith(">"):
+        return s[1:-1]
+    return s
+
 
 _NODE_KIND_MAP: dict[str, NodeKind] = {
     "IRI": NodeKind.IRI,
@@ -83,12 +94,15 @@ def _is_rdf_type_only_stub(shape: ShapeE) -> bool:
 
 def _shexje_value_to_shacl(val) -> Union[IRI, Literal]:
     if isinstance(val, str):
-        return IRI(val)
+        return IRI(_clean_iri(val))
+    if isinstance(val, LiteralValue):
+        dt = IRI(_clean_iri(val.datatype)) if val.datatype else None
+        return Literal(value=val.value, datatype=dt, language=val.language)
     if isinstance(val, dict):
-        dt = IRI(val["datatype"]) if "datatype" in val else None
+        dt = IRI(_clean_iri(val["datatype"])) if "datatype" in val else None
         lang = val.get("language")
         return Literal(value=val["value"], datatype=dt, language=lang)
-    return IRI(str(val))
+    return IRI(_clean_iri(str(val)))
 
 
 def _shape_ref_iri(ref: str) -> IRI:
@@ -132,14 +146,19 @@ def _resolve_ve_to_ps(
         classes = _extract_or_classes(ve)
         if classes:
             ps.or_constraints = [IRI(c) for c in classes]
+            # Propagate nodeKind=iri when arms carry it (class URI + nodeKind pattern)
+            first_nc = next((e for e in ve.shapeExprs if isinstance(e, NodeConstraintE)), None)
+            if first_nc is not None and first_nc.nodeKind == "iri":
+                ps.node_kind = NodeKind.IRI
         return
 
     if isinstance(ve, ShapeAndE):
         # Pattern: [shape_ref, NodeConstraint(nodeKind=...)]
-        str_refs = [e for e in ve.shapeExprs if isinstance(e, str)]
+        # The parser produces ShapeRefE objects; accept both str and ShapeRefE.
+        shape_refs = [e for e in ve.shapeExprs if isinstance(e, (str, ShapeRefE))]
         ncs = [e for e in ve.shapeExprs if isinstance(e, NodeConstraintE)]
-        if str_refs:
-            _resolve_ve_to_ps(str_refs[0], shape_map, ps)
+        if shape_refs:
+            _resolve_ve_to_ps(shape_refs[0], shape_map, ps)
         if ncs:
             _resolve_nc_to_ps(ncs[0], ps)
         return
@@ -152,7 +171,7 @@ def _resolve_value_shape_to_ps(shape: ShapeE, ps: PropertyShape) -> None:
     """Extract class IRI(s) from a value-shape helper ShapeE."""
     # Compact shorthand: predicate + values on ShapeE
     if shape.predicate is not None and shape.values is not None:
-        class_iris = [v for v in shape.values if isinstance(v, str)]
+        class_iris = [_clean_iri(v) for v in shape.values if isinstance(v, str)]
         if len(class_iris) == 1:
             ps.class_ = IRI(class_iris[0])
         elif len(class_iris) > 1:
@@ -168,7 +187,7 @@ def _extract_class_from_tc(tc: TripleConstraintE, ps: PropertyShape) -> None:
         return
     nc = tc.valueExpr
     if nc.values:
-        class_iris = [v for v in nc.values if isinstance(v, str)]
+        class_iris = [_clean_iri(v) for v in nc.values if isinstance(v, str)]
         if len(class_iris) == 1:
             ps.class_ = IRI(class_iris[0])
         elif len(class_iris) > 1:
@@ -177,12 +196,19 @@ def _extract_class_from_tc(tc: TripleConstraintE, ps: PropertyShape) -> None:
 
 def _resolve_nc_to_ps(nc: NodeConstraintE, ps: PropertyShape) -> None:
     if nc.datatype is not None:
-        ps.datatype = IRI(nc.datatype)
+        ps.datatype = IRI(_clean_iri(nc.datatype))
     if nc.nodeKind is not None:
         ps.node_kind = _NODE_KIND_MAP.get(nc.nodeKind)
     if nc.datatype is not None or nc.nodeKind is not None:
         if nc.pattern is not None:
             ps.pattern = nc.pattern
+        # Class URI values may coexist with nodeKind=iri → emit sh:class + sh:nodeKind sh:IRI
+        if nc.values is not None and nc.nodeKind is not None:
+            http_vals = [_clean_iri(v) for v in nc.values if isinstance(v, str) and _clean_iri(v).startswith("http")]
+            if len(http_vals) == 1:
+                ps.class_ = IRI(http_vals[0])
+            elif len(http_vals) > 1:
+                ps.or_constraints = [IRI(v) for v in http_vals]
         return
     if nc.hasValue is not None:
         ps.has_value = _shexje_value_to_shacl(nc.hasValue)
@@ -195,7 +221,23 @@ def _resolve_nc_to_ps(nc: NodeConstraintE, ps: PropertyShape) -> None:
             ps.pattern = f"^{nc.values[0].stem}/"
             return
         if len(nc.values) == 1 and isinstance(nc.values[0], str):
-            ps.has_value = IRI(nc.values[0])
+            v = _clean_iri(nc.values[0])
+            # A bare IRI string used as the sole value is a class constraint
+            # (produced by _build_value_expr for dbo:… / schema:… class URIs).
+            # Distinguish from sh:hasValue by checking it looks like an ontology
+            # URI rather than a named individual or literal.
+            if v.startswith("http"):
+                ps.class_ = IRI(v)
+            else:
+                ps.has_value = IRI(v)
+            return
+        # Multiple IRI strings → sh:or of sh:class (same logic as _extract_or_classes)
+        if all(isinstance(v, str) for v in nc.values):
+            class_iris = [_clean_iri(v) for v in nc.values]
+            if len(class_iris) == 1:
+                ps.class_ = IRI(class_iris[0])
+            else:
+                ps.or_constraints = [IRI(c) for c in class_iris]
             return
         ps.in_values = [_shexje_value_to_shacl(v) for v in nc.values]
         return
@@ -209,7 +251,7 @@ def _extract_or_classes(shape_or: ShapeOrE) -> Optional[list[str]]:
         if isinstance(se, NodeConstraintE) and se.values and len(se.values) == 1:
             v = se.values[0]
             if isinstance(v, str):
-                classes.append(v)
+                classes.append(_clean_iri(v))
                 continue
         return None
     return classes or None
@@ -333,7 +375,8 @@ def _shape_to_node_shape(
     target_class = None
     if shape.targetClass:
         tc_val = shape.targetClass
-        target_class = IRI(tc_val[0] if isinstance(tc_val, list) else tc_val)
+        raw = tc_val[0] if isinstance(tc_val, list) else tc_val
+        target_class = IRI(_clean_iri(raw))
 
     # Collect all triple constraints
     all_tcs: list[TripleConstraintE] = []
