@@ -1,5 +1,7 @@
 # shaclex-py
-
+<p align="center">
+  <img  width="500" src="/Shaclex.png?raw=true" alt="Bannière GitHub" />
+</p>
 A bidirectional translator between **SHACL** (Shapes Constraint Language, Turtle format) and **ShEx** (Shape Expressions, ShExC compact syntax), built from scratch in Python.
 
 Uses **ShexJE** (ShEx JSON Extended) as the canonical intermediate format, handling the semantic differences documented in [Validating RDF Data, Ch. 13](https://book.validatingrdf.com/bookHtml013.html). ShexJE is a lossless superset of W3C ShexJ extended for full SHACL compatibility.
