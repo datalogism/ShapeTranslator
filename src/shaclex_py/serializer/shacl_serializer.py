@@ -99,18 +99,31 @@ def _fill_property_shape(g: Graph, prop: BNode, ps: PropertyShape):
         g.add((prop, SH["or"], or_list))
 
 
-def _add_property_shape(g: Graph, shape_node: URIRef, ps: PropertyShape):
+def _add_property_shape(
+    g: Graph,
+    shape_node: URIRef,
+    ps: PropertyShape,
+    label_map: dict | None = None,
+):
     """Add a property shape as a blank node to the graph."""
     prop = BNode()
     g.add((shape_node, SH.property, prop))
     _fill_property_shape(g, prop, ps)
+    if label_map:
+        path_iri = ps.path.iri.value
+        label = label_map.get(path_iri)
+        if label:
+            g.add((prop, SH.name, rdflib.Literal(label, lang="en")))
 
 
-def serialize_shacl(schema: SHACLSchema) -> str:
+def serialize_shacl(schema: SHACLSchema, label_map: dict | None = None) -> str:
     """Serialize a SHACLSchema to Turtle string.
 
     Args:
-        schema: The SHACL schema to serialize.
+        schema:    The SHACL schema to serialize.
+        label_map: Optional mapping of Wikidata IRI → English label.  When
+                   provided, ``sh:name`` is added to property shapes and
+                   ``rdfs:label`` is added to node shapes.
 
     Returns:
         Turtle format string.
@@ -136,6 +149,11 @@ def serialize_shacl(schema: SHACLSchema) -> str:
 
         if shape.target_class:
             g.add((shape_uri, SH.targetClass, _iri_to_uri(shape.target_class)))
+            if label_map:
+                tc_label = label_map.get(shape.target_class.value)
+                if tc_label:
+                    g.add((shape_uri, RDFS.label, rdflib.Literal(tc_label, lang="en")))
+                    g.add((shape_uri, SH.name, rdflib.Literal(tc_label, lang="en")))
 
         if shape.closed:
             g.add((shape_uri, SH.closed, rdflib.Literal(True)))
@@ -171,7 +189,7 @@ def serialize_shacl(schema: SHACLSchema) -> str:
             g.add((shape_uri, SH["in"], collection))
 
         for ps in shape.properties:
-            _add_property_shape(g, shape_uri, ps)
+            _add_property_shape(g, shape_uri, ps, label_map=label_map)
 
         # sh:or at NodeShape level with sh:property groups (alternative property sets)
         if shape.or_property_groups:
@@ -182,10 +200,19 @@ def serialize_shacl(schema: SHACLSchema) -> str:
                     prop = BNode()
                     g.add((item_node, SH.property, prop))
                     _fill_property_shape(g, prop, ps)
+                    if label_map:
+                        path_iri = ps.path.iri.value
+                        lbl = label_map.get(path_iri)
+                        if lbl:
+                            g.add((prop, SH.name, rdflib.Literal(lbl, lang="en")))
                 or_items.append(item_node)
             or_list = BNode()
             Collection(g, or_list, or_items)
             g.add((shape_uri, SH["or"], or_list))
+
+    if label_map:
+        for iri, label in label_map.items():
+            g.add((URIRef(iri), RDFS.label, rdflib.Literal(label, lang="en")))
 
     result = g.serialize(format="turtle")
     # Fix rdflib's schema prefix issue (it uses schema1 for http://schema.org/
@@ -222,8 +249,12 @@ def _fix_property_shape_ordering(turtle: str) -> str:
     return turtle
 
 
-def serialize_shacl_to_file(schema: SHACLSchema, filepath: str):
+def serialize_shacl_to_file(
+    schema: SHACLSchema,
+    filepath: str,
+    label_map: dict | None = None,
+):
     """Serialize a SHACLSchema to a Turtle file."""
-    turtle = serialize_shacl(schema)
+    turtle = serialize_shacl(schema, label_map=label_map)
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(turtle)

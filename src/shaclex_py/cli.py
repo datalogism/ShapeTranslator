@@ -24,16 +24,19 @@ import sys
 
 
 def _maybe_fetch_labels(schema, direction: str, wikidata_labels: bool) -> dict:
-    """Fetch Wikidata labels when ``--wikidata-labels`` is set and the output
-    is ShEx.  Returns an empty dict otherwise (labels disabled by default).
+    """Fetch Wikidata labels when ``--wikidata-labels`` is set.
 
-    Only targets ShEx-producing directions: ``shacl2shex``.
-    The label map is built lazily from the already-parsed schema so we make
-    exactly one SPARQL round-trip per file.
+    Supported directions:
+    - ``shacl2shex``   — labels collected from the input SHACL schema
+    - ``shex2shacl``   — labels collected from the converted SHACL schema
+    - ``shexje2shacl`` — labels collected from the converted SHACL schema
+
+    Returns an empty dict when labels are disabled or the direction is not
+    supported.
     """
     if not wikidata_labels:
         return {}
-    if direction != "shacl2shex":
+    if direction not in ("shacl2shex", "shex2shacl", "shexje2shacl"):
         return {}
     try:
         from shaclex_py.utils.wikidata import (
@@ -94,7 +97,8 @@ def convert_file(
 
         shex = parse_shex_file(input_path)
         shacl = convert_shex_to_shacl(shex)
-        result = serialize_shacl(shacl)
+        label_map = _maybe_fetch_labels(shacl, direction, wikidata_labels)
+        result = serialize_shacl(shacl, label_map=label_map or None)
     elif direction == "shacl2shexje":
         from shaclex_py.parser.shacl_parser import parse_shacl_file
         from shaclex_py.converter.shacl_to_shexje import convert_shacl_to_shexje
@@ -118,7 +122,8 @@ def convert_file(
 
         shexje = parse_shexje_file(input_path)
         shacl = convert_shexje_to_shacl(shexje)
-        result = serialize_shacl(shacl)
+        label_map = _maybe_fetch_labels(shacl, direction, wikidata_labels)
+        result = serialize_shacl(shacl, label_map=label_map or None)
     elif direction == "shexje2shex":
         from shaclex_py.parser.shexje_parser import parse_shexje_file
         from shaclex_py.converter.shexje_to_shex import convert_shexje_to_shex
@@ -246,9 +251,11 @@ def main():
         action="store_true",
         default=False,
         help=(
-            "Fetch English labels from the Wikidata SPARQL endpoint and use "
-            "them for @<ShapeName> references and inline comments in ShEx "
-            "output.  Only applies to shacl2shex direction. "
+            "Fetch English labels from the Wikidata SPARQL endpoint. "
+            "For shacl2shex: labels appear as @<ShapeName> references and "
+            "inline comments in ShEx output. "
+            "For shex2shacl / shexje2shacl: labels are added as sh:name on "
+            "property shapes and rdfs:label on node shapes. "
             "Disabled by default."
         ),
     )
