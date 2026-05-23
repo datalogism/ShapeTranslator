@@ -1,6 +1,6 @@
 # shaclex-py
 <p align="center">
-  <img  width="500" src="/Shaclex.png?raw=true" alt="Bannière GitHub" />
+  <img  width="500" src="./Shaclex.png?raw=true" alt="Bannière GitHub" />
 </p>
 A bidirectional translator between **SHACL** (Shapes Constraint Language, Turtle format) and **ShEx** (Shape Expressions, ShExC compact syntax), built from scratch in Python.
 
