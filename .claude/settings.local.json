@@ -59,7 +59,16 @@
       "Bash(PYTHONPATH=src python3 -m pytest tests/test_yago_fidelity.py -v)",
       "Bash(PYTHONPATH=src python3 -m pytest tests/ -q)",
       "Bash(PYTHONPATH=src python3 -m pytest tests/test_yago_fidelity.py::TestYAGO_ShEx_to_SHACL::test_shex_translated_to_shacl_matches_original[Newspaper] -v --tb=short)",
-      "Bash(PYTHONPATH=src python3 -m pytest tests/ -q --tb=short)"
+      "Bash(PYTHONPATH=src python3 -m pytest tests/ -q --tb=short)",
+      "Bash(pip show *)",
+      "Bash(cp /mnt/c/Users/doccr/PycharmProjects/PythonProject1/src/shaclex_py/cli.py /mnt/c/Users/doccr/PycharmProjects/DoubleShapespresso/parser_extended/src/shaclex_py/cli.py)",
+      "Bash(cp /mnt/c/Users/doccr/PycharmProjects/PythonProject1/src/shaclex_py/serializer/shacl_serializer.py /mnt/c/Users/doccr/PycharmProjects/DoubleShapespresso/parser_extended/src/shaclex_py/serializer/shacl_serializer.py)",
+      "Bash(xargs basename -s .shex)",
+      "Bash(xargs basename -s .ttl)",
+      "Bash(sed -n '223,230p' /mnt/c/Users/doccr/PycharmProjects/DoubleShapespresso/parser_extended/src/shaclex_py/converter/shex_to_shexje.py)",
+      "Bash(sed -n '291,300p' /mnt/c/Users/doccr/PycharmProjects/DoubleShapespresso/parser_extended/src/shaclex_py/converter/shexje_to_shex.py)",
+      "Bash(git -C /mnt/c/Users/doccr/PycharmProjects/PythonProject1 stash)",
+      "Bash(git -C /mnt/c/Users/doccr/PycharmProjects/PythonProject1 stash pop)"
     ]
   }
 }

@@ -90,7 +90,13 @@ def _is_rdf_type_only_stub(shape: ShapeE) -> bool:
         return True
     if isinstance(expr, TripleConstraintE):
         rdf_type = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-        return expr.predicate == rdf_type and expr.min is None and expr.max is None
+        # Only treat as a stub when there is NO value constraint — a bare
+        # `rdf:type .` with no cardinality.  A shape with a real valueExpr
+        # (e.g. rdf:type [ schema:Person ] from sh:hasValue) is legitimate.
+        return (expr.predicate == rdf_type
+                and expr.min is None
+                and expr.max is None
+                and expr.valueExpr is None)
     return False
 
 
@@ -163,6 +169,24 @@ def _local_name(iri: str) -> str:
     return iri
 
 
+def _find_aux_for_class(class_iri: str, auxiliary: dict[str, Shape]) -> Optional[str]:
+    """Return the name of an existing single-class auxiliary shape for class_iri, or None."""
+    for name, shape in auxiliary.items():
+        expr = shape.expression
+        if not isinstance(expr, TripleConstraint):
+            continue
+        c = expr.constraint
+        if (
+            isinstance(c, NodeConstraint)
+            and c.values
+            and len(c.values) == 1
+            and isinstance(c.values[0].value, IRI)
+            and c.values[0].value.value == class_iri
+        ):
+            return name
+    return None
+
+
 # ── Value-expr resolution → ShEx constraint ───────────────────────────────────
 
 def _resolve_ve_to_shex(
@@ -178,15 +202,22 @@ def _resolve_ve_to_shex(
         if isinstance(referenced, ShapeE) and _is_value_shape_stub(referenced):
             class_iris = _extract_value_shape_classes(referenced)
             if len(class_iris) == 1:
-                name = _local_name(class_iris[0])
-                name = _unique_name(name, auxiliary, main_names)
+                existing = _find_aux_for_class(class_iris[0], auxiliary)
+                if existing is not None:
+                    return ShapeRef(name=IRI(existing))
+                name = _unique_name(_local_name(class_iris[0]), auxiliary, main_names)
                 _ensure_aux_class_shape(name, IRI(class_iris[0]), auxiliary)
                 return ShapeRef(name=IRI(name))
             elif len(class_iris) > 1:
                 base = _local_name(ve) or ve
-                name = _unique_name(base, auxiliary, main_names)
-                _ensure_aux_or_shape(name, [IRI(c) for c in class_iris], auxiliary)
-                return ShapeRef(name=IRI(name))
+                # If already in auxiliary with this name, reuse it (deduplication).
+                if base in auxiliary:
+                    return ShapeRef(name=IRI(base))
+                # Avoid collision with main shape names.
+                if base in main_names:
+                    base = _unique_name(base, auxiliary, main_names)
+                _ensure_aux_or_shape(base, [IRI(c) for c in class_iris], auxiliary)
+                return ShapeRef(name=IRI(base))
         return ShapeRef(name=IRI(ve))
 
     if isinstance(ve, NodeConstraintE):
@@ -197,15 +228,20 @@ def _resolve_ve_to_shex(
         if isinstance(referenced, ShapeE) and _is_value_shape_stub(referenced):
             class_iris = _extract_value_shape_classes(referenced)
             if len(class_iris) == 1:
-                name = _local_name(class_iris[0])
-                name = _unique_name(name, auxiliary, main_names)
+                existing = _find_aux_for_class(class_iris[0], auxiliary)
+                if existing is not None:
+                    return ShapeRef(name=IRI(existing))
+                name = _unique_name(_local_name(class_iris[0]), auxiliary, main_names)
                 _ensure_aux_class_shape(name, IRI(class_iris[0]), auxiliary)
                 return ShapeRef(name=IRI(name))
             elif len(class_iris) > 1:
-                base = _local_name(ve.reference)
-                name = _unique_name(base, auxiliary, main_names)
-                _ensure_aux_or_shape(name, [IRI(c) for c in class_iris], auxiliary)
-                return ShapeRef(name=IRI(name))
+                base = _local_name(ve.reference) or ve.reference
+                if base in auxiliary:
+                    return ShapeRef(name=IRI(base))
+                if base in main_names:
+                    base = _unique_name(base, auxiliary, main_names)
+                _ensure_aux_or_shape(base, [IRI(c) for c in class_iris], auxiliary)
+                return ShapeRef(name=IRI(base))
         return ShapeRef(name=IRI(ve.reference))
 
     if isinstance(ve, ShapeOrE):
@@ -419,7 +455,9 @@ def _tc_e_to_shex(
     if tc_e.valueExpr is not None:
         constraint = _resolve_ve_to_shex(tc_e.valueExpr, shape_map, auxiliary, main_names)
 
-    # AlternativePath → expand to one TC per path, wrapped in OneOf
+    # AlternativePath → one TripleConstraint per path, wrapped in a single OneOf (|).
+    # EachOf.expressions accepts TripleExpression items (TripleConstraint | EachOf | OneOf),
+    # so returning [OneOf(...)] lets the outer builder embed the disjunction correctly.
     if isinstance(tc_e.path, AlternativePath):
         paths = [e for e in tc_e.path.expressions if isinstance(e, str)]
         if not paths:
@@ -430,14 +468,7 @@ def _tc_e_to_shex(
         ]
         if len(branches) == 1:
             return branches
-        oo = OneOf(expressions=branches)
-        # Wrap in a dummy TC? No — ShEx EachOf accepts OneOf directly.
-        # We return a "pseudo-TC" which is actually OneOf. The serializer handles it.
-        # In practice the ShEx schema EachOf accepts TripleExpression items.
-        # Since OneOf is also a TripleExpression in the ShEx model, we can append it.
-        # But our TripleConstraint list only accepts TripleConstraint objects.
-        # Use the first branch as representative (same as existing behaviour).
-        return branches  # serialized as alternating TCs in EachOf
+        return [OneOf(expressions=branches)]
 
     if tc_e.predicate is None:
         return []

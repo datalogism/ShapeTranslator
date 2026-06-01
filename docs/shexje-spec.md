@@ -472,11 +472,13 @@ ShexJ conventions, extended with SHACL language stems:
 
 ---
 
-## 8. Internal canonical model → ShexJE mapping
+## 8. CanonicalSchema → ShexJE mapping (metrics / evaluation layer)
 
-The internal canonical representation used during conversion maps to ShexJE as follows:
+`CanonicalSchema` (`schema/canonical.py`) is a lightweight, language-neutral dataclass used **only** by the shapespresso metrics and evaluation layer — it is **not** part of the main conversion pipeline.  The main pipeline converts SHACL directly to ShexJE via `shacl_to_shexje.py` and `shexje_to_shacl.py` without any CanonicalSchema step.
 
-| Internal canonical field      | ShexJE equivalent                                                     |
+The table below shows how `CanonicalProperty` fields (used for property-level classification and similarity scoring) map onto ShexJE constructs:
+
+| CanonicalProperty field       | ShexJE equivalent                                                     |
 |-------------------------------|-----------------------------------------------------------------------|
 | `shapes[].name`               | `shapes[].id`                                                         |
 | `shapes[].targetClass`        | `shapes[].targetClass`                                                |

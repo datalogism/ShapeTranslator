@@ -2,7 +2,7 @@
 
 This document catalogues which constructs from [Validating RDF Data, Ch. 13](https://book.validatingrdf.com/bookHtml013.html) are fully translated, which are approximated, and which are currently out of scope.
 
-All conversions use **ShexJE** as the canonical intermediate format.  See [ShexJE Spec](shexje-spec.md) for the full language reference.
+All conversions use **ShexJE** as the mandatory canonical intermediate format — every SHACL ↔ ShEx conversion routes through ShexJE, with no direct converter between the two surface languages.  See [ShexJE Spec](shexje-spec.md) for the full language reference and [Architecture](architecture.md) for the pipeline design.
 
 ---
 
@@ -33,6 +33,8 @@ The following patterns survive SHACL→ShexJE→ShEx→ShexJE and ShEx→ShexJE�
 | Non-standard `sh:dataType` (shexer) | `sh:dataType D` (capital T) | normalised to `datatype` | — |
 | Closed shapes | `sh:closed true` | `CLOSED` | 7.14 |
 | Default cardinality mismatch | explicit `{0,*}` vs `{1,1}` | always emitted explicitly | 7.8 |
+| Companion shape deduplication | multiple `sh:class C` / `sh:or` pointing to the same class(es) | one shared auxiliary shape per unique class combination | — |
+| Shapes with only `rdf:type hasValue` | `sh:property [ sh:path rdf:type ; sh:hasValue C ]` (no `sh:targetClass`) | `rdf:type [C] *` inside the shape body | — |
 
 ---
 

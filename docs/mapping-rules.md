@@ -137,15 +137,14 @@ with companion value shape:
 
 **ShEx**
 ```shex
-schema:founder @<Founder> *
+schema:founder @<OrganizationOrPerson> *
 
-<Founder> EXTRA rdf:type {
+<OrganizationOrPerson> EXTRA rdf:type {
   rdf:type [ schema:Organization schema:Person ]
 }
 ```
 
-The companion shape ID is derived from the local names of the class IRIs joined with `"Or"`.
-Multiple properties pointing to the same combination share one companion shape.
+The companion shape ID is derived from the **sorted local names** of the class IRIs joined with `"Or"` — e.g. `schema:Organization` + `schema:Person` → `OrganizationOrPerson`. This naming is deterministic and class-based, not property-based, so multiple properties pointing to the same class combination always share one companion shape.
 
 ---
 

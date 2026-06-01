@@ -202,11 +202,6 @@ def convert_shacl_to_shexje(
     shape_decls: list = []
 
     for ns in shacl.shapes:
-        # Skip old-format companion stubs (rdf:type-only shapes without targetClass).
-        # These were emitted by earlier converter versions; the companion shapes
-        # will be regenerated via _ensure_value_shape when processing main shapes.
-        if _is_rdf_type_only_companion(ns):
-            continue
         # OR-of-datatypes at NodeShape level → ShapeOrE
         if ns.or_datatypes:
             nc_list = [NodeConstraintE(datatype=dt.value) for dt in ns.or_datatypes]
