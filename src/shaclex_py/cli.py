@@ -61,11 +61,61 @@ def _maybe_fetch_labels(schema, direction: str, wikidata_labels: bool) -> dict:
         return {}
 
 
+def _prefetch_labels_for_batch(
+    input_dir: str,
+    direction: str,
+    ext_in: str,
+) -> dict:
+    """Collect all Wikidata IRIs across every file in *input_dir* and fetch
+    their labels in a single batch (at most 2 SPARQL requests total).
+
+    This is far more efficient than fetching per-file when the dataset is large
+    or the Wikidata endpoint is rate-limiting.
+    """
+    from shaclex_py.utils.wikidata import collect_iris_from_shacl, collect_iris_from_shex, fetch_labels
+
+    all_iris: set[str] = set()
+    for filename in sorted(os.listdir(input_dir)):
+        if not filename.endswith(ext_in):
+            continue
+        path = os.path.join(input_dir, filename)
+        try:
+            if direction == "shex2shacl":
+                from shaclex_py.parser.shex_parser import parse_shex_file
+                from shaclex_py.converter.shex_to_shacl import convert_shex_to_shacl
+                shex = parse_shex_file(path)
+                shacl = convert_shex_to_shacl(shex)
+                all_iris.update(collect_iris_from_shex(shex))
+                all_iris.update(collect_iris_from_shacl(shacl))
+            elif direction == "shacl2shex":
+                from shaclex_py.parser.shacl_parser import parse_shacl_file
+                shacl = parse_shacl_file(path)
+                all_iris.update(collect_iris_from_shacl(shacl))
+            elif direction == "shexje2shacl":
+                from shaclex_py.parser.shexje_parser import parse_shexje_file
+                from shaclex_py.converter.shexje_to_shacl import convert_shexje_to_shacl
+                shexje = parse_shexje_file(path)
+                shacl = convert_shexje_to_shacl(shexje)
+                all_iris.update(collect_iris_from_shacl(shacl))
+        except Exception:
+            pass  # parse errors are reported again in the main conversion loop
+
+    if not all_iris:
+        return {}
+    print(
+        f"  [wikidata-labels] pre-fetching labels for {len(all_iris)} unique "
+        f"IRIs across all files …",
+        flush=True,
+    )
+    return fetch_labels(list(all_iris))
+
+
 def convert_file(
     input_path: str,
     direction: str,
     output_path: str | None = None,
     wikidata_labels: bool = False,
+    label_map: dict | None = None,
 ) -> str:
     """Convert a single file.
 
@@ -77,6 +127,9 @@ def convert_file(
                           labels from the Wikidata SPARQL endpoint and use them
                           for ``@<ShapeName>`` references and inline comments.
                           Disabled by default.
+        label_map:        Pre-fetched IRI → label mapping (e.g. from a batch
+                          pre-fetch).  When provided, ``wikidata_labels`` is
+                          ignored and no additional SPARQL request is made.
 
     Returns:
         The converted output string.
@@ -87,7 +140,8 @@ def convert_file(
         from shaclex_py.serializer.shex_serializer import serialize_shex
 
         shacl = parse_shacl_file(input_path)
-        label_map = _maybe_fetch_labels(shacl, direction, wikidata_labels)
+        if label_map is None:
+            label_map = _maybe_fetch_labels(shacl, direction, wikidata_labels)
         shex = convert_shacl_to_shex(shacl, label_map=label_map or None)
         result = serialize_shex(shex, label_map=label_map or None)
     elif direction == "shex2shacl":
@@ -97,7 +151,8 @@ def convert_file(
 
         shex = parse_shex_file(input_path)
         shacl = convert_shex_to_shacl(shex)
-        label_map = _maybe_fetch_labels(shacl, direction, wikidata_labels)
+        if label_map is None:
+            label_map = _maybe_fetch_labels(shacl, direction, wikidata_labels)
         result = serialize_shacl(shacl, label_map=label_map or None)
     elif direction == "shacl2shexje":
         from shaclex_py.parser.shacl_parser import parse_shacl_file
@@ -122,7 +177,8 @@ def convert_file(
 
         shexje = parse_shexje_file(input_path)
         shacl = convert_shexje_to_shacl(shexje)
-        label_map = _maybe_fetch_labels(shacl, direction, wikidata_labels)
+        if label_map is None:
+            label_map = _maybe_fetch_labels(shacl, direction, wikidata_labels)
         result = serialize_shacl(shacl, label_map=label_map or None)
     elif direction == "shexje2shex":
         from shaclex_py.parser.shexje_parser import parse_shexje_file
@@ -166,6 +222,11 @@ def convert_batch(
     }
     ext_in, ext_out = ext_map[direction]
 
+    # Pre-fetch all Wikidata labels in one batch to minimise SPARQL round-trips.
+    shared_label_map: dict | None = None
+    if wikidata_labels and direction in ("shacl2shex", "shex2shacl", "shexje2shacl"):
+        shared_label_map = _prefetch_labels_for_batch(input_dir, direction, ext_in)
+
     ok = 0
     fail = 0
     warnings: list[str] = []
@@ -179,8 +240,11 @@ def convert_batch(
         output_path = os.path.join(output_dir, output_name)
 
         try:
-            convert_file(input_path, direction, output_path,
-                         wikidata_labels=wikidata_labels)
+            convert_file(
+                input_path, direction, output_path,
+                wikidata_labels=wikidata_labels,
+                label_map=shared_label_map,
+            )
             print(f"  OK  {filename} -> {output_name}")
             ok += 1
         except Exception as e:
