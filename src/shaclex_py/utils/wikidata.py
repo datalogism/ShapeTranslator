@@ -22,8 +22,9 @@ from __future__ import annotations
 
 import json
 import re
+import time
 from typing import Optional
-from urllib.error import URLError
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -180,35 +181,61 @@ def _fetch_entity_labels(qids: list[str], lang: str) -> dict[str, str]:
 
 
 def _fetch_property_labels(pids: list[str], lang: str) -> dict[str, str]:
-    """SPARQL fetch for P-properties (using wd: entity IRI, mapped back to wdt:)."""
+    """SPARQL fetch for P-properties via wikibase:label service.
+
+    Wikidata P-items do not expose rdfs:label reliably through WDQS; the
+    wikibase:label SERVICE is the correct approach for property labels.
+    """
     values = " ".join(f"wd:{p}" for p in pids)
-    query = f"""SELECT ?prop ?label WHERE {{
+    query = f"""SELECT ?prop ?propLabel WHERE {{
   VALUES ?prop {{ {values} }}
-  ?prop rdfs:label ?label .
-  FILTER(LANG(?label) = "{lang}")
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "{lang}". }}
 }}"""
     result: dict[str, str] = {}
     for row in _run_sparql(query):
         entity_iri = row["prop"]["value"]   # http://www.wikidata.org/entity/P50
         pid = entity_iri.rsplit("/", 1)[-1]  # P50
         wdt_iri = f"{WDT_BASE}{pid}"
-        result[wdt_iri] = row["label"]["value"]
+        prop_label = row.get("propLabel", {})
+        label = prop_label.get("value", "")
+        # wikibase:label falls back to the QID/PID itself when no label exists;
+        # skip those fallbacks by checking the language tag.
+        if label and prop_label.get("xml:lang") == lang:
+            result[wdt_iri] = label
     return result
 
 
-def _run_sparql(query: str) -> list[dict]:
-    """Execute one SPARQL query against the Wikidata endpoint."""
+def _run_sparql(query: str, retries: int = 3) -> list[dict]:
+    """Execute one SPARQL query against the Wikidata endpoint.
+
+    Retries up to *retries* times on HTTP 429 (rate-limit), honouring the
+    ``Retry-After`` header when present.  Other errors are logged and return [].
+    """
     params = urlencode({"query": query, "format": "json"})
+    url = f"{WIKIDATA_SPARQL}?{params}"
     req = Request(
-        f"{WIKIDATA_SPARQL}?{params}",
+        url,
         headers={
             "User-Agent": "shaclex-py/0.1 (https://github.com/cringwald/shaclex-py)",
             "Accept": "application/sparql-results+json",
         },
     )
-    try:
-        with urlopen(req, timeout=30) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        return data.get("results", {}).get("bindings", [])
-    except (URLError, OSError, json.JSONDecodeError):
-        return []
+    for attempt in range(retries + 1):
+        try:
+            with urlopen(req, timeout=30) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            return data.get("results", {}).get("bindings", [])
+        except HTTPError as exc:
+            if exc.code == 429 and attempt < retries:
+                wait = int(exc.headers.get("Retry-After", 65))
+                print(f"  [wikidata] rate-limited (429), waiting {wait}s …",
+                      flush=True)
+                time.sleep(wait)
+            else:
+                print(f"  [wikidata] HTTP {exc.code} from SPARQL endpoint: {exc.reason}",
+                      flush=True)
+                return []
+        except (URLError, OSError, json.JSONDecodeError) as exc:
+            print(f"  [wikidata] SPARQL request failed: {exc}", flush=True)
+            return []
+    return []
