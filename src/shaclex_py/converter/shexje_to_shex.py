@@ -90,13 +90,7 @@ def _is_rdf_type_only_stub(shape: ShapeE) -> bool:
         return True
     if isinstance(expr, TripleConstraintE):
         rdf_type = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-        # Only treat as a stub when there is NO value constraint — a bare
-        # `rdf:type .` with no cardinality.  A shape with a real valueExpr
-        # (e.g. rdf:type [ schema:Person ] from sh:hasValue) is legitimate.
-        return (expr.predicate == rdf_type
-                and expr.min is None
-                and expr.max is None
-                and expr.valueExpr is None)
+        return expr.predicate == rdf_type and expr.min is None and expr.max is None
     return False
 
 
@@ -161,14 +155,6 @@ def _unique_name(base: str, auxiliary: dict, main_names: set[str]) -> str:
         i += 1
 
 
-def _local_name(iri: str) -> str:
-    for sep in ("#", "/"):
-        idx = iri.rfind(sep)
-        if idx != -1:
-            return iri[idx + 1:]
-    return iri
-
-
 def _find_aux_for_class(class_iri: str, auxiliary: dict[str, Shape]) -> Optional[str]:
     """Return the name of an existing single-class auxiliary shape for class_iri, or None."""
     for name, shape in auxiliary.items():
@@ -185,6 +171,14 @@ def _find_aux_for_class(class_iri: str, auxiliary: dict[str, Shape]) -> Optional
         ):
             return name
     return None
+
+
+def _local_name(iri: str) -> str:
+    for sep in ("#", "/"):
+        idx = iri.rfind(sep)
+        if idx != -1:
+            return iri[idx + 1:]
+    return iri
 
 
 # ── Value-expr resolution → ShEx constraint ───────────────────────────────────
@@ -210,10 +204,8 @@ def _resolve_ve_to_shex(
                 return ShapeRef(name=IRI(name))
             elif len(class_iris) > 1:
                 base = _local_name(ve) or ve
-                # If already in auxiliary with this name, reuse it (deduplication).
                 if base in auxiliary:
                     return ShapeRef(name=IRI(base))
-                # Avoid collision with main shape names.
                 if base in main_names:
                     base = _unique_name(base, auxiliary, main_names)
                 _ensure_aux_or_shape(base, [IRI(c) for c in class_iris], auxiliary)
@@ -235,7 +227,7 @@ def _resolve_ve_to_shex(
                 _ensure_aux_class_shape(name, IRI(class_iris[0]), auxiliary)
                 return ShapeRef(name=IRI(name))
             elif len(class_iris) > 1:
-                base = _local_name(ve.reference) or ve.reference
+                base = _local_name(ve.reference)
                 if base in auxiliary:
                     return ShapeRef(name=IRI(base))
                 if base in main_names:
@@ -257,6 +249,8 @@ def _resolve_ve_to_shex(
             break
         if classes:
             base = "Or".join(_local_name(c) for c in sorted(classes))
+            if base in auxiliary:
+                return ShapeRef(name=IRI(base))
             name = _unique_name(base, auxiliary, main_names)
             _ensure_aux_or_shape(name, [IRI(c) for c in classes], auxiliary)
             return ShapeRef(name=IRI(name))
@@ -455,9 +449,7 @@ def _tc_e_to_shex(
     if tc_e.valueExpr is not None:
         constraint = _resolve_ve_to_shex(tc_e.valueExpr, shape_map, auxiliary, main_names)
 
-    # AlternativePath → one TripleConstraint per path, wrapped in a single OneOf (|).
-    # EachOf.expressions accepts TripleExpression items (TripleConstraint | EachOf | OneOf),
-    # so returning [OneOf(...)] lets the outer builder embed the disjunction correctly.
+    # AlternativePath → expand to one TC per path, wrapped in OneOf
     if isinstance(tc_e.path, AlternativePath):
         paths = [e for e in tc_e.path.expressions if isinstance(e, str)]
         if not paths:
@@ -468,7 +460,14 @@ def _tc_e_to_shex(
         ]
         if len(branches) == 1:
             return branches
-        return [OneOf(expressions=branches)]
+        oo = OneOf(expressions=branches)
+        # Wrap in a dummy TC? No — ShEx EachOf accepts OneOf directly.
+        # We return a "pseudo-TC" which is actually OneOf. The serializer handles it.
+        # In practice the ShEx schema EachOf accepts TripleExpression items.
+        # Since OneOf is also a TripleExpression in the ShEx model, we can append it.
+        # But our TripleConstraint list only accepts TripleConstraint objects.
+        # Use the first branch as representative (same as existing behaviour).
+        return branches  # serialized as alternating TCs in EachOf
 
     if tc_e.predicate is None:
         return []
