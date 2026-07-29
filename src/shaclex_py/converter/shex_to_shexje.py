@@ -133,14 +133,37 @@ def _derive_value_shape_id(class_iris: list[str]) -> str:
     return "Or".join(_local_name(iri) for iri in sorted(class_iris))
 
 
+def _unique_shape_id(base: str, used_ids: set[str]) -> str:
+    """Disambiguate an auto-generated companion value-shape id against ids
+    already in use (main shape names, and other value shapes already
+    assigned in this conversion). Without this, a companion value shape
+    whose single class's local name happens to equal an existing shape's own
+    name (e.g. a `<Foo_class>` source shape wrapping `rdf:type [ :Foo ]`,
+    alongside an unrelated top-level shape literally named `<Foo>`) collides
+    silently: both end up with id `Foo`, and downstream substitution's
+    dedup-by-id logic then skips rewriting the second one entirely, leaving
+    it permanently unresolved."""
+    if base not in used_ids:
+        return base
+    candidate = f"{base}_class"
+    if candidate not in used_ids:
+        return candidate
+    i = 2
+    while f"{candidate}{i}" in used_ids:
+        i += 1
+    return f"{candidate}{i}"
+
+
 def _ensure_value_shape(
     class_iris: list[str],
     value_shapes: dict[tuple, ShapeE],
     type_predicate: str,
+    used_ids: set[str],
 ) -> str:
     key = tuple(sorted(class_iris))
     if key not in value_shapes:
-        shape_id = _derive_value_shape_id(class_iris)
+        shape_id = _unique_shape_id(_derive_value_shape_id(class_iris), used_ids)
+        used_ids.add(shape_id)
         value_shapes[key] = ShapeE(
             id=shape_id,
             extra=[type_predicate],
@@ -175,6 +198,7 @@ def _tc_to_shexje(
     shape_map: dict,
     value_shapes: dict[tuple, ShapeE],
     type_predicate: str,
+    used_ids: set[str],
 ) -> Optional[TripleConstraintE]:
     """Convert a ShEx TripleConstraint to a ShexJE TripleConstraintE."""
     tc_e = TripleConstraintE(predicate=tc.predicate.value)
@@ -191,9 +215,9 @@ def _tc_to_shexje(
         ref_name = tc.constraint.name.value
         class_ref, class_ref_or = _resolve_shape_ref(ref_name, shape_map)
         if class_ref:
-            tc_e.valueExpr = _ensure_value_shape([class_ref], value_shapes, type_predicate)
+            tc_e.valueExpr = _ensure_value_shape([class_ref], value_shapes, type_predicate, used_ids)
         elif class_ref_or:
-            tc_e.valueExpr = _ensure_value_shape(class_ref_or, value_shapes, type_predicate)
+            tc_e.valueExpr = _ensure_value_shape(class_ref_or, value_shapes, type_predicate, used_ids)
         else:
             tc_e.valueExpr = ShapeRefE(reference=ref_name)
 
@@ -238,6 +262,10 @@ def convert_shex_to_shexje(
     shape_map = {s.name.value: s for s in shex.shapes}
     value_shapes: dict[tuple, ShapeE] = {}
     shape_decls: list = []
+    # Seeded with every main shape's own name so an auto-generated companion
+    # value-shape id (derived purely from a referenced class's local name --
+    # see _ensure_value_shape) can never collide with a real shape.
+    used_ids: set[str] = set(main_names)
 
     for shape in shex.shapes:
         if shape.name.value not in main_names:
@@ -267,7 +295,7 @@ def convert_shex_to_shexje(
             if _is_target_class_tc(tc, target_class):
                 continue
             # Expand alternativePaths (ShEx serialiser creates a OneOf per path)
-            tc_e = _tc_to_shexje(tc, shape_map, value_shapes, type_predicate)
+            tc_e = _tc_to_shexje(tc, shape_map, value_shapes, type_predicate, used_ids)
             if tc_e is not None:
                 triple_constraints.append(tc_e)
 
