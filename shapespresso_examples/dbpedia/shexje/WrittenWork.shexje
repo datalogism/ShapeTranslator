@@ -1,0 +1,310 @@
+{
+  "@context": "http://www.w3.org/ns/shexje.jsonld",
+  "type": "Schema",
+  "prefixes": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "sh": "http://www.w3.org/ns/shacl#",
+    "dbo": "http://dbpedia.org/ontology/",
+    "dbr": "http://dbpedia.org/resource/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "schema": "http://schema.org/",
+    "yago": "http://yago-knowledge.org/resource/",
+    "wd": "http://www.wikidata.org/entity/",
+    "wdt": "http://www.wikidata.org/prop/direct/"
+  },
+  "start": "written work",
+  "shapes": [
+    {
+      "type": "Shape",
+      "id": "written work",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "expression": {
+        "type": "EachOf",
+        "expressions": [
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+            "valueExpr": "WrittenWork",
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/name",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/ns/dcat#resource_identifier",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/author",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/numberOfPages",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/literaryGenre",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/publisher",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/isbn",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/oclc",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://purl.org/dc/elements/1.1/publisher",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/previousWork",
+            "valueExpr": "WrittenWork",
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/subsequentWork",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/lcc",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/dcc",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/mediaType",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/country",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/language",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/numberOfVolumes",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/publicationDate",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/type",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/magazine",
+            "valueExpr": "Magazine",
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/firstPublicationDate",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/nonFictionSubject",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/genre",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/lastPublicationDate",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/homepage",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          }
+        ]
+      },
+      "targetClass": "http://dbpedia.org/ontology/WrittenWork"
+    },
+    {
+      "type": "Shape",
+      "id": "WrittenWork",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "expression": {
+        "type": "TripleConstraint",
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "valueExpr": {
+          "type": "NodeConstraint",
+          "values": [
+            "http://dbpedia.org/ontology/WrittenWork"
+          ]
+        }
+      }
+    },
+    {
+      "type": "Shape",
+      "id": "WrittenWork",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "expression": {
+        "type": "TripleConstraint",
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "valueExpr": {
+          "type": "NodeConstraint",
+          "values": [
+            "http://dbpedia.org/ontology/WrittenWork"
+          ]
+        }
+      }
+    },
+    {
+      "type": "Shape",
+      "id": "Magazine",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "expression": {
+        "type": "TripleConstraint",
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "valueExpr": {
+          "type": "NodeConstraint",
+          "values": [
+            "http://dbpedia.org/ontology/Magazine"
+          ]
+        }
+      }
+    }
+  ]
+}

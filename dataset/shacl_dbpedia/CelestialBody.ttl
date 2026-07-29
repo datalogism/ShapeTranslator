@@ -1,468 +1,129 @@
-@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix dbo: <http://dbpedia.org/ontology/> .
-@prefix dbt: <http://dbpedia.org/datatype/> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix shapes: <http://shaclshapes.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+shapes:CelestialBodyShape a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:double ;
+                        sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path dbo:apoapsis ],
+        [ sh:datatype xsd:double ;
+                        sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path dbo:temperature ],
+        [ sh:datatype xsd:double ;
+                        sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path dbo:mass ],
+        [ sh:datatype xsd:double ;
+                        sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path dbo:density ],
+        [ sh:datatype xsd:double ;
+                        sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path dbo:averageSpeed ],
+        [ sh:datatype xsd:double ;
+                        sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path dbo:orbitalPeriod ];
+    sh:property [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:label ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:detectionMethod ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:neighbourConstellations ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:periapsis ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:rotationPeriod ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:escapeVelocity ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:averageSpeed ],
+        [ sh:datatype xsd:string ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path foaf:name ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:formerName ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:volume ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:meanRadius ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:abbreviation ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:surfaceArea ],
+        [ sh:datatype xsd:double ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:absoluteMagnitude ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:comment ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:apparentMagnitude ],
+        [ sh:datatype xsd:double ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:albedo ],
+        [ sh:datatype xsd:anyURI ;
+            sh:nodeKind sh:Literal ;
+            sh:path owl:differentFrom ],
+        [ sh:datatype xsd:anyURI ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:seeAlso ],
+        [ sh:datatype xsd:date ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:discovered ],
+        [ sh:datatype xsd:integer ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:wikiPageRevisionID ],
+        [ sh:class dbo:Person ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:discoverer ],
+        [ sh:datatype xsd:string ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:epoch ] ;
+    sh:targetClass dbo:CelestialBody .
 
-<http://shaclshapes.org/CelestialBodyShape> a sh:NodeShape ;
-    sh:targetClass dbo:CelestialBody ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # IDENTITY & NAMING
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path rdfs:label ;
-        sh:nodeKind sh:Literal ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:name ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:formerName ;
-        sh:nodeKind sh:Literal ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:abbreviation ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # DESCRIPTION & ABSTRACT
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:abstract ;
-        sh:nodeKind sh:Literal ;
-        sh:datatype rdf:langString;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path rdfs:comment ;
-        sh:nodeKind sh:Literal ;
-        sh:datatype rdf:langString;
-        sh:minCount 1 ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # DISCOVERY & TIMELINE
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:discovered ;
-        sh:datatype xsd:date ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:discoverer ;
-        sh:class dbo:Person ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:epoch ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:detectionMethod ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # LOCATION & CELESTIAL POSITION
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:neighbourConstellations ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # ORBITAL CHARACTERISTICS
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path <http://dbpedia.org/ontology/Planet/periapsis> ;
-        sh:datatype dbt:kilometre ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:periapsis ;
-        sh:datatype xsd:double ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:rotationPeriod ;
-        sh:datatype xsd:double ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:escapeVelocity ;
-        sh:datatype xsd:double ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:averageSpeed ;
-        sh:datatype xsd:double ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # --- Orbital Period (alternative representations) ---
-    sh:or (
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/Planet/orbitalPeriod> ;
-                sh:datatype dbt:day ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:orbitalPeriod ;
-                sh:datatype xsd:double ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    # --- Apoapsis (alternative representations) ---
-    sh:or (
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/Planet/apoapsis> ;
-                sh:datatype dbt:kilometre ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:apoapsis ;
-                sh:datatype xsd:double ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    # --- Average Speed (alternative representations) ---
-    sh:or (
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/Planet/averageSpeed> ;
-                sh:datatype dbt:kilometrePerSecond ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:averageSpeed ;
-                sh:datatype xsd:double ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # PHYSICAL DIMENSIONS & SIZE
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path <http://dbpedia.org/ontology/Planet/volume> ;
-        sh:datatype dbt:cubicKilometre ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:volume ;
-        sh:datatype xsd:double ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path <http://dbpedia.org/ontology/Planet/meanRadius> ;
-        sh:datatype dbt:kilometre ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:meanRadius ;
-        sh:datatype xsd:double ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path <http://dbpedia.org/ontology/Planet/surfaceArea> ;
-        sh:datatype dbt:squareKilometre ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:surfaceArea ;
-        sh:datatype xsd:double ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # --- Mass (alternative representations) ---
-    sh:or (
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/Planet/mass> ;
-                sh:datatype dbt:kilogram ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:mass ;
-                sh:datatype xsd:double ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    # --- Density (alternative representations) ---
-    sh:or (
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/Planet/density> ;
-                sh:datatype dbt:kilogramPerCubicMetre ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:density ;
-                sh:datatype xsd:double ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # TEMPERATURE & ATMOSPHERIC CONDITIONS
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path <http://dbpedia.org/ontology/Planet/minimumTemperature> ;
-        sh:datatype dbt:kelvin ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path <http://dbpedia.org/ontology/Planet/maximumTemperature> ;
-        sh:datatype dbt:kelvin ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    # --- Temperature (alternative representations) ---
-    sh:or (
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/Planet/temperature> ;
-                sh:datatype dbt:kelvin ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:temperature ;
-                sh:datatype xsd:double ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-            ]
-        ]
-    ) ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # OPTICAL & MAGNITUDE PROPERTIES
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:absoluteMagnitude ;
-        sh:datatype xsd:double ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:apparentMagnitude ;
-        sh:datatype xsd:double ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:albedo ;
-        sh:datatype xsd:double ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # MEDIA & IMAGES
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:thumbnail ;
-        sh:class dbo:Image ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:depiction ;
-        sh:class dbo:Image ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # EXTERNAL REFERENCES & LINKS
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path foaf:isPrimaryTopicOf ;
-        sh:datatype xsd:anyURI ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:datatype xsd:anyURI ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path owl:differentFrom ;
-        sh:datatype xsd:anyURI ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path rdfs:seeAlso ;
-        sh:datatype xsd:anyURI ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path prov:wasDerivedFrom ;
-        sh:datatype xsd:anyURI ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dct:subject ;
-        sh:class skos:Concept ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path skos:exactMatch ;
-        sh:nodeKind sh:IRI ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # WIKIPEDIA & DBPEDIA METADATA
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:wikiPageID ;
-        sh:datatype xsd:integer ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageRevisionID ;
-        sh:datatype xsd:integer ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageLength ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageExternalLink ;
-        sh:datatype xsd:anyURI ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageWikiLink ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
-        sh:nodeKind sh:Literal ;
-    ] .

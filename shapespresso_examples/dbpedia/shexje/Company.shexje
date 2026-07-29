@@ -1,0 +1,367 @@
+{
+  "@context": "http://www.w3.org/ns/shexje.jsonld",
+  "type": "Schema",
+  "prefixes": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "sh": "http://www.w3.org/ns/shacl#",
+    "dbo": "http://dbpedia.org/ontology/",
+    "dbr": "http://dbpedia.org/resource/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "schema": "http://schema.org/",
+    "yago": "http://yago-knowledge.org/resource/",
+    "wd": "http://www.wikidata.org/entity/",
+    "wdt": "http://www.wikidata.org/prop/direct/"
+  },
+  "start": "company",
+  "shapes": [
+    {
+      "type": "Shape",
+      "id": "company",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "expression": {
+        "type": "EachOf",
+        "expressions": [
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/name",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/foundingYear",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/ns/dcat#resource_identifier",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/industry",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/type",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/homepage",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/location",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/product",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/numberOfEmployees",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/foundedBy",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/keyPerson",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/parentCompany",
+            "valueExpr": "Company",
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/genre",
+            "valueExpr": "Genre",
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/revenue",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/locationCity",
+            "valueExpr": "City",
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/foundingDate",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/locationCountry",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/regionServed",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/headquarter",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/numberOfLocations",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/country",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/equity",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/distributingCompany",
+            "valueExpr": "Company",
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/distributingLabel",
+            "valueExpr": "Company",
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/formerName",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/netIncome",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/service",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/assets",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/fate",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "iri"
+            },
+            "min": 0
+          }
+        ]
+      },
+      "targetClass": "http://dbpedia.org/ontology/Company"
+    },
+    {
+      "type": "Shape",
+      "id": "Company",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "expression": {
+        "type": "TripleConstraint",
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "valueExpr": {
+          "type": "NodeConstraint",
+          "values": [
+            "http://dbpedia.org/ontology/Company"
+          ]
+        }
+      }
+    },
+    {
+      "type": "Shape",
+      "id": "Genre",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "expression": {
+        "type": "TripleConstraint",
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "valueExpr": {
+          "type": "NodeConstraint",
+          "values": [
+            "http://dbpedia.org/ontology/Genre",
+            "http://dbpedia.org/ontology/MusicGenre"
+          ]
+        }
+      }
+    },
+    {
+      "type": "Shape",
+      "id": "City",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "expression": {
+        "type": "TripleConstraint",
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "valueExpr": {
+          "type": "NodeConstraint",
+          "values": [
+            "http://dbpedia.org/ontology/Location",
+            "http://dbpedia.org/ontology/Place"
+          ]
+        }
+      }
+    },
+    {
+      "type": "Shape",
+      "id": "Company",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "expression": {
+        "type": "TripleConstraint",
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "valueExpr": {
+          "type": "NodeConstraint",
+          "values": [
+            "http://dbpedia.org/ontology/Company"
+          ]
+        }
+      }
+    },
+    {
+      "type": "Shape",
+      "id": "Company",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "expression": {
+        "type": "TripleConstraint",
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "valueExpr": {
+          "type": "NodeConstraint",
+          "values": [
+            "http://dbpedia.org/ontology/Company"
+          ]
+        }
+      }
+    }
+  ]
+}

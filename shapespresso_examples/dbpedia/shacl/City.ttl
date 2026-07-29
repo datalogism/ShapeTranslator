@@ -1,0 +1,44 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/CityShape> a sh:NodeShape ;
+    sh:property [ sh:hasValue <http://dbpedia.org/ontology/City> ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/cityShape> a sh:NodeShape ;
+    sh:property [ sh:path <http://dbpedia.org/ontology/populationMetro> ],
+        [ sh:path <http://dbpedia.org/ontology/type> ],
+        [ sh:path <http://dbpedia.org/ontology/utcOffset> ],
+        [ sh:path <http://dbpedia.org/ontology/areaTotal> ],
+        [ sh:path <http://dbpedia.org/ontology/subdivision> ],
+        [ sh:path dcat:resource_identifier ],
+        [ sh:class <http://dbpedia.org/ontology/City> ;
+            sh:path rdf:type ],
+        [ sh:path <http://dbpedia.org/ontology/country> ],
+        [ sh:path <http://dbpedia.org/ontology/populationUrban> ],
+        [ sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/populationTotal> ],
+        [ sh:path <http://dbpedia.org/ontology/areaCode> ],
+        [ sh:path <http://dbpedia.org/ontology/elevation> ],
+        [ sh:path <http://dbpedia.org/ontology/postalCode> ],
+        [ sh:path <http://dbpedia.org/ontology/namedAfter> ],
+        [ sh:path <http://dbpedia.org/ontology/areaUrban> ],
+        [ sh:path <http://dbpedia.org/ontology/areaWater> ],
+        [ sh:path <http://dbpedia.org/ontology/demonym> ],
+        [ sh:path <http://dbpedia.org/ontology/politicalLeader> ],
+        [ sh:path <http://dbpedia.org/ontology/motto> ],
+        [ sh:path <http://dbpedia.org/ontology/timeZone> ],
+        [ sh:path foaf:homepage ],
+        [ sh:path <http://dbpedia.org/ontology/synonym> ],
+        [ sh:path <http://dbpedia.org/ontology/foundingDate> ],
+        [ sh:path foaf:nick ],
+        [ sh:path <http://dbpedia.org/ontology/originalName> ],
+        [ sh:path <http://dbpedia.org/ontology/areaLand> ],
+        [ sh:path foaf:name ],
+        [ sh:path <http://dbpedia.org/ontology/governmentType> ],
+        [ sh:path <http://dbpedia.org/ontology/populationDensity> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/City> .
+

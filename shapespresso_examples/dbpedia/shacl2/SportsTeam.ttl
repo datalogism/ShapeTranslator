@@ -1,0 +1,56 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/sports_teamShape> a sh:NodeShape ;
+    sh:property [ sh:nodeKind sh:IRI ;
+            sh:path foaf:homepage ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/discipline> ],
+        [ sh:datatype <xsd:string> ;
+            sh:path <http://dbpedia.org/ontology/uciCode> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/president> ],
+        [ sh:datatype <xsd:double> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path dcat:resource_identifier ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/manager> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/league> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/ground> ],
+        [ sh:datatype <xsd:string> ;
+            sh:path <http://dbpedia.org/ontology/status> ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:path <http://dbpedia.org/ontology/dissolutionYear> ],
+        [ sh:datatype <rdf:langString> ;
+            sh:path foaf:name ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/coach> ],
+        [ sh:datatype <xsd:integer> ;
+            sh:path <http://dbpedia.org/ontology/capacity> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/stadium> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/owner> ],
+        [ sh:path <http://dbpedia.org/ontology/city> ;
+            sh:or ( [ sh:class <http://dbpedia.org/ontology/Location> ] [ sh:class <http://dbpedia.org/ontology/Place> ] ) ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/sport> ],
+        [ sh:datatype <rdf:langString> ;
+            sh:path foaf:nick ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:path <http://dbpedia.org/ontology/foundingYear> ],
+        [ sh:datatype <xsd:string> ;
+            sh:path <http://dbpedia.org/ontology/logo> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/location> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/SportsTeam> .
+

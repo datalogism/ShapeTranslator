@@ -1,0 +1,424 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/PodcastShowShape> a sh:NodeShape ;
+    rdfs:label "podcast show"@en ;
+    sh:name "podcast show"@en ;
+    sh:property [ sh:class wd:Q5 ;
+            sh:name "presenter"@en ;
+            sh:path wdt:P371 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "review score"@en ;
+            sh:path wdt:P444 ],
+        [ sh:class wd:Q34770 ;
+            sh:maxCount 1 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:name "founder"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P112 ],
+        [ sh:class wd:Q5 ;
+            sh:name "producer"@en ;
+            sh:path wdt:P162 ],
+        [ sh:class wd:Q618779 ;
+            sh:name "nominated for"@en ;
+            sh:path wdt:P1411 ],
+        [ sh:class wd:Q61715186 ;
+            sh:maxCount 1 ;
+            sh:name "distributed by"@en ;
+            sh:path wdt:P750 ],
+        [ sh:in ( wd:Q106588463 wd:Q106677578 ) ;
+            sh:maxCount 1 ;
+            sh:name "has characteristic"@en ;
+            sh:path wdt:P1552 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:class wd:Q559618 ;
+            sh:maxCount 1 ;
+            sh:name "takes place in fictional universe"@en ;
+            sh:path wdt:P1434 ],
+        [ sh:class wd:Q41825 ;
+            sh:name "day of regular release"@en ;
+            sh:path wdt:P6437 ],
+        [ sh:class wd:Q5 ;
+            sh:name "owned by"@en ;
+            sh:path wdt:P127 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of seasons"@en ;
+            sh:path wdt:P2437 ],
+        [ sh:name "characters"@en ;
+            sh:or ( [ sh:class wd:Q15632617 ] [ sh:class wd:Q106921001 ] ) ;
+            sh:path wdt:P674 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "hashtag"@en ;
+            sh:path wdt:P2572 ],
+        [ sh:name "sponsor"@en ;
+            sh:or ( [ sh:class wd:Q4830453 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P859 ],
+        [ sh:class wd:Q5 ;
+            sh:name "creator"@en ;
+            sh:path wdt:P170 ],
+        [ sh:name "narrative location"@en ;
+            sh:or ( [ sh:class wd:Q17334923 ] [ sh:class wd:Q3895768 ] ) ;
+            sh:path wdt:P840 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "subtitle"@en ;
+            sh:path wdt:P1680 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "duration"@en ;
+            sh:path wdt:P2047 ],
+        [ sh:class wd:Q49773 ;
+            sh:maxCount 1 ;
+            sh:name "movement"@en ;
+            sh:path wdt:P135 ],
+        [ sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:class wd:Q104822033 ;
+            sh:name "genre"@en ;
+            sh:path wdt:P136 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "social media followers"@en ;
+            sh:path wdt:P8687 ],
+        [ sh:maxCount 1 ;
+            sh:name "email address"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P968 ],
+        [ sh:class wd:Q12909644 ;
+            sh:name "political ideology"@en ;
+            sh:path wdt:P1142 ],
+        [ sh:name "production company"@en ;
+            sh:or ( [ sh:class wd:Q11396960 ] [ sh:class wd:Q4830453 ] ) ;
+            sh:path wdt:P272 ],
+        [ sh:class wd:Q105543609 ;
+            sh:name "theme music"@en ;
+            sh:path wdt:P942 ],
+        [ sh:maxCount 1 ;
+            sh:name "publisher"@en ;
+            sh:or ( [ sh:class wd:Q24581379 ] [ sh:class wd:Q4830453 ] [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P123 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:maxCount 1 ;
+            sh:name "based on"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P144 ],
+        [ sh:name "has part(s)"@en ;
+            sh:or ( [ sh:class wd:Q61855877 ] [ sh:class wd:Q69154911 ] ) ;
+            sh:path wdt:P527 ],
+        [ sh:class wd:Q5 ;
+            sh:name "participant"@en ;
+            sh:path wdt:P710 ],
+        [ sh:class wd:Q5 ;
+            sh:name "screenwriter"@en ;
+            sh:path wdt:P58 ],
+        [ sh:maxCount 1 ;
+            sh:name "privacy policy URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P7101 ],
+        [ sh:maxCount 1 ;
+            sh:name "work available at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P953 ],
+        [ sh:class wd:Q77205602 ;
+            sh:maxCount 1 ;
+            sh:name "copyright license"@en ;
+            sh:path wdt:P275 ],
+        [ sh:class wd:Q24634210 ;
+            sh:maxCount 1 ;
+            sh:name "followed by"@en ;
+            sh:path wdt:P156 ],
+        [ sh:class wd:Q110571913 ;
+            sh:maxCount 1 ;
+            sh:name "part of the series"@en ;
+            sh:path wdt:P179 ],
+        [ sh:class wd:Q5 ;
+            sh:name "cast member"@en ;
+            sh:path wdt:P161 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:maxCount 1 ;
+            sh:name "official blog URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1581 ],
+        [ sh:maxCount 1 ;
+            sh:name "web feed URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1019 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "publication interval"@en ;
+            sh:path wdt:P2896 ],
+        [ sh:maxCount 1 ;
+            sh:name "broadcast by"@en ;
+            sh:or ( [ sh:class wd:Q14350 ] [ sh:class wd:Q4830453 ] [ sh:class wd:Q61715186 ] ) ;
+            sh:path wdt:P3301 ],
+        [ sh:class wd:Q81941037 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "distribution format"@en ;
+            sh:path wdt:P437 ],
+        [ sh:class wd:Q13406463 ;
+            sh:maxCount 1 ;
+            sh:name "list of episodes"@en ;
+            sh:path wdt:P1811 ],
+        [ sh:class wd:Q618779 ;
+            sh:name "award received"@en ;
+            sh:path wdt:P166 ],
+        [ sh:class wd:Q24634210 ;
+            sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:path wdt:P155 ],
+        [ sh:class wd:Q35127 ;
+            sh:name "website account on"@en ;
+            sh:path wdt:P553 ],
+        [ sh:maxCount 1 ;
+            sh:name "podcast logo URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P10286 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "start time"@en ;
+            sh:path wdt:P580 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "end time"@en ;
+            sh:path wdt:P582 ],
+        [ sh:hasValue wd:Q50423863 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "phone number"@en ;
+            sh:path wdt:P1329 ],
+        [ sh:maxCount 1 ;
+            sh:name "original broadcaster"@en ;
+            sh:or ( [ sh:class wd:Q14350 ] [ sh:class wd:Q24581379 ] ) ;
+            sh:path wdt:P449 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "number of episodes"@en ;
+            sh:path wdt:P1113 ],
+        [ sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ] ;
+    sh:targetClass wd:Q24634210 .
+
+wd:Q104822033 rdfs:label "podcast genre"@en .
+
+wd:Q105543609 rdfs:label "musical work/composition"@en .
+
+wd:Q106921001 rdfs:label "podcast character"@en .
+
+wd:Q110571913 rdfs:label "series of podcasts"@en .
+
+wd:Q11396960 rdfs:label "production company"@en .
+
+wd:Q12909644 rdfs:label "political ideology"@en .
+
+wd:Q13406463 rdfs:label "Wikimedia list article"@en .
+
+wd:Q15632617 rdfs:label "fictional human"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q17334923 rdfs:label "physical location"@en .
+
+wd:Q34770 rdfs:label "language"@en .
+
+wd:Q35127 rdfs:label "website"@en .
+
+wd:Q3895768 rdfs:label "fictional location"@en .
+
+wd:Q41825 rdfs:label "day of the week"@en .
+
+wd:Q49773 rdfs:label "social movement"@en .
+
+wd:Q559618 rdfs:label "fictional universe"@en .
+
+wd:Q61855877 rdfs:label "podcast episode"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q69154911 rdfs:label "podcast series season"@en .
+
+wd:Q77205602 rdfs:label "copyright license"@en .
+
+wd:Q81941037 rdfs:label "product distribution method"@en .
+
+wdt:P1019 rdfs:label "web feed URL"@en .
+
+wdt:P10286 rdfs:label "podcast logo URL"@en .
+
+wdt:P1113 rdfs:label "number of episodes"@en .
+
+wdt:P112 rdfs:label "founder"@en .
+
+wdt:P1142 rdfs:label "political ideology"@en .
+
+wdt:P123 rdfs:label "publisher"@en .
+
+wdt:P127 rdfs:label "owned by"@en .
+
+wdt:P1329 rdfs:label "phone number"@en .
+
+wdt:P135 rdfs:label "movement"@en .
+
+wdt:P136 rdfs:label "genre"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1411 rdfs:label "nominated for"@en .
+
+wdt:P1434 rdfs:label "takes place in fictional universe"@en .
+
+wdt:P144 rdfs:label "based on"@en .
+
+wdt:P1476 rdfs:label "title"@en .
+
+wdt:P155 rdfs:label "follows"@en .
+
+wdt:P1552 rdfs:label "has characteristic"@en .
+
+wdt:P156 rdfs:label "followed by"@en .
+
+wdt:P1581 rdfs:label "official blog URL"@en .
+
+wdt:P161 rdfs:label "cast member"@en .
+
+wdt:P162 rdfs:label "producer"@en .
+
+wdt:P166 rdfs:label "award received"@en .
+
+wdt:P1680 rdfs:label "subtitle"@en .
+
+wdt:P170 rdfs:label "creator"@en .
+
+wdt:P179 rdfs:label "part of the series"@en .
+
+wdt:P1811 rdfs:label "list of episodes"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2047 rdfs:label "duration"@en .
+
+wdt:P2437 rdfs:label "number of seasons"@en .
+
+wdt:P2572 rdfs:label "hashtag"@en .
+
+wdt:P272 rdfs:label "production company"@en .
+
+wdt:P275 rdfs:label "copyright license"@en .
+
+wdt:P2896 rdfs:label "publication interval"@en .
+
+wdt:P3301 rdfs:label "broadcast by"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P371 rdfs:label "presenter"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P407 rdfs:label "language of work or name"@en .
+
+wdt:P437 rdfs:label "distribution format"@en .
+
+wdt:P444 rdfs:label "review score"@en .
+
+wdt:P449 rdfs:label "original broadcaster"@en .
+
+wdt:P495 rdfs:label "country of origin"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P527 rdfs:label "has part(s)"@en .
+
+wdt:P553 rdfs:label "website account on"@en .
+
+wdt:P58 rdfs:label "screenwriter"@en .
+
+wdt:P580 rdfs:label "start time"@en .
+
+wdt:P582 rdfs:label "end time"@en .
+
+wdt:P6216 rdfs:label "copyright status"@en .
+
+wdt:P6437 rdfs:label "day of regular release"@en .
+
+wdt:P674 rdfs:label "characters"@en .
+
+wdt:P710 rdfs:label "participant"@en .
+
+wdt:P7101 rdfs:label "privacy policy URL"@en .
+
+wdt:P750 rdfs:label "distributed by"@en .
+
+wdt:P840 rdfs:label "narrative location"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P859 rdfs:label "sponsor"@en .
+
+wdt:P8687 rdfs:label "social media followers"@en .
+
+wdt:P921 rdfs:label "main subject"@en .
+
+wdt:P942 rdfs:label "theme music"@en .
+
+wdt:P953 rdfs:label "work available at URL"@en .
+
+wdt:P968 rdfs:label "email address"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q14350 rdfs:label "radio station"@en .
+
+wd:Q24581379 rdfs:label "podcast network"@en .
+
+wd:Q61715186 rdfs:label "podcast hosting service"@en .
+
+wd:Q618779 rdfs:label "award"@en .
+
+wd:Q24634210 rdfs:label "podcast show"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q4830453 rdfs:label "business"@en .
+
+wd:Q5 rdfs:label "human"@en .
+

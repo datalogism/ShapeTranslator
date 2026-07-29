@@ -1,0 +1,233 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/CardGameShape> a sh:NodeShape ;
+    rdfs:label "card game"@en ;
+    sh:name "card game"@en ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:name "author name string"@en ;
+            sh:path wdt:P2093 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by WikiProject"@en ;
+            sh:path wdt:P6104 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "publication date"@en ;
+            sh:path wdt:P577 ],
+        [ sh:name "publisher"@en ;
+            sh:or ( [ sh:class wd:Q3579158 ] [ sh:class wd:Q2085381 ] [ sh:class wd:Q4830453 ] ) ;
+            sh:path wdt:P123 ],
+        [ sh:class wd:Q142714 ;
+            sh:name "partially coincident with"@en ;
+            sh:path wdt:P1382 ],
+        [ sh:class wd:Q50424085 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:name "nominated for"@en ;
+            sh:or ( [ sh:class wd:Q30505248 ] [ sh:class wd:Q38033430 ] [ sh:class wd:Q618779 ] ) ;
+            sh:path wdt:P1411 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:class wd:Q483394 ;
+            sh:maxCount 1 ;
+            sh:name "genre"@en ;
+            sh:path wdt:P136 ],
+        [ sh:class wd:Q142714 ;
+            sh:name "said to be the same as"@en ;
+            sh:path wdt:P460 ],
+        [ sh:class wd:Q1288568 ;
+            sh:maxCount 1 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:class wd:Q559618 ;
+            sh:maxCount 1 ;
+            sh:name "takes place in fictional universe"@en ;
+            sh:path wdt:P1434 ],
+        [ sh:name "award received"@en ;
+            sh:or ( [ sh:class wd:Q30505248 ] [ sh:class wd:Q38033430 ] [ sh:class wd:Q618779 ] ) ;
+            sh:path wdt:P166 ],
+        [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q3331189 ] [ sh:class wd:Q386724 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q11410 ;
+            sh:name "based on"@en ;
+            sh:path wdt:P144 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "maximum number of players"@en ;
+            sh:path wdt:P1873 ],
+        [ sh:class wd:Q5 ;
+            sh:name "developer"@en ;
+            sh:path wdt:P178 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "designed by"@en ;
+            sh:path wdt:P287 ],
+        [ sh:class wd:Q56061 ;
+            sh:maxCount 1 ;
+            sh:name "indigenous to"@en ;
+            sh:path wdt:P2341 ],
+        [ sh:maxCount 1 ;
+            sh:name "collection"@en ;
+            sh:or ( [ sh:class wd:Q2668072 ] [ sh:class wd:Q33506 ] ) ;
+            sh:path wdt:P195 ],
+        [ sh:maxCount 1 ;
+            sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:maxCount 1 ;
+            sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "minimum age"@en ;
+            sh:path wdt:P2899 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "minimum number of players"@en ;
+            sh:path wdt:P1872 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ] ;
+    sh:targetClass wd:Q142714 .
+
+wd:Q11410 rdfs:label "game"@en .
+
+wd:Q1288568 rdfs:label "modern language"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q2085381 rdfs:label "publishing house"@en .
+
+wd:Q2668072 rdfs:label "collection"@en .
+
+wd:Q3331189 rdfs:label "version, edition or translation"@en .
+
+wd:Q33506 rdfs:label "museum"@en .
+
+wd:Q3579158 rdfs:label "board game publishing company"@en .
+
+wd:Q386724 rdfs:label "work"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q4830453 rdfs:label "business"@en .
+
+wd:Q483394 rdfs:label "genre"@en .
+
+wd:Q50424085 rdfs:label "copyright status"@en .
+
+wd:Q559618 rdfs:label "fictional universe"@en .
+
+wd:Q56061 rdfs:label "administrative territorial entity"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wdt:P123 rdfs:label "publisher"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P136 rdfs:label "genre"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1382 rdfs:label "partially coincident with"@en .
+
+wdt:P1411 rdfs:label "nominated for"@en .
+
+wdt:P1434 rdfs:label "takes place in fictional universe"@en .
+
+wdt:P144 rdfs:label "based on"@en .
+
+wdt:P1476 rdfs:label "title"@en .
+
+wdt:P166 rdfs:label "award received"@en .
+
+wdt:P1705 rdfs:label "native label"@en .
+
+wdt:P178 rdfs:label "developer"@en .
+
+wdt:P1872 rdfs:label "minimum number of players"@en .
+
+wdt:P1873 rdfs:label "maximum number of players"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P195 rdfs:label "collection"@en .
+
+wdt:P2093 rdfs:label "author name string"@en .
+
+wdt:P2283 rdfs:label "uses"@en .
+
+wdt:P2341 rdfs:label "indigenous to"@en .
+
+wdt:P287 rdfs:label "designed by"@en .
+
+wdt:P2899 rdfs:label "minimum age"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P407 rdfs:label "language of work or name"@en .
+
+wdt:P460 rdfs:label "said to be the same as"@en .
+
+wdt:P495 rdfs:label "country of origin"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P577 rdfs:label "publication date"@en .
+
+wdt:P6104 rdfs:label "maintained by WikiProject"@en .
+
+wdt:P6216 rdfs:label "copyright status"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q30505248 rdfs:label "game award"@en .
+
+wd:Q38033430 rdfs:label "class of award"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q618779 rdfs:label "award"@en .
+
+wd:Q142714 rdfs:label "card game"@en .
+

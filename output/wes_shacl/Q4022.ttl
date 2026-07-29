@@ -1,0 +1,309 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/RiverShape> a sh:NodeShape ;
+    rdfs:label "river"@en ;
+    sh:name "river"@en ;
+    sh:property [ sh:class wd:Q15324 ;
+            sh:maxCount 1 ;
+            sh:name "mouth of the watercourse"@en ;
+            sh:path wdt:P403 ],
+        [ sh:name "tributary"@en ;
+            sh:or ( [ sh:class wd:Q4022 ] [ sh:class wd:Q355304 ] ) ;
+            sh:path wdt:P974 ],
+        [ sh:maxCount 1 ;
+            sh:name "said to be the same as"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P460 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:class wd:Q6256 ;
+            sh:name "basin country"@en ;
+            sh:path wdt:P205 ],
+        [ sh:class wd:Q166620 ;
+            sh:maxCount 1 ;
+            sh:name "drainage basin"@en ;
+            sh:path wdt:P4614 ],
+        [ sh:class wd:Q12143 ;
+            sh:name "located in time zone"@en ;
+            sh:path wdt:P421 ],
+        [ sh:class wd:Q43229 ;
+            sh:name "maintained by"@en ;
+            sh:path wdt:P126 ],
+        [ sh:maxCount 1 ;
+            sh:name "located in the administrative territorial entity"@en ;
+            sh:or ( [ sh:class wd:Q56061 ] [ sh:class wd:Q7930989 ] ) ;
+            sh:path wdt:P131 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:class wd:Q23397 ;
+            sh:name "lake on watercourse"@en ;
+            sh:path wdt:P469 ],
+        [ sh:class wd:Q89210005 ;
+            sh:maxCount 1 ;
+            sh:name "tributary orientation"@en ;
+            sh:path wdt:P3871 ],
+        [ sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:maxCount 1 ;
+            sh:name "location"@en ;
+            sh:or ( [ sh:class wd:Q82794 ] [ sh:class wd:Q618123 ] [ sh:class wd:Q2221906 ] [ sh:class wd:Q17334923 ] ) ;
+            sh:path wdt:P276 ],
+        [ sh:class wd:Q473972 ;
+            sh:name "located in protected area"@en ;
+            sh:path wdt:P3018 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "elevation above sea level"@en ;
+            sh:path wdt:P2044 ],
+        [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q3331189 ] [ sh:class wd:Q47461344 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons gallery"@en ;
+            sh:path wdt:P935 ],
+        [ sh:name "connects with"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2789 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:name "impounded by"@en ;
+            sh:or ( [ sh:class wd:Q12323 ] [ sh:class wd:Q105190 ] ) ;
+            sh:path wdt:P4792 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "area"@en ;
+            sh:path wdt:P2046 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "watershed area"@en ;
+            sh:path wdt:P2053 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "discharge"@en ;
+            sh:path wdt:P2225 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:name "has use"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P366 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "maximum Strahler number"@en ;
+            sh:path wdt:P1548 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:class wd:Q5107 ;
+            sh:maxCount 1 ;
+            sh:name "continent"@en ;
+            sh:path wdt:P30 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for the water basin"@en ;
+            sh:path wdt:P1200 ],
+        [ sh:maxCount 1 ;
+            sh:name "origin of the watercourse"@en ;
+            sh:or ( [ sh:class wd:Q271669 ] [ sh:class wd:Q15324 ] ) ;
+            sh:path wdt:P885 ],
+        [ sh:maxCount 1 ;
+            sh:name "located in/on physical feature"@en ;
+            sh:or ( [ sh:class wd:Q82794 ] [ sh:class wd:Q618123 ] [ sh:class wd:Q2221906 ] ) ;
+            sh:path wdt:P706 ],
+        [ sh:maxCount 1 ;
+            sh:name "heritage designation"@en ;
+            sh:or ( [ sh:class wd:Q210272 ] [ sh:class wd:Q386426 ] ) ;
+            sh:path wdt:P1435 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "slope"@en ;
+            sh:path wdt:P4184 ],
+        [ sh:class wd:Q67376938 ;
+            sh:maxCount 1 ;
+            sh:name "historic county"@en ;
+            sh:path wdt:P7959 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "length"@en ;
+            sh:path wdt:P2043 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "waterbody number"@en ;
+            sh:path wdt:P1183 ],
+        [ sh:maxCount 1 ;
+            sh:name "mountain range"@en ;
+            sh:or ( [ sh:class wd:Q1061151 ] [ sh:class wd:Q8502 ] [ sh:class wd:Q46831 ] ) ;
+            sh:path wdt:P4552 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ] ;
+    sh:targetClass wd:Q4022 .
+
+wd:Q105190 rdfs:label "levee"@en .
+
+wd:Q1061151 rdfs:label "massif"@en .
+
+wd:Q12143 rdfs:label "time zone"@en .
+
+wd:Q12323 rdfs:label "dam"@en .
+
+wd:Q166620 rdfs:label "drainage basin"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q17334923 rdfs:label "physical location"@en .
+
+wd:Q210272 rdfs:label "cultural heritage"@en .
+
+wd:Q23397 rdfs:label "lake"@en .
+
+wd:Q271669 rdfs:label "landform"@en .
+
+wd:Q3331189 rdfs:label "version, edition or translation"@en .
+
+wd:Q355304 rdfs:label "watercourse"@en .
+
+wd:Q386426 rdfs:label "natural heritage"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q46831 rdfs:label "mountain range"@en .
+
+wd:Q473972 rdfs:label "protected area"@en .
+
+wd:Q47461344 rdfs:label "written work"@en .
+
+wd:Q5107 rdfs:label "continent"@en .
+
+wd:Q56061 rdfs:label "administrative territorial entity"@en .
+
+wd:Q67376938 rdfs:label "historic county of the United Kingdom"@en .
+
+wd:Q7930989 rdfs:label "city or town"@en .
+
+wd:Q8502 rdfs:label "mountain"@en .
+
+wd:Q89210005 rdfs:label "Hydrographic direction"@en .
+
+wdt:P1183 rdfs:label "waterbody number"@en .
+
+wdt:P1200 rdfs:label "category for the water basin"@en .
+
+wdt:P126 rdfs:label "maintained by"@en .
+
+wdt:P131 rdfs:label "located in the administrative territorial entity"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1435 rdfs:label "heritage designation"@en .
+
+wdt:P1448 rdfs:label "official name"@en .
+
+wdt:P1548 rdfs:label "maximum Strahler number"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P1705 rdfs:label "native label"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2043 rdfs:label "length"@en .
+
+wdt:P2044 rdfs:label "elevation above sea level"@en .
+
+wdt:P2046 rdfs:label "area"@en .
+
+wdt:P205 rdfs:label "basin country"@en .
+
+wdt:P2053 rdfs:label "watershed area"@en .
+
+wdt:P2225 rdfs:label "discharge"@en .
+
+wdt:P276 rdfs:label "location"@en .
+
+wdt:P2789 rdfs:label "connects with"@en .
+
+wdt:P30 rdfs:label "continent"@en .
+
+wdt:P3018 rdfs:label "located in protected area"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P366 rdfs:label "has use"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P3871 rdfs:label "tributary orientation"@en .
+
+wdt:P403 rdfs:label "mouth of the watercourse"@en .
+
+wdt:P4184 rdfs:label "slope"@en .
+
+wdt:P421 rdfs:label "located in time zone"@en .
+
+wdt:P4552 rdfs:label "mountain range"@en .
+
+wdt:P460 rdfs:label "said to be the same as"@en .
+
+wdt:P4614 rdfs:label "drainage basin"@en .
+
+wdt:P469 rdfs:label "lake on watercourse"@en .
+
+wdt:P4792 rdfs:label "impounded by"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P527 rdfs:label "has part(s)"@en .
+
+wdt:P706 rdfs:label "located in/on physical feature"@en .
+
+wdt:P7959 rdfs:label "historic county"@en .
+
+wdt:P885 rdfs:label "origin of the watercourse"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P935 rdfs:label "Commons gallery"@en .
+
+wdt:P974 rdfs:label "tributary"@en .
+
+wd:Q15324 rdfs:label "body of water"@en .
+
+wd:Q2221906 rdfs:label "geographic location"@en .
+
+wd:Q4022 rdfs:label "river"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q618123 rdfs:label "geographical feature"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q82794 rdfs:label "region"@en .
+

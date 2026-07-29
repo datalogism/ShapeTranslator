@@ -1,0 +1,159 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/BalletShape> a sh:NodeShape ;
+    rdfs:label "ballet"@en ;
+    sh:property [ sh:class wd:Q1288568 ;
+            sh:maxCount 1 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "author"@en ;
+            sh:path wdt:P50 ],
+        [ sh:name "instrumentation"@en ;
+            sh:or ( [ sh:class wd:Q34379 ] [ sh:class wd:Q617028 ] [ sh:class wd:Q1254773 ] [ sh:class wd:Q2088357 ] ) ;
+            sh:path wdt:P870 ],
+        [ sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:class wd:Q5 ;
+            sh:name "cast member"@en ;
+            sh:path wdt:P161 ],
+        [ sh:name "based on"@en ;
+            sh:or ( [ sh:class wd:Q7725634 ] [ sh:class wd:Q105543609 ] ) ;
+            sh:path wdt:P144 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "director"@en ;
+            sh:path wdt:P57 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "after a work by"@en ;
+            sh:path wdt:P1877 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:name "work available at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P953 ],
+        [ sh:class wd:Q805233 ;
+            sh:name "production company"@en ;
+            sh:path wdt:P272 ],
+        [ sh:maxCount 1 ;
+            sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:maxCount 1 ;
+            sh:name "award received"@en ;
+            sh:or ( [ sh:class wd:Q38033430 ] [ sh:class wd:Q618779 ] ) ;
+            sh:path wdt:P166 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:class wd:Q5 ;
+            sh:name "performer"@en ;
+            sh:path wdt:P175 ],
+        [ sh:class wd:Q50424085 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:maxCount 1 ;
+            sh:name "inspired by"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P941 ],
+        [ sh:name "narrative location"@en ;
+            sh:or ( [ sh:class wd:Q82794 ] [ sh:class wd:Q17334923 ] [ sh:class wd:Q3895768 ] ) ;
+            sh:path wdt:P840 ],
+        [ sh:name "commissioned by"@en ;
+            sh:or ( [ sh:class wd:Q805233 ] [ sh:class wd:Q5 ] ) ;
+            sh:path wdt:P88 ],
+        [ sh:maxCount 1 ;
+            sh:name "genre"@en ;
+            sh:or ( [ sh:class wd:Q45971958 ] [ sh:class wd:Q107357104 ] ) ;
+            sh:path wdt:P136 ],
+        [ sh:class wd:Q5 ;
+            sh:name "costume designer"@en ;
+            sh:path wdt:P2515 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "choreographer"@en ;
+            sh:path wdt:P1809 ],
+        [ sh:maxCount 1 ;
+            sh:name "location of first performance"@en ;
+            sh:or ( [ sh:class wd:Q153562 ] [ sh:class wd:Q57660343 ] ) ;
+            sh:path wdt:P4647 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "number of parts of this work"@en ;
+            sh:path wdt:P2635 ],
+        [ sh:name "form of creative work"@en ;
+            sh:or ( [ sh:class wd:Q107487333 ] [ sh:class wd:Q862597 ] ) ;
+            sh:path wdt:P7937 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "date of first performance"@en ;
+            sh:path wdt:P1191 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "orchestrator"@en ;
+            sh:path wdt:P10806 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:class wd:Q5 ;
+            sh:name "scenographer"@en ;
+            sh:path wdt:P4608 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "opus number"@en ;
+            sh:path wdt:P10855 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q95074 ;
+            sh:name "characters"@en ;
+            sh:path wdt:P674 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "duration"@en ;
+            sh:path wdt:P2047 ],
+        [ sh:class wd:Q5 ;
+            sh:name "creator"@en ;
+            sh:path wdt:P170 ],
+        [ sh:class wd:Q5 ;
+            sh:name "composer"@en ;
+            sh:path wdt:P86 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "production designer"@en ;
+            sh:path wdt:P2554 ],
+        [ sh:class wd:Q5 ;
+            sh:name "librettist"@en ;
+            sh:path wdt:P87 ],
+        [ sh:maxCount 1 ;
+            sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q105543609 ;
+            sh:maxCount 1 ;
+            sh:name "has melody"@en ;
+            sh:path wdt:P1625 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ] ;
+    sh:targetClass wd:Q15079786 .
+

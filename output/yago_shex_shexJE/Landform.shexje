@@ -1,0 +1,147 @@
+{
+  "@context": "http://www.w3.org/ns/shexje.jsonld",
+  "type": "Schema",
+  "shapes": [
+    {
+      "type": "Shape",
+      "id": "Landform",
+      "expression": {
+        "type": "EachOf",
+        "expressions": [
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#comment",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/alternateName",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/image",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/mainEntityOfPage",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/sameAs",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/url",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/geo",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/location",
+            "valueExpr": "Place"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://yago-knowledge.org/resource/area",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://yago-knowledge.org/resource/elevation",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://yago-knowledge.org/resource/highestPoint",
+            "valueExpr": "Place",
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://yago-knowledge.org/resource/neighbors",
+            "valueExpr": "Place"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2002/07/owl#sameAs",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "values": [
+                {
+                  "type": "IriStem",
+                  "stem": "http://www.wikidata.org/entity"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "targetClass": "http://schema.org/Landform"
+    },
+    {
+      "type": "Shape",
+      "id": "Place",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://schema.org/Place"
+      ]
+    }
+  ]
+}

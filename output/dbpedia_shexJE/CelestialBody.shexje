@@ -1,0 +1,446 @@
+{
+  "@context": "http://www.w3.org/ns/shexje.jsonld",
+  "type": "Schema",
+  "shapes": [
+    {
+      "type": "Shape",
+      "id": "CelestialBody",
+      "expression": {
+        "type": "EachOf",
+        "expressions": [
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/name",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/formerName",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/abbreviation",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/abstract",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#comment",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/discovered",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/discoverer",
+            "valueExpr": "Person",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/epoch",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/detectionMethod",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/neighbourConstellations",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/Planet/periapsis",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/periapsis",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/rotationPeriod",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/escapeVelocity",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/averageSpeed",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/Planet/volume",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/volume",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/Planet/meanRadius",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/meanRadius",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/Planet/surfaceArea",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/surfaceArea",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/Planet/minimumTemperature",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/Planet/maximumTemperature",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/absoluteMagnitude",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/apparentMagnitude",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/albedo",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/thumbnail",
+            "valueExpr": "Image",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/depiction",
+            "valueExpr": "Image",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2002/07/owl#sameAs",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2002/07/owl#differentFrom",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/ns/prov#wasDerivedFrom",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://purl.org/dc/terms/subject",
+            "valueExpr": "Concept"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2004/02/skos/core#exactMatch",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "IRI"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageID",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageRevisionID",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageLength",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageExternalLink",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "pattern": "^http://dbpedia.org/resource/"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/Planet/orbitalPeriod",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/orbitalPeriod",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          }
+        ],
+        "alternativeGroups": [
+          [
+            "http://dbpedia.org/ontology/Planet/orbitalPeriod",
+            "http://dbpedia.org/ontology/orbitalPeriod"
+          ]
+        ]
+      },
+      "targetClass": "http://dbpedia.org/ontology/CelestialBody"
+    },
+    {
+      "type": "Shape",
+      "id": "Concept",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Image",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Image"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Person",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Person"
+      ]
+    }
+  ]
+}

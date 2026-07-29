@@ -1,0 +1,78 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/NationalFlagShape> a sh:NodeShape ;
+    sh:property [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1684> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P487> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1889> ],
+        [ sh:datatype rdf:langString ;
+            sh:path <http://www.wikidata.org/prop/direct/P1449> ],
+        [ sh:class <http://www.wikidata.org/entity/Q4167836> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P910> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P2670> ],
+        [ sh:class <http://www.wikidata.org/entity/Q1075> ;
+            sh:path <http://www.wikidata.org/prop/direct/P462> ],
+        [ sh:class <http://www.wikidata.org/entity/Q16695773> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P5008> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ],
+        [ sh:class <http://www.wikidata.org/entity/Q3331189> ;
+            sh:path <http://www.wikidata.org/prop/direct/P1343> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q1441762> ] [ sh:class <http://www.wikidata.org/entity/Q20970434> ] ) ;
+            sh:path <http://www.wikidata.org/prop/direct/P2061> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P180> ],
+        [ sh:class <http://www.wikidata.org/entity/Q6256> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1268> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/NationalFlagShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P1366> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P136> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q24577232> ] [ sh:class <http://www.wikidata.org/entity/Q208324> ] [ sh:class <http://www.wikidata.org/entity/Q2029729> ] [ sh:class <http://www.wikidata.org/entity/Q23777467> ] [ sh:class <http://www.wikidata.org/entity/Q203161> ] [ sh:class <http://www.wikidata.org/entity/Q24577249> ] ) ],
+        [ sh:class <http://www.wikidata.org/entity/Q14660> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P460> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/NationalFlagShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P1365> ],
+        [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P287> ],
+        [ sh:class <http://www.wikidata.org/entity/Q6256> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1001> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P571> ],
+        [ sh:class <http://www.wikidata.org/entity/Q6256> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P17> ],
+        [ sh:class <http://www.wikidata.org/entity/Q14660> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P4969> ],
+        [ sh:datatype rdf:langString ;
+            sh:path <http://www.wikidata.org/prop/direct/P1448> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P576> ],
+        [ sh:class <http://www.wikidata.org/entity/Q815741> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1419> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/NationalFlagShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P144> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q186516> .
+

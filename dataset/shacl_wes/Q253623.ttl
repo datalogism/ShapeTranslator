@@ -1,0 +1,51 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/PatentShape> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:path <http://www.wikidata.org/prop/direct/P5778> ],
+        [ sh:class <http://www.wikidata.org/entity/Q1288568> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P407> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P921> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P859> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q327333> ] [ sh:class <http://www.wikidata.org/entity/Q4830453> ] ) ],
+        [ sh:class <http://www.wikidata.org/entity/Q6256> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P17> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P953> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://www.wikidata.org/prop/direct/P2093> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P361> ],
+        [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P50> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P577> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P2860> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q13442814> ] [ sh:class <http://www.wikidata.org/entity/Q253623> ] ) ],
+        [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P61> ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1476> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q43229> ] [ sh:class <http://www.wikidata.org/entity/Q4830453> ] [ sh:class <http://www.wikidata.org/entity/Q5> ] ) ;
+            sh:path <http://www.wikidata.org/prop/direct/P127> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q1148446> ] [ sh:class <http://www.wikidata.org/entity/Q43229> ] ) ;
+            sh:path <http://www.wikidata.org/prop/direct/P2378> ],
+        [ sh:class <http://www.wikidata.org/entity/Q16695773> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P5008> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q253623> .
+

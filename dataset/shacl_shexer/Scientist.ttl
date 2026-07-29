@@ -1,0 +1,156 @@
+@prefix : <http://weso.es/shapes/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Scientist a sh:NodeShape ;
+    sh:property [ a sh:PropertyShape ;
+            sh:in ( dbo:Eukaryote ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dcat:resource_identifier ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q901> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path foaf:homepage ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q729> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:academicDiscipline ],
+        [ a sh:PropertyShape ;
+            sh:in ( foaf:Person ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:almaMater ],
+        [ a sh:PropertyShape ;
+            sh:dataType rdf:langString ;
+            sh:path rdfs:comment ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:birthName ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:maxCount 1 ;
+            sh:path dbo:deathDate ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:birthPlace ],
+        [ a sh:PropertyShape ;
+            sh:in ( owl:Thing ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q19088> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Scientist ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Species ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Thing ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://schema.org/Person> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:nationality ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:knownFor ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:institution ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#NaturalPerson> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q215627> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q5> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path rdfs:comment ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path rdfs:label ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Person ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path dbo:birthYear ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:award ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:deathPlace ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path dbo:deathYear ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Animal ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:doctoralAdvisor ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path foaf:name ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path dbo:wikiPageRevisionID ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:maxCount 1 ;
+            sh:path dbo:birthDate ] ;
+    sh:targetClass dbo:Scientist .
+

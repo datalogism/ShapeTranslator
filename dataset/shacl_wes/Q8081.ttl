@@ -1,0 +1,54 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/TornadoShape> a sh:NodeShape ;
+    sh:property [ sh:class <http://www.wikidata.org/entity/Q56061> ;
+            sh:path <http://www.wikidata.org/prop/direct/P131> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/TornadoShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P155> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P580> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1120> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1542> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P973> ],
+        [ sh:class <http://www.wikidata.org/entity/Q6256> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P17> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2630> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/TornadoShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P156> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2047> ],
+        [ sh:class <http://www.wikidata.org/entity/Q515> ;
+            sh:path <http://www.wikidata.org/prop/direct/P276> ],
+        [ sh:class <http://www.wikidata.org/entity/Q2696963> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P361> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1339> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P585> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2895> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P582> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q8081> .
+

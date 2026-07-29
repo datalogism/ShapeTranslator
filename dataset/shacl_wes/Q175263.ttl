@@ -1,0 +1,34 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/DataStructureShape> a sh:NodeShape ;
+    sh:property [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P61> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P366> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ],
+        [ sh:class <http://www.wikidata.org/entity/Q13636890> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2579> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P973> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1482> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P575> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1889> ],
+        [ sh:class <http://www.wikidata.org/entity/Q827335> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2283> ],
+        [ sh:class <http://www.wikidata.org/entity/Q16695773> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P6104> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q175263> .
+

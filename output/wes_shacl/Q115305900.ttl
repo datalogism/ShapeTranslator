@@ -1,0 +1,141 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/LargeLanguageModelShape> a sh:NodeShape ;
+    rdfs:label "large language model"@en ;
+    sh:name "large language model"@en ;
+    sh:property [ sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q1047113 ;
+            sh:name "has use"@en ;
+            sh:path wdt:P366 ],
+        [ sh:class wd:Q115305900 ;
+            sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:path wdt:P155 ],
+        [ sh:class wd:Q115305900 ;
+            sh:maxCount 1 ;
+            sh:name "followed by"@en ;
+            sh:path wdt:P156 ],
+        [ sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:hasValue wd:Q50423863 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:class wd:Q9143 ;
+            sh:name "programmed in"@en ;
+            sh:path wdt:P277 ],
+        [ sh:datatype xsd:string ;
+            sh:name "software version identifier"@en ;
+            sh:path wdt:P348 ],
+        [ sh:name "used by"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1535 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "publication date"@en ;
+            sh:path wdt:P577 ],
+        [ sh:maxCount 1 ;
+            sh:name "source code repository URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1324 ],
+        [ sh:class wd:Q77205602 ;
+            sh:name "copyright license"@en ;
+            sh:path wdt:P275 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:hasValue wd:Q20923490 ;
+            sh:maxCount 1 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:class wd:Q1047113 ;
+            sh:name "based on"@en ;
+            sh:path wdt:P144 ],
+        [ sh:class wd:Q13442814 ;
+            sh:maxCount 1 ;
+            sh:name "described by source"@en ;
+            sh:path wdt:P1343 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:name "developer"@en ;
+            sh:or ( [ sh:class wd:Q43229 ] [ sh:class wd:Q18388277 ] ) ;
+            sh:path wdt:P178 ] ;
+    sh:targetClass wd:Q115305900 .
+
+wd:Q13442814 rdfs:label "scholarly article"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q18388277 rdfs:label "technology company"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q77205602 rdfs:label "copyright license"@en .
+
+wd:Q9143 rdfs:label "programming language"@en .
+
+wdt:P1324 rdfs:label "source code repository URL"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P144 rdfs:label "based on"@en .
+
+wdt:P1535 rdfs:label "used by"@en .
+
+wdt:P155 rdfs:label "follows"@en .
+
+wdt:P156 rdfs:label "followed by"@en .
+
+wdt:P178 rdfs:label "developer"@en .
+
+wdt:P2283 rdfs:label "uses"@en .
+
+wdt:P275 rdfs:label "copyright license"@en .
+
+wdt:P277 rdfs:label "programmed in"@en .
+
+wdt:P348 rdfs:label "software version identifier"@en .
+
+wdt:P366 rdfs:label "has use"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P407 rdfs:label "language of work or name"@en .
+
+wdt:P495 rdfs:label "country of origin"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P577 rdfs:label "publication date"@en .
+
+wdt:P6216 rdfs:label "copyright status"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wd:Q1047113 rdfs:label "field of study"@en .
+
+wd:Q115305900 rdfs:label "large language model"@en .
+

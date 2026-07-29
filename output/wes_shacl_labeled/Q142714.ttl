@@ -1,0 +1,126 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/CardGameShape> a sh:NodeShape ;
+    rdfs:label "card game"@en ;
+    sh:property [ sh:datatype rdf:langString ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:class wd:Q142714 ;
+            sh:name "said to be the same as"@en ;
+            sh:path wdt:P460 ],
+        [ sh:class wd:Q483394 ;
+            sh:maxCount 1 ;
+            sh:name "genre"@en ;
+            sh:path wdt:P136 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "minimum number of players"@en ;
+            sh:path wdt:P1872 ],
+        [ sh:class wd:Q1288568 ;
+            sh:maxCount 1 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "maximum number of players"@en ;
+            sh:path wdt:P1873 ],
+        [ sh:maxCount 1 ;
+            sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q5 ;
+            sh:name "developer"@en ;
+            sh:path wdt:P178 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by WikiProject"@en ;
+            sh:path wdt:P6104 ],
+        [ sh:class wd:Q50424085 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "designed by"@en ;
+            sh:path wdt:P287 ],
+        [ sh:class wd:Q559618 ;
+            sh:maxCount 1 ;
+            sh:name "takes place in fictional universe"@en ;
+            sh:path wdt:P1434 ],
+        [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q3331189 ] [ sh:class wd:Q386724 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "minimum age"@en ;
+            sh:path wdt:P2899 ],
+        [ sh:class wd:Q11410 ;
+            sh:name "based on"@en ;
+            sh:path wdt:P144 ],
+        [ sh:name "nominated for"@en ;
+            sh:or ( [ sh:class wd:Q30505248 ] [ sh:class wd:Q38033430 ] [ sh:class wd:Q618779 ] ) ;
+            sh:path wdt:P1411 ],
+        [ sh:maxCount 1 ;
+            sh:name "collection"@en ;
+            sh:or ( [ sh:class wd:Q2668072 ] [ sh:class wd:Q33506 ] ) ;
+            sh:path wdt:P195 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "publication date"@en ;
+            sh:path wdt:P577 ],
+        [ sh:maxCount 1 ;
+            sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:name "publisher"@en ;
+            sh:or ( [ sh:class wd:Q3579158 ] [ sh:class wd:Q2085381 ] [ sh:class wd:Q4830453 ] ) ;
+            sh:path wdt:P123 ],
+        [ sh:class wd:Q56061 ;
+            sh:maxCount 1 ;
+            sh:name "indigenous to"@en ;
+            sh:path wdt:P2341 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:name "award received"@en ;
+            sh:or ( [ sh:class wd:Q30505248 ] [ sh:class wd:Q38033430 ] [ sh:class wd:Q618779 ] ) ;
+            sh:path wdt:P166 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q142714 ;
+            sh:name "partially coincident with"@en ;
+            sh:path wdt:P1382 ],
+        [ sh:datatype xsd:string ;
+            sh:name "author name string"@en ;
+            sh:path wdt:P2093 ] ;
+    sh:targetClass wd:Q142714 .
+

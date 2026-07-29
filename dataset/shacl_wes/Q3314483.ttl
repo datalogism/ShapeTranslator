@@ -1,0 +1,32 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/FruitShape> a sh:NodeShape ;
+    sh:property [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1889> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P487> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P7971> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P462> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q1075> ] [ sh:class <http://www.wikidata.org/entity/Q166902> ] ) ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P6000> ],
+        [ sh:class <http://www.wikidata.org/entity/Q16521> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1582> ],
+        [ sh:class <http://www.wikidata.org/entity/Q4167836> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P910> ],
+        [ sh:class <http://www.wikidata.org/entity/Q6256> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P495> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q3314483> .
+

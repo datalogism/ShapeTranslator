@@ -1,0 +1,48 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+<http://shaclshapes.org/MagazineShape> a sh:NodeShape ;
+    sh:property [ sh:hasValue <http://dbpedia.org/ontology/Magazine> ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/WrittenWorkShape> a sh:NodeShape ;
+    sh:property [ sh:hasValue <http://dbpedia.org/ontology/WrittenWork> ;
+            sh:path rdf:type ],
+        [ sh:hasValue <http://dbpedia.org/ontology/WrittenWork> ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/written_workShape> a sh:NodeShape ;
+    sh:property [ sh:path <http://dbpedia.org/ontology/genre> ],
+        [ sh:path <http://dbpedia.org/ontology/firstPublicationDate> ],
+        [ sh:path <http://dbpedia.org/ontology/literaryGenre> ],
+        [ sh:path <http://dbpedia.org/ontology/publicationDate> ],
+        [ sh:path <http://dbpedia.org/ontology/language> ],
+        [ sh:path <http://dbpedia.org/ontology/nonFictionSubject> ],
+        [ sh:path <http://dbpedia.org/ontology/mediaType> ],
+        [ sh:path <http://dbpedia.org/ontology/lastPublicationDate> ],
+        [ sh:path foaf:homepage ],
+        [ sh:class <http://dbpedia.org/ontology/WrittenWork> ;
+            sh:path <http://dbpedia.org/ontology/previousWork> ],
+        [ sh:path <http://dbpedia.org/ontology/author> ],
+        [ sh:path <http://dbpedia.org/ontology/isbn> ],
+        [ sh:path dc:publisher ],
+        [ sh:path <http://dbpedia.org/ontology/oclc> ],
+        [ sh:path <http://dbpedia.org/ontology/publisher> ],
+        [ sh:path <http://dbpedia.org/ontology/numberOfPages> ],
+        [ sh:path <http://dbpedia.org/ontology/subsequentWork> ],
+        [ sh:path <http://dbpedia.org/ontology/lcc> ],
+        [ sh:class <http://dbpedia.org/ontology/Magazine> ;
+            sh:path <http://dbpedia.org/ontology/magazine> ],
+        [ sh:path dcat:resource_identifier ],
+        [ sh:path foaf:name ],
+        [ sh:path <http://dbpedia.org/ontology/type> ],
+        [ sh:class <http://dbpedia.org/ontology/WrittenWork> ;
+            sh:path rdf:type ],
+        [ sh:path <http://dbpedia.org/ontology/dcc> ],
+        [ sh:path <http://dbpedia.org/ontology/country> ],
+        [ sh:path <http://dbpedia.org/ontology/numberOfVolumes> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/WrittenWork> .
+

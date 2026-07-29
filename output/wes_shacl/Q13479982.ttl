@@ -1,0 +1,203 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/CryptocurrencyShape> a sh:NodeShape ;
+    rdfs:label "cryptocurrency"@en ;
+    sh:name "cryptocurrency"@en ;
+    sh:property [ sh:class wd:Q4830453 ;
+            sh:name "developer"@en ;
+            sh:path wdt:P178 ],
+        [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:datatype xsd:string ;
+            sh:name "cryptocurrency code"@en ;
+            sh:path wdt:P5810 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q9135 ;
+            sh:name "operating system"@en ;
+            sh:path wdt:P306 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "unit symbol"@en ;
+            sh:path wdt:P5061 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "price"@en ;
+            sh:path wdt:P2284 ],
+        [ sh:name "used by"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1535 ],
+        [ sh:hasValue wd:Q50423863 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:maxCount 1 ;
+            sh:name "Stack Exchange site URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P6541 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "market capitalization"@en ;
+            sh:path wdt:P2226 ],
+        [ sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:class wd:Q13479982 ;
+            sh:name "based on"@en ;
+            sh:path wdt:P144 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:class wd:Q77205602 ;
+            sh:maxCount 1 ;
+            sh:name "copyright license"@en ;
+            sh:path wdt:P275 ],
+        [ sh:class wd:Q308229 ;
+            sh:maxCount 1 ;
+            sh:name "currency sign"@en ;
+            sh:path wdt:P489 ],
+        [ sh:name "has use"@en ;
+            sh:or ( [ sh:class wd:Q1047113 ] [ sh:class wd:Q11862829 ] ) ;
+            sh:path wdt:P366 ],
+        [ sh:maxCount 1 ;
+            sh:name "WordLift URL"@en ;
+            sh:path wdt:P6363 ;
+            sh:pattern "^http://data.thenextweb.com/tnw/entity//" ],
+        [ sh:name "founder"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q4830453 ] ) ;
+            sh:path wdt:P112 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:name "creator"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q4830453 ] ) ;
+            sh:path wdt:P170 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "social media followers"@en ;
+            sh:path wdt:P8687 ],
+        [ sh:class wd:Q25401607 ;
+            sh:name "stock exchange"@en ;
+            sh:path wdt:P414 ],
+        [ sh:class wd:Q13479982 ;
+            sh:name "inspired by"@en ;
+            sh:path wdt:P941 ],
+        [ sh:datatype xsd:string ;
+            sh:name "software version identifier"@en ;
+            sh:path wdt:P348 ],
+        [ sh:class wd:Q9143 ;
+            sh:name "programmed in"@en ;
+            sh:path wdt:P277 ],
+        [ sh:maxCount 1 ;
+            sh:name "source code repository URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1324 ] ;
+    sh:targetClass wd:Q13479982 .
+
+wd:Q1047113 rdfs:label "field of study"@en .
+
+wd:Q11862829 rdfs:label "academic discipline"@en .
+
+wd:Q25401607 rdfs:label "cryptocurrency exchange"@en .
+
+wd:Q308229 rdfs:label "currency sign"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q77205602 rdfs:label "copyright license"@en .
+
+wd:Q9135 rdfs:label "operating system"@en .
+
+wd:Q9143 rdfs:label "programming language"@en .
+
+wdt:P112 rdfs:label "founder"@en .
+
+wdt:P1324 rdfs:label "source code repository URL"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P144 rdfs:label "based on"@en .
+
+wdt:P1535 rdfs:label "used by"@en .
+
+wdt:P170 rdfs:label "creator"@en .
+
+wdt:P178 rdfs:label "developer"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2226 rdfs:label "market capitalization"@en .
+
+wdt:P2283 rdfs:label "uses"@en .
+
+wdt:P2284 rdfs:label "price"@en .
+
+wdt:P275 rdfs:label "copyright license"@en .
+
+wdt:P277 rdfs:label "programmed in"@en .
+
+wdt:P306 rdfs:label "operating system"@en .
+
+wdt:P348 rdfs:label "software version identifier"@en .
+
+wdt:P366 rdfs:label "has use"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P414 rdfs:label "stock exchange"@en .
+
+wdt:P489 rdfs:label "currency sign"@en .
+
+wdt:P495 rdfs:label "country of origin"@en .
+
+wdt:P5061 rdfs:label "unit symbol"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P5810 rdfs:label "cryptocurrency code"@en .
+
+wdt:P6216 rdfs:label "copyright status"@en .
+
+wdt:P6363 rdfs:label "WordLift URL"@en .
+
+wdt:P6541 rdfs:label "Stack Exchange site URL"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P8687 rdfs:label "social media followers"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P941 rdfs:label "inspired by"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q13479982 rdfs:label "cryptocurrency"@en .
+
+wd:Q4830453 rdfs:label "business"@en .
+

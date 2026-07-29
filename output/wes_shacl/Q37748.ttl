@@ -1,0 +1,66 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/ChromosomeShape> a sh:NodeShape ;
+    rdfs:label "chromosome"@en ;
+    sh:name "chromosome"@en ;
+    sh:property [ sh:class wd:Q37748 ;
+            sh:maxCount 1 ;
+            sh:name "followed by"@en ;
+            sh:path wdt:P156 ],
+        [ sh:class wd:Q37748 ;
+            sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:path wdt:P155 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "length"@en ;
+            sh:path wdt:P2043 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ],
+        [ sh:class wd:Q16521 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "found in taxon"@en ;
+            sh:path wdt:P703 ] ;
+    sh:targetClass wd:Q37748 .
+
+wd:Q16521 rdfs:label "taxon"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wdt:P155 rdfs:label "follows"@en .
+
+wdt:P156 rdfs:label "followed by"@en .
+
+wdt:P1813 rdfs:label "short name"@en .
+
+wdt:P2043 rdfs:label "length"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P703 rdfs:label "found in taxon"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wd:Q37748 rdfs:label "chromosome"@en .
+

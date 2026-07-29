@@ -1,0 +1,76 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/FruitShape> a sh:NodeShape ;
+    rdfs:label "fruit"@en ;
+    sh:name "fruit"@en ;
+    sh:property [ sh:class wd:Q16521 ;
+            sh:maxCount 1 ;
+            sh:name "natural product of taxon"@en ;
+            sh:path wdt:P1582 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "food energy"@en ;
+            sh:path wdt:P7971 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Unicode character"@en ;
+            sh:path wdt:P487 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "water footprint"@en ;
+            sh:path wdt:P6000 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:name "color"@en ;
+            sh:or ( [ sh:class wd:Q1075 ] [ sh:class wd:Q166902 ] ) ;
+            sh:path wdt:P462 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ] ;
+    sh:targetClass wd:Q3314483 .
+
+wd:Q1075 rdfs:label "color"@en .
+
+wd:Q16521 rdfs:label "taxon"@en .
+
+wd:Q166902 rdfs:label "primary color"@en .
+
+wd:Q3314483 rdfs:label "fruit"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wdt:P1582 rdfs:label "natural product of taxon"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P462 rdfs:label "color"@en .
+
+wdt:P487 rdfs:label "Unicode character"@en .
+
+wdt:P495 rdfs:label "country of origin"@en .
+
+wdt:P6000 rdfs:label "water footprint"@en .
+
+wdt:P7971 rdfs:label "food energy"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+

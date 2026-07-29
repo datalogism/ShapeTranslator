@@ -1,0 +1,266 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/WebServiceShape> a sh:NodeShape ;
+    rdfs:label "web service"@en ;
+    sh:name "web service"@en ;
+    sh:property [ sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:class wd:Q620615 ;
+            sh:maxCount 1 ;
+            sh:name "official app"@en ;
+            sh:path wdt:P4290 ],
+        [ sh:name "industry"@en ;
+            sh:or ( [ sh:class wd:Q268592 ] [ sh:class wd:Q8187769 ] ) ;
+            sh:path wdt:P452 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:datatype xsd:string ;
+            sh:name "hashtag"@en ;
+            sh:path wdt:P2572 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:maxCount 1 ;
+            sh:name "publisher"@en ;
+            sh:or ( [ sh:class wd:Q4830453 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P123 ],
+        [ sh:class wd:Q1288568 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:class wd:Q81941037 ;
+            sh:name "distribution format"@en ;
+            sh:path wdt:P437 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "search formatter URL"@en ;
+            sh:path wdt:P4354 ],
+        [ sh:name "described by source"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1343 ],
+        [ sh:maxCount 1 ;
+            sh:name "issue tracker URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1401 ],
+        [ sh:class wd:Q864114 ;
+            sh:name "input device"@en ;
+            sh:path wdt:P479 ],
+        [ sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:name "has use"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P366 ],
+        [ sh:maxCount 1 ;
+            sh:name "developer"@en ;
+            sh:or ( [ sh:class wd:Q4830453 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P178 ],
+        [ sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:class wd:Q3814081 ;
+            sh:name "distributed by"@en ;
+            sh:path wdt:P750 ],
+        [ sh:name "founder"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q4830453 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P112 ],
+        [ sh:name "operator"@en ;
+            sh:or ( [ sh:class wd:Q4830453 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P137 ],
+        [ sh:class wd:Q77205602 ;
+            sh:maxCount 1 ;
+            sh:name "copyright license"@en ;
+            sh:path wdt:P275 ],
+        [ sh:maxCount 1 ;
+            sh:name "user manual URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2078 ],
+        [ sh:name "official blog URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1581 ],
+        [ sh:maxCount 1 ;
+            sh:name "API endpoint URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P6269 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q15836568 ;
+            sh:name "protocol"@en ;
+            sh:path wdt:P2700 ],
+        [ sh:datatype xsd:string ;
+            sh:name "software version identifier"@en ;
+            sh:path wdt:P348 ],
+        [ sh:maxCount 1 ;
+            sh:name "owned by"@en ;
+            sh:or ( [ sh:class wd:Q4830453 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P127 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:name "platform"@en ;
+            sh:or ( [ sh:class wd:Q6368 ] [ sh:class wd:Q241317 ] ) ;
+            sh:path wdt:P400 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "social media followers"@en ;
+            sh:path wdt:P8687 ],
+        [ sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:hasValue wd:Q50423863 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:class wd:Q7397 ;
+            sh:name "depends on software"@en ;
+            sh:path wdt:P1547 ],
+        [ sh:class wd:Q9143 ;
+            sh:name "programmed in"@en ;
+            sh:path wdt:P277 ],
+        [ sh:maxCount 1 ;
+            sh:name "source code repository URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1324 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q9135 ;
+            sh:name "operating system"@en ;
+            sh:path wdt:P306 ] ;
+    sh:targetClass wd:Q193424 .
+
+wd:Q1288568 rdfs:label "modern language"@en .
+
+wd:Q15836568 rdfs:label "computer network protocol"@en .
+
+wd:Q193424 rdfs:label "web service"@en .
+
+wd:Q241317 rdfs:label "computing platform"@en .
+
+wd:Q268592 rdfs:label "industry"@en .
+
+wd:Q3814081 rdfs:label "app marketplace"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q620615 rdfs:label "mobile app"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q6368 rdfs:label "web browser"@en .
+
+wd:Q7397 rdfs:label "software"@en .
+
+wd:Q77205602 rdfs:label "copyright license"@en .
+
+wd:Q8187769 rdfs:label "economic activity"@en .
+
+wd:Q81941037 rdfs:label "product distribution method"@en .
+
+wd:Q864114 rdfs:label "input device"@en .
+
+wd:Q9135 rdfs:label "operating system"@en .
+
+wd:Q9143 rdfs:label "programming language"@en .
+
+wdt:P112 rdfs:label "founder"@en .
+
+wdt:P123 rdfs:label "publisher"@en .
+
+wdt:P127 rdfs:label "owned by"@en .
+
+wdt:P1324 rdfs:label "source code repository URL"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P137 rdfs:label "operator"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1401 rdfs:label "issue tracker URL"@en .
+
+wdt:P1476 rdfs:label "title"@en .
+
+wdt:P1547 rdfs:label "depends on software"@en .
+
+wdt:P1581 rdfs:label "official blog URL"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P178 rdfs:label "developer"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2078 rdfs:label "user manual URL"@en .
+
+wdt:P2283 rdfs:label "uses"@en .
+
+wdt:P2572 rdfs:label "hashtag"@en .
+
+wdt:P2700 rdfs:label "protocol"@en .
+
+wdt:P275 rdfs:label "copyright license"@en .
+
+wdt:P277 rdfs:label "programmed in"@en .
+
+wdt:P306 rdfs:label "operating system"@en .
+
+wdt:P348 rdfs:label "software version identifier"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P366 rdfs:label "has use"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P400 rdfs:label "platform"@en .
+
+wdt:P407 rdfs:label "language of work or name"@en .
+
+wdt:P4290 rdfs:label "official app"@en .
+
+wdt:P4354 rdfs:label "search formatter URL"@en .
+
+wdt:P437 rdfs:label "distribution format"@en .
+
+wdt:P452 rdfs:label "industry"@en .
+
+wdt:P479 rdfs:label "input device"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P6216 rdfs:label "copyright status"@en .
+
+wdt:P6269 rdfs:label "API endpoint URL"@en .
+
+wdt:P750 rdfs:label "distributed by"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P8687 rdfs:label "social media followers"@en .
+
+wdt:P921 rdfs:label "main subject"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q4830453 rdfs:label "business"@en .
+

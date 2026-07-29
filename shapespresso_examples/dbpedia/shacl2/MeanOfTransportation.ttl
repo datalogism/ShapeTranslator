@@ -1,0 +1,87 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/mean_of_transportationShape> a sh:NodeShape ;
+    sh:property [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/assembly> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/type> ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:path <http://dbpedia.org/ontology/productionStartYear> ],
+        [ sh:class <http://dbpedia.org/ontology/MeanOfTransportation> ;
+            sh:path <http://dbpedia.org/ontology/predecessor> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/layout> ],
+        [ sh:datatype <xsd:double> ;
+            sh:path <http://dbpedia.org/ontology/shipBeam> ],
+        [ sh:class <http://dbpedia.org/ontology/Organisation> ;
+            sh:path <http://dbpedia.org/ontology/operator> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/owner> ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:path <http://dbpedia.org/ontology/modelStartYear> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/engine> ],
+        [ sh:datatype <xsd:double> ;
+            sh:path <http://dbpedia.org/ontology/length> ],
+        [ sh:datatype <xsd:integer> ;
+            sh:path <http://dbpedia.org/ontology/numberBuilt> ],
+        [ sh:class <http://dbpedia.org/ontology/MeanOfTransportation> ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:class <http://dbpedia.org/ontology/MeanOfTransportation> ;
+            sh:path <http://dbpedia.org/ontology/successor> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/class> ],
+        [ sh:path <http://dbpedia.org/ontology/builder> ;
+            sh:or ( [ sh:class <http://dbpedia.org/ontology/Agent> ] [ sh:class <http://dbpedia.org/ontology/Company> ] ) ],
+        [ sh:class <http://dbpedia.org/ontology/Organisation> ;
+            sh:path <http://dbpedia.org/ontology/manufacturer> ],
+        [ sh:datatype <xsd:string> ;
+            sh:path <http://dbpedia.org/ontology/status> ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:path <http://dbpedia.org/ontology/productionEndYear> ],
+        [ sh:datatype <rdf:langString> ;
+            sh:path foaf:name ],
+        [ sh:datatype <xsd:date> ;
+            sh:path <http://dbpedia.org/ontology/shipLaunch> ],
+        [ sh:class <http://dbpedia.org/ontology/MeanOfTransportation> ;
+            sh:path <http://dbpedia.org/ontology/relatedMeanOfTransportation> ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/activeYearsEndYear> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/country> ],
+        [ sh:datatype <xsd:double> ;
+            sh:maxCount 2 ;
+            sh:path <http://dbpedia.org/ontology/height> ],
+        [ sh:datatype <xsd:double> ;
+            sh:path <http://dbpedia.org/ontology/wheelbase> ],
+        [ sh:datatype <xsd:integer> ;
+            sh:path <http://dbpedia.org/ontology/capacity> ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/activeYearsStartYear> ],
+        [ sh:datatype <rdf:langString> ;
+            sh:path <http://dbpedia.org/ontology/alternativeName> ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:path <http://dbpedia.org/ontology/modelEndYear> ],
+        [ sh:datatype <xsd:double> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/weight> ],
+        [ sh:datatype <xsd:string> ;
+            sh:path <http://dbpedia.org/ontology/transmission> ],
+        [ sh:datatype <xsd:double> ;
+            sh:maxCount 1 ;
+            sh:path dcat:resource_identifier ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/bodyStyle> ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:path <http://dbpedia.org/ontology/yearOfConstruction> ],
+        [ sh:datatype <xsd:double> ;
+            sh:path <http://dbpedia.org/ontology/width> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/MeanOfTransportation> .
+

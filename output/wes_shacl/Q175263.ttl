@@ -1,0 +1,77 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/DataStructureShape> a sh:NodeShape ;
+    rdfs:label "data structure"@en ;
+    sh:name "data structure"@en ;
+    sh:property [ sh:hasValue wd:Q13636890 ;
+            sh:maxCount 1 ;
+            sh:name "studied by"@en ;
+            sh:path wdt:P2579 ],
+        [ sh:maxCount 1 ;
+            sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q827335 ;
+            sh:maxCount 1 ;
+            sh:name "uses"@en ;
+            sh:path wdt:P2283 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by WikiProject"@en ;
+            sh:path wdt:P6104 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:name "has use"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P366 ],
+        [ sh:maxCount 1 ;
+            sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q5 ;
+            sh:name "discoverer or inventor"@en ;
+            sh:path wdt:P61 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "time of discovery or invention"@en ;
+            sh:path wdt:P575 ],
+        [ sh:maxCount 1 ;
+            sh:name "Stack Exchange tag"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1482 ] ;
+    sh:targetClass wd:Q175263 .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q175263 rdfs:label "data structure"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q827335 rdfs:label "abstract data type"@en .
+
+wdt:P1482 rdfs:label "Stack Exchange tag"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2283 rdfs:label "uses"@en .
+
+wdt:P2579 rdfs:label "studied by"@en .
+
+wdt:P366 rdfs:label "has use"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P575 rdfs:label "time of discovery or invention"@en .
+
+wdt:P61 rdfs:label "discoverer or inventor"@en .
+
+wdt:P6104 rdfs:label "maintained by WikiProject"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+

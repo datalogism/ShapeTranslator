@@ -1,0 +1,1225 @@
+{
+  "@context": "http://www.w3.org/ns/shexje.jsonld",
+  "type": "Schema",
+  "shapes": [
+    {
+      "type": "Shape",
+      "id": "City",
+      "expression": {
+        "type": "EachOf",
+        "expressions": [
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/name",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/nick",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/originalName",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/demonym",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/motto",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/synonym",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/abstract",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#comment",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/foundingDate",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#date"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/founder",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Person",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/country",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Country",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/location",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Place",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/district",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "PopulatedPlace",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/federalState",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "PopulatedPlace",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/subdivision",
+            "valueExpr": "AdministrativeRegion",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/isoCodeRegion",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/postalCode",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/areaCode",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/licenceNumber",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#float"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2003/01/geo/wgs84_pos#long",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#float"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2003/01/geo/wgs84_pos#geometry",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.opengis.net/ont/geosparql#wktLiteral"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/timeZone",
+            "valueExpr": {
+              "type": "ShapeRef",
+              "reference": "TimeZone"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/utcOffset",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/elevation",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#double"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/minimumElevation",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#double"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/maximumElevation",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#double"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/areaTotal",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/areaLand",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#double"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/areaWater",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#double"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/percentageOfAreaWater",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#float"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/PopulatedPlace/areaMetro",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://dbpedia.org/datatype/squareKilometre"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/areaMetro",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#double"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/populationTotal",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/populationUrban",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/populationMetro",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/populationAsOf",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#date"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/governmentType",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "GovernmentType",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/governingBody",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Legislature",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/mayor",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Mayor",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/leaderName",
+            "valueExpr": "Person",
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/leaderTitle",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/leaderParty",
+            "valueExpr": "PoliticalParty"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/politicalLeader",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "PoliticalFunction",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/saint",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Saint",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/namedAfter",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "IRI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/team",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "SportsTeam",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/thumbnail",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Image",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/depiction",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Image",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/homepage",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "IRI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2002/07/owl#sameAs",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2002/07/owl#differentFrom",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/ns/prov#wasDerivedFrom",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://purl.org/dc/terms/subject",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Concept",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2004/02/skos/core#exactMatch",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageID",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageRevisionID",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageLength",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageExternalLink",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+              "pattern": "^http://dbpedia.org/resource/"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageInterLanguageLink",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+              "pattern": "^http://dbpedia.org/resource/"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageRedirects",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+              "pattern": "^http://dbpedia.org/resource/"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageDisambiguates",
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/PopulatedPlace/areaTotal",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://dbpedia.org/datatype/squareKilometre"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/areaTotal",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#double"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/PopulatedPlace/areaTotal",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://dbpedia.org/datatype/squareKilometre"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/areaTotal",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#double"
+            },
+            "min": 1,
+            "max": 1
+          }
+        ],
+        "alternativeGroups": [
+          [
+            "http://dbpedia.org/ontology/PopulatedPlace/areaTotal",
+            "http://dbpedia.org/ontology/areaTotal"
+          ]
+        ]
+      },
+      "targetClass": "http://dbpedia.org/ontology/City"
+    },
+    {
+      "type": "NodeConstraint",
+      "id": "TimeZone",
+      "values": [
+        "http://dbpedia.org/resource/Eastern_Time_Zone",
+        "http://dbpedia.org/resource/Indian_Standard_Time",
+        "http://dbpedia.org/resource/East_Africa_Time",
+        "http://dbpedia.org/resource/Iran_Standard_Time",
+        "http://dbpedia.org/resource/Time_in_Madagascar",
+        "http://dbpedia.org/resource/UTC%2B03:00",
+        "http://dbpedia.org/resource/Central_Time_Zone",
+        "http://dbpedia.org/resource/Pakistan_Standard_Time",
+        "http://dbpedia.org/resource/Mountain_Time_Zone",
+        "http://dbpedia.org/resource/Eastern_European_Summer_Time",
+        "http://dbpedia.org/resource/Eastern_European_Time",
+        "http://dbpedia.org/resource/Time_in_Malaysia",
+        "http://dbpedia.org/resource/Sri_Lanka_Standard_Time",
+        "http://dbpedia.org/resource/Central_European_Summer_Time",
+        "http://dbpedia.org/resource/Central_European_Time",
+        "http://dbpedia.org/resource/Central_Africa_Time",
+        "http://dbpedia.org/resource/South_Africa_Standard_Time",
+        "http://dbpedia.org/resource/Myanmar_Standard_Time",
+        "http://dbpedia.org/resource/Time_in_the_Republic_of_Ireland",
+        "http://dbpedia.org/resource/Western_European_Time",
+        "http://dbpedia.org/resource/Bangladesh_Standard_Time",
+        "http://dbpedia.org/resource/Bhutan_Time",
+        "http://dbpedia.org/resource/Time_in_Thailand",
+        "http://dbpedia.org/resource/UTC%2B10:00",
+        "http://dbpedia.org/resource/UTC%2B11:00",
+        "http://dbpedia.org/resource/Greenwich_Mean_Time",
+        "http://dbpedia.org/resource/Coordinated_Universal_Time",
+        "http://dbpedia.org/resource/West_Africa_Time",
+        "http://dbpedia.org/resource/Pacific_Time_Zone",
+        "http://dbpedia.org/resource/Time_in_Indonesia",
+        "http://dbpedia.org/resource/Time_in_Pakistan",
+        "http://dbpedia.org/resource/Azerbaijan_Time",
+        "http://dbpedia.org/resource/Saudi_Arabia_Standard_Time",
+        "http://dbpedia.org/resource/UTC%2B04:00",
+        "http://dbpedia.org/resource/Western_European_Summer_Time",
+        "http://dbpedia.org/resource/Nepal_Standard_Time",
+        "http://dbpedia.org/resource/Moscow_Time",
+        "http://dbpedia.org/resource/Eastern_Daylight_Time__%28North_America%29",
+        "http://dbpedia.org/resource/Time_in_Afghanistan",
+        "http://dbpedia.org/resource/Hawaii%E2%80%93Aleutian_Time_Zone",
+        "http://dbpedia.org/resource/Time_in_Brazil",
+        "http://dbpedia.org/resource/Time_in_Argentina",
+        "http://dbpedia.org/resource/Time_in_Mexico",
+        "http://dbpedia.org/resource/Atlantic_Time_Zone",
+        "http://dbpedia.org/resource/Japan_Standard_Time",
+        "http://dbpedia.org/resource/UTC%2B07:00",
+        "http://dbpedia.org/resource/Time_in_Tajikistan",
+        "http://dbpedia.org/resource/China_Standard_Time",
+        "http://dbpedia.org/resource/List_of_time_zones_by_country",
+        "http://dbpedia.org/resource/UTC%2B04:30",
+        "http://dbpedia.org/resource/Georgia_Time",
+        "http://dbpedia.org/resource/Time_in_Turkey",
+        "http://dbpedia.org/resource/UTC%E2%88%9204:00",
+        "http://dbpedia.org/resource/Alaska_Time_Zone",
+        "http://dbpedia.org/resource/Alaska",
+        "http://dbpedia.org/resource/Time_in_China",
+        "http://dbpedia.org/resource/Philippine_Standard_Time",
+        "http://dbpedia.org/resource/British_Summer_Time",
+        "http://dbpedia.org/resource/UTC%E2%88%9202:00",
+        "http://dbpedia.org/resource/UTC%E2%88%9203:00",
+        "http://dbpedia.org/resource/UTC%E2%88%9205:00",
+        "http://dbpedia.org/resource/UTC%2B06:00",
+        "http://dbpedia.org/resource/Daylight_saving_time",
+        "http://dbpedia.org/resource/Central_Alabama",
+        "http://dbpedia.org/resource/Summer_time_in_Europe",
+        "http://dbpedia.org/resource/Egypt_Standard_Time",
+        "http://dbpedia.org/resource/Armenia_Time",
+        "http://dbpedia.org/resource/Time_in_Chile",
+        "http://dbpedia.org/resource/Daylight_saving_time_in_Brazil",
+        "http://dbpedia.org/resource/Time_in_Colombia",
+        "http://dbpedia.org/resource/Time_in_Venezuela",
+        "http://dbpedia.org/resource/Time_in_Papua_New_Guinea",
+        "http://dbpedia.org/resource/Time_in_Australia",
+        "http://dbpedia.org/resource/Time_in_South_Korea",
+        "http://dbpedia.org/resource/Lists_of_time_zones",
+        "http://dbpedia.org/resource/Time_in_Taiwan",
+        "http://dbpedia.org/resource/UTC%2B01:00",
+        "http://dbpedia.org/resource/UTC%2B08:00",
+        "http://dbpedia.org/resource/Time_in_Peru",
+        "http://dbpedia.org/resource/Time_in_Antarctica",
+        "http://dbpedia.org/resource/Time_in_the_Danish_Realm",
+        "http://dbpedia.org/resource/Samoa_Time_Zone",
+        "http://dbpedia.org/resource/Time_in_New_Zealand",
+        "http://dbpedia.org/resource/Time_in_Paraguay",
+        "http://dbpedia.org/resource/Time_in_Ecuador",
+        "http://dbpedia.org/resource/UTC%2B09:00",
+        "http://dbpedia.org/resource/UTC%E2%88%9206:00",
+        "http://dbpedia.org/resource/Time_in_the_Falkland_Islands",
+        "http://dbpedia.org/resource/Newfoundland_Time_Zone",
+        "http://dbpedia.org/resource/UTC%2B00:00",
+        "http://dbpedia.org/resource/Time_in_Uzbekistan",
+        "http://dbpedia.org/resource/Macau_Standard_Time",
+        "http://dbpedia.org/resource/Time_in_Cambodia",
+        "http://dbpedia.org/resource/UTC%2B02:00",
+        "http://dbpedia.org/resource/Time_in_Brunei",
+        "http://dbpedia.org/resource/Omsk_Time",
+        "http://dbpedia.org/resource/Time_zone",
+        "http://dbpedia.org/resource/Seychelles_Time",
+        "http://dbpedia.org/resource/Thailand",
+        "http://dbpedia.org/resource/Hong_Kong_Time",
+        "http://dbpedia.org/resource/Mauritius_Time",
+        "http://dbpedia.org/resource/Beirut",
+        "http://dbpedia.org/resource/Time_in_Laos",
+        "http://dbpedia.org/resource/Chamorro_Time_Zone",
+        "http://dbpedia.org/resource/UTC%E2%88%9207:00",
+        "http://dbpedia.org/resource/UTC%2B12:00",
+        "http://dbpedia.org/resource/UTC%2B06:30",
+        "http://dbpedia.org/resource/Time_in_Kazakhstan",
+        "http://dbpedia.org/resource/China",
+        "http://dbpedia.org/resource/Yemen_Standard_Time",
+        "http://dbpedia.org/resource/Iran_Standardm%C3%A4%C3%9Fig_Time",
+        "http://dbpedia.org/resource/Africa",
+        "http://dbpedia.org/resource/Kigali",
+        "http://dbpedia.org/resource/Yekaterinburg_Time",
+        "http://dbpedia.org/resource/Time_in_Chad",
+        "http://dbpedia.org/resource/Krasnoyarsk_Time",
+        "http://dbpedia.org/resource/Time_in_Malawi",
+        "http://dbpedia.org/resource/Eastern_European_Standard_Time",
+        "http://dbpedia.org/resource/Sri_Lanka_Standard_Time_Zone",
+        "http://dbpedia.org/resource/UTC%2B05:00",
+        "http://dbpedia.org/resource/Cambodia",
+        "http://dbpedia.org/resource/CNorthern_Time_Zone",
+        "http://dbpedia.org/resource/Time_in_France",
+        "http://dbpedia.org/resource/UTC%2B05:30",
+        "http://dbpedia.org/resource/Bolivia",
+        "http://dbpedia.org/resource/Time_in_the_United_Arab_Emirates",
+        "http://dbpedia.org/resource/Cape_Verde_Time",
+        "http://dbpedia.org/resource/Chihuahua_City",
+        "http://dbpedia.org/resource/Time_in_East_Timor",
+        "http://dbpedia.org/resource/Time_in_Vietnam",
+        "http://dbpedia.org/resource/Israel_Standard_Time",
+        "http://dbpedia.org/resource/Israel_Summer_Time",
+        "http://dbpedia.org/resource/Palestine_Summer_Time",
+        "http://dbpedia.org/resource/Time_in_the_State_of_Palestine",
+        "http://dbpedia.org/resource/Kyrgyzstan_Time",
+        "http://dbpedia.org/resource/Time_in_Maldives",
+        "http://dbpedia.org/resource/Time_in_Uruguay",
+        "http://dbpedia.org/resource/Time_in_North_Korea",
+        "http://dbpedia.org/resource/Persian_Gulf_Standard_Time",
+        "http://dbpedia.org/resource/Time_in_Portugal",
+        "http://dbpedia.org/resource/UTC%2B13:00",
+        "http://dbpedia.org/resource/Singapore_Time",
+        "http://dbpedia.org/resource/Time_in_Turkmenistan",
+        "http://dbpedia.org/resource/Time_in_Vanuatu",
+        "http://dbpedia.org/resource/Vietnam",
+        "http://dbpedia.org/resource/Pacific_County%2C_Washington",
+        "http://dbpedia.org/resource/Central_America",
+        "http://dbpedia.org/resource/Pacific_Ocean",
+        "http://dbpedia.org/resource/Douala",
+        "http://dbpedia.org/resource/Time_in_Zimbabwe",
+        "http://dbpedia.org/resource/Time_in_Honduras",
+        "http://dbpedia.org/resource/Greenwhich_Mean_Time",
+        "http://dbpedia.org/resource/Hindustan",
+        "http://dbpedia.org/resource/Aest_Africa_Time",
+        "http://dbpedia.org/resource/Taimoor_Ahmed_DarStandard_Time",
+        "http://dbpedia.org/resource/Greenwich_Summer_Time",
+        "http://dbpedia.org/resource/Time_in_Sri_Lanka",
+        "http://dbpedia.org/resource/Sri_Lanka",
+        "http://dbpedia.org/resource/Irkutsk_Time",
+        "http://dbpedia.org/resource/Yakutsk_Time",
+        "http://dbpedia.org/resource/UTC%E2%88%9208:00",
+        "http://dbpedia.org/resource/Coordinated_Universal_Time_%28India%29",
+        "http://dbpedia.org/resource/Time_in__Afghanistan",
+        "http://dbpedia.org/resource/Pacific%2C_Washington",
+        "http://dbpedia.org/resource/Turkish_Time",
+        "http://dbpedia.org/resource/UTC%E2%88%9201:00",
+        "http://dbpedia.org/resource/Time_in_Fiji",
+        "http://dbpedia.org/resource/Time_in_Nauru",
+        "http://dbpedia.org/resource/Central_Township%2C_Bond_County%2C_Illinois",
+        "http://dbpedia.org/resource/Western_Time_Zone",
+        "http://dbpedia.org/resource/Brasil_Time",
+        "http://dbpedia.org/resource/Atlantic_Daylight_Time_Zone",
+        "http://dbpedia.org/resource/Chatham_Standard_Time_Zone",
+        "http://dbpedia.org/resource/UTC%2B14:00",
+        "http://dbpedia.org/resource/Time_in_India",
+        "http://dbpedia.org/resource/West_Africa_standard_Time",
+        "http://dbpedia.org/resource/UTC_%2B3",
+        "http://dbpedia.org/resource/Pokhara",
+        "http://dbpedia.org/resource/Central%2C_Alabama",
+        "http://dbpedia.org/resource/Eastern%2C_Kentucky",
+        "http://dbpedia.org/resource/Central_Township%2C_Jefferson_County%2C_Missouri",
+        "http://dbpedia.org/resource/Hawaii",
+        "http://dbpedia.org/resource/Xinjiang_Time",
+        "http://dbpedia.org/resource/Time_in_Spain",
+        "http://dbpedia.org/resource/Central_Township%2C_Perry_County%2C_Missouri",
+        "http://dbpedia.org/resource/Daylight_saving_time_in_Canada",
+        "http://dbpedia.org/resource/Wake_Island_Time_Zone",
+        "http://dbpedia.org/resource/De_facto",
+        "http://dbpedia.org/resource/De_jure",
+        "http://dbpedia.org/resource/Central_Oklahoma",
+        "http://dbpedia.org/resource/GMT0",
+        "http://dbpedia.org/resource/Further-eastern_European_Time",
+        "http://dbpedia.org/resource/Central_Township%2C_Nelson_County%2C_North_Dakota",
+        "http://dbpedia.org/resource/Casablanca_Time",
+        "http://dbpedia.org/resource/Central%2C_Angelina_County%2C_Texas",
+        "http://dbpedia.org/resource/Australia",
+        "http://dbpedia.org/resource/Kiribati",
+        "http://dbpedia.org/resource/Palau",
+        "http://dbpedia.org/resource/UTC%E2%88%9209:00",
+        "http://dbpedia.org/resource/UTC%E2%88%9209:30",
+        "http://dbpedia.org/resource/UTC%E2%88%9210:00",
+        "http://dbpedia.org/resource/Vanuatu",
+        "http://dbpedia.org/resource/UTC%2B09:30",
+        "http://dbpedia.org/resource/French_Polynesia",
+        "http://dbpedia.org/resource/Pitcairn_Islands",
+        "http://dbpedia.org/resource/Eastern__Daylight_Time_%28North_America%29",
+        "http://dbpedia.org/resource/Vladivostok_Time",
+        "http://dbpedia.org/resource/Azores",
+        "http://dbpedia.org/resource/Universal_Time",
+        "http://dbpedia.org/resource/Afghanistan",
+        "http://dbpedia.org/resource/Peru_time",
+        "http://dbpedia.org/resource/Eastern_District%2C_Jackson_County%2C_West_Virginia",
+        "http://dbpedia.org/resource/Central_Township%2C_Knox_County%2C_Nebraska",
+        "http://dbpedia.org/resource/Central_European_Summer__Time",
+        "http://dbpedia.org/resource/Historical_time_zones_of_China",
+        "http://dbpedia.org/resource/Daylight_saving_time_in_the_United_States",
+        "http://dbpedia.org/resource/Kathmandu_Time",
+        "http://dbpedia.org/resource/UTC%2B03:30",
+        "http://dbpedia.org/resource/Mountain_Daight_Time",
+        "http://dbpedia.org/resource/Central_United_States",
+        "http://dbpedia.org/resource/Central_Township%2C_Barton_County%2C_Missouri",
+        "http://dbpedia.org/resource/Quintana_Roo",
+        "http://dbpedia.org/resource/Central%2C_Minnesota",
+        "http://dbpedia.org/resource/Mountain",
+        "http://dbpedia.org/resource/East_Kazakhstan_Region",
+        "http://dbpedia.org/resource/Eastern_Europe",
+        "http://dbpedia.org/resource/CentralEuropean_Summer_Time",
+        "http://dbpedia.org/resource/INDIAN_STANDARD_TIME",
+        "http://dbpedia.org/resource/Indian_Standard_Times",
+        "http://dbpedia.org/resource/Ghana",
+        "http://dbpedia.org/resource/Nigeria",
+        "http://dbpedia.org/resource/Togo",
+        "http://dbpedia.org/resource/East_European_Summer_Time",
+        "http://dbpedia.org/resource/Venezuela",
+        "http://dbpedia.org/resource/Bahrain_Standard_Time",
+        "http://dbpedia.org/resource/Puerto_Rico",
+        "http://dbpedia.org/resource/United_States_Virgin_Islands",
+        "http://dbpedia.org/resource/Astana_Time",
+        "http://dbpedia.org/resource/Bhutan",
+        "http://dbpedia.org/resource/Waktu_Piawai_Iran",
+        "http://dbpedia.org/resource/Waktu_Siang_Iran",
+        "http://dbpedia.org/resource/Iraq_Standard_Time",
+        "http://dbpedia.org/resource/Daylight_saving_time_in_Mexico",
+        "http://dbpedia.org/resource/Indian_Standard_Ti%255Cme",
+        "http://dbpedia.org/resource/Time_in_Ghana",
+        "http://dbpedia.org/resource/Arizona_Time_Zone",
+        "http://dbpedia.org/resource/Arabia_Standard_Time_Time",
+        "http://dbpedia.org/resource/Mountain_Time_Zone%28Americas%29",
+        "http://dbpedia.org/resource/Kyiv_Time",
+        "http://dbpedia.org/resource/Latvija",
+        "http://dbpedia.org/resource/Time_in_Tanzania",
+        "http://dbpedia.org/resource/Time_in_Albania",
+        "http://dbpedia.org/resource/Brasil_Time_Zone",
+        "http://dbpedia.org/resource/Central%2C_Arkansas",
+        "http://dbpedia.org/resource/Samara_Time",
+        "http://dbpedia.org/resource/Time_in_Russia",
+        "http://dbpedia.org/resource/Brunei",
+        "http://dbpedia.org/resource/Magadan_Time",
+        "http://dbpedia.org/resource/Time_in_Yemen",
+        "http://dbpedia.org/resource/Time_in_Mali",
+        "http://dbpedia.org/resource/Guatemala",
+        "http://dbpedia.org/resource/Daylight_saving_time_in_Australia",
+        "http://dbpedia.org/resource/North_American_Central_Daylight_Time_Zone",
+        "http://dbpedia.org/resource/%E0%A4%AD%E0%A4%BE%E0%A4%B0%E0%A4%A4%E0%A5%80%E0%A4%AF_%E0%A4%AE%E0%A4%BE%E0%A4%A8%E0%A4%95_%E0%A4%B8%E0%A4%AE%E0%A4%AF",
+        "http://dbpedia.org/resource/South_East_Alabama_Central_Time_Zone",
+        "http://dbpedia.org/resource/Oman_Standard_Time",
+        "http://dbpedia.org/resource/Mountain_Standard_Time%28MST%29",
+        "http://dbpedia.org/resource/North_Carolina_Central_Time_Zone",
+        "http://dbpedia.org/resource/Central_Daylight_Time__%28North_America%29",
+        "http://dbpedia.org/resource/Azkaban_Time",
+        "http://dbpedia.org/resource/Indian_Standard_Time_Zone",
+        "http://dbpedia.org/resource/Indian_Standa",
+        "http://dbpedia.org/resource/Time_in_Canada",
+        "http://dbpedia.org/resource/Almaty_time",
+        "http://dbpedia.org/resource/India",
+        "http://dbpedia.org/resource/UTC%2B3:30_%28IRST%29",
+        "http://dbpedia.org/resource/%E0%A8%AD%E0%A8%BE%E0%A8%B0%E0%A8%A4%E0%A9%80_%E0%A8%AE%E0%A8%BF%E0%A8%86%E0%A8%B0%E0%A9%80_%E0%A8%B8%E0%A8%AE%E0%A8%BE%E0%A8%82",
+        "http://dbpedia.org/resource/Time_in_Oman",
+        "http://dbpedia.org/resource/Eastern_Time_Zone_%28EST%29",
+        "http://dbpedia.org/resource/Bogot%C3%A1",
+        "http://dbpedia.org/resource/North_Eastern_Time_Zone",
+        "http://dbpedia.org/resource/Central__Time_Zone_%28North_America%29",
+        "http://dbpedia.org/resource/Pakistan_Time"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "AdministrativeRegion",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/AdministrativeRegion"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Concept",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Country",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Country"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "GovernmentType",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/GovernmentType"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Image",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Image"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Legislature",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Legislature"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Mayor",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Mayor"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Person",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Person"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Place",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Place"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "PoliticalFunction",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/PoliticalFunction"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "PoliticalParty",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/PoliticalParty"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "PopulatedPlace",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/PopulatedPlace"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Saint",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Saint"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "SportsTeam",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/SportsTeam"
+      ]
+    }
+  ]
+}

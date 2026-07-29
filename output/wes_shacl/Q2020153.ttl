@@ -1,0 +1,209 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/AcademicConferenceShape> a sh:NodeShape ;
+    rdfs:label "academic conference"@en ;
+    sh:name "academic conference"@en ;
+    sh:property [ sh:name "organizer"@en ;
+            sh:or ( [ sh:class wd:Q2085381 ] [ sh:class wd:Q45400320 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P664 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:class wd:Q5 ;
+            sh:name "has program committee member"@en ;
+            sh:path wdt:P5804 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "event interval"@en ;
+            sh:path wdt:P2257 ],
+        [ sh:class wd:Q2020153 ;
+            sh:maxCount 1 ;
+            sh:name "followed by"@en ;
+            sh:path wdt:P156 ],
+        [ sh:maxCount 1 ;
+            sh:name "publisher"@en ;
+            sh:or ( [ sh:class wd:Q2085381 ] [ sh:class wd:Q4202064 ] ) ;
+            sh:path wdt:P123 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:class wd:Q5 ;
+            sh:name "speaker"@en ;
+            sh:path wdt:P823 ],
+        [ sh:class wd:Q5 ;
+            sh:name "participant"@en ;
+            sh:path wdt:P710 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "end time"@en ;
+            sh:path wdt:P582 ],
+        [ sh:name "main subject"@en ;
+            sh:or ( [ sh:class wd:Q11862829 ] [ sh:class wd:Q2267705 ] [ sh:class wd:Q4671286 ] ) ;
+            sh:path wdt:P921 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:class wd:Q2020153 ;
+            sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:path wdt:P155 ],
+        [ sh:class wd:Q43229 ;
+            sh:name "sponsor"@en ;
+            sh:path wdt:P859 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:maxCount 1 ;
+            sh:name "part of the series"@en ;
+            sh:or ( [ sh:class wd:Q47258130 ] [ sh:class wd:Q15900647 ] ) ;
+            sh:path wdt:P179 ],
+        [ sh:maxCount 1 ;
+            sh:name "exact match"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2888 ],
+        [ sh:class wd:Q5 ;
+            sh:name "chairperson"@en ;
+            sh:path wdt:P488 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:path wdt:P138 ],
+        [ sh:class wd:Q515 ;
+            sh:maxCount 1 ;
+            sh:name "location"@en ;
+            sh:path wdt:P276 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of participants"@en ;
+            sh:path wdt:P1132 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "start time"@en ;
+            sh:path wdt:P580 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ],
+        [ sh:class wd:Q34770 ;
+            sh:name "language used"@en ;
+            sh:path wdt:P2936 ],
+        [ sh:name "field of work"@en ;
+            sh:or ( [ sh:class wd:Q11862829 ] [ sh:class wd:Q2267705 ] [ sh:class wd:Q4671286 ] ) ;
+            sh:path wdt:P101 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "social media followers"@en ;
+            sh:path wdt:P8687 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "admission rate"@en ;
+            sh:path wdt:P5822 ],
+        [ sh:maxCount 1 ;
+            sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q2020153 ;
+            sh:name "colocated with"@en ;
+            sh:path wdt:P11633 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "edition number"@en ;
+            sh:path wdt:P393 ] ;
+    sh:targetClass wd:Q2020153 .
+
+wd:Q15900647 rdfs:label "convention series"@en .
+
+wd:Q34770 rdfs:label "language"@en .
+
+wd:Q4202064 rdfs:label "publishing platform"@en .
+
+wd:Q45400320 rdfs:label "open-access publisher"@en .
+
+wd:Q47258130 rdfs:label "academic conference series"@en .
+
+wd:Q515 rdfs:label "city"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wdt:P101 rdfs:label "field of work"@en .
+
+wdt:P1132 rdfs:label "number of participants"@en .
+
+wdt:P11633 rdfs:label "colocated with"@en .
+
+wdt:P123 rdfs:label "publisher"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1476 rdfs:label "title"@en .
+
+wdt:P155 rdfs:label "follows"@en .
+
+wdt:P156 rdfs:label "followed by"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P179 rdfs:label "part of the series"@en .
+
+wdt:P1813 rdfs:label "short name"@en .
+
+wdt:P2257 rdfs:label "event interval"@en .
+
+wdt:P276 rdfs:label "location"@en .
+
+wdt:P2888 rdfs:label "exact match"@en .
+
+wdt:P2936 rdfs:label "language used"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P393 rdfs:label "edition number"@en .
+
+wdt:P488 rdfs:label "chairperson"@en .
+
+wdt:P580 rdfs:label "start time"@en .
+
+wdt:P5804 rdfs:label "has program committee member"@en .
+
+wdt:P582 rdfs:label "end time"@en .
+
+wdt:P5822 rdfs:label "admission rate"@en .
+
+wdt:P664 rdfs:label "organizer"@en .
+
+wdt:P710 rdfs:label "participant"@en .
+
+wdt:P823 rdfs:label "speaker"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P859 rdfs:label "sponsor"@en .
+
+wdt:P8687 rdfs:label "social media followers"@en .
+
+wdt:P921 rdfs:label "main subject"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q11862829 rdfs:label "academic discipline"@en .
+
+wd:Q2085381 rdfs:label "publishing house"@en .
+
+wd:Q2267705 rdfs:label "field of study"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q4671286 rdfs:label "academic major"@en .
+
+wd:Q2020153 rdfs:label "academic conference"@en .
+
+wd:Q5 rdfs:label "human"@en .
+

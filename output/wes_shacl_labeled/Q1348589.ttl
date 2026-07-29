@@ -1,0 +1,52 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/LunarCraterShape> a sh:NodeShape ;
+    rdfs:label "lunar crater"@en ;
+    sh:property [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "area"@en ;
+            sh:path wdt:P2046 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "diameter"@en ;
+            sh:path wdt:P2386 ],
+        [ sh:class wd:Q180874 ;
+            sh:maxCount 1 ;
+            sh:name "located in/on physical feature"@en ;
+            sh:path wdt:P706 ],
+        [ sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:class wd:Q56551180 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "location"@en ;
+            sh:path wdt:P276 ],
+        [ sh:hasValue wd:Q405 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "located on astronomical body"@en ;
+            sh:path wdt:P376 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "vertical depth"@en ;
+            sh:path wdt:P4511 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ] ;
+    sh:targetClass wd:Q1348589 .
+

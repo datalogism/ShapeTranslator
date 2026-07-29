@@ -1,0 +1,116 @@
+@prefix : <http://weso.es/shapes/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:MusicalWork a sh:NodeShape ;
+    sh:property [ a sh:PropertyShape ;
+            sh:in ( dbo:Work ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://schema.org/CreativeWork> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:maxCount 1 ;
+            sh:path dcat:resource_identifier ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q386724> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://schema.org/MusicRecording> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:subsequentWork ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:MusicalWork ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:previousWork ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q2188189> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:recordLabel ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:album ],
+        [ a sh:PropertyShape ;
+            sh:in ( owl:Thing ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:producer ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://schema.org/MusicAlbum> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:runtime ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path rdfs:comment ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:genre ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path dbo:wikiPageRevisionID ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Album ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path foaf:name ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:artist ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q482994> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:releaseDate ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Song ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:maxCount 1 ;
+            sh:path rdfs:label ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:writer ] ;
+    sh:targetClass dbo:MusicalWork .
+

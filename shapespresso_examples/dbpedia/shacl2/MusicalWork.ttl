@@ -1,0 +1,31 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+<http://shaclshapes.org/musical_workShape> a sh:NodeShape ;
+    sh:property [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/subsequentWork> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/previousWork> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/album> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/runtime> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path dcat:resource_identifier ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path foaf:name ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/releaseDate> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/writer> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/producer> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/artist> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/genre> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/recordLabel> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/MusicalWork> .
+

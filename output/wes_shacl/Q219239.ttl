@@ -1,0 +1,112 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/RecipeShape> a sh:NodeShape ;
+    rdfs:label "recipe"@en ;
+    sh:name "recipe"@en ;
+    sh:property [ sh:maxCount 1 ;
+            sh:name "work available at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P953 ],
+        [ sh:maxCount 1 ;
+            sh:name "indigenous to"@en ;
+            sh:or ( [ sh:class wd:Q3502482 ] [ sh:class wd:Q82794 ] ) ;
+            sh:path wdt:P2341 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by WikiProject"@en ;
+            sh:path wdt:P6104 ],
+        [ sh:name "has listed ingredient"@en ;
+            sh:or ( [ sh:class wd:Q10675206 ] [ sh:class wd:Q25403900 ] ) ;
+            sh:path wdt:P4543 ],
+        [ sh:class wd:Q3331189 ;
+            sh:maxCount 1 ;
+            sh:name "published in"@en ;
+            sh:path wdt:P1433 ],
+        [ sh:class wd:Q1968435 ;
+            sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:path wdt:P361 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "publication date"@en ;
+            sh:path wdt:P577 ],
+        [ sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "author"@en ;
+            sh:path wdt:P50 ],
+        [ sh:class wd:Q1288568 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:class wd:Q11659512 ;
+            sh:maxCount 1 ;
+            sh:name "degree of difficulty"@en ;
+            sh:path wdt:P7252 ] ;
+    sh:targetClass wd:Q219239 .
+
+wd:Q10675206 rdfs:label "ingredient"@en .
+
+wd:Q11659512 rdfs:label "degree of difficulty"@en .
+
+wd:Q1288568 rdfs:label "modern language"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q1968435 rdfs:label "national cuisine"@en .
+
+wd:Q219239 rdfs:label "recipe"@en .
+
+wd:Q25403900 rdfs:label "food ingredient"@en .
+
+wd:Q3331189 rdfs:label "version, edition or translation"@en .
+
+wd:Q3502482 rdfs:label "cultural region"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q82794 rdfs:label "region"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1433 rdfs:label "published in"@en .
+
+wdt:P2341 rdfs:label "indigenous to"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P407 rdfs:label "language of work or name"@en .
+
+wdt:P4543 rdfs:label "has listed ingredient"@en .
+
+wdt:P495 rdfs:label "country of origin"@en .
+
+wdt:P50 rdfs:label "author"@en .
+
+wdt:P577 rdfs:label "publication date"@en .
+
+wdt:P6104 rdfs:label "maintained by WikiProject"@en .
+
+wdt:P7252 rdfs:label "degree of difficulty"@en .
+
+wdt:P953 rdfs:label "work available at URL"@en .
+

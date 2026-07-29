@@ -1,0 +1,24 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/MonumentShape> a sh:NodeShape ;
+    sh:property [ sh:hasValue <http://dbpedia.org/ontology/Monument> ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/monumentShape> a sh:NodeShape ;
+    sh:property [ sh:datatype <rdf:langString> ;
+            sh:path foaf:name ],
+        [ sh:class <http://dbpedia.org/ontology/Monument> ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:path <http://dbpedia.org/ontology/designer> ],
+        [ sh:datatype <xsd:double> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path dcat:resource_identifier ],
+        [ sh:path <http://dbpedia.org/ontology/location> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/Monument> .
+

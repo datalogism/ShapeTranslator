@@ -1,0 +1,151 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/SportsTeamShape> a sh:NodeShape ;
+    sh:or ( [ sh:property [ sh:nodeKind sh:Literal ;
+                        sh:path <http://dbpedia.org/ontology/teamName> ] ] [ sh:property [ sh:nodeKind sh:Literal ;
+                        sh:path foaf:name ] ] ) ;
+    sh:property [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/generalManager> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/formationDate> ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/thumbnail> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageRevisionID> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:label ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/Work/runtime> ],
+        [ sh:class skos:Concept ;
+            sh:path dcterms:subject ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:comment ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path foaf:depiction ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path rdfs:seeAlso ],
+        [ sh:class <http://dbpedia.org/ontology/Agent> ;
+            sh:path <http://dbpedia.org/ontology/owner> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/status> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/dissolutionYear> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path owl:sameAs ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/foundingYear> ],
+        [ sh:class <http://dbpedia.org/ontology/Country> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/country> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/uciCode> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/runtime> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/successor> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/title> ],
+        [ sh:class <http://dbpedia.org/ontology/Sport> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/sport> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path owl:differentFrom ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path prov:wasDerivedFrom ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/currentMember> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path foaf:nick ],
+        [ sh:class <http://dbpedia.org/ontology/SportsLeague> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/league> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/chairman> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/manager> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/abstract> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/capacity> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageExternalLink> ],
+        [ sh:class <http://dbpedia.org/ontology/City> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/city> ],
+        [ sh:class <http://dbpedia.org/ontology/Stadium> ;
+            sh:minCount 1 ;
+            sh:path [ sh:alternativePath ( <http://dbpedia.org/ontology/stadium> <http://dbpedia.org/ontology/homeStadium> ) ] ],
+        [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/location> ],
+        [ sh:class <http://dbpedia.org/ontology/Colour> ;
+            sh:path <http://dbpedia.org/ontology/colour> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/coach> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/colourName> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/imdbId> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path foaf:homepage ],
+        [ sh:or ( [ sh:class <http://dbpedia.org/ontology/Place> ] [ sh:class <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> ] ) ;
+            sh:path <http://dbpedia.org/ontology/ground> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path <http://dbpedia.org/ontology/predecessor> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/squadNumber> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/logo> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/director> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageLength> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageID> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/chairmanTitle> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/managerTitle> ],
+        [ sh:class <http://dbpedia.org/ontology/Company> ;
+            sh:path <http://dbpedia.org/ontology/parentCompany> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path foaf:isPrimaryTopicOf ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/mascot> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:path <http://dbpedia.org/ontology/president> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/SportsTeam> .
+

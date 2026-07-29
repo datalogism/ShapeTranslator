@@ -1,0 +1,288 @@
+{
+  "@context": "http://www.w3.org/ns/shexje.jsonld",
+  "type": "Schema",
+  "shapes": [
+    {
+      "type": "Shape",
+      "id": "Worker",
+      "expression": {
+        "type": "EachOf",
+        "expressions": [
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#comment",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/alternateName",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/image",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/mainEntityOfPage",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/sameAs",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/alumniOf",
+            "valueExpr": "EducationalOrganization"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/award",
+            "valueExpr": "Award"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/birthDate",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/birthPlace",
+            "valueExpr": "Place",
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/deathDate",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#dateTime"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/deathPlace",
+            "valueExpr": "Place",
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/gender",
+            "valueExpr": "Gender",
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/homeLocation",
+            "valueExpr": "Place",
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/knowsLanguage",
+            "valueExpr": "Language"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/memberOf",
+            "valueExpr": "Organization"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/nationality",
+            "valueExpr": "Country"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/spouse",
+            "valueExpr": "Person"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://schema.org/worksFor",
+            "valueExpr": "Organization"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://yago-knowledge.org/resource/beliefSystem",
+            "valueExpr": "BeliefSystem"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://yago-knowledge.org/resource/appearsIn",
+            "valueExpr": "CreativeWork"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2002/07/owl#sameAs",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "values": [
+                {
+                  "type": "IriStem",
+                  "stem": "http://www.wikidata.org/entity"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "targetClass": "http://yago-knowledge.org/resource/Worker"
+    },
+    {
+      "type": "Shape",
+      "id": "Award",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://yago-knowledge.org/resource/Award"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "BeliefSystem",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://yago-knowledge.org/resource/BeliefSystem"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Country",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://schema.org/Country"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "CreativeWork",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://schema.org/CreativeWork"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "EducationalOrganization",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://schema.org/EducationalOrganization"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Gender",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://yago-knowledge.org/resource/Gender"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Language",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://schema.org/Language"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Organization",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://schema.org/Organization"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Person",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://schema.org/Person"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Place",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://schema.org/Place"
+      ]
+    }
+  ]
+}

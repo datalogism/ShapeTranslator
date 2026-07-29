@@ -1,0 +1,869 @@
+{
+  "@context": "http://www.w3.org/ns/shexje.jsonld",
+  "type": "Schema",
+  "shapes": [
+    {
+      "type": "NodeConstraint",
+      "id": "LangString",
+      "nodeKind": "Literal",
+      "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+    },
+    {
+      "type": "ShapeOr",
+      "shapeExprs": [
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/usDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/euro"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/poundSterling"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/indianRupee"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/japaneseYen"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/malaysianRinggit"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/canadianDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/swedishKrona"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/czechKoruna"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/australianDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/sriLankanRupee"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/norwegianKrone"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/renminbi"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/russianRouble"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/danishKrone"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/swissFranc"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/croatianKuna"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/maldivianRufiyaa"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/bruneiDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/newZealandDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/indonesianRupiah"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/polishZ%C5%82oty"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/bangladeshiTaka"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/brazilianReal"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/thaiBaht"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/southKoreanWon"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/egyptianPound"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/nepaleseRupee"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/hungarianForint"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/southAfricanRand"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/hongKongDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/pakistaniRupee"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/argentinePeso"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/moroccanDirham"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/chileanPeso"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/mongolianT%C3%B6gr%C3%B6g"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/icelandKrona"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/newTaiwanDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/philippinePeso"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/latvianLats"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/ukrainianHryvnia"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/serbianDinar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/nigerianNaira"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/unitedArabEmiratesDirham"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/westAfricanCfaFranc"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/eastCaribbeanDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/trinidadAndTobagoDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/macedonianDenar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/estonianKroon"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/mexicanPeso"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/fijiDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/bosniaAndHerzegovinaConvertibleMarks"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/bulgarianLev"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/singaporeDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/libyanDinar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/honduranLempira"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/myanmaKyat"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/georgianLari"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/guineaFranc"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/barbadosDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/israeliNewSheqel"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/nicaraguanC%C3%B3rdoba"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/haitiGourde"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/bahrainiDinar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/botswanaPula"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/namibianDollar"
+        },
+        {
+          "type": "NodeConstraint",
+          "datatype": "http://dbpedia.org/datatype/ghanaianCedi"
+        }
+      ],
+      "id": "budgetValue"
+    },
+    {
+      "type": "Shape",
+      "id": "Film",
+      "expression": {
+        "type": "EachOf",
+        "expressions": [
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+            "valueExpr": {
+              "type": "ShapeRef",
+              "reference": "LangString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/name",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/alias",
+            "valueExpr": {
+              "type": "ShapeRef",
+              "reference": "LangString"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/abstract",
+            "valueExpr": {
+              "type": "ShapeRef",
+              "reference": "LangString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#comment",
+            "valueExpr": {
+              "type": "ShapeRef",
+              "reference": "LangString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/releaseDate",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/genre",
+            "valueExpr": "Genre",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/award",
+            "valueExpr": "Award"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/starring",
+            "valueExpr": "Person",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/narrator",
+            "valueExpr": "Person"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/director",
+            "valueExpr": "Person",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/producer",
+            "valueExpr": "Agent",
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/creator",
+            "valueExpr": "Agent"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/keyPerson",
+            "valueExpr": "Person"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/writer",
+            "valueExpr": "Person"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/author",
+            "valueExpr": "Person",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/cinematography",
+            "valueExpr": "Person",
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/editor",
+            "valueExpr": "Agent",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/editing",
+            "valueExpr": "Person",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/musicComposer",
+            "valueExpr": "Person"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/composer",
+            "valueExpr": "Person"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/musicBy",
+            "valueExpr": "Person"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/lyrics",
+            "valueExpr": "Person"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/soundRecording",
+            "valueExpr": "Sound"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/openingTheme",
+            "valueExpr": "Work"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/productionCompany",
+            "valueExpr": "Agent",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/publisher",
+            "valueExpr": "Agent",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/distributor",
+            "valueExpr": "Organisation"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/company",
+            "valueExpr": "Company"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/channel",
+            "valueExpr": "Organisation"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/budget",
+            "valueExpr": {
+              "type": "ShapeRef",
+              "reference": "budgetValue"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/gross",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/format",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "IRI"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/numberOfEpisodes",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/numberOfSeasons",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/country",
+            "valueExpr": "Country",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/location",
+            "valueExpr": "Place"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/language",
+            "valueExpr": "Language",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/previousWork",
+            "valueExpr": "Work"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/subsequentWork",
+            "valueExpr": "Work"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/thumbnail",
+            "valueExpr": "Image",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/depiction",
+            "valueExpr": "Image",
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/imdbId",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/homepage",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "IRI"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2002/07/owl#sameAs",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/ns/prov#wasDerivedFrom",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://purl.org/dc/terms/subject",
+            "valueExpr": "Concept"
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageID",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageRevisionID",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageLength",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageExternalLink",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageWikiLink",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "pattern": "^http://dbpedia.org/resource/"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageRedirects",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "pattern": "^http://dbpedia.org/resource/"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageDisambiguates",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "IRI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/Work/runtime",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/runtime",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal"
+            }
+          }
+        ],
+        "alternativeGroups": [
+          [
+            "http://dbpedia.org/ontology/Work/runtime",
+            "http://dbpedia.org/ontology/runtime"
+          ]
+        ]
+      },
+      "targetClass": "http://dbpedia.org/ontology/Film"
+    },
+    {
+      "type": "Shape",
+      "id": "Agent",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Agent"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Award",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Award"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Company",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Company"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Concept",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Country",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Country"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Genre",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Genre"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Image",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Image"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Language",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Language"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Organisation",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Organisation"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Person",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Person"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Place",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Place"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Sound",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Sound"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Work",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Work"
+      ]
+    }
+  ]
+}

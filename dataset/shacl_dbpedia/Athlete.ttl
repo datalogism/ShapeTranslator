@@ -1,733 +1,296 @@
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dbo: <http://dbpedia.org/ontology/> .
 @prefix dbt: <http://dbpedia.org/datatype/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix shapes: <http://shaclshapes.org/> .
-
-
-<http://shaclshapes.org/AthleteShape> a sh:NodeShape ;
-    sh:targetClass dbo:Athlete ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # IDENTITY & NAMING
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path rdfs:label ;
-        sh:nodeKind sh:Literal ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:name ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:nick ;
-        sh:datatype xsd:string ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:birthName ;
-        sh:nodeKind sh:Literal ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:title ;
-        sh:nodeKind sh:Literal ;
-        sh:datatype rdf:langString ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # DESCRIPTION & ABSTRACT
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:abstract ;
-        sh:nodeKind sh:Literal ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path rdfs:comment ;
-        sh:nodeKind sh:Literal ;
-        sh:datatype rdf:langString ;
-        sh:minCount 1 ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # DATES & TIMELINE
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:birthDate ;
-        sh:datatype xsd:date ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:deathDate ;
-        sh:datatype xsd:date ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:birthYear ;
-        sh:datatype xsd:gYear ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:activeYearsStartYear ;
-        sh:datatype xsd:gYear ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:activeYearsEndYear ;
-        sh:datatype xsd:gYear ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:draftYear ;
-        sh:datatype xsd:gYear ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:undraftedYear ;
-        sh:datatype xsd:gYear ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # LOCATION & GEOGRAPHY
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:birthPlace ;
-        sh:class dbo:Place ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:deathPlace ;
-        sh:class dbo:Place ;
-        sh:nodeKind sh:IRI ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:residence ;
-        sh:class dbo:Place ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:hometown ;
-        sh:class dbo:Settlement ;
-        sh:nodeKind sh:IRI ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:country ;
-        sh:class dbo:Country ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:nationality ;
-        sh:class dbo:Country ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:stateOfOrigin ;
-        sh:class dbo:Country ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # PHYSICAL CHARACTERISTICS (alternative representations)
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:or (
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/Person/height> ;
-                sh:datatype dbt:centimetre ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path dbo:height ;
-                sh:datatype xsd:double ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    sh:or (
-        [
-            sh:property [
-                sh:path dbo:weight ;
-                sh:datatype xsd:double ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-        [
-            sh:property [
-                sh:path <http://dbpedia.org/ontology/Person/weight> ;
-                sh:datatype dbt:kilogram ;
-                sh:nodeKind sh:Literal ;
-                sh:minCount 1 ;
-                sh:maxCount 1 ;
-            ]
-        ]
-    ) ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # CAREER & ACHIEVEMENTS
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:occupation ;
-        sh:class dbo:PersonFunction ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:position ;
-        sh:class dbo:PersonFunction ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:award ;
-        sh:class dbo:Award ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:careerStation ;
-        sh:class dbo:CareerStation ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:genre ;
-        sh:class dbo:Genre ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:status ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:number ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # SPORT & DISCIPLINE
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:sport ;
-        sh:class dbo:Sport ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:race ;
-        sh:class dbo:Race ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:raceHorse ;
-        sh:class dbo:Horse ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # TEAMS & CLUBS
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:team ;
-        sh:class dbo:SportsTeam ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:formerTeam ;
-        sh:class dbo:SportsTeam ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:debutTeam ;
-        sh:class dbo:SportsTeam ;
-        sh:nodeKind sh:IRI ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:draftTeam ;
-        sh:class dbo:SportsTeam ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:nationalTeam ;
-        sh:class dbo:SportsTeam ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:club ;
-        sh:class dbo:SportsTeam ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:managerClub ;
-        sh:class dbo:SportsTeam ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:whaDraftTeam ;
-        sh:class dbo:HockeyTeam ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # LEAGUES & COMPETITIONS
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:league ;
-        sh:class dbo:SportsLeague ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:prospectLeague ;
-        sh:class dbo:SportsLeague ;
-        sh:nodeKind sh:IRI ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:firstRace ;
-        sh:class dbo:GrandPrix ;
-        sh:nodeKind sh:IRI ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:lastRace ;
-        sh:class dbo:GrandPrix ;
-        sh:nodeKind sh:IRI ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:ground ;
-        sh:class dbo:Place ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:billed ;
-        sh:class dbo:Settlement ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # DRAFT INFORMATION
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:draft ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:draftPick ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:draftRound ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:draftLeague ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:whaDraft ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # STATISTICS & PERFORMANCE
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:wins ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:races ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:poles ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:podiums ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:championships ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:fastestLap ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:overallRecord ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:careerPrizeMoney ;
-        sh:node shapes:careerPrizeMoneyValueShape ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # PLAYING STYLE & TECHNIQUES
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:plays ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:shoots ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:battingSide ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:bowlingSide ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:spike ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:block ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # EDUCATION & INSTITUTIONS
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:college ;
-        sh:class dbo:EducationalInstitution ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:school ;
-        sh:class dbo:EducationalInstitution ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:university ;
-        sh:class dbo:EducationalInstitution ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:highschool ;
-        sh:class dbo:School ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # PEOPLE & RELATIONSHIPS
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:relative ;
-        sh:class dbo:Person ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:currentPartner ;
-        sh:class dbo:Person ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:formerPartner ;
-        sh:class dbo:Person ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # COACHES, TRAINERS & STAFF
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:coach ;
-        sh:class dbo:Person ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:formerCoach ;
-        sh:class dbo:Person ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:trainer ;
-        sh:class dbo:Person ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:manager ;
-        sh:class dbo:Person ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:choreographer ;
-        sh:class dbo:Person ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:formerChoreographer ;
-        sh:class dbo:Person ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # MEDIA & IMAGES
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:thumbnail ;
-        sh:class dbo:Image ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path foaf:depiction ;
-        sh:class dbo:Image ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:language ;
-        sh:class dbo:Language ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1 ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # EXTERNAL REFERENCES & LINKS
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path foaf:homepage ;
-        sh:nodeKind sh:IRI ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:bbr ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:imdbId ;
-        sh:datatype xsd:string ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:datatype xsd:anyURI ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path owl:differentFrom ;
-        sh:datatype xsd:anyURI ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path rdfs:seeAlso ;
-        sh:datatype xsd:anyURI ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # WIKIPEDIA & DBPEDIA METADATA
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    sh:property [
-        sh:path dbo:wikiPageID ;
-        sh:datatype xsd:integer ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageRevisionID ;
-        sh:datatype xsd:integer ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageLength ;
-        sh:datatype xsd:nonNegativeInteger ;
-        sh:nodeKind sh:Literal ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageExternalLink ;
-        sh:datatype xsd:anyURI ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageWikiLink ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
-        sh:nodeKind sh:Literal ;
-    ] ;
-
-    sh:property [
-        sh:path dbo:wikiPageDisambiguates ;
-        sh:datatype xsd:anyURI ;
-        sh:pattern "^http://dbpedia.org/resource/" ;
-        sh:nodeKind sh:Literal ;
-    ] .
-
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# REUSABLE VALUE SHAPES
-# ═══════════════════════════════════════════════════════════════════════════════
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+shapes:AthleteShape a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:double ;
+                        sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path dbo:height ],
+        [ sh:datatype xsd:double ;
+                        sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path dbo:weight ];
+    sh:property [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:label ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:birthYear ],
+        [ sh:datatype xsd:gYear ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:activeYearsStartYear ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:activeYearsEndYear ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:draftYear ],
+        [ sh:datatype xsd:gYear ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:undraftedYear ],
+        [ sh:class dbo:Place ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:birthPlace ],
+        [ sh:class dbo:Place ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:deathPlace ],
+        [ sh:class dbo:Place ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:residence ],
+        [ sh:class dbo:Settlement ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:hometown ],
+        [ sh:class dbo:Country ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:country ],
+        [ sh:datatype xsd:string ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path foaf:name ],
+        [ sh:class dbo:Country ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:nationality ],
+        [ sh:class dbo:Country ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:stateOfOrigin ],
+        [ sh:datatype xsd:string ;
+            sh:path foaf:nick ],
+        [ sh:class dbo:PersonFunction ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:occupation ],
+        [ sh:class dbo:PersonFunction ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:position ],
+        [ sh:class dbo:Award ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:award ],
+        [ sh:class dbo:CareerStation ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:careerStation ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:status ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:number ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:birthName ],
+        [ sh:class dbo:Sport ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:sport ],
+        [ sh:class dbo:Race ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:race ],
+        [ sh:class dbo:Horse ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:raceHorse ],
+        [ sh:class dbo:SportsTeam ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:team ],
+        [ sh:class dbo:SportsTeam ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:formerTeam ],
+        [ sh:class dbo:SportsTeam ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:debutTeam ],
+        [ sh:class dbo:SportsTeam ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:draftTeam ],
+        [ sh:class dbo:SportsTeam ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:nationalTeam ],
+        [ sh:class dbo:SportsTeam ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:club ],
+        [ sh:class dbo:SportsTeam ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:managerClub ],
+        [ sh:datatype rdf:langString ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:title ],
+        [ sh:class dbo:HockeyTeam ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:whaDraftTeam ],
+        [ sh:class dbo:SportsLeague ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:league ],
+        [ sh:class dbo:SportsLeague ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:prospectLeague ],
+        [ sh:class dbo:GrandPrix ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:firstRace ],
+        [ sh:class dbo:GrandPrix ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:lastRace ],
+        [ sh:class dbo:Settlement ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:billed ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:draft ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:draftPick ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:draftRound ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:draftLeague ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:whaDraft ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:wins ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:races ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:poles ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:podiums ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:championships ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:fastestLap ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:overallRecord ],
+        [ sh:node shapes:careerPrizeMoneyValueShape ;
+            sh:path dbo:careerPrizeMoney ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:plays ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:comment ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:shoots ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:battingSide ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:bowlingSide ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:spike ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:block ],
+        [ sh:class dbo:EducationalInstitution ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:college ],
+        [ sh:class dbo:EducationalInstitution ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:school ],
+        [ sh:class dbo:EducationalInstitution ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:university ],
+        [ sh:class dbo:School ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:highschool ],
+        [ sh:class dbo:Person ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:relative ],
+        [ sh:datatype xsd:date ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:birthDate ],
+        [ sh:class dbo:Person ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:currentPartner ],
+        [ sh:class dbo:Person ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:formerPartner ],
+        [ sh:class dbo:Person ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:coach ],
+        [ sh:class dbo:Person ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:formerCoach ],
+        [ sh:class dbo:Person ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:trainer ],
+        [ sh:class dbo:Person ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:choreographer ],
+        [ sh:class dbo:Person ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:formerChoreographer ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path foaf:homepage ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:bbr ],
+        [ sh:datatype xsd:date ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:deathDate ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:imdbId ],
+        [ sh:datatype xsd:anyURI ;
+            sh:nodeKind sh:Literal ;
+            sh:path owl:differentFrom ],
+        [ sh:datatype xsd:anyURI ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:seeAlso ],
+        [ sh:datatype xsd:integer ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:wikiPageRevisionID ] ;
+    sh:targetClass dbo:Athlete .
 
 shapes:careerPrizeMoneyValueShape a sh:NodeShape ;
-    sh:or (
-        [ sh:datatype dbt:usDollar ; sh:nodeKind sh:Literal ]
-        [ sh:datatype dbt:poundSterling ; sh:nodeKind sh:Literal ]
-    ) .
+    sh:or ( [ sh:datatype dbt:usDollar ;
+                sh:nodeKind sh:Literal ] [ sh:datatype dbt:poundSterling ;
+                sh:nodeKind sh:Literal ] ) .
+

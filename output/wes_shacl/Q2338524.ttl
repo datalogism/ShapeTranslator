@@ -1,0 +1,241 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/MotorsportRacingTrackShape> a sh:NodeShape ;
+    rdfs:label "motorsport racing track"@en ;
+    sh:name "motorsport racing track"@en ;
+    sh:property [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:maxCount 1 ;
+            sh:name "operator"@en ;
+            sh:or ( [ sh:class wd:Q6881511 ] [ sh:class wd:Q4830453 ] [ sh:class wd:Q15911314 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P137 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "nickname"@en ;
+            sh:path wdt:P1449 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "dissolved, abolished or demolished date"@en ;
+            sh:path wdt:P576 ],
+        [ sh:name "significant event"@en ;
+            sh:or ( [ sh:class wd:Q1656682 ] [ sh:class wd:Q1914636 ] ) ;
+            sh:path wdt:P793 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:maxCount 1 ;
+            sh:name "location"@en ;
+            sh:or ( [ sh:class wd:Q17334923 ] [ sh:class wd:Q2221906 ] ) ;
+            sh:path wdt:P276 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "elevation above sea level"@en ;
+            sh:path wdt:P2044 ],
+        [ sh:class wd:Q43229 ;
+            sh:name "owned by"@en ;
+            sh:path wdt:P127 ],
+        [ sh:maxCount 1 ;
+            sh:name "located in the administrative territorial entity"@en ;
+            sh:or ( [ sh:class wd:Q7930989 ] [ sh:class wd:Q56061 ] [ sh:class wd:Q515 ] ) ;
+            sh:path wdt:P131 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:maxCount 1 ;
+            sh:name "located in/on physical feature"@en ;
+            sh:or ( [ sh:class wd:Q618123 ] [ sh:class wd:Q2221906 ] [ sh:class wd:Q82794 ] ) ;
+            sh:path wdt:P706 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:class wd:Q67376938 ;
+            sh:maxCount 1 ;
+            sh:name "historic county"@en ;
+            sh:path wdt:P7959 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:in ( wd:Q5367 wd:Q5386 ) ;
+            sh:maxCount 1 ;
+            sh:name "sport"@en ;
+            sh:path wdt:P641 ],
+        [ sh:class wd:Q12143 ;
+            sh:maxCount 1 ;
+            sh:name "located in time zone"@en ;
+            sh:path wdt:P421 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "social media followers"@en ;
+            sh:path wdt:P8687 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "postal code"@en ;
+            sh:path wdt:P281 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons gallery"@en ;
+            sh:path wdt:P935 ],
+        [ sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "slope"@en ;
+            sh:path wdt:P4184 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "street address"@en ;
+            sh:path wdt:P6375 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of matches played/races/starts"@en ;
+            sh:path wdt:P1350 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:maxCount 1 ;
+            sh:name "used by"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1535 ],
+        [ sh:name "heritage designation"@en ;
+            sh:or ( [ sh:class wd:Q210272 ] [ sh:class wd:Q386426 ] ) ;
+            sh:path wdt:P1435 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "length"@en ;
+            sh:path wdt:P2043 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ] ;
+    sh:targetClass wd:Q2338524 .
+
+wd:Q12143 rdfs:label "time zone"@en .
+
+wd:Q15911314 rdfs:label "association"@en .
+
+wd:Q1656682 rdfs:label "event"@en .
+
+wd:Q17334923 rdfs:label "physical location"@en .
+
+wd:Q1914636 rdfs:label "activity"@en .
+
+wd:Q210272 rdfs:label "cultural heritage"@en .
+
+wd:Q2338524 rdfs:label "motorsport racing track"@en .
+
+wd:Q386426 rdfs:label "natural heritage"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q4830453 rdfs:label "business"@en .
+
+wd:Q515 rdfs:label "city"@en .
+
+wd:Q56061 rdfs:label "administrative territorial entity"@en .
+
+wd:Q618123 rdfs:label "geographical feature"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q67376938 rdfs:label "historic county of the United Kingdom"@en .
+
+wd:Q6881511 rdfs:label "enterprise"@en .
+
+wd:Q7930989 rdfs:label "city or town"@en .
+
+wd:Q82794 rdfs:label "region"@en .
+
+wdt:P127 rdfs:label "owned by"@en .
+
+wdt:P131 rdfs:label "located in the administrative territorial entity"@en .
+
+wdt:P1350 rdfs:label "number of matches played/races/starts"@en .
+
+wdt:P137 rdfs:label "operator"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1435 rdfs:label "heritage designation"@en .
+
+wdt:P1448 rdfs:label "official name"@en .
+
+wdt:P1449 rdfs:label "nickname"@en .
+
+wdt:P1535 rdfs:label "used by"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P1705 rdfs:label "native label"@en .
+
+wdt:P1813 rdfs:label "short name"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2043 rdfs:label "length"@en .
+
+wdt:P2044 rdfs:label "elevation above sea level"@en .
+
+wdt:P276 rdfs:label "location"@en .
+
+wdt:P281 rdfs:label "postal code"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P4184 rdfs:label "slope"@en .
+
+wdt:P421 rdfs:label "located in time zone"@en .
+
+wdt:P527 rdfs:label "has part(s)"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P576 rdfs:label "dissolved, abolished or demolished date"@en .
+
+wdt:P6375 rdfs:label "street address"@en .
+
+wdt:P641 rdfs:label "sport"@en .
+
+wdt:P706 rdfs:label "located in/on physical feature"@en .
+
+wdt:P793 rdfs:label "significant event"@en .
+
+wdt:P7959 rdfs:label "historic county"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P8687 rdfs:label "social media followers"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P935 rdfs:label "Commons gallery"@en .
+
+wd:Q2221906 rdfs:label "geographic location"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+

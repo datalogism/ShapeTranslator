@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/ProteinShape> a sh:NodeShape ;
+    sh:property [ sh:class <http://www.wikidata.org/entity/Q113145171> ;
+            sh:path <http://www.wikidata.org/prop/direct/P129> ],
+        [ sh:class <http://www.wikidata.org/entity/Q14860489> ;
+            sh:path <http://www.wikidata.org/prop/direct/P680> ],
+        [ sh:class <http://www.wikidata.org/entity/Q16521> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P703> ],
+        [ sh:class <http://www.wikidata.org/entity/Q7187> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P702> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ],
+        [ sh:class <http://www.wikidata.org/entity/Q5058355> ;
+            sh:path <http://www.wikidata.org/prop/direct/P681> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P591> ],
+        [ sh:class <http://www.wikidata.org/entity/Q7187> ;
+            sh:path <http://www.wikidata.org/prop/direct/P684> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P2888> ],
+        [ sh:class <http://www.wikidata.org/entity/Q13442814> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1343> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P4844> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P527> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P4945> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P361> ],
+        [ sh:class <http://www.wikidata.org/entity/Q2996394> ;
+            sh:path <http://www.wikidata.org/prop/direct/P682> ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1813> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1325> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q8054> .
+

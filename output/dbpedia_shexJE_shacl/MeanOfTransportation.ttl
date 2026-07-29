@@ -1,0 +1,194 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/MeanOfTransportationShape> a sh:NodeShape ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path <http://dbpedia.org/ontology/MeanOfTransportation/length> ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path <http://dbpedia.org/ontology/length> ] ] ) ;
+    sh:property [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/costValueShape> ;
+            sh:path <http://dbpedia.org/ontology/unitCost> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/activeYearsStartYear> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/transmission> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/modelEndYear> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/rocketStages> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path foaf:isPrimaryTopicOf ],
+        [ sh:class <http://dbpedia.org/ontology/Agent> ;
+            sh:path <http://dbpedia.org/ontology/owner> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/diameter> ],
+        [ sh:class <http://dbpedia.org/ontology/Agent> ;
+            sh:path <http://dbpedia.org/ontology/designer> ],
+        [ sh:class <http://dbpedia.org/ontology/Battery> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/battery> ],
+        [ sh:class <http://dbpedia.org/ontology/PopulatedPlace> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/origin> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/costValueShape> ;
+            sh:path <http://dbpedia.org/ontology/cost> ],
+        [ sh:class <http://dbpedia.org/ontology/Automobile> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/automobilePlatform> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path prov:wasDerivedFrom ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/acquirementDate> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/orderDate> ],
+        [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/homeport> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/productionStartYear> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/maidenVoyage> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/topSpeed> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/recommissioningDate> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/activeYearsEndDate> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/shipBeam> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/retired> ],
+        [ sh:class <http://dbpedia.org/ontology/Rocket> ;
+            sh:path <http://dbpedia.org/ontology/comparable> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/shipDraft> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/layingDown> ],
+        [ sh:class <http://dbpedia.org/ontology/Country> ;
+            sh:path <http://dbpedia.org/ontology/countryOrigin> ],
+        [ sh:class <http://dbpedia.org/ontology/Company> ;
+            sh:path <http://dbpedia.org/ontology/designCompany> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/abstract> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path rdfs:seeAlso ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/status> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageID> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageRedirects> ;
+            sh:pattern "^http://dbpedia.org/resource/" ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/activeYearsStartDate> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/completionDate> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/cylinderCount> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/captureDate> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/yearOfConstruction> ],
+        [ sh:class <http://dbpedia.org/ontology/AutomobileEngine> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/engine> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/maidenFlight> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/shipDisplacement> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/commissioningDate> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/productionEndYear> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageWikiLink> ;
+            sh:pattern "^http://dbpedia.org/resource/" ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/modelStartYear> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/totalLaunches> ],
+        [ sh:class <http://dbpedia.org/ontology/MeanOfTransportation> ;
+            sh:path <http://dbpedia.org/ontology/relatedMeanOfTransportation> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/failedLaunches> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/alternativeName> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageRevisionID> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:comment ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/capacity> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/activeYearsEndYear> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/shipLaunch> ],
+        [ sh:class <http://dbpedia.org/ontology/Building> ;
+            sh:path <http://dbpedia.org/ontology/launchSite> ],
+        [ sh:class <http://dbpedia.org/ontology/Country> ;
+            sh:path <http://dbpedia.org/ontology/country> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageInterLanguageLink> ;
+            sh:pattern "^http://dbpedia.org/resource/" ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path owl:differentFrom ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/numberOfDoors> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/numberBuilt> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/decommissioningDate> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/finalFlight> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/motto> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/MeanOfTransportation> .
+
+<http://shaclshapes.org/costValueShape> a sh:NodeShape ;
+    sh:or ( [ sh:datatype <http://dbpedia.org/datatype/usDollar> ] [ sh:datatype <http://dbpedia.org/datatype/poundSterling> ] [ sh:datatype <http://dbpedia.org/datatype/euro> ] [ sh:datatype <http://dbpedia.org/datatype/japaneseYen> ] [ sh:datatype <http://dbpedia.org/datatype/canadianDollar> ] [ sh:datatype <http://dbpedia.org/datatype/swedishKrona> ] [ sh:datatype <http://dbpedia.org/datatype/norwegianKrone> ] [ sh:datatype <http://dbpedia.org/datatype/danishKrone> ] [ sh:datatype <http://dbpedia.org/datatype/swissFranc> ] [ sh:datatype <http://dbpedia.org/datatype/australianDollar> ] [ sh:datatype <http://dbpedia.org/datatype/malaysianRinggit> ] [ sh:datatype <http://dbpedia.org/datatype/russianRouble> ] [ sh:datatype <http://dbpedia.org/datatype/indonesianRupiah> ] [ sh:datatype <http://dbpedia.org/datatype/polishZ%C5%82oty> ] [ sh:datatype <http://dbpedia.org/datatype/unitedArabEmiratesDirham> ] [ sh:datatype <http://dbpedia.org/datatype/renminbi> ] [ sh:datatype <http://dbpedia.org/datatype/czechKoruna> ] [ sh:datatype <http://dbpedia.org/datatype/indianRupee> ] [ sh:datatype <http://dbpedia.org/datatype/bulgarianLev> ] [ sh:datatype <http://dbpedia.org/datatype/sriLankanRupee> ] [ sh:datatype <http://dbpedia.org/datatype/hungarianForint> ] [ sh:datatype <http://dbpedia.org/datatype/southKoreanWon> ] [ sh:datatype <http://dbpedia.org/datatype/lithuanianLitas> ] [ sh:datatype <http://dbpedia.org/datatype/croatianKuna> ] [ sh:datatype <http://dbpedia.org/datatype/iraqiDinar> ] [ sh:datatype <http://dbpedia.org/datatype/mexicanPeso> ] [ sh:datatype <http://dbpedia.org/datatype/saudiRiyal> ] [ sh:datatype <http://dbpedia.org/datatype/turkishLira> ] [ sh:datatype <http://dbpedia.org/datatype/estonianKroon> ] [ sh:datatype <http://dbpedia.org/datatype/hongKongDollar> ] [ sh:datatype <http://dbpedia.org/datatype/newTaiwanDollar> ] [ sh:datatype <http://dbpedia.org/datatype/thaiBaht> ] [ sh:datatype <http://dbpedia.org/datatype/pakistaniRupee> ] [ sh:datatype <http://dbpedia.org/datatype/slovakKoruna> ] [ sh:datatype <http://dbpedia.org/datatype/chileanPeso> ] [ sh:datatype <http://dbpedia.org/datatype/kuwaitiDinar> ] [ sh:datatype <http://dbpedia.org/datatype/newZealandDollar> ] [ sh:datatype <http://dbpedia.org/datatype/bangladeshiTaka> ] [ sh:datatype <http://dbpedia.org/datatype/philippinePeso> ] [ sh:datatype <http://dbpedia.org/datatype/serbianDinar> ] [ sh:datatype <http://dbpedia.org/datatype/brazilianReal> ] [ sh:datatype <http://dbpedia.org/datatype/tanzanianShilling> ] [ sh:datatype <http://dbpedia.org/datatype/georgianLari> ] [ sh:datatype <http://dbpedia.org/datatype/algerianDinar> ] [ sh:datatype <http://dbpedia.org/datatype/armenianDram> ] [ sh:datatype <http://dbpedia.org/datatype/colombianPeso> ] [ sh:datatype <http://dbpedia.org/datatype/argentinePeso> ] [ sh:datatype <http://dbpedia.org/datatype/israeliNewSheqel> ] [ sh:datatype <http://dbpedia.org/datatype/moroccanDirham> ] [ sh:datatype <http://dbpedia.org/datatype/egyptianPound> ] [ sh:datatype <http://dbpedia.org/datatype/lebanesePound> ] [ sh:datatype <http://dbpedia.org/datatype/iranianRial> ] [ sh:datatype <http://dbpedia.org/datatype/capeVerdeEscudo> ] [ sh:datatype <http://dbpedia.org/datatype/kenyanShilling> ] [ sh:datatype <http://dbpedia.org/datatype/ugandaShilling> ] [ sh:datatype <http://dbpedia.org/datatype/bruneiDollar> ] [ sh:datatype <http://dbpedia.org/datatype/cambodianRiel> ] ) .
+

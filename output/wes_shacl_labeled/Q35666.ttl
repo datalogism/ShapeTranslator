@@ -1,0 +1,156 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/GlacierShape> a sh:NodeShape ;
+    rdfs:label "glacier"@en ;
+    sh:property [ sh:class wd:Q56061 ;
+            sh:maxCount 1 ;
+            sh:name "located in the administrative territorial entity"@en ;
+            sh:path wdt:P131 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "time of earliest written record"@en ;
+            sh:path wdt:P1249 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "area"@en ;
+            sh:path wdt:P2046 ],
+        [ sh:class wd:Q166620 ;
+            sh:maxCount 1 ;
+            sh:name "drainage basin"@en ;
+            sh:path wdt:P4614 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "topographic prominence"@en ;
+            sh:path wdt:P2660 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "elevation above sea level"@en ;
+            sh:path wdt:P2044 ],
+        [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q8513 ] [ sh:class wd:Q3331189 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:class wd:Q35666 ;
+            sh:name "connects with"@en ;
+            sh:path wdt:P2789 ],
+        [ sh:maxCount 1 ;
+            sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons gallery"@en ;
+            sh:path wdt:P935 ],
+        [ sh:class wd:Q82794 ;
+            sh:maxCount 1 ;
+            sh:name "location"@en ;
+            sh:path wdt:P276 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:maxCount 1 ;
+            sh:name "located in/on physical feature"@en ;
+            sh:or ( [ sh:class wd:Q2221906 ] [ sh:class wd:Q618123 ] ) ;
+            sh:path wdt:P706 ],
+        [ sh:class wd:Q3866635 ;
+            sh:maxCount 1 ;
+            sh:name "glacier status"@en ;
+            sh:path wdt:P7442 ],
+        [ sh:maxCount 1 ;
+            sh:name "named by"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P3938 ],
+        [ sh:class wd:Q6256 ;
+            sh:name "territory claimed by"@en ;
+            sh:path wdt:P1336 ],
+        [ sh:class wd:Q5 ;
+            sh:name "discoverer or inventor"@en ;
+            sh:path wdt:P61 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "length"@en ;
+            sh:path wdt:P2043 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "topographic isolation"@en ;
+            sh:path wdt:P2659 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:class wd:Q46831 ;
+            sh:maxCount 1 ;
+            sh:name "mountain range"@en ;
+            sh:path wdt:P4552 ],
+        [ sh:maxCount 1 ;
+            sh:name "terminus"@en ;
+            sh:or ( [ sh:class wd:Q2221906 ] [ sh:class wd:Q15324 ] ) ;
+            sh:path wdt:P559 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q12143 ;
+            sh:maxCount 1 ;
+            sh:name "located in time zone"@en ;
+            sh:path wdt:P421 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q15324 ;
+            sh:maxCount 1 ;
+            sh:name "located in or next to body of water"@en ;
+            sh:path wdt:P206 ],
+        [ sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "width"@en ;
+            sh:path wdt:P2049 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for maps or plans"@en ;
+            sh:path wdt:P7867 ],
+        [ sh:maxCount 1 ;
+            sh:name "located in protected area"@en ;
+            sh:or ( [ sh:class wd:Q46169 ] [ sh:class wd:Q473972 ] ) ;
+            sh:path wdt:P3018 ],
+        [ sh:class wd:Q15324 ;
+            sh:name "outflows"@en ;
+            sh:path wdt:P201 ],
+        [ sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:maxCount 1 ;
+            sh:name "heritage designation"@en ;
+            sh:or ( [ sh:class wd:Q210272 ] [ sh:class wd:Q386426 ] ) ;
+            sh:path wdt:P1435 ],
+        [ sh:class wd:Q15324 ;
+            sh:maxCount 1 ;
+            sh:name "mouth of the watercourse"@en ;
+            sh:path wdt:P403 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "dissolved, abolished or demolished date"@en ;
+            sh:path wdt:P576 ],
+        [ sh:class wd:Q5107 ;
+            sh:maxCount 1 ;
+            sh:name "continent"@en ;
+            sh:path wdt:P30 ] ;
+    sh:targetClass wd:Q35666 .
+

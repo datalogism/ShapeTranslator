@@ -1,0 +1,31 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/ChromosomeShape> a sh:NodeShape ;
+    sh:property [ sh:class <http://www.wikidata.org/entity/Q4167836> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P910> ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1813> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/ChromosomeShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P155> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/ChromosomeShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P156> ],
+        [ sh:class <http://www.wikidata.org/entity/Q16521> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P703> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P361> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2043> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q37748> .
+

@@ -1,0 +1,43 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/ChromosomeShape> a sh:NodeShape ;
+    rdfs:label "chromosome"@en ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q16521 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "found in taxon"@en ;
+            sh:path wdt:P703 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "length"@en ;
+            sh:path wdt:P2043 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q37748 ;
+            sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:path wdt:P155 ],
+        [ sh:class wd:Q37748 ;
+            sh:maxCount 1 ;
+            sh:name "followed by"@en ;
+            sh:path wdt:P156 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ] ;
+    sh:targetClass wd:Q37748 .
+

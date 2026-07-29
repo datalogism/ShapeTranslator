@@ -1,0 +1,215 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/TypeOfMusicalInstrumentShape> a sh:NodeShape ;
+    rdfs:label "type of musical instrument"@en ;
+    sh:name "type of musical instrument"@en ;
+    sh:property [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q3331189 ] [ sh:class wd:Q47461344 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:class wd:Q66715801 ;
+            sh:maxCount 1 ;
+            sh:name "used by"@en ;
+            sh:path wdt:P1535 ],
+        [ sh:class wd:Q66715801 ;
+            sh:maxCount 1 ;
+            sh:name "practiced by"@en ;
+            sh:path wdt:P3095 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:class wd:Q98645843 ;
+            sh:maxCount 1 ;
+            sh:name "has list"@en ;
+            sh:path wdt:P2354 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q55190325 ;
+            sh:maxCount 1 ;
+            sh:name "manufacturer"@en ;
+            sh:path wdt:P176 ],
+        [ sh:name "has part(s) of the class"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2670 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Unicode character"@en ;
+            sh:path wdt:P487 ],
+        [ sh:class wd:Q16695773 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:name "exact match"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2888 ],
+        [ sh:class wd:Q214609 ;
+            sh:name "made from material"@en ;
+            sh:path wdt:P186 ],
+        [ sh:name "intangible cultural heritage status"@en ;
+            sh:or ( [ sh:class wd:Q113040113 ] [ sh:class wd:Q116056897 ] ) ;
+            sh:path wdt:P3259 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Hornbostel-Sachs classification"@en ;
+            sh:path wdt:P1762 ],
+        [ sh:class wd:Q6256 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by WikiProject"@en ;
+            sh:path wdt:P6104 ],
+        [ sh:name "indigenous to"@en ;
+            sh:or ( [ sh:class wd:Q82794 ] [ sh:class wd:Q56061 ] ) ;
+            sh:path wdt:P2341 ],
+        [ sh:name "discoverer or inventor"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] [ sh:class wd:Q16334295 ] ) ;
+            sh:path wdt:P61 ],
+        [ sh:name "has use"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P366 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "time of discovery or invention"@en ;
+            sh:path wdt:P575 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:name "culture"@en ;
+            sh:or ( [ sh:class wd:Q11042 ] [ sh:class wd:Q19958368 ] ) ;
+            sh:path wdt:P2596 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons gallery"@en ;
+            sh:path wdt:P935 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:class wd:Q110295396 ;
+            sh:maxCount 1 ;
+            sh:name "said to be the same as"@en ;
+            sh:path wdt:P460 ],
+        [ sh:class wd:Q618779 ;
+            sh:maxCount 1 ;
+            sh:name "award received"@en ;
+            sh:path wdt:P166 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ] ;
+    sh:targetClass wd:Q110295396 .
+
+wd:Q11042 rdfs:label "culture"@en .
+
+wd:Q113040113 rdfs:label "national inventory of intangible cultural heritage"@en .
+
+wd:Q116056897 rdfs:label "heritage register of intangible cultural heritage"@en .
+
+wd:Q16334295 rdfs:label "group of humans"@en .
+
+wd:Q19958368 rdfs:label "culture of an area"@en .
+
+wd:Q214609 rdfs:label "material"@en .
+
+wd:Q3331189 rdfs:label "version, edition or translation"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q47461344 rdfs:label "written work"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q55190325 rdfs:label "musical instrument manufacturing company"@en .
+
+wd:Q56061 rdfs:label "administrative territorial entity"@en .
+
+wd:Q618779 rdfs:label "award"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q82794 rdfs:label "region"@en .
+
+wd:Q98645843 rdfs:label "Wikimedia music-related list"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1448 rdfs:label "official name"@en .
+
+wdt:P1535 rdfs:label "used by"@en .
+
+wdt:P166 rdfs:label "award received"@en .
+
+wdt:P176 rdfs:label "manufacturer"@en .
+
+wdt:P1762 rdfs:label "Hornbostel-Sachs classification"@en .
+
+wdt:P186 rdfs:label "made from material"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2341 rdfs:label "indigenous to"@en .
+
+wdt:P2354 rdfs:label "has list"@en .
+
+wdt:P2596 rdfs:label "culture"@en .
+
+wdt:P2670 rdfs:label "has part(s) of the class"@en .
+
+wdt:P2888 rdfs:label "exact match"@en .
+
+wdt:P3095 rdfs:label "practiced by"@en .
+
+wdt:P3259 rdfs:label "intangible cultural heritage status"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P366 rdfs:label "has use"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P460 rdfs:label "said to be the same as"@en .
+
+wdt:P487 rdfs:label "Unicode character"@en .
+
+wdt:P495 rdfs:label "country of origin"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P527 rdfs:label "has part(s)"@en .
+
+wdt:P575 rdfs:label "time of discovery or invention"@en .
+
+wdt:P61 rdfs:label "discoverer or inventor"@en .
+
+wdt:P6104 rdfs:label "maintained by WikiProject"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P935 rdfs:label "Commons gallery"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q110295396 rdfs:label "type of musical instrument"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q66715801 rdfs:label "musical profession"@en .
+

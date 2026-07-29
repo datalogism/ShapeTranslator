@@ -1,0 +1,118 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/OntologyShape> a sh:NodeShape ;
+    rdfs:label "ontology"@en ;
+    sh:property [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q2668072 ] [ sh:class wd:Q13442814 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:class wd:Q77205602 ;
+            sh:maxCount 1 ;
+            sh:name "copyright license"@en ;
+            sh:path wdt:P275 ],
+        [ sh:class wd:Q33742 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:name "contributor to the creative work or subject"@en ;
+            sh:or ( [ sh:class wd:Q16334295 ] [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P767 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "publication date"@en ;
+            sh:path wdt:P577 ],
+        [ sh:class wd:Q50424085 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "curator"@en ;
+            sh:path wdt:P1640 ],
+        [ sh:maxCount 1 ;
+            sh:name "exact match"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2888 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:name "based on"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P144 ],
+        [ sh:class wd:Q3331189 ;
+            sh:name "has edition or translation"@en ;
+            sh:path wdt:P747 ],
+        [ sh:maxCount 1 ;
+            sh:name "source code repository URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1324 ],
+        [ sh:class wd:Q324254 ;
+            sh:name "uses"@en ;
+            sh:path wdt:P2283 ],
+        [ sh:name "author"@en ;
+            sh:or ( [ sh:class wd:Q16334295 ] [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P50 ],
+        [ sh:maxCount 1 ;
+            sh:name "URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2699 ],
+        [ sh:maxCount 1 ;
+            sh:name "XML namespace URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P7510 ],
+        [ sh:maxCount 1 ;
+            sh:name "maintained by"@en ;
+            sh:or ( [ sh:class wd:Q170584 ] [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P126 ],
+        [ sh:name "developer"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P178 ],
+        [ sh:class wd:Q324254 ;
+            sh:name "replaces"@en ;
+            sh:path wdt:P1365 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "software version identifier"@en ;
+            sh:path wdt:P348 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:name "work available at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P953 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:maxCount 1 ;
+            sh:name "publisher"@en ;
+            sh:or ( [ sh:class wd:Q2085381 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P123 ] ;
+    sh:targetClass wd:Q324254 .
+

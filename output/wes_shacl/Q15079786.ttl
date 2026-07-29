@@ -1,0 +1,294 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/BalletShape> a sh:NodeShape ;
+    rdfs:label "ballet"@en ;
+    sh:name "ballet"@en ;
+    sh:property [ sh:datatype xsd:decimal ;
+            sh:name "duration"@en ;
+            sh:path wdt:P2047 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:name "based on"@en ;
+            sh:or ( [ sh:class wd:Q7725634 ] [ sh:class wd:Q105543609 ] ) ;
+            sh:path wdt:P144 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:class wd:Q105543609 ;
+            sh:maxCount 1 ;
+            sh:name "has melody"@en ;
+            sh:path wdt:P1625 ],
+        [ sh:class wd:Q5 ;
+            sh:name "composer"@en ;
+            sh:path wdt:P86 ],
+        [ sh:class wd:Q805233 ;
+            sh:name "production company"@en ;
+            sh:path wdt:P272 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q50424085 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "opus number"@en ;
+            sh:path wdt:P10855 ],
+        [ sh:name "commissioned by"@en ;
+            sh:or ( [ sh:class wd:Q805233 ] [ sh:class wd:Q5 ] ) ;
+            sh:path wdt:P88 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:class wd:Q1288568 ;
+            sh:maxCount 1 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "orchestrator"@en ;
+            sh:path wdt:P10806 ],
+        [ sh:maxCount 1 ;
+            sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:maxCount 1 ;
+            sh:name "award received"@en ;
+            sh:or ( [ sh:class wd:Q38033430 ] [ sh:class wd:Q618779 ] ) ;
+            sh:path wdt:P166 ],
+        [ sh:name "work available at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P953 ],
+        [ sh:maxCount 1 ;
+            sh:name "location of first performance"@en ;
+            sh:or ( [ sh:class wd:Q153562 ] [ sh:class wd:Q57660343 ] ) ;
+            sh:path wdt:P4647 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "date of first performance"@en ;
+            sh:path wdt:P1191 ],
+        [ sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:maxCount 1 ;
+            sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:class wd:Q5 ;
+            sh:name "performer"@en ;
+            sh:path wdt:P175 ],
+        [ sh:class wd:Q5 ;
+            sh:name "librettist"@en ;
+            sh:path wdt:P87 ],
+        [ sh:class wd:Q95074 ;
+            sh:name "characters"@en ;
+            sh:path wdt:P674 ],
+        [ sh:class wd:Q5 ;
+            sh:name "cast member"@en ;
+            sh:path wdt:P161 ],
+        [ sh:maxCount 1 ;
+            sh:name "inspired by"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P941 ],
+        [ sh:maxCount 1 ;
+            sh:name "genre"@en ;
+            sh:or ( [ sh:class wd:Q45971958 ] [ sh:class wd:Q107357104 ] ) ;
+            sh:path wdt:P136 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "author"@en ;
+            sh:path wdt:P50 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "director"@en ;
+            sh:path wdt:P57 ],
+        [ sh:name "narrative location"@en ;
+            sh:or ( [ sh:class wd:Q82794 ] [ sh:class wd:Q17334923 ] [ sh:class wd:Q3895768 ] ) ;
+            sh:path wdt:P840 ],
+        [ sh:class wd:Q5 ;
+            sh:name "creator"@en ;
+            sh:path wdt:P170 ],
+        [ sh:class wd:Q5 ;
+            sh:name "scenographer"@en ;
+            sh:path wdt:P4608 ],
+        [ sh:name "instrumentation"@en ;
+            sh:or ( [ sh:class wd:Q34379 ] [ sh:class wd:Q617028 ] [ sh:class wd:Q1254773 ] [ sh:class wd:Q2088357 ] ) ;
+            sh:path wdt:P870 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "production designer"@en ;
+            sh:path wdt:P2554 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "after a work by"@en ;
+            sh:path wdt:P1877 ],
+        [ sh:class wd:Q5 ;
+            sh:name "costume designer"@en ;
+            sh:path wdt:P2515 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "number of parts of this work"@en ;
+            sh:path wdt:P2635 ],
+        [ sh:name "form of creative work"@en ;
+            sh:or ( [ sh:class wd:Q107487333 ] [ sh:class wd:Q862597 ] ) ;
+            sh:path wdt:P7937 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "choreographer"@en ;
+            sh:path wdt:P1809 ] ;
+    sh:targetClass wd:Q15079786 .
+
+wd:Q107357104 rdfs:label "type of dance"@en .
+
+wd:Q107487333 rdfs:label "type of musical work/composition"@en .
+
+wd:Q1254773 rdfs:label "family of musical instruments"@en .
+
+wd:Q1288568 rdfs:label "modern language"@en .
+
+wd:Q15079786 rdfs:label "ballet"@en .
+
+wd:Q153562 rdfs:label "opera house"@en .
+
+wd:Q17334923 rdfs:label "physical location"@en .
+
+wd:Q2088357 rdfs:label "musical ensemble"@en .
+
+wd:Q34379 rdfs:label "musical instrument"@en .
+
+wd:Q38033430 rdfs:label "class of award"@en .
+
+wd:Q3895768 rdfs:label "fictional location"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q45971958 rdfs:label "performing arts genre"@en .
+
+wd:Q50424085 rdfs:label "copyright status"@en .
+
+wd:Q57660343 rdfs:label "performing arts building"@en .
+
+wd:Q617028 rdfs:label "instrumentation"@en .
+
+wd:Q618779 rdfs:label "award"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q7725634 rdfs:label "literary work"@en .
+
+wd:Q82794 rdfs:label "region"@en .
+
+wd:Q862597 rdfs:label "musical form"@en .
+
+wd:Q95074 rdfs:label "character"@en .
+
+wdt:P10806 rdfs:label "orchestrator"@en .
+
+wdt:P10855 rdfs:label "opus number"@en .
+
+wdt:P1191 rdfs:label "date of first performance"@en .
+
+wdt:P136 rdfs:label "genre"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P144 rdfs:label "based on"@en .
+
+wdt:P1476 rdfs:label "title"@en .
+
+wdt:P161 rdfs:label "cast member"@en .
+
+wdt:P1625 rdfs:label "has melody"@en .
+
+wdt:P166 rdfs:label "award received"@en .
+
+wdt:P170 rdfs:label "creator"@en .
+
+wdt:P1705 rdfs:label "native label"@en .
+
+wdt:P175 rdfs:label "performer"@en .
+
+wdt:P1809 rdfs:label "choreographer"@en .
+
+wdt:P1877 rdfs:label "after a work by"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2047 rdfs:label "duration"@en .
+
+wdt:P2515 rdfs:label "costume designer"@en .
+
+wdt:P2554 rdfs:label "production designer"@en .
+
+wdt:P2635 rdfs:label "number of parts of this work"@en .
+
+wdt:P272 rdfs:label "production company"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P407 rdfs:label "language of work or name"@en .
+
+wdt:P4608 rdfs:label "scenographer"@en .
+
+wdt:P4647 rdfs:label "location of first performance"@en .
+
+wdt:P495 rdfs:label "country of origin"@en .
+
+wdt:P50 rdfs:label "author"@en .
+
+wdt:P57 rdfs:label "director"@en .
+
+wdt:P6216 rdfs:label "copyright status"@en .
+
+wdt:P674 rdfs:label "characters"@en .
+
+wdt:P7937 rdfs:label "form of creative work"@en .
+
+wdt:P840 rdfs:label "narrative location"@en .
+
+wdt:P86 rdfs:label "composer"@en .
+
+wdt:P87 rdfs:label "librettist"@en .
+
+wdt:P870 rdfs:label "instrumentation"@en .
+
+wdt:P88 rdfs:label "commissioned by"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P921 rdfs:label "main subject"@en .
+
+wdt:P941 rdfs:label "inspired by"@en .
+
+wdt:P953 rdfs:label "work available at URL"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q105543609 rdfs:label "musical work/composition"@en .
+
+wd:Q805233 rdfs:label "ballet company"@en .
+
+wd:Q5 rdfs:label "human"@en .
+

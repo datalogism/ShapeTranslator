@@ -1,0 +1,168 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+start = @<Person>
+
+<Person> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Person> ] ;
+  <http://dbpedia.org/ontology/height> xsd:double ? ;
+  <http://dbpedia.org/ontology/weight> xsd:double ? ;
+  <http://xmlns.com/foaf/0.1/givenName> xsd:string * ;
+  <http://dbpedia.org/ontology/draftYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/undraftedYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/country> @<Country> * ;
+  <http://dbpedia.org/ontology/stateOfOrigin> @<Country> * ;
+  <http://dbpedia.org/ontology/residence> @<Place> * ;
+  <http://dbpedia.org/ontology/restingPlace> @<Place> ? ;
+  <http://dbpedia.org/ontology/hometown> @<Settlement> * ;
+  <http://xmlns.com/foaf/0.1/nick> xsd:string * ;
+  <http://dbpedia.org/ontology/occupation> @<Profession> * ;
+  <http://dbpedia.org/ontology/profession> @<Profession> * ;
+  <http://dbpedia.org/ontology/title> rdf:langString * ;
+  <http://dbpedia.org/ontology/knownFor> IRI * ;
+  <http://dbpedia.org/ontology/genre> @<Genre> * ;
+  <http://dbpedia.org/ontology/instrument> @<Instrument> * ;
+  <http://dbpedia.org/ontology/award> @<Award> * ;
+  <http://dbpedia.org/ontology/careerStation> @<CareerStation> * ;
+  <http://dbpedia.org/ontology/education> @<EducationalInstitution> * ;
+  <http://dbpedia.org/ontology/almaMater> @<EducationalInstitution> * ;
+  <http://dbpedia.org/ontology/abstract> rdf:langString + ;
+  <http://dbpedia.org/ontology/college> @<EducationalInstitution> * ;
+  <http://dbpedia.org/ontology/school> @<EducationalInstitution> * ;
+  <http://dbpedia.org/ontology/highschool> @<School> * ;
+  <http://dbpedia.org/ontology/academicDiscipline> @<AcademicSubjectOrMedicalSpecialty> * ;
+  <http://dbpedia.org/ontology/doctoralAdvisor> @<Person_class> * ;
+  <http://dbpedia.org/ontology/institution> @<Organisation> * ;
+  rdfs:comment rdf:langString + ;
+  <http://dbpedia.org/ontology/employer> @<Organisation> * ;
+  <http://dbpedia.org/ontology/associatedBand> @<Band> * ;
+  <http://dbpedia.org/ontology/associatedMusicalArtist> @<BandOrPerson> * ;
+  <http://dbpedia.org/ontology/recordLabel> @<RecordLabel> * ;
+  <http://dbpedia.org/ontology/militaryService> @<MilitaryService> ? ;
+  <http://dbpedia.org/ontology/militaryBranch> @<MilitaryUnit> * ;
+  <http://dbpedia.org/ontology/activeYearsStartYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/militaryUnit> @<MilitaryUnit> * ;
+  <http://dbpedia.org/ontology/militaryCommand> xsd:string * ;
+  <http://dbpedia.org/ontology/allegiance> xsd:string * ;
+  <http://dbpedia.org/ontology/spouse> @<Person_class> * ;
+  <http://dbpedia.org/ontology/parent> @<Person_class> * ;
+  <http://dbpedia.org/ontology/child> @<Person_class> * ;
+  <http://dbpedia.org/ontology/relative> @<Person_class> * ;
+  <http://dbpedia.org/ontology/relation> @<Person_class> * ;
+  <http://dbpedia.org/ontology/successor> @<Person_class> * ;
+  <http://dbpedia.org/ontology/predecessor> @<Person_class> * ;
+  <http://dbpedia.org/ontology/activeYearsEndYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/team> @<SportsTeam> * ;
+  <http://dbpedia.org/ontology/formerTeam> @<SportsTeam> * ;
+  <http://dbpedia.org/ontology/debutTeam> @<SportsTeam> ? ;
+  <http://dbpedia.org/ontology/draftTeam> @<SportsTeam> ? ;
+  <http://dbpedia.org/ontology/managerClub> @<SportsTeam> * ;
+  <http://dbpedia.org/ontology/league> @<SportsLeague> * ;
+  <http://dbpedia.org/ontology/draft> xsd:string ? ;
+  <http://dbpedia.org/ontology/draftPick> xsd:string ? ;
+  <http://dbpedia.org/ontology/draftRound> xsd:string ? ;
+  <http://dbpedia.org/ontology/battingSide> xsd:string ? ;
+  <http://dbpedia.org/ontology/serviceStartYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/bowlingSide> xsd:string ? ;
+  <http://dbpedia.org/ontology/shoots> xsd:string {0,2} ;
+  <http://dbpedia.org/ontology/overallRecord> xsd:string * ;
+  <http://xmlns.com/foaf/0.1/depiction> @<Image> + ;
+  <http://xmlns.com/foaf/0.1/homepage> IRI * ;
+  <http://dbpedia.org/ontology/imdbId> xsd:string ? ;
+  owl:differentFrom xsd:anyURI * ;
+  rdfs:seeAlso xsd:anyURI * ;
+  <http://dbpedia.org/ontology/serviceEndYear> xsd:gYear ? ;
+  <http://dbpedia.org/ontology/wikiPageRevisionID> xsd:integer +
+}
+
+<AcademicSubjectOrMedicalSpecialty> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/AcademicSubject> <http://dbpedia.org/ontology/MedicalSpecialty> ]
+}
+
+<Award> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Award> ]
+}
+
+<Band> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Band> ]
+}
+
+<BandOrPerson> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Band> <http://dbpedia.org/ontology/Person> ]
+}
+
+<CareerStation> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/CareerStation> ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Country> ]
+}
+
+<EducationalInstitution> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/EducationalInstitution> ]
+}
+
+<Genre> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Genre> ]
+}
+
+<Image> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Image> ]
+}
+
+<Instrument> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Instrument> ]
+}
+
+<MilitaryService> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/MilitaryService> ]
+}
+
+<MilitaryUnit> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/MilitaryUnit> ]
+}
+
+<Organisation> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Organisation> ]
+}
+
+<Person_class> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Person> ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Place> ]
+}
+
+<Profession> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Profession> ]
+}
+
+<RecordLabel> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/RecordLabel> ]
+}
+
+<School> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/School> ]
+}
+
+<Settlement> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Settlement> ]
+}
+
+<SportsLeague> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/SportsLeague> ]
+}
+
+<SportsTeam> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/SportsTeam> ]
+}

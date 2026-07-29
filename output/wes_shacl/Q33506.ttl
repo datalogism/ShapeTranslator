@@ -1,0 +1,762 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/MuseumShape> a sh:NodeShape ;
+    rdfs:label "museum"@en ;
+    sh:name "museum"@en ;
+    sh:property [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by WikiProject"@en ;
+            sh:path wdt:P6104 ],
+        [ sh:in ( wd:Q24192067 wd:Q24192069 ) ;
+            sh:maxCount 1 ;
+            sh:name "disabled accessibility"@en ;
+            sh:path wdt:P2846 ],
+        [ sh:class wd:Q10541491 ;
+            sh:maxCount 1 ;
+            sh:name "legal form"@en ;
+            sh:path wdt:P1454 ],
+        [ sh:maxCount 1 ;
+            sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q33506 ;
+            sh:maxCount 1 ;
+            sh:name "followed by"@en ;
+            sh:path wdt:P156 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons gallery"@en ;
+            sh:path wdt:P935 ],
+        [ sh:name "occupant"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P466 ],
+        [ sh:name "field of work"@en ;
+            sh:or ( [ sh:class wd:Q11862829 ] [ sh:class wd:Q1047113 ] [ sh:class wd:Q627436 ] ) ;
+            sh:path wdt:P101 ],
+        [ sh:class wd:Q51728742 ;
+            sh:name "activity policy in this place"@en ;
+            sh:path wdt:P5023 ],
+        [ sh:class wd:Q15324 ;
+            sh:maxCount 1 ;
+            sh:name "located in or next to body of water"@en ;
+            sh:path wdt:P206 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:name "open days"@en ;
+            sh:or ( [ sh:class wd:Q99731370 ] [ sh:class wd:Q41825 ] ) ;
+            sh:path wdt:P3025 ],
+        [ sh:class wd:Q22809610 ;
+            sh:maxCount 1 ;
+            sh:name "World Heritage criteria"@en ;
+            sh:path wdt:P2614 ],
+        [ sh:name "heritage designation"@en ;
+            sh:or ( [ sh:class wd:Q210272 ] [ sh:class wd:Q30634609 ] ) ;
+            sh:path wdt:P1435 ],
+        [ sh:maxCount 1 ;
+            sh:name "URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2699 ],
+        [ sh:class wd:Q2198855 ;
+            sh:maxCount 1 ;
+            sh:name "movement"@en ;
+            sh:path wdt:P135 ],
+        [ sh:class wd:Q12143 ;
+            sh:name "located in time zone"@en ;
+            sh:path wdt:P421 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "OS grid reference"@en ;
+            sh:path wdt:P613 ],
+        [ sh:class wd:Q5 ;
+            sh:name "curator"@en ;
+            sh:path wdt:P1640 ],
+        [ sh:class wd:Q618779 ;
+            sh:name "award received"@en ;
+            sh:path wdt:P166 ],
+        [ sh:hasValue wd:Q1543615 ;
+            sh:maxCount 1 ;
+            sh:name "Wi-Fi access"@en ;
+            sh:path wdt:P2848 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "elevation above sea level"@en ;
+            sh:path wdt:P2044 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for the interior of the item"@en ;
+            sh:path wdt:P7561 ],
+        [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q3331189 ] [ sh:class wd:Q35127 ] [ sh:class wd:Q47461344 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:class wd:Q13406463 ;
+            sh:maxCount 1 ;
+            sh:name "appears in the heritage monument list"@en ;
+            sh:path wdt:P2817 ],
+        [ sh:class wd:Q43229 ;
+            sh:name "partnership with"@en ;
+            sh:path wdt:P2652 ],
+        [ sh:class wd:Q386724 ;
+            sh:maxCount 1 ;
+            sh:name "depicted by"@en ;
+            sh:path wdt:P1299 ],
+        [ sh:name "closed on"@en ;
+            sh:or ( [ sh:class wd:Q41825 ] [ sh:class wd:Q14795564 ] [ sh:class wd:Q1197685 ] ) ;
+            sh:path wdt:P3026 ],
+        [ sh:class wd:Q515 ;
+            sh:maxCount 1 ;
+            sh:name "location"@en ;
+            sh:path wdt:P276 ],
+        [ sh:datatype xsd:string ;
+            sh:name "phone number"@en ;
+            sh:path wdt:P1329 ],
+        [ sh:class wd:Q473972 ;
+            sh:maxCount 1 ;
+            sh:name "located in protected area"@en ;
+            sh:path wdt:P3018 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:name "member of"@en ;
+            sh:or ( [ sh:class wd:Q88667167 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P463 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "motto text"@en ;
+            sh:path wdt:P1451 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:class wd:Q43229 ;
+            sh:maxCount 1 ;
+            sh:name "parent organization or unit"@en ;
+            sh:path wdt:P749 ],
+        [ sh:maxCount 1 ;
+            sh:name "ground level 360 degree view URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P5282 ],
+        [ sh:name "sponsor"@en ;
+            sh:or ( [ sh:class wd:Q43229 ] [ sh:class wd:Q5 ] [ sh:class wd:Q157031 ] ) ;
+            sh:path wdt:P859 ],
+        [ sh:class wd:Q67770276 ;
+            sh:maxCount 1 ;
+            sh:name "historic county"@en ;
+            sh:path wdt:P7959 ],
+        [ sh:name "commemorates"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P547 ],
+        [ sh:maxCount 1 ;
+            sh:name "headquarters location"@en ;
+            sh:or ( [ sh:class wd:Q515 ] [ sh:class wd:Q532 ] [ sh:class wd:Q3957 ] ) ;
+            sh:path wdt:P159 ],
+        [ sh:name "payment types accepted"@en ;
+            sh:or ( [ sh:class wd:Q1912682 ] [ sh:class wd:Q986008 ] ) ;
+            sh:path wdt:P2851 ],
+        [ sh:class wd:Q33506 ;
+            sh:maxCount 1 ;
+            sh:name "replaces"@en ;
+            sh:path wdt:P1365 ],
+        [ sh:maxCount 1 ;
+            sh:name "state of use"@en ;
+            sh:or ( [ sh:class wd:Q56557118 ] [ sh:class wd:Q3505845 ] ) ;
+            sh:path wdt:P5817 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "fax number"@en ;
+            sh:path wdt:P2900 ],
+        [ sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:maxCount 1 ;
+            sh:name "culture"@en ;
+            sh:or ( [ sh:class wd:Q11042 ] [ sh:class wd:Q19958368 ] [ sh:class wd:Q120870093 ] ) ;
+            sh:path wdt:P2596 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:maxCount 1 ;
+            sh:name "online catalog URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P8768 ],
+        [ sh:minCount 1 ;
+            sh:name "owner of"@en ;
+            sh:or ( [ sh:class wd:Q838948 ] [ sh:class wd:Q386724 ] ) ;
+            sh:path wdt:P1830 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "total revenue"@en ;
+            sh:path wdt:P2139 ],
+        [ sh:maxCount 1 ;
+            sh:name "location of formation"@en ;
+            sh:or ( [ sh:class wd:Q7930989 ] [ sh:class wd:Q56061 ] ) ;
+            sh:path wdt:P740 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "post office box"@en ;
+            sh:path wdt:P2918 ],
+        [ sh:maxCount 1 ;
+            sh:name "API endpoint URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P6269 ],
+        [ sh:maxCount 1 ;
+            sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:class wd:Q43229 ;
+            sh:maxCount 1 ;
+            sh:name "operator"@en ;
+            sh:path wdt:P137 ],
+        [ sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:class wd:Q55553838 ;
+            sh:maxCount 1 ;
+            sh:name "state of conservation"@en ;
+            sh:path wdt:P5816 ],
+        [ sh:class wd:Q32880 ;
+            sh:maxCount 1 ;
+            sh:name "architectural style"@en ;
+            sh:path wdt:P149 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:class wd:Q2221906 ;
+            sh:maxCount 1 ;
+            sh:name "located in/on physical feature"@en ;
+            sh:path wdt:P706 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "collection or exhibition size"@en ;
+            sh:path wdt:P1436 ],
+        [ sh:maxCount 1 ;
+            sh:name "email address"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P968 ],
+        [ sh:name "significant event"@en ;
+            sh:or ( [ sh:class wd:Q1190554 ] [ sh:class wd:Q1656682 ] ) ;
+            sh:path wdt:P793 ],
+        [ sh:name "owned by"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P127 ],
+        [ sh:maxCount 1 ;
+            sh:name "terms of service URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P7014 ],
+        [ sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:class wd:Q5 ;
+            sh:name "significant person"@en ;
+            sh:path wdt:P3342 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for maps or plans"@en ;
+            sh:path wdt:P7867 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "employees"@en ;
+            sh:path wdt:P1128 ],
+        [ sh:maxCount 1 ;
+            sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "street address"@en ;
+            sh:path wdt:P6375 ],
+        [ sh:class wd:Q56061 ;
+            sh:name "located in the administrative territorial entity"@en ;
+            sh:path wdt:P131 ],
+        [ sh:maxCount 1 ;
+            sh:name "official blog URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1581 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category of associated people"@en ;
+            sh:path wdt:P1792 ],
+        [ sh:class wd:Q43229 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by"@en ;
+            sh:path wdt:P126 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "service entry"@en ;
+            sh:path wdt:P729 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:class wd:Q33506 ;
+            sh:maxCount 1 ;
+            sh:name "replaced by"@en ;
+            sh:path wdt:P1366 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for employees of the organization"@en ;
+            sh:path wdt:P4195 ],
+        [ sh:class wd:Q5 ;
+            sh:name "director / manager"@en ;
+            sh:path wdt:P1037 ],
+        [ sh:class wd:Q618779 ;
+            sh:maxCount 1 ;
+            sh:name "nominated for"@en ;
+            sh:path wdt:P1411 ],
+        [ sh:class wd:Q79007 ;
+            sh:maxCount 1 ;
+            sh:name "located on street"@en ;
+            sh:path wdt:P669 ],
+        [ sh:datatype xsd:string ;
+            sh:name "postal code"@en ;
+            sh:path wdt:P281 ],
+        [ sh:name "founder"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P112 ],
+        [ sh:class wd:Q33506 ;
+            sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:path wdt:P155 ],
+        [ sh:name "religion or worldview"@en ;
+            sh:or ( [ sh:class wd:Q71966963 ] [ sh:class wd:Q9174 ] ) ;
+            sh:path wdt:P140 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "visitors per year"@en ;
+            sh:path wdt:P1174 ],
+        [ sh:maxCount 1 ;
+            sh:name "located on linear feature"@en ;
+            sh:or ( [ sh:class wd:Q628179 ] [ sh:class wd:Q728937 ] [ sh:class wd:Q34442 ] ) ;
+            sh:path wdt:P795 ],
+        [ sh:class wd:Q5 ;
+            sh:name "architect"@en ;
+            sh:path wdt:P84 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ],
+        [ sh:class wd:Q214609 ;
+            sh:name "made from material"@en ;
+            sh:path wdt:P186 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons Institution page"@en ;
+            sh:path wdt:P1612 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "name"@en ;
+            sh:path wdt:P2561 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "designed by"@en ;
+            sh:path wdt:P287 ],
+        [ sh:maxCount 1 ;
+            sh:name "official shop URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P10225 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "social media followers"@en ;
+            sh:path wdt:P8687 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for the exterior of the item"@en ;
+            sh:path wdt:P8596 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "donations"@en ;
+            sh:path wdt:P8093 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "area"@en ;
+            sh:path wdt:P2046 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "content partnership category"@en ;
+            sh:path wdt:P8464 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for the view from the item"@en ;
+            sh:path wdt:P8933 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of volunteers"@en ;
+            sh:path wdt:P6125 ],
+        [ sh:class wd:Q5 ;
+            sh:name "chairperson"@en ;
+            sh:path wdt:P488 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "date of official opening"@en ;
+            sh:path wdt:P1619 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for the view of the item"@en ;
+            sh:path wdt:P8989 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "fee"@en ;
+            sh:path wdt:P2555 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "date of official closure"@en ;
+            sh:path wdt:P3999 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "dissolved, abolished or demolished date"@en ;
+            sh:path wdt:P576 ] ;
+    sh:targetClass wd:Q33506 .
+
+wd:Q1047113 rdfs:label "field of study"@en .
+
+wd:Q10541491 rdfs:label "legal form"@en .
+
+wd:Q11042 rdfs:label "culture"@en .
+
+wd:Q11862829 rdfs:label "academic discipline"@en .
+
+wd:Q1190554 rdfs:label "occurrence"@en .
+
+wd:Q1197685 rdfs:label "public holiday"@en .
+
+wd:Q120870093 rdfs:label "culture by ethnic group"@en .
+
+wd:Q12143 rdfs:label "time zone"@en .
+
+wd:Q13406463 rdfs:label "Wikimedia list article"@en .
+
+wd:Q14795564 rdfs:label "point in time with respect to recurrent timeframe"@en .
+
+wd:Q15324 rdfs:label "body of water"@en .
+
+wd:Q157031 rdfs:label "foundation"@en .
+
+wd:Q1656682 rdfs:label "event"@en .
+
+wd:Q1912682 rdfs:label "payment method"@en .
+
+wd:Q19958368 rdfs:label "culture of an area"@en .
+
+wd:Q210272 rdfs:label "cultural heritage"@en .
+
+wd:Q214609 rdfs:label "material"@en .
+
+wd:Q2198855 rdfs:label "cultural movement"@en .
+
+wd:Q2221906 rdfs:label "geographic location"@en .
+
+wd:Q22809610 rdfs:label "selection criterion for World Heritage"@en .
+
+wd:Q30634609 rdfs:label "heritage designation"@en .
+
+wd:Q32880 rdfs:label "architectural style"@en .
+
+wd:Q3331189 rdfs:label "version, edition or translation"@en .
+
+wd:Q34442 rdfs:label "road"@en .
+
+wd:Q3505845 rdfs:label "state"@en .
+
+wd:Q35127 rdfs:label "website"@en .
+
+wd:Q3957 rdfs:label "town"@en .
+
+wd:Q473972 rdfs:label "protected area"@en .
+
+wd:Q47461344 rdfs:label "written work"@en .
+
+wd:Q51728742 rdfs:label "activity policy"@en .
+
+wd:Q532 rdfs:label "village"@en .
+
+wd:Q55553838 rdfs:label "conservation state"@en .
+
+wd:Q56557118 rdfs:label "use status"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q627436 rdfs:label "field of work"@en .
+
+wd:Q628179 rdfs:label "trail"@en .
+
+wd:Q67770276 rdfs:label "historic county"@en .
+
+wd:Q71966963 rdfs:label "religion or world view"@en .
+
+wd:Q728937 rdfs:label "railway line"@en .
+
+wd:Q79007 rdfs:label "street"@en .
+
+wd:Q7930989 rdfs:label "city or town"@en .
+
+wd:Q838948 rdfs:label "work of art"@en .
+
+wd:Q88667167 rdfs:label "museum network"@en .
+
+wd:Q9174 rdfs:label "religion"@en .
+
+wd:Q986008 rdfs:label "payment system"@en .
+
+wd:Q99731370 rdfs:label "range of days of the week"@en .
+
+wdt:P101 rdfs:label "field of work"@en .
+
+wdt:P10225 rdfs:label "official shop URL"@en .
+
+wdt:P1037 rdfs:label "director / manager"@en .
+
+wdt:P112 rdfs:label "founder"@en .
+
+wdt:P1128 rdfs:label "employees"@en .
+
+wdt:P1174 rdfs:label "visitors per year"@en .
+
+wdt:P126 rdfs:label "maintained by"@en .
+
+wdt:P127 rdfs:label "owned by"@en .
+
+wdt:P1299 rdfs:label "depicted by"@en .
+
+wdt:P131 rdfs:label "located in the administrative territorial entity"@en .
+
+wdt:P1329 rdfs:label "phone number"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P135 rdfs:label "movement"@en .
+
+wdt:P1365 rdfs:label "replaces"@en .
+
+wdt:P1366 rdfs:label "replaced by"@en .
+
+wdt:P137 rdfs:label "operator"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P140 rdfs:label "religion or worldview"@en .
+
+wdt:P1411 rdfs:label "nominated for"@en .
+
+wdt:P1435 rdfs:label "heritage designation"@en .
+
+wdt:P1436 rdfs:label "collection or exhibition size"@en .
+
+wdt:P1448 rdfs:label "official name"@en .
+
+wdt:P1451 rdfs:label "motto text"@en .
+
+wdt:P1454 rdfs:label "legal form"@en .
+
+wdt:P149 rdfs:label "architectural style"@en .
+
+wdt:P155 rdfs:label "follows"@en .
+
+wdt:P156 rdfs:label "followed by"@en .
+
+wdt:P1581 rdfs:label "official blog URL"@en .
+
+wdt:P159 rdfs:label "headquarters location"@en .
+
+wdt:P1612 rdfs:label "Commons Institution page"@en .
+
+wdt:P1619 rdfs:label "date of official opening"@en .
+
+wdt:P1640 rdfs:label "curator"@en .
+
+wdt:P166 rdfs:label "award received"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P1705 rdfs:label "native label"@en .
+
+wdt:P1792 rdfs:label "category of associated people"@en .
+
+wdt:P1813 rdfs:label "short name"@en .
+
+wdt:P1830 rdfs:label "owner of"@en .
+
+wdt:P186 rdfs:label "made from material"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2044 rdfs:label "elevation above sea level"@en .
+
+wdt:P2046 rdfs:label "area"@en .
+
+wdt:P206 rdfs:label "located in or next to body of water"@en .
+
+wdt:P2139 rdfs:label "total revenue"@en .
+
+wdt:P2283 rdfs:label "uses"@en .
+
+wdt:P2555 rdfs:label "fee"@en .
+
+wdt:P2561 rdfs:label "name"@en .
+
+wdt:P2596 rdfs:label "culture"@en .
+
+wdt:P2614 rdfs:label "World Heritage criteria"@en .
+
+wdt:P2652 rdfs:label "partnership with"@en .
+
+wdt:P2699 rdfs:label "URL"@en .
+
+wdt:P276 rdfs:label "location"@en .
+
+wdt:P281 rdfs:label "postal code"@en .
+
+wdt:P2817 rdfs:label "appears in the heritage monument list"@en .
+
+wdt:P2846 rdfs:label "disabled accessibility"@en .
+
+wdt:P2848 rdfs:label "Wi-Fi access"@en .
+
+wdt:P2851 rdfs:label "payment types accepted"@en .
+
+wdt:P287 rdfs:label "designed by"@en .
+
+wdt:P2900 rdfs:label "fax number"@en .
+
+wdt:P2918 rdfs:label "post office box"@en .
+
+wdt:P3018 rdfs:label "located in protected area"@en .
+
+wdt:P3025 rdfs:label "open days"@en .
+
+wdt:P3026 rdfs:label "closed on"@en .
+
+wdt:P3342 rdfs:label "significant person"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P3999 rdfs:label "date of official closure"@en .
+
+wdt:P4195 rdfs:label "category for employees of the organization"@en .
+
+wdt:P421 rdfs:label "located in time zone"@en .
+
+wdt:P463 rdfs:label "member of"@en .
+
+wdt:P466 rdfs:label "occupant"@en .
+
+wdt:P488 rdfs:label "chairperson"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P5023 rdfs:label "activity policy in this place"@en .
+
+wdt:P527 rdfs:label "has part(s)"@en .
+
+wdt:P5282 rdfs:label "ground level 360 degree view URL"@en .
+
+wdt:P547 rdfs:label "commemorates"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P576 rdfs:label "dissolved, abolished or demolished date"@en .
+
+wdt:P5816 rdfs:label "state of conservation"@en .
+
+wdt:P5817 rdfs:label "state of use"@en .
+
+wdt:P6104 rdfs:label "maintained by WikiProject"@en .
+
+wdt:P6125 rdfs:label "number of volunteers"@en .
+
+wdt:P613 rdfs:label "OS grid reference"@en .
+
+wdt:P6269 rdfs:label "API endpoint URL"@en .
+
+wdt:P6375 rdfs:label "street address"@en .
+
+wdt:P669 rdfs:label "located on street"@en .
+
+wdt:P7014 rdfs:label "terms of service URL"@en .
+
+wdt:P706 rdfs:label "located in/on physical feature"@en .
+
+wdt:P729 rdfs:label "service entry"@en .
+
+wdt:P740 rdfs:label "location of formation"@en .
+
+wdt:P749 rdfs:label "parent organization or unit"@en .
+
+wdt:P7561 rdfs:label "category for the interior of the item"@en .
+
+wdt:P7867 rdfs:label "category for maps or plans"@en .
+
+wdt:P793 rdfs:label "significant event"@en .
+
+wdt:P795 rdfs:label "located on linear feature"@en .
+
+wdt:P7959 rdfs:label "historic county"@en .
+
+wdt:P8093 rdfs:label "donations"@en .
+
+wdt:P84 rdfs:label "architect"@en .
+
+wdt:P8464 rdfs:label "content partnership category"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P859 rdfs:label "sponsor"@en .
+
+wdt:P8596 rdfs:label "category for the exterior of the item"@en .
+
+wdt:P8687 rdfs:label "social media followers"@en .
+
+wdt:P8768 rdfs:label "online catalog URL"@en .
+
+wdt:P8933 rdfs:label "category for the view from the item"@en .
+
+wdt:P8989 rdfs:label "category for the view of the item"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P921 rdfs:label "main subject"@en .
+
+wdt:P935 rdfs:label "Commons gallery"@en .
+
+wdt:P968 rdfs:label "email address"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q386724 rdfs:label "work"@en .
+
+wd:Q41825 rdfs:label "day of the week"@en .
+
+wd:Q515 rdfs:label "city"@en .
+
+wd:Q56061 rdfs:label "administrative territorial entity"@en .
+
+wd:Q618779 rdfs:label "award"@en .
+
+wd:Q33506 rdfs:label "museum"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q5 rdfs:label "human"@en .
+

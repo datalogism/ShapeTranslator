@@ -1,0 +1,77 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/ClinicalTrialShape> a sh:NodeShape ;
+    rdfs:label "clinical trial"@en ;
+    sh:property [ sh:class wd:Q78088984 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "study type"@en ;
+            sh:path wdt:P8363 ],
+        [ sh:name "contributor to the creative work or subject"@en ;
+            sh:or ( [ sh:class wd:Q16917 ] [ sh:class wd:Q43229 ] [ sh:class wd:Q4830453 ] ) ;
+            sh:path wdt:P767 ],
+        [ sh:name "research intervention"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P4844 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "principal investigator"@en ;
+            sh:path wdt:P8329 ],
+        [ sh:class wd:Q7180990 ;
+            sh:name "clinical trial phase"@en ;
+            sh:path wdt:P6099 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "maximum age"@en ;
+            sh:path wdt:P4135 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "number of participants"@en ;
+            sh:path wdt:P1132 ],
+        [ sh:class wd:Q6256 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "start time"@en ;
+            sh:path wdt:P580 ],
+        [ sh:maxCount 1 ;
+            sh:name "sponsor"@en ;
+            sh:or ( [ sh:class wd:Q43229 ] [ sh:class wd:Q4830453 ] [ sh:class wd:Q16917 ] ) ;
+            sh:path wdt:P859 ],
+        [ sh:maxCount 1 ;
+            sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "end time"@en ;
+            sh:path wdt:P582 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "minimum age"@en ;
+            sh:path wdt:P2899 ],
+        [ sh:name "medical condition"@en ;
+            sh:or ( [ sh:class wd:Q12136 ] [ sh:class wd:Q7189713 ] ) ;
+            sh:path wdt:P1050 ] ;
+    sh:targetClass wd:Q30612 .
+

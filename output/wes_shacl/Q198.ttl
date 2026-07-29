@@ -1,0 +1,239 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/WarShape> a sh:NodeShape ;
+    rdfs:label "war"@en ;
+    sh:name "war"@en ;
+    sh:property [ sh:class wd:Q11514315 ;
+            sh:maxCount 1 ;
+            sh:name "time period"@en ;
+            sh:path wdt:P2348 ],
+        [ sh:class wd:Q13406463 ;
+            sh:name "has list"@en ;
+            sh:path wdt:P2354 ],
+        [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:class wd:Q11266439 ;
+            sh:name "topic has template"@en ;
+            sh:path wdt:P1424 ],
+        [ sh:class wd:Q131569 ;
+            sh:maxCount 1 ;
+            sh:name "end cause"@en ;
+            sh:path wdt:P1534 ],
+        [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q3331189 ] [ sh:class wd:Q47461344 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:class wd:Q5 ;
+            sh:name "significant person"@en ;
+            sh:path wdt:P3342 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "end time"@en ;
+            sh:path wdt:P582 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for maps or plans"@en ;
+            sh:path wdt:P7867 ],
+        [ sh:name "has effect"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1542 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "number of deaths"@en ;
+            sh:path wdt:P1120 ],
+        [ sh:name "significant event"@en ;
+            sh:or ( [ sh:class wd:Q1190554 ] [ sh:class wd:Q1914636 ] ) ;
+            sh:path wdt:P793 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "point in time"@en ;
+            sh:path wdt:P585 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:name "said to be the same as"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P460 ],
+        [ sh:class wd:Q16334295 ;
+            sh:name "participant"@en ;
+            sh:path wdt:P710 ],
+        [ sh:class wd:Q386724 ;
+            sh:maxCount 1 ;
+            sh:name "present in work"@en ;
+            sh:path wdt:P1441 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q11167066 ;
+            sh:name "order of battle"@en ;
+            sh:path wdt:P4220 ],
+        [ sh:name "has immediate cause"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1478 ],
+        [ sh:class wd:Q6256 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:name "has cause"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P828 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:class wd:Q386724 ;
+            sh:name "depicted by"@en ;
+            sh:path wdt:P1299 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "number of participants"@en ;
+            sh:path wdt:P1132 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "start time"@en ;
+            sh:path wdt:P580 ],
+        [ sh:class wd:Q82794 ;
+            sh:name "location"@en ;
+            sh:path wdt:P276 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons gallery"@en ;
+            sh:path wdt:P935 ],
+        [ sh:name "followed by"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P156 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P155 ],
+        [ sh:class wd:Q16695773 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:name "facet of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1269 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q56061 ;
+            sh:name "located in the administrative territorial entity"@en ;
+            sh:path wdt:P131 ] ;
+    sh:targetClass wd:Q198 .
+
+wd:Q11167066 rdfs:label "order of battle"@en .
+
+wd:Q11266439 rdfs:label "Wikimedia template"@en .
+
+wd:Q11514315 rdfs:label "historical period"@en .
+
+wd:Q1190554 rdfs:label "occurrence"@en .
+
+wd:Q131569 rdfs:label "treaty"@en .
+
+wd:Q13406463 rdfs:label "Wikimedia list article"@en .
+
+wd:Q16334295 rdfs:label "group of humans"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q1914636 rdfs:label "activity"@en .
+
+wd:Q198 rdfs:label "war"@en .
+
+wd:Q3331189 rdfs:label "version, edition or translation"@en .
+
+wd:Q47461344 rdfs:label "written work"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q56061 rdfs:label "administrative territorial entity"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q82794 rdfs:label "region"@en .
+
+wdt:P1120 rdfs:label "number of deaths"@en .
+
+wdt:P1132 rdfs:label "number of participants"@en .
+
+wdt:P1269 rdfs:label "facet of"@en .
+
+wdt:P1299 rdfs:label "depicted by"@en .
+
+wdt:P131 rdfs:label "located in the administrative territorial entity"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1424 rdfs:label "topic has template"@en .
+
+wdt:P1441 rdfs:label "present in work"@en .
+
+wdt:P1478 rdfs:label "has immediate cause"@en .
+
+wdt:P1534 rdfs:label "end cause"@en .
+
+wdt:P1542 rdfs:label "has effect"@en .
+
+wdt:P155 rdfs:label "follows"@en .
+
+wdt:P156 rdfs:label "followed by"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P1705 rdfs:label "native label"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2348 rdfs:label "time period"@en .
+
+wdt:P2354 rdfs:label "has list"@en .
+
+wdt:P276 rdfs:label "location"@en .
+
+wdt:P3342 rdfs:label "significant person"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P4220 rdfs:label "order of battle"@en .
+
+wdt:P460 rdfs:label "said to be the same as"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P527 rdfs:label "has part(s)"@en .
+
+wdt:P580 rdfs:label "start time"@en .
+
+wdt:P582 rdfs:label "end time"@en .
+
+wdt:P585 rdfs:label "point in time"@en .
+
+wdt:P710 rdfs:label "participant"@en .
+
+wdt:P7867 rdfs:label "category for maps or plans"@en .
+
+wdt:P793 rdfs:label "significant event"@en .
+
+wdt:P828 rdfs:label "has cause"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P935 rdfs:label "Commons gallery"@en .
+
+wd:Q386724 rdfs:label "work"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+

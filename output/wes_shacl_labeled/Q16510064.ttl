@@ -1,0 +1,187 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/SportingEventShape> a sh:NodeShape ;
+    rdfs:label "sporting event"@en ;
+    sh:property [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "pole position"@en ;
+            sh:path wdt:P3764 ],
+        [ sh:class wd:Q1076486 ;
+            sh:maxCount 1 ;
+            sh:name "home venue"@en ;
+            sh:path wdt:P115 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "point in time"@en ;
+            sh:path wdt:P585 ],
+        [ sh:class wd:Q5 ;
+            sh:name "significant person"@en ;
+            sh:path wdt:P3342 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "end time"@en ;
+            sh:path wdt:P582 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "fastest lap"@en ;
+            sh:path wdt:P5053 ],
+        [ sh:class wd:Q11266439 ;
+            sh:maxCount 1 ;
+            sh:name "topic has template"@en ;
+            sh:path wdt:P1424 ],
+        [ sh:class wd:Q56061 ;
+            sh:maxCount 1 ;
+            sh:name "located in the administrative territorial entity"@en ;
+            sh:path wdt:P131 ],
+        [ sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:name "organizer"@en ;
+            sh:or ( [ sh:class wd:Q43229 ] [ sh:class wd:Q4438121 ] ) ;
+            sh:path wdt:P664 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q16510064 ;
+            sh:maxCount 1 ;
+            sh:name "followed by"@en ;
+            sh:path wdt:P156 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:class wd:Q5 ;
+            sh:name "referee"@en ;
+            sh:path wdt:P1652 ],
+        [ sh:maxCount 1 ;
+            sh:name "sport"@en ;
+            sh:or ( [ sh:class wd:Q31629 ] [ sh:class wd:Q349 ] ) ;
+            sh:path wdt:P641 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of matches played/races/starts"@en ;
+            sh:path wdt:P1350 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ],
+        [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:class wd:Q61685689 ;
+            sh:maxCount 1 ;
+            sh:name "tournament format"@en ;
+            sh:path wdt:P8127 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "edition number"@en ;
+            sh:path wdt:P393 ],
+        [ sh:class wd:Q30227593 ;
+            sh:maxCount 1 ;
+            sh:name "time period"@en ;
+            sh:path wdt:P2348 ],
+        [ sh:maxCount 1 ;
+            sh:name "sponsor"@en ;
+            sh:or ( [ sh:class wd:Q43229 ] [ sh:class wd:Q431289 ] ) ;
+            sh:path wdt:P859 ],
+        [ sh:name "winner"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q4438121 ] ) ;
+            sh:path wdt:P1346 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "event interval"@en ;
+            sh:path wdt:P2257 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of points/goals/set scored"@en ;
+            sh:path wdt:P1351 ],
+        [ sh:class wd:Q16510064 ;
+            sh:maxCount 1 ;
+            sh:name "part of the series"@en ;
+            sh:path wdt:P179 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "event distance"@en ;
+            sh:path wdt:P3157 ],
+        [ sh:maxCount 1 ;
+            sh:name "competition class"@en ;
+            sh:or ( [ sh:class wd:Q1744559 ] [ sh:class wd:Q10708051 ] ) ;
+            sh:path wdt:P2094 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "start time"@en ;
+            sh:path wdt:P580 ],
+        [ sh:maxCount 1 ;
+            sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:name "participant"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q4438121 ] ) ;
+            sh:path wdt:P710 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:name "participating team"@en ;
+            sh:or ( [ sh:class wd:Q847017 ] [ sh:class wd:Q12973014 ] ) ;
+            sh:path wdt:P1923 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of participants"@en ;
+            sh:path wdt:P1132 ],
+        [ sh:class wd:Q16510064 ;
+            sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:path wdt:P155 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "attendance"@en ;
+            sh:path wdt:P1110 ],
+        [ sh:name "location"@en ;
+            sh:or ( [ sh:class wd:Q515 ] [ sh:class wd:Q1076486 ] ) ;
+            sh:path wdt:P276 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "total revenue"@en ;
+            sh:path wdt:P2139 ],
+        [ sh:class wd:Q16510064 ;
+            sh:maxCount 1 ;
+            sh:name "opposite of"@en ;
+            sh:path wdt:P461 ],
+        [ sh:maxCount 1 ;
+            sh:name "facet of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1269 ],
+        [ sh:datatype xsd:string ;
+            sh:name "hashtag"@en ;
+            sh:path wdt:P2572 ] ;
+    sh:targetClass wd:Q16510064 .
+

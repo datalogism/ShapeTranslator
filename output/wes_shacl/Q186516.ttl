@@ -1,0 +1,183 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/NationalFlagShape> a sh:NodeShape ;
+    rdfs:label "national flag"@en ;
+    sh:name "national flag"@en ;
+    sh:property [ sh:class wd:Q5 ;
+            sh:name "designed by"@en ;
+            sh:path wdt:P287 ],
+        [ sh:name "depicts"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P180 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Unicode character"@en ;
+            sh:path wdt:P487 ],
+        [ sh:class wd:Q186516 ;
+            sh:maxCount 1 ;
+            sh:name "replaced by"@en ;
+            sh:path wdt:P1366 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:name "has part(s) of the class"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2670 ],
+        [ sh:in ( wd:Q24577232 wd:Q208324 wd:Q2029729 wd:Q23777467 wd:Q203161 wd:Q24577249 ) ;
+            sh:name "genre"@en ;
+            sh:path wdt:P136 ],
+        [ sh:class wd:Q14660 ;
+            sh:maxCount 1 ;
+            sh:name "said to be the same as"@en ;
+            sh:path wdt:P460 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q186516 ;
+            sh:maxCount 1 ;
+            sh:name "based on"@en ;
+            sh:path wdt:P144 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "nickname"@en ;
+            sh:path wdt:P1449 ],
+        [ sh:maxCount 1 ;
+            sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q186516 ;
+            sh:maxCount 1 ;
+            sh:name "replaces"@en ;
+            sh:path wdt:P1365 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:class wd:Q3331189 ;
+            sh:name "described by source"@en ;
+            sh:path wdt:P1343 ],
+        [ sh:class wd:Q815741 ;
+            sh:maxCount 1 ;
+            sh:name "shape"@en ;
+            sh:path wdt:P1419 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "inscription"@en ;
+            sh:path wdt:P1684 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "dissolved, abolished or demolished date"@en ;
+            sh:path wdt:P576 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "applies to jurisdiction"@en ;
+            sh:path wdt:P1001 ],
+        [ sh:class wd:Q14660 ;
+            sh:maxCount 1 ;
+            sh:name "derivative work"@en ;
+            sh:path wdt:P4969 ],
+        [ sh:class wd:Q1075 ;
+            sh:name "color"@en ;
+            sh:path wdt:P462 ],
+        [ sh:maxCount 1 ;
+            sh:name "aspect ratio (W:H)"@en ;
+            sh:or ( [ sh:class wd:Q20970434 ] [ sh:class wd:Q1441762 ] ) ;
+            sh:path wdt:P2061 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "represents"@en ;
+            sh:path wdt:P1268 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ] ;
+    sh:targetClass wd:Q186516 .
+
+wd:Q1075 rdfs:label "color"@en .
+
+wd:Q1441762 rdfs:label "aspect ratio"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q20970434 rdfs:label "width to height aspect ratio"@en .
+
+wd:Q3331189 rdfs:label "version, edition or translation"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q815741 rdfs:label "geometric shape"@en .
+
+wdt:P1001 rdfs:label "applies to jurisdiction"@en .
+
+wdt:P1268 rdfs:label "represents"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P136 rdfs:label "genre"@en .
+
+wdt:P1365 rdfs:label "replaces"@en .
+
+wdt:P1366 rdfs:label "replaced by"@en .
+
+wdt:P1419 rdfs:label "shape"@en .
+
+wdt:P144 rdfs:label "based on"@en .
+
+wdt:P1448 rdfs:label "official name"@en .
+
+wdt:P1449 rdfs:label "nickname"@en .
+
+wdt:P1684 rdfs:label "inscription"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P180 rdfs:label "depicts"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2061 rdfs:label "aspect ratio (W:H)"@en .
+
+wdt:P2670 rdfs:label "has part(s) of the class"@en .
+
+wdt:P287 rdfs:label "designed by"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P460 rdfs:label "said to be the same as"@en .
+
+wdt:P462 rdfs:label "color"@en .
+
+wdt:P487 rdfs:label "Unicode character"@en .
+
+wdt:P4969 rdfs:label "derivative work"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P576 rdfs:label "dissolved, abolished or demolished date"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wd:Q14660 rdfs:label "flag"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q186516 rdfs:label "national flag"@en .
+

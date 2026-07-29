@@ -1,0 +1,205 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/SpaceportShape> a sh:NodeShape ;
+    rdfs:label "spaceport"@en ;
+    sh:name "spaceport"@en ;
+    sh:property [ sh:datatype xsd:decimal ;
+            sh:name "social media followers"@en ;
+            sh:path wdt:P8687 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "patronage"@en ;
+            sh:path wdt:P3872 ],
+        [ sh:maxCount 1 ;
+            sh:name "located in/on physical feature"@en ;
+            sh:or ( [ sh:class wd:Q618123 ] [ sh:class wd:Q2221906 ] ) ;
+            sh:path wdt:P706 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:name "operator"@en ;
+            sh:or ( [ sh:class wd:Q327333 ] [ sh:class wd:Q61883 ] [ sh:class wd:Q4830453 ] ) ;
+            sh:path wdt:P137 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:maxCount 1 ;
+            sh:name "place served by transport hub"@en ;
+            sh:or ( [ sh:class wd:Q486972 ] [ sh:class wd:Q3957 ] [ sh:class wd:Q515 ] ) ;
+            sh:path wdt:P931 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:class wd:Q56061 ;
+            sh:maxCount 1 ;
+            sh:name "located in the administrative territorial entity"@en ;
+            sh:path wdt:P131 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "area"@en ;
+            sh:path wdt:P2046 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "date of official opening"@en ;
+            sh:path wdt:P1619 ],
+        [ sh:class wd:Q82794 ;
+            sh:maxCount 1 ;
+            sh:name "location"@en ;
+            sh:path wdt:P276 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:name "significant event"@en ;
+            sh:or ( [ sh:class wd:Q1190554 ] [ sh:class wd:Q2245405 ] ) ;
+            sh:path wdt:P793 ],
+        [ sh:maxCount 1 ;
+            sh:name "parent organization or unit"@en ;
+            sh:or ( [ sh:class wd:Q327333 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P749 ],
+        [ sh:class wd:Q56557118 ;
+            sh:maxCount 1 ;
+            sh:name "state of use"@en ;
+            sh:path wdt:P5817 ],
+        [ sh:name "owned by"@en ;
+            sh:or ( [ sh:class wd:Q327333 ] [ sh:class wd:Q4830453 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P127 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "elevation above sea level"@en ;
+            sh:path wdt:P2044 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q30634609 ;
+            sh:name "heritage designation"@en ;
+            sh:path wdt:P1435 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ],
+        [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ] ;
+    sh:targetClass wd:Q194188 .
+
+wd:Q1190554 rdfs:label "occurrence"@en .
+
+wd:Q194188 rdfs:label "spaceport"@en .
+
+wd:Q2221906 rdfs:label "geographic location"@en .
+
+wd:Q2245405 rdfs:label "key event"@en .
+
+wd:Q30634609 rdfs:label "heritage designation"@en .
+
+wd:Q3957 rdfs:label "town"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q486972 rdfs:label "human settlement"@en .
+
+wd:Q515 rdfs:label "city"@en .
+
+wd:Q56061 rdfs:label "administrative territorial entity"@en .
+
+wd:Q56557118 rdfs:label "use status"@en .
+
+wd:Q618123 rdfs:label "geographical feature"@en .
+
+wd:Q61883 rdfs:label "air force"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q82794 rdfs:label "region"@en .
+
+wdt:P127 rdfs:label "owned by"@en .
+
+wdt:P131 rdfs:label "located in the administrative territorial entity"@en .
+
+wdt:P137 rdfs:label "operator"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1435 rdfs:label "heritage designation"@en .
+
+wdt:P1448 rdfs:label "official name"@en .
+
+wdt:P1619 rdfs:label "date of official opening"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P1705 rdfs:label "native label"@en .
+
+wdt:P1813 rdfs:label "short name"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2044 rdfs:label "elevation above sea level"@en .
+
+wdt:P2046 rdfs:label "area"@en .
+
+wdt:P276 rdfs:label "location"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P3872 rdfs:label "patronage"@en .
+
+wdt:P527 rdfs:label "has part(s)"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P5817 rdfs:label "state of use"@en .
+
+wdt:P706 rdfs:label "located in/on physical feature"@en .
+
+wdt:P749 rdfs:label "parent organization or unit"@en .
+
+wdt:P793 rdfs:label "significant event"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P8687 rdfs:label "social media followers"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P931 rdfs:label "place served by transport hub"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q4830453 rdfs:label "business"@en .
+
+wd:Q327333 rdfs:label "government agency"@en .
+

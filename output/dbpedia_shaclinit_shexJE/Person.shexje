@@ -1,0 +1,1160 @@
+{
+  "@context": "http://www.w3.org/ns/shexje.jsonld",
+  "type": "Schema",
+  "shapes": [
+    {
+      "type": "Shape",
+      "id": "Person",
+      "expression": {
+        "type": "EachOf",
+        "expressions": [
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/givenName",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/nick",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/title",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/abstract",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#comment",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/activeYearsStartYear",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#gYear"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/activeYearsEndYear",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#gYear"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/serviceStartYear",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#gYear"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/serviceEndYear",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#gYear"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/draftYear",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#gYear"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/undraftedYear",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#gYear"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/country",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Country",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/stateOfOrigin",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Country",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/residence",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Place",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/restingPlace",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Place",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/hometown",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Settlement",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "path": {
+              "type": "AlternativePath",
+              "expressions": [
+                "http://dbpedia.org/ontology/occupation",
+                "http://dbpedia.org/ontology/profession"
+              ]
+            },
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Profession",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/knownFor",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "IRI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/genre",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Genre",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/instrument",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Instrument",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/award",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Award",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/careerStation",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "CareerStation",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/education",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "EducationalInstitution",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/almaMater",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "EducationalInstitution",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/college",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "EducationalInstitution",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/school",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "EducationalInstitution",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/highschool",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "School",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/academicDiscipline",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "AcademicSubjectOrMedicalSpecialty",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/doctoralAdvisor",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Person",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/institution",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Organisation",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/employer",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Organisation",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/associatedBand",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Band",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/associatedMusicalArtist",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "BandOrPerson",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/recordLabel",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "RecordLabel",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/militaryService",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "MilitaryService",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/militaryBranch",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "MilitaryUnit",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/militaryUnit",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "MilitaryUnit",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/militaryCommand",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/allegiance",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/spouse",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Person",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/parent",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Person",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/child",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Person",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/relative",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Person",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/relation",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Person",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/successor",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Person",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/predecessor",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Person",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/team",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "SportsTeam",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/formerTeam",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "SportsTeam",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/debutTeam",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "SportsTeam",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/draftTeam",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "SportsTeam",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/managerClub",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "SportsTeam",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/league",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "SportsLeague",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/draft",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/draftPick",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/draftRound",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/battingSide",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/bowlingSide",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/shoots",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 0,
+            "max": 2
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/overallRecord",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/thumbnail",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Image",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/depiction",
+            "valueExpr": {
+              "type": "ShapeAnd",
+              "shapeExprs": [
+                "Image",
+                {
+                  "type": "NodeConstraint",
+                  "nodeKind": "IRI"
+                }
+              ]
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://xmlns.com/foaf/0.1/homepage",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "IRI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/imdbId",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2002/07/owl#differentFrom",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageID",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "min": 1,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageRevisionID",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+            },
+            "min": 1,
+            "max": -1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/wikiPageRedirects",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#anyURI",
+              "pattern": "^http://dbpedia.org/resource/"
+            }
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/Person/height",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://dbpedia.org/datatype/centimetre"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/height",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#double"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/Person/height",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://dbpedia.org/datatype/centimetre"
+            },
+            "min": 0,
+            "max": 1
+          },
+          {
+            "type": "TripleConstraint",
+            "predicate": "http://dbpedia.org/ontology/height",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "nodeKind": "Literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#double"
+            },
+            "min": 0,
+            "max": 1
+          }
+        ],
+        "alternativeGroups": [
+          [
+            "http://dbpedia.org/ontology/Person/height",
+            "http://dbpedia.org/ontology/height"
+          ]
+        ]
+      },
+      "targetClass": "http://dbpedia.org/ontology/Person"
+    },
+    {
+      "type": "Shape",
+      "id": "AcademicSubjectOrMedicalSpecialty",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/AcademicSubject",
+        "http://dbpedia.org/ontology/MedicalSpecialty"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Award",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Award"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Band",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Band"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "BandOrPerson",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Band",
+        "http://dbpedia.org/ontology/Person"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "CareerStation",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/CareerStation"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Country",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Country"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "EducationalInstitution",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/EducationalInstitution"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Genre",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Genre"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Image",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Image"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Instrument",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Instrument"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "MilitaryService",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/MilitaryService"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "MilitaryUnit",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/MilitaryUnit"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Organisation",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Organisation"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Person",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Person"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Place",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Place"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Profession",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Profession"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "RecordLabel",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/RecordLabel"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "School",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/School"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "Settlement",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/Settlement"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "SportsLeague",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/SportsLeague"
+      ]
+    },
+    {
+      "type": "Shape",
+      "id": "SportsTeam",
+      "extra": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "values": [
+        "http://dbpedia.org/ontology/SportsTeam"
+      ]
+    }
+  ]
+}

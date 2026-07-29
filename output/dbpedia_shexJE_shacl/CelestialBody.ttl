@@ -1,0 +1,135 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/CelestialBodyShape> a sh:NodeShape ;
+    sh:or ( [ sh:property [ sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path <http://dbpedia.org/ontology/Planet/orbitalPeriod> ] ] [ sh:property [ sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path <http://dbpedia.org/ontology/orbitalPeriod> ] ] ) ;
+    sh:property [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:comment ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/meanRadius> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageRevisionID> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path skos:exactMatch ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageLength> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path owl:differentFrom ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/detectionMethod> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/epoch> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/volume> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path owl:sameAs ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/periapsis> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/albedo> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:label ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/Planet/volume> ],
+        [ sh:class <http://dbpedia.org/ontology/Person> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/discoverer> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/formerName> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/Planet/surfaceArea> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/averageSpeed> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/rotationPeriod> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageWikiLink> ;
+            sh:pattern "^http://dbpedia.org/resource/" ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path foaf:isPrimaryTopicOf ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/absoluteMagnitude> ],
+        [ sh:class skos:Concept ;
+            sh:path dcterms:subject ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/abstract> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageID> ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/thumbnail> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path foaf:name ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/escapeVelocity> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/Planet/maximumTemperature> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/Planet/meanRadius> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageExternalLink> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path rdfs:seeAlso ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path prov:wasDerivedFrom ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/discovered> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/surfaceArea> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/abbreviation> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/neighbourConstellations> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/Planet/minimumTemperature> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/Planet/periapsis> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/apparentMagnitude> ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path foaf:depiction ] ;
+    sh:targetClass <http://dbpedia.org/ontology/CelestialBody> .
+

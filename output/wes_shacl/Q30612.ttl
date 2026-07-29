@@ -1,0 +1,132 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/ClinicalTrialShape> a sh:NodeShape ;
+    rdfs:label "clinical trial"@en ;
+    sh:name "clinical trial"@en ;
+    sh:property [ sh:name "medical condition"@en ;
+            sh:or ( [ sh:class wd:Q12136 ] [ sh:class wd:Q7189713 ] ) ;
+            sh:path wdt:P1050 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "minimum age"@en ;
+            sh:path wdt:P2899 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "start time"@en ;
+            sh:path wdt:P580 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "end time"@en ;
+            sh:path wdt:P582 ],
+        [ sh:name "contributor to the creative work or subject"@en ;
+            sh:or ( [ sh:class wd:Q16917 ] [ sh:class wd:Q43229 ] [ sh:class wd:Q4830453 ] ) ;
+            sh:path wdt:P767 ],
+        [ sh:class wd:Q78088984 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "study type"@en ;
+            sh:path wdt:P8363 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "maximum age"@en ;
+            sh:path wdt:P4135 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "number of participants"@en ;
+            sh:path wdt:P1132 ],
+        [ sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:maxCount 1 ;
+            sh:name "sponsor"@en ;
+            sh:or ( [ sh:class wd:Q43229 ] [ sh:class wd:Q4830453 ] [ sh:class wd:Q16917 ] ) ;
+            sh:path wdt:P859 ],
+        [ sh:class wd:Q6256 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:name "research intervention"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P4844 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ],
+        [ sh:class wd:Q7180990 ;
+            sh:name "clinical trial phase"@en ;
+            sh:path wdt:P6099 ],
+        [ sh:maxCount 1 ;
+            sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "principal investigator"@en ;
+            sh:path wdt:P8329 ] ;
+    sh:targetClass wd:Q30612 .
+
+wd:Q12136 rdfs:label "disease"@en .
+
+wd:Q30612 rdfs:label "clinical trial"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q7180990 rdfs:label "phase of clinical research"@en .
+
+wd:Q7189713 rdfs:label "physiological condition"@en .
+
+wd:Q78088984 rdfs:label "study type"@en .
+
+wdt:P1050 rdfs:label "medical condition"@en .
+
+wdt:P1132 rdfs:label "number of participants"@en .
+
+wdt:P1476 rdfs:label "title"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P1813 rdfs:label "short name"@en .
+
+wdt:P2283 rdfs:label "uses"@en .
+
+wdt:P2899 rdfs:label "minimum age"@en .
+
+wdt:P4135 rdfs:label "maximum age"@en .
+
+wdt:P4844 rdfs:label "research intervention"@en .
+
+wdt:P580 rdfs:label "start time"@en .
+
+wdt:P582 rdfs:label "end time"@en .
+
+wdt:P6099 rdfs:label "clinical trial phase"@en .
+
+wdt:P767 rdfs:label "contributor to the creative work or subject"@en .
+
+wdt:P8329 rdfs:label "principal investigator"@en .
+
+wdt:P8363 rdfs:label "study type"@en .
+
+wdt:P859 rdfs:label "sponsor"@en .
+
+wdt:P921 rdfs:label "main subject"@en .
+
+wd:Q16917 rdfs:label "hospital"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q4830453 rdfs:label "business"@en .
+

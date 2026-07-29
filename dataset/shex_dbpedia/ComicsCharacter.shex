@@ -1,0 +1,31 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+start = @<ComicsCharacter>
+
+<ComicsCharacter> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/ComicsCharacter> ] ;
+  rdfs:label rdf:langString + ;
+  <http://dbpedia.org/ontology/imdbId> xsd:string * ;
+  owl:differentFrom xsd:anyURI * ;
+  rdfs:seeAlso xsd:anyURI * ;
+  <http://dbpedia.org/ontology/wikiPageRevisionID> xsd:integer + ;
+  <http://xmlns.com/foaf/0.1/name> xsd:string + ;
+  <http://xmlns.com/foaf/0.1/givenName> xsd:string + ;
+  rdfs:comment rdf:langString + ;
+  <http://dbpedia.org/ontology/firstAppearance> xsd:string * ;
+  <http://dbpedia.org/ontology/creator> @<Person> + ;
+  <http://dbpedia.org/ontology/portrayer> @<Person> +
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Person> ]
+}

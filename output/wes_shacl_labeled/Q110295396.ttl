@@ -1,0 +1,114 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/TypeOfMusicalInstrumentShape> a sh:NodeShape ;
+    rdfs:label "type of musical instrument"@en ;
+    sh:property [ sh:class wd:Q98645843 ;
+            sh:maxCount 1 ;
+            sh:name "has list"@en ;
+            sh:path wdt:P2354 ],
+        [ sh:class wd:Q55190325 ;
+            sh:maxCount 1 ;
+            sh:name "manufacturer"@en ;
+            sh:path wdt:P176 ],
+        [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q3331189 ] [ sh:class wd:Q47461344 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by WikiProject"@en ;
+            sh:path wdt:P6104 ],
+        [ sh:name "has part(s) of the class"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2670 ],
+        [ sh:class wd:Q66715801 ;
+            sh:maxCount 1 ;
+            sh:name "practiced by"@en ;
+            sh:path wdt:P3095 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Unicode character"@en ;
+            sh:path wdt:P487 ],
+        [ sh:class wd:Q110295396 ;
+            sh:maxCount 1 ;
+            sh:name "said to be the same as"@en ;
+            sh:path wdt:P460 ],
+        [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:class wd:Q16695773 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q6256 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q66715801 ;
+            sh:maxCount 1 ;
+            sh:name "used by"@en ;
+            sh:path wdt:P1535 ],
+        [ sh:name "discoverer or inventor"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] [ sh:class wd:Q16334295 ] ) ;
+            sh:path wdt:P61 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons gallery"@en ;
+            sh:path wdt:P935 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "time of discovery or invention"@en ;
+            sh:path wdt:P575 ],
+        [ sh:name "indigenous to"@en ;
+            sh:or ( [ sh:class wd:Q82794 ] [ sh:class wd:Q56061 ] ) ;
+            sh:path wdt:P2341 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:name "has use"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P366 ],
+        [ sh:name "intangible cultural heritage status"@en ;
+            sh:or ( [ sh:class wd:Q113040113 ] [ sh:class wd:Q116056897 ] ) ;
+            sh:path wdt:P3259 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q618779 ;
+            sh:maxCount 1 ;
+            sh:name "award received"@en ;
+            sh:path wdt:P166 ],
+        [ sh:class wd:Q214609 ;
+            sh:name "made from material"@en ;
+            sh:path wdt:P186 ],
+        [ sh:name "exact match"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2888 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:name "culture"@en ;
+            sh:or ( [ sh:class wd:Q11042 ] [ sh:class wd:Q19958368 ] ) ;
+            sh:path wdt:P2596 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Hornbostel-Sachs classification"@en ;
+            sh:path wdt:P1762 ] ;
+    sh:targetClass wd:Q110295396 .
+

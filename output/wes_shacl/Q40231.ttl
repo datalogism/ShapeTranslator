@@ -1,0 +1,217 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/PublicElectionShape> a sh:NodeShape ;
+    rdfs:label "public election"@en ;
+    sh:name "public election"@en ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "point in time"@en ;
+            sh:path wdt:P585 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by WikiProject"@en ;
+            sh:path wdt:P6104 ],
+        [ sh:class wd:Q56061 ;
+            sh:maxCount 1 ;
+            sh:name "applies to jurisdiction"@en ;
+            sh:path wdt:P1001 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "successful candidate"@en ;
+            sh:path wdt:P991 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q5 ;
+            sh:name "candidate"@en ;
+            sh:path wdt:P726 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "ballots cast"@en ;
+            sh:path wdt:P1868 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:class wd:Q515 ;
+            sh:maxCount 1 ;
+            sh:name "location"@en ;
+            sh:path wdt:P276 ],
+        [ sh:class wd:Q11266439 ;
+            sh:maxCount 1 ;
+            sh:name "topic has template"@en ;
+            sh:path wdt:P1424 ],
+        [ sh:class wd:Q40231 ;
+            sh:maxCount 1 ;
+            sh:name "followed by"@en ;
+            sh:path wdt:P156 ],
+        [ sh:class wd:Q40231 ;
+            sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:path wdt:P361 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "eligible voters"@en ;
+            sh:path wdt:P1867 ],
+        [ sh:class wd:Q13406463 ;
+            sh:name "has list"@en ;
+            sh:path wdt:P2354 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "total valid votes"@en ;
+            sh:path wdt:P1697 ],
+        [ sh:maxCount 1 ;
+            sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:maxCount 1 ;
+            sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "electorate"@en ;
+            sh:path wdt:P1831 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of spoilt votes"@en ;
+            sh:path wdt:P5044 ],
+        [ sh:class wd:Q7278 ;
+            sh:maxCount 1 ;
+            sh:name "organizer"@en ;
+            sh:path wdt:P664 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of abstentions"@en ;
+            sh:path wdt:P5043 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of blank votes"@en ;
+            sh:path wdt:P5045 ],
+        [ sh:class wd:Q4164871 ;
+            sh:name "elector"@en ;
+            sh:path wdt:P2319 ],
+        [ sh:class wd:Q182985 ;
+            sh:name "voting system"@en ;
+            sh:path wdt:P8196 ],
+        [ sh:class wd:Q56061 ;
+            sh:maxCount 1 ;
+            sh:name "located in the administrative territorial entity"@en ;
+            sh:path wdt:P131 ],
+        [ sh:class wd:Q4164871 ;
+            sh:maxCount 1 ;
+            sh:name "office contested"@en ;
+            sh:path wdt:P541 ],
+        [ sh:maxCount 1 ;
+            sh:name "facet of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1269 ],
+        [ sh:class wd:Q40231 ;
+            sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:path wdt:P155 ] ;
+    sh:targetClass wd:Q40231 .
+
+wd:Q11266439 rdfs:label "Wikimedia template"@en .
+
+wd:Q13406463 rdfs:label "Wikimedia list article"@en .
+
+wd:Q182985 rdfs:label "electoral system"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q515 rdfs:label "city"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q7278 rdfs:label "political party"@en .
+
+wdt:P1001 rdfs:label "applies to jurisdiction"@en .
+
+wdt:P1269 rdfs:label "facet of"@en .
+
+wdt:P131 rdfs:label "located in the administrative territorial entity"@en .
+
+wdt:P1424 rdfs:label "topic has template"@en .
+
+wdt:P155 rdfs:label "follows"@en .
+
+wdt:P156 rdfs:label "followed by"@en .
+
+wdt:P1697 rdfs:label "total valid votes"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P1831 rdfs:label "electorate"@en .
+
+wdt:P1867 rdfs:label "eligible voters"@en .
+
+wdt:P1868 rdfs:label "ballots cast"@en .
+
+wdt:P2319 rdfs:label "elector"@en .
+
+wdt:P2354 rdfs:label "has list"@en .
+
+wdt:P276 rdfs:label "location"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P5043 rdfs:label "number of abstentions"@en .
+
+wdt:P5044 rdfs:label "number of spoilt votes"@en .
+
+wdt:P5045 rdfs:label "number of blank votes"@en .
+
+wdt:P541 rdfs:label "office contested"@en .
+
+wdt:P585 rdfs:label "point in time"@en .
+
+wdt:P6104 rdfs:label "maintained by WikiProject"@en .
+
+wdt:P664 rdfs:label "organizer"@en .
+
+wdt:P726 rdfs:label "candidate"@en .
+
+wdt:P8196 rdfs:label "voting system"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P921 rdfs:label "main subject"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wdt:P991 rdfs:label "successful candidate"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q4164871 rdfs:label "position"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q56061 rdfs:label "administrative territorial entity"@en .
+
+wd:Q40231 rdfs:label "public election"@en .
+

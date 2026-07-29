@@ -1,0 +1,100 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/AstronautShape> a sh:NodeShape ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path <http://dbpedia.org/ontology/timeInSpace> ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:nodeKind sh:Literal ;
+                        sh:path <http://dbpedia.org/ontology/Astronaut/timeInSpace> ] ] ) ;
+    sh:property [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageID> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/birthDate> ],
+        [ sh:class <http://dbpedia.org/ontology/SpaceMission> ;
+            sh:path <http://dbpedia.org/ontology/mission> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:label ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:comment ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/selection> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/retired> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/deathDate> ],
+        [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/birthPlace> ],
+        [ sh:class <http://dbpedia.org/ontology/PersonFunction> ;
+            sh:path <http://dbpedia.org/ontology/occupation> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path foaf:name ],
+        [ sh:class <http://dbpedia.org/ontology/Award> ;
+            sh:path <http://dbpedia.org/ontology/award> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageLength> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageWikiLink> ;
+            sh:pattern "^http://dbpedia.org/resource/" ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path prov:wasDerivedFrom ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path foaf:isPrimaryTopicOf ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path owl:sameAs ],
+        [ sh:class skos:Concept ;
+            sh:path dcterms:subject ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageExternalLink> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/birthName> ],
+        [ sh:class <http://dbpedia.org/ontology/EducationalInstitution> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/almaMater> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/wikiPageRevisionID> ],
+        [ sh:class <http://dbpedia.org/ontology/Place> ;
+            sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/deathPlace> ],
+        [ sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/abstract> ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/thumbnail> ],
+        [ sh:nodeKind sh:Literal ;
+            sh:path <http://dbpedia.org/ontology/status> ],
+        [ sh:class <http://dbpedia.org/ontology/Image> ;
+            sh:minCount 1 ;
+            sh:path foaf:depiction ],
+        [ sh:class <http://dbpedia.org/ontology/Country> ;
+            sh:minCount 1 ;
+            sh:path <http://dbpedia.org/ontology/nationality> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path foaf:homepage ] ;
+    sh:targetClass <http://dbpedia.org/ontology/Astronaut> .
+

@@ -1,0 +1,162 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/FilmAwardShape> a sh:NodeShape ;
+    rdfs:label "film award"@en ;
+    sh:name "film award"@en ;
+    sh:property [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "event interval"@en ;
+            sh:path wdt:P2257 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "prize money"@en ;
+            sh:path wdt:P2121 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for recipients of this award"@en ;
+            sh:path wdt:P2517 ],
+        [ sh:class wd:Q11266439 ;
+            sh:maxCount 1 ;
+            sh:name "topic has template"@en ;
+            sh:path wdt:P1424 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "social media followers"@en ;
+            sh:path wdt:P8687 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:name "winner"@en ;
+            sh:or ( [ sh:class wd:Q11424 ] [ sh:class wd:Q5 ] ) ;
+            sh:path wdt:P1346 ],
+        [ sh:class wd:Q515 ;
+            sh:maxCount 1 ;
+            sh:name "location"@en ;
+            sh:path wdt:P276 ],
+        [ sh:name "founder"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P112 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q201658 ;
+            sh:name "genre"@en ;
+            sh:path wdt:P136 ],
+        [ sh:class wd:Q220505 ;
+            sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:path wdt:P361 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "dissolved, abolished or demolished date"@en ;
+            sh:path wdt:P576 ],
+        [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:maxCount 1 ;
+            sh:name "conferred by"@en ;
+            sh:or ( [ sh:class wd:Q220505 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P1027 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ] ;
+    sh:targetClass wd:Q4220917 .
+
+wd:Q11266439 rdfs:label "Wikimedia template"@en .
+
+wd:Q11424 rdfs:label "film"@en .
+
+wd:Q201658 rdfs:label "film genre"@en .
+
+wd:Q4220917 rdfs:label "film award"@en .
+
+wd:Q515 rdfs:label "city"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wdt:P1027 rdfs:label "conferred by"@en .
+
+wdt:P112 rdfs:label "founder"@en .
+
+wdt:P1346 rdfs:label "winner"@en .
+
+wdt:P136 rdfs:label "genre"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1424 rdfs:label "topic has template"@en .
+
+wdt:P1448 rdfs:label "official name"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P1705 rdfs:label "native label"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2121 rdfs:label "prize money"@en .
+
+wdt:P2257 rdfs:label "event interval"@en .
+
+wdt:P2517 rdfs:label "category for recipients of this award"@en .
+
+wdt:P276 rdfs:label "location"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P527 rdfs:label "has part(s)"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P576 rdfs:label "dissolved, abolished or demolished date"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P8687 rdfs:label "social media followers"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q220505 rdfs:label "film festival"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q5 rdfs:label "human"@en .
+

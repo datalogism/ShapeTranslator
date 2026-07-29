@@ -1,0 +1,93 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/ComputerNetworkProtocolShape> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P527> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/ComputerNetworkProtocolShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P1365> ],
+        [ sh:class <http://www.wikidata.org/entity/Q9143> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P277> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://www.wikidata.org/prop/direct/P1163> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1535> ],
+        [ sh:class <http://www.wikidata.org/entity/Q50423863> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P6216> ],
+        [ sh:datatype xsd:decimal ;
+            sh:path <http://www.wikidata.org/prop/direct/P1641> ],
+        [ sh:class <http://www.wikidata.org/entity/Q9135> ;
+            sh:path <http://www.wikidata.org/prop/direct/P306> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1269> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P1462> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q1328899> ] [ sh:class <http://www.wikidata.org/entity/Q43229> ] ) ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/ComputerNetworkProtocolShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P1366> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1889> ],
+        [ sh:node <http://shaclshapes.org/ComputerNetworkProtocolShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P4969> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/ComputerNetworkProtocolShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P156> ],
+        [ sh:class <http://www.wikidata.org/entity/Q77205602> ;
+            sh:path <http://www.wikidata.org/prop/direct/P275> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P2283> ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1448> ],
+        [ sh:class <http://www.wikidata.org/entity/Q212971> ;
+            sh:path <http://www.wikidata.org/prop/direct/P1343> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P138> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P973> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1324> ],
+        [ sh:node <http://shaclshapes.org/ComputerNetworkProtocolShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P144> ],
+        [ sh:class <http://www.wikidata.org/entity/Q4167836> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P910> ],
+        [ sh:class <http://www.wikidata.org/entity/Q65054805> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P5805> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1482> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P361> ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1813> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://www.wikidata.org/prop/direct/P348> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/ComputerNetworkProtocolShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P629> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P366> ],
+        [ sh:node <http://shaclshapes.org/ComputerNetworkProtocolShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P155> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P856> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P571> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P178> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q43229> ] [ sh:class <http://www.wikidata.org/entity/Q5> ] ) ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q15836568> .
+

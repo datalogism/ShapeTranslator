@@ -1,0 +1,35 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/ScientistShape> a sh:NodeShape ;
+    sh:property [ sh:hasValue <http://dbpedia.org/ontology/Scientist> ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/scientistShape> a sh:NodeShape ;
+    sh:property [ sh:path <http://dbpedia.org/ontology/doctoralAdvisor> ],
+        [ sh:path <http://dbpedia.org/ontology/almaMater> ],
+        [ sh:path <http://dbpedia.org/ontology/doctoralStudent> ],
+        [ sh:path <http://dbpedia.org/ontology/knownFor> ],
+        [ sh:path <http://dbpedia.org/ontology/institution> ],
+        [ sh:path <http://dbpedia.org/ontology/nationality> ],
+        [ sh:class <http://dbpedia.org/ontology/Scientist> ;
+            sh:path rdf:type ],
+        [ sh:path <http://dbpedia.org/ontology/notableStudent> ],
+        [ sh:path <http://dbpedia.org/ontology/birthPlace> ],
+        [ sh:path <http://dbpedia.org/ontology/deathDate> ],
+        [ sh:path foaf:name ],
+        [ sh:path <http://dbpedia.org/ontology/academicDiscipline> ],
+        [ sh:path <http://dbpedia.org/ontology/deathPlace> ],
+        [ sh:path <http://dbpedia.org/ontology/birthName> ],
+        [ sh:maxCount 1 ;
+            sh:path <http://dbpedia.org/ontology/deathYear> ],
+        [ sh:path <http://dbpedia.org/ontology/award> ],
+        [ sh:path dcat:resource_identifier ],
+        [ sh:path foaf:homepage ],
+        [ sh:path <http://dbpedia.org/ontology/birthDate> ],
+        [ sh:path <http://dbpedia.org/ontology/birthYear> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/Scientist> .
+

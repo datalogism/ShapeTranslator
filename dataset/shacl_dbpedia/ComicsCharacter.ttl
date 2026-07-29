@@ -1,0 +1,50 @@
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapes: <http://shaclshapes.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+shapes:ComicsCharacterShape a sh:NodeShape ;
+    sh:property [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:label ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:imdbId ],
+        [ sh:datatype xsd:anyURI ;
+            sh:nodeKind sh:Literal ;
+            sh:path owl:differentFrom ],
+        [ sh:datatype xsd:anyURI ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:seeAlso ],
+        [ sh:datatype xsd:integer ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:wikiPageRevisionID ],
+        [ sh:datatype xsd:string ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path foaf:name ],
+        [ sh:datatype xsd:string ;
+            sh:minCount 1 ;
+            sh:path foaf:givenName ],
+        [ sh:datatype rdf:langString ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path rdfs:comment ],
+        [ sh:datatype xsd:string ;
+            sh:nodeKind sh:Literal ;
+            sh:path dbo:firstAppearance ],
+        [ sh:class dbo:Person ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:creator ],
+        [ sh:class dbo:Person ;
+            sh:minCount 1 ;
+            sh:path dbo:portrayer ] ;
+    sh:targetClass dbo:ComicsCharacter .
+

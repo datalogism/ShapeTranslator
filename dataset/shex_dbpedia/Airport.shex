@@ -1,0 +1,55 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+start = @<Airport>
+
+<Airport> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Airport> ] ;
+  rdfs:label rdf:langString + ;
+  <http://dbpedia.org/ontology/city> @<City> + ;
+  <http://dbpedia.org/ontology/location> @<Place> + ;
+  <http://dbpedia.org/ontology/elevation> xsd:double ;
+  <http://dbpedia.org/ontology/runwayLength> xsd:double + ;
+  <http://dbpedia.org/ontology/runwaySurface> xsd:string + ;
+  <http://dbpedia.org/ontology/runwayDesignation> xsd:string + ;
+  <http://xmlns.com/foaf/0.1/name> xsd:string + ;
+  <http://dbpedia.org/ontology/owner> @<Agent> * ;
+  <http://dbpedia.org/ontology/operator> @<Organisation> ? ;
+  <http://dbpedia.org/ontology/commander> @<Person> * ;
+  <http://xmlns.com/foaf/0.1/homepage> IRI ? ;
+  <http://dbpedia.org/ontology/wikiPageRevisionID> xsd:integer + ;
+  rdfs:comment rdf:langString + ;
+  <http://dbpedia.org/ontology/icaoLocationIdentifier> xsd:string ;
+  <http://dbpedia.org/ontology/iataLocationIdentifier> xsd:string ;
+  <http://dbpedia.org/ontology/faaLocationIdentifier> xsd:string ? ;
+  <http://dbpedia.org/ontology/locationIdentifier> xsd:string ? ;
+  <http://dbpedia.org/ontology/openingDate> xsd:date ?
+}
+
+<Agent> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Agent> ]
+}
+
+<City> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/City> ]
+}
+
+<Organisation> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Organisation> ]
+}
+
+<Person> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Person> ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Place> ]
+}

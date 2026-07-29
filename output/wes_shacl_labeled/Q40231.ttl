@@ -1,0 +1,130 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/PublicElectionShape> a sh:NodeShape ;
+    rdfs:label "public election"@en ;
+    sh:property [ sh:class wd:Q56061 ;
+            sh:maxCount 1 ;
+            sh:name "located in the administrative territorial entity"@en ;
+            sh:path wdt:P131 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "total valid votes"@en ;
+            sh:path wdt:P1697 ],
+        [ sh:class wd:Q4164871 ;
+            sh:name "elector"@en ;
+            sh:path wdt:P2319 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of blank votes"@en ;
+            sh:path wdt:P5045 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "eligible voters"@en ;
+            sh:path wdt:P1867 ],
+        [ sh:class wd:Q40231 ;
+            sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q4164871 ;
+            sh:maxCount 1 ;
+            sh:name "office contested"@en ;
+            sh:path wdt:P541 ],
+        [ sh:class wd:Q515 ;
+            sh:maxCount 1 ;
+            sh:name "location"@en ;
+            sh:path wdt:P276 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "point in time"@en ;
+            sh:path wdt:P585 ],
+        [ sh:class wd:Q40231 ;
+            sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:path wdt:P155 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "ballots cast"@en ;
+            sh:path wdt:P1868 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "electorate"@en ;
+            sh:path wdt:P1831 ],
+        [ sh:class wd:Q56061 ;
+            sh:maxCount 1 ;
+            sh:name "applies to jurisdiction"@en ;
+            sh:path wdt:P1001 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by WikiProject"@en ;
+            sh:path wdt:P6104 ],
+        [ sh:class wd:Q13406463 ;
+            sh:name "has list"@en ;
+            sh:path wdt:P2354 ],
+        [ sh:class wd:Q40231 ;
+            sh:maxCount 1 ;
+            sh:name "followed by"@en ;
+            sh:path wdt:P156 ],
+        [ sh:maxCount 1 ;
+            sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q5 ;
+            sh:name "candidate"@en ;
+            sh:path wdt:P726 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:maxCount 1 ;
+            sh:name "facet of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1269 ],
+        [ sh:maxCount 1 ;
+            sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "successful candidate"@en ;
+            sh:path wdt:P991 ],
+        [ sh:class wd:Q7278 ;
+            sh:maxCount 1 ;
+            sh:name "organizer"@en ;
+            sh:path wdt:P664 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q182985 ;
+            sh:name "voting system"@en ;
+            sh:path wdt:P8196 ],
+        [ sh:class wd:Q11266439 ;
+            sh:maxCount 1 ;
+            sh:name "topic has template"@en ;
+            sh:path wdt:P1424 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of abstentions"@en ;
+            sh:path wdt:P5043 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "number of spoilt votes"@en ;
+            sh:path wdt:P5044 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ] ;
+    sh:targetClass wd:Q40231 .
+

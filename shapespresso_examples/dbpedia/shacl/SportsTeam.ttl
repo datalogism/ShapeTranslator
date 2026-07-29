@@ -1,0 +1,53 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/CityShape> a sh:NodeShape ;
+    sh:property [ sh:in ( <http://dbpedia.org/ontology/Location> <http://dbpedia.org/ontology/Place> ) ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/SportsTeamShape> a sh:NodeShape ;
+    sh:property [ sh:hasValue <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/sports_teamShape> a sh:NodeShape ;
+    sh:property [ sh:path <http://dbpedia.org/ontology/ground> ],
+        [ sh:path <http://dbpedia.org/ontology/manager> ],
+        [ sh:path <http://dbpedia.org/ontology/sport> ],
+        [ sh:class <http://dbpedia.org/ontology/SportsTeam> ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:datatype <xsd:string> ;
+            sh:path <http://dbpedia.org/ontology/uciCode> ],
+        [ sh:path <http://dbpedia.org/ontology/owner> ],
+        [ sh:path <http://dbpedia.org/ontology/location> ],
+        [ sh:datatype <xsd:string> ;
+            sh:path <http://dbpedia.org/ontology/status> ],
+        [ sh:path <http://dbpedia.org/ontology/league> ],
+        [ sh:datatype <rdf:langString> ;
+            sh:path foaf:name ],
+        [ sh:datatype <xsd:integer> ;
+            sh:path <http://dbpedia.org/ontology/capacity> ],
+        [ sh:datatype <xsd:double> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path dcat:resource_identifier ],
+        [ sh:path <http://dbpedia.org/ontology/president> ],
+        [ sh:path <http://dbpedia.org/ontology/stadium> ],
+        [ sh:datatype <xsd:string> ;
+            sh:path <http://dbpedia.org/ontology/logo> ],
+        [ sh:datatype <rdf:langString> ;
+            sh:path foaf:nick ],
+        [ sh:path foaf:homepage ],
+        [ sh:path <http://dbpedia.org/ontology/discipline> ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:path <http://dbpedia.org/ontology/foundingYear> ],
+        [ sh:datatype <xsd:gYear> ;
+            sh:path <http://dbpedia.org/ontology/dissolutionYear> ],
+        [ sh:path <http://dbpedia.org/ontology/coach> ],
+        [ sh:or ( [ sh:class <http://dbpedia.org/ontology/Location> ] [ sh:class <http://dbpedia.org/ontology/Place> ] ) ;
+            sh:path <http://dbpedia.org/ontology/city> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/SportsTeam> .
+

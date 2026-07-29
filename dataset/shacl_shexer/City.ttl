@@ -1,0 +1,160 @@
+@prefix : <http://weso.es/shapes/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:City a sh:NodeShape ;
+    sh:property [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:path dbo:areaCode ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:PopulatedPlace ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Settlement ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Location ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:subdivision ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path dbo:populationTotal ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:path dbo:utcOffset ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:timeZone ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path foaf:nick ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:path dbo:postalCode ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:motto ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:maxCount 1 ;
+            sh:path dcat:resource_identifier ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://schema.org/Place> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:areaLand ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Place ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:politicalLeader ],
+        [ a sh:PropertyShape ;
+            sh:dataType rdf:langString ;
+            sh:path rdfs:comment ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://schema.org/City> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path rdfs:comment ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:areaWater ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:areaTotal ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path foaf:name ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:areaCode ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q515> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:utcOffset ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:originalName ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:maxCount 1 ;
+            sh:path rdfs:label ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:governmentType ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:postalCode ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:foundingDate ],
+        [ a sh:PropertyShape ;
+            sh:in ( owl:Thing ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:elevation ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:path dbo:areaWater ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:country ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:City ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q486972> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path dbo:wikiPageRevisionID ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path rdfs:seeAlso ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path foaf:homepage ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:populationDensity ] ;
+    sh:targetClass dbo:City .
+

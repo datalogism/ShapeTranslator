@@ -1,0 +1,215 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/SearchEngineShape> a sh:NodeShape ;
+    rdfs:label "search engine"@en ;
+    sh:name "search engine"@en ;
+    sh:property [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q386724 ] [ sh:class wd:Q13442814 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:class wd:Q7406919 ;
+            sh:name "product or material produced"@en ;
+            sh:path wdt:P1056 ],
+        [ sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "Alexa rank"@en ;
+            sh:path wdt:P1661 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:maxCount 1 ;
+            sh:name "maintained by"@en ;
+            sh:or ( [ sh:class wd:Q4830453 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P126 ],
+        [ sh:name "developer"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] [ sh:class wd:Q18388277 ] ) ;
+            sh:path wdt:P178 ],
+        [ sh:maxCount 1 ;
+            sh:name "source code repository URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1324 ],
+        [ sh:name "founder"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q4830453 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P112 ],
+        [ sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:class wd:Q9135 ;
+            sh:name "operating system"@en ;
+            sh:path wdt:P306 ],
+        [ sh:name "official blog URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1581 ],
+        [ sh:name "distributed by"@en ;
+            sh:or ( [ sh:class wd:Q3814081 ] [ sh:class wd:Q35127 ] ) ;
+            sh:path wdt:P750 ],
+        [ sh:class wd:Q50424085 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "dissolved, abolished or demolished date"@en ;
+            sh:path wdt:P576 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "social media followers"@en ;
+            sh:path wdt:P8687 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "search formatter URL"@en ;
+            sh:path wdt:P4354 ],
+        [ sh:maxCount 1 ;
+            sh:name "privacy policy URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P7101 ],
+        [ sh:class wd:Q1288568 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:maxCount 1 ;
+            sh:name "has use"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P366 ],
+        [ sh:class wd:Q4830453 ;
+            sh:name "owned by"@en ;
+            sh:path wdt:P127 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "software version identifier"@en ;
+            sh:path wdt:P348 ],
+        [ sh:class wd:Q4830453 ;
+            sh:name "operator"@en ;
+            sh:path wdt:P137 ],
+        [ sh:class wd:Q77205602 ;
+            sh:name "copyright license"@en ;
+            sh:path wdt:P275 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "motto text"@en ;
+            sh:path wdt:P1451 ],
+        [ sh:class wd:Q9143 ;
+            sh:name "programmed in"@en ;
+            sh:path wdt:P277 ] ;
+    sh:targetClass wd:Q4182287 .
+
+wd:Q1288568 rdfs:label "modern language"@en .
+
+wd:Q13442814 rdfs:label "scholarly article"@en .
+
+wd:Q18388277 rdfs:label "technology company"@en .
+
+wd:Q35127 rdfs:label "website"@en .
+
+wd:Q3814081 rdfs:label "app marketplace"@en .
+
+wd:Q386724 rdfs:label "work"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q4182287 rdfs:label "search engine"@en .
+
+wd:Q50424085 rdfs:label "copyright status"@en .
+
+wd:Q7406919 rdfs:label "service"@en .
+
+wd:Q77205602 rdfs:label "copyright license"@en .
+
+wd:Q9135 rdfs:label "operating system"@en .
+
+wd:Q9143 rdfs:label "programming language"@en .
+
+wdt:P1056 rdfs:label "product or material produced"@en .
+
+wdt:P112 rdfs:label "founder"@en .
+
+wdt:P126 rdfs:label "maintained by"@en .
+
+wdt:P127 rdfs:label "owned by"@en .
+
+wdt:P1324 rdfs:label "source code repository URL"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P137 rdfs:label "operator"@en .
+
+wdt:P1451 rdfs:label "motto text"@en .
+
+wdt:P1581 rdfs:label "official blog URL"@en .
+
+wdt:P1661 rdfs:label "Alexa rank"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P178 rdfs:label "developer"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P2283 rdfs:label "uses"@en .
+
+wdt:P275 rdfs:label "copyright license"@en .
+
+wdt:P277 rdfs:label "programmed in"@en .
+
+wdt:P306 rdfs:label "operating system"@en .
+
+wdt:P348 rdfs:label "software version identifier"@en .
+
+wdt:P366 rdfs:label "has use"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P407 rdfs:label "language of work or name"@en .
+
+wdt:P4354 rdfs:label "search formatter URL"@en .
+
+wdt:P495 rdfs:label "country of origin"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P576 rdfs:label "dissolved, abolished or demolished date"@en .
+
+wdt:P6216 rdfs:label "copyright status"@en .
+
+wdt:P7101 rdfs:label "privacy policy URL"@en .
+
+wdt:P750 rdfs:label "distributed by"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P8687 rdfs:label "social media followers"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q4830453 rdfs:label "business"@en .
+

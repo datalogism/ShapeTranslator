@@ -1,0 +1,127 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/PatentShape> a sh:NodeShape ;
+    rdfs:label "patent"@en ;
+    sh:name "patent"@en ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:name "author name string"@en ;
+            sh:path wdt:P2093 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:class wd:Q5 ;
+            sh:name "discoverer or inventor"@en ;
+            sh:path wdt:P61 ],
+        [ sh:maxCount 1 ;
+            sh:name "owned by"@en ;
+            sh:or ( [ sh:class wd:Q4830453 ] [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P127 ],
+        [ sh:name "cites work"@en ;
+            sh:or ( [ sh:class wd:Q13442814 ] [ sh:class wd:Q253623 ] ) ;
+            sh:path wdt:P2860 ],
+        [ sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:name "sponsor"@en ;
+            sh:or ( [ sh:class wd:Q327333 ] [ sh:class wd:Q4830453 ] ) ;
+            sh:path wdt:P859 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "publication date"@en ;
+            sh:path wdt:P577 ],
+        [ sh:class wd:Q5 ;
+            sh:name "author"@en ;
+            sh:path wdt:P50 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:maxCount 1 ;
+            sh:name "work available at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P953 ],
+        [ sh:maxCount 1 ;
+            sh:name "issued by"@en ;
+            sh:or ( [ sh:class wd:Q43229 ] [ sh:class wd:Q1148446 ] ) ;
+            sh:path wdt:P2378 ],
+        [ sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:datatype xsd:string ;
+            sh:name "Cooperative Patent Classification code"@en ;
+            sh:path wdt:P5778 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q1288568 ;
+            sh:maxCount 1 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ] ;
+    sh:targetClass wd:Q253623 .
+
+wd:Q1148446 rdfs:label "patent office"@en .
+
+wd:Q1288568 rdfs:label "modern language"@en .
+
+wd:Q13442814 rdfs:label "scholarly article"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q327333 rdfs:label "government agency"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wdt:P127 rdfs:label "owned by"@en .
+
+wdt:P1476 rdfs:label "title"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P2093 rdfs:label "author name string"@en .
+
+wdt:P2378 rdfs:label "issued by"@en .
+
+wdt:P2860 rdfs:label "cites work"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P407 rdfs:label "language of work or name"@en .
+
+wdt:P50 rdfs:label "author"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P577 rdfs:label "publication date"@en .
+
+wdt:P5778 rdfs:label "Cooperative Patent Classification code"@en .
+
+wdt:P61 rdfs:label "discoverer or inventor"@en .
+
+wdt:P859 rdfs:label "sponsor"@en .
+
+wdt:P921 rdfs:label "main subject"@en .
+
+wdt:P953 rdfs:label "work available at URL"@en .
+
+wd:Q253623 rdfs:label "patent"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q4830453 rdfs:label "business"@en .
+
+wd:Q5 rdfs:label "human"@en .
+

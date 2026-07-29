@@ -1,0 +1,236 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/SkiResortShape> a sh:NodeShape ;
+    rdfs:label "ski resort"@en ;
+    sh:name "ski resort"@en ;
+    sh:property [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q56061 ;
+            sh:name "located in the administrative territorial entity"@en ;
+            sh:path wdt:P131 ],
+        [ sh:class wd:Q10541491 ;
+            sh:maxCount 1 ;
+            sh:name "legal form"@en ;
+            sh:path wdt:P1454 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons gallery"@en ;
+            sh:path wdt:P935 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:maxCount 1 ;
+            sh:name "webcam page URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P4238 ],
+        [ sh:class wd:Q5107 ;
+            sh:maxCount 1 ;
+            sh:name "continent"@en ;
+            sh:path wdt:P30 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q3034650 ;
+            sh:name "part of"@en ;
+            sh:path wdt:P361 ],
+        [ sh:name "located in time zone"@en ;
+            sh:or ( [ sh:class wd:Q12143 ] [ sh:class wd:Q17272482 ] ) ;
+            sh:path wdt:P421 ],
+        [ sh:class wd:Q46831 ;
+            sh:maxCount 1 ;
+            sh:name "mountain range"@en ;
+            sh:path wdt:P4552 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "dissolved, abolished or demolished date"@en ;
+            sh:path wdt:P576 ],
+        [ sh:maxCount 1 ;
+            sh:name "location"@en ;
+            sh:or ( [ sh:class wd:Q515 ] [ sh:class wd:Q3957 ] [ sh:class wd:Q532 ] ) ;
+            sh:path wdt:P276 ],
+        [ sh:maxCount 1 ;
+            sh:name "replaced by"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1366 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "postal code"@en ;
+            sh:path wdt:P281 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "elevation above sea level"@en ;
+            sh:path wdt:P2044 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "street address"@en ;
+            sh:path wdt:P6375 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "date of official opening"@en ;
+            sh:path wdt:P1619 ],
+        [ sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:class wd:Q67376938 ;
+            sh:maxCount 1 ;
+            sh:name "historic county"@en ;
+            sh:path wdt:P7959 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "local dialing code"@en ;
+            sh:path wdt:P473 ],
+        [ sh:maxCount 1 ;
+            sh:name "located in/on physical feature"@en ;
+            sh:or ( [ sh:class wd:Q8502 ] [ sh:class wd:Q8072 ] [ sh:class wd:Q39816 ] ) ;
+            sh:path wdt:P706 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "architect"@en ;
+            sh:path wdt:P84 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:maxCount 1 ;
+            sh:name "operator"@en ;
+            sh:or ( [ sh:class wd:Q4830453 ] [ sh:class wd:Q6881511 ] ) ;
+            sh:path wdt:P137 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for people who died here"@en ;
+            sh:path wdt:P1465 ],
+        [ sh:maxCount 1 ;
+            sh:name "email address"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P968 ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "area"@en ;
+            sh:path wdt:P2046 ] ;
+    sh:targetClass wd:Q130003 .
+
+wd:Q10541491 rdfs:label "legal form"@en .
+
+wd:Q12143 rdfs:label "time zone"@en .
+
+wd:Q130003 rdfs:label "ski resort"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q17272482 rdfs:label "time zone named for a UTC offset"@en .
+
+wd:Q3034650 rdfs:label "ski area"@en .
+
+wd:Q3957 rdfs:label "town"@en .
+
+wd:Q39816 rdfs:label "valley"@en .
+
+wd:Q46831 rdfs:label "mountain range"@en .
+
+wd:Q4830453 rdfs:label "business"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q5107 rdfs:label "continent"@en .
+
+wd:Q515 rdfs:label "city"@en .
+
+wd:Q532 rdfs:label "village"@en .
+
+wd:Q56061 rdfs:label "administrative territorial entity"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q67376938 rdfs:label "historic county of the United Kingdom"@en .
+
+wd:Q6881511 rdfs:label "enterprise"@en .
+
+wd:Q8072 rdfs:label "volcano"@en .
+
+wd:Q8502 rdfs:label "mountain"@en .
+
+wdt:P131 rdfs:label "located in the administrative territorial entity"@en .
+
+wdt:P1366 rdfs:label "replaced by"@en .
+
+wdt:P137 rdfs:label "operator"@en .
+
+wdt:P1448 rdfs:label "official name"@en .
+
+wdt:P1454 rdfs:label "legal form"@en .
+
+wdt:P1465 rdfs:label "category for people who died here"@en .
+
+wdt:P1619 rdfs:label "date of official opening"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P1705 rdfs:label "native label"@en .
+
+wdt:P2044 rdfs:label "elevation above sea level"@en .
+
+wdt:P2046 rdfs:label "area"@en .
+
+wdt:P276 rdfs:label "location"@en .
+
+wdt:P281 rdfs:label "postal code"@en .
+
+wdt:P30 rdfs:label "continent"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P421 rdfs:label "located in time zone"@en .
+
+wdt:P4238 rdfs:label "webcam page URL"@en .
+
+wdt:P4552 rdfs:label "mountain range"@en .
+
+wdt:P473 rdfs:label "local dialing code"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P576 rdfs:label "dissolved, abolished or demolished date"@en .
+
+wdt:P6375 rdfs:label "street address"@en .
+
+wdt:P706 rdfs:label "located in/on physical feature"@en .
+
+wdt:P7959 rdfs:label "historic county"@en .
+
+wdt:P84 rdfs:label "architect"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P935 rdfs:label "Commons gallery"@en .
+
+wdt:P968 rdfs:label "email address"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+

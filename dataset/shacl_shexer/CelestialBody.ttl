@@ -1,0 +1,112 @@
+@prefix : <http://weso.es/shapes/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:CelestialBody a sh:NodeShape ;
+    sh:property [ a sh:PropertyShape ;
+            sh:in ( dbo:Galaxy ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path foaf:name ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:apoapsis ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:epoch ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:periapsis ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:orbitalPeriod ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:albedo ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:formerName ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:discoverer ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:maxCount 1 ;
+            sh:path dcat:resource_identifier ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:maxCount 1 ;
+            sh:path rdfs:label ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://schema.org/Place> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path rdfs:comment ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path dbo:wikiPageRevisionID ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:CelestialBody ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( owl:Thing ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q318> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Place ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q634> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Location ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:absoluteMagnitude ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Star ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path rdfs:comment ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Planet ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:discovered ] ;
+    sh:targetClass dbo:CelestialBody .
+

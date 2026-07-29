@@ -1,0 +1,58 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX yago: <http://yago-knowledge.org/resource/>
+
+start = @<Astronaut>
+
+<Astronaut> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Astronaut> ] ;
+  <http://dbpedia.org/ontology/timeInSpace> xsd:double + ;
+  rdfs:label rdf:langString + ;
+  <http://dbpedia.org/ontology/deathPlace> @<Place> ? ;
+  <http://dbpedia.org/ontology/nationality> @<Country> + ;
+  <http://dbpedia.org/ontology/occupation> @<PersonFunction> * ;
+  <http://dbpedia.org/ontology/award> @<Award> * ;
+  <http://dbpedia.org/ontology/status> xsd:string * ;
+  <http://dbpedia.org/ontology/selection> IRI + ;
+  <http://dbpedia.org/ontology/mission> @<SpaceMission> * ;
+  <http://xmlns.com/foaf/0.1/name> xsd:string + ;
+  <http://dbpedia.org/ontology/almaMater> @<EducationalInstitution> + ;
+  <http://dbpedia.org/ontology/birthName> rdf:langString + ;
+  <http://dbpedia.org/ontology/wikiPageRevisionID> xsd:integer + ;
+  rdfs:comment rdf:langString + ;
+  <http://dbpedia.org/ontology/birthDate> xsd:date ;
+  <http://dbpedia.org/ontology/deathDate> xsd:date ? ;
+  <http://dbpedia.org/ontology/retired> xsd:date ? ;
+  <http://dbpedia.org/ontology/birthPlace> @<Place>
+}
+
+<Award> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Award> ]
+}
+
+<Country> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Country> ]
+}
+
+<EducationalInstitution> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/EducationalInstitution> ]
+}
+
+<PersonFunction> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/PersonFunction> ]
+}
+
+<Place> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/Place> ]
+}
+
+<SpaceMission> EXTRA rdf:type {
+  rdf:type [ <http://dbpedia.org/ontology/SpaceMission> ]
+}

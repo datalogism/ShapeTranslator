@@ -1,0 +1,61 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+<http://shaclshapes.org/AthleteShape> a sh:NodeShape ;
+    sh:property [ sh:hasValue <http://dbpedia.org/ontology/Athlete> ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/EducationalInstitutionShape> a sh:NodeShape ;
+    sh:property [ sh:hasValue <http://dbpedia.org/ontology/EducationalInstitution> ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/OrganisationShape> a sh:NodeShape ;
+    sh:property [ sh:hasValue <http://dbpedia.org/ontology/Organisation> ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/OrganizationShape> a sh:NodeShape ;
+    sh:property [ sh:hasValue <http://dbpedia.org/ontology/Organisation> ;
+            sh:path rdf:type ] .
+
+<http://shaclshapes.org/athleteShape> a sh:NodeShape ;
+    sh:property [ sh:path <http://dbpedia.org/ontology/activeYearsEndYear> ],
+        [ sh:path <http://dbpedia.org/ontology/height> ],
+        [ sh:path <http://dbpedia.org/ontology/league> ],
+        [ sh:path foaf:nick ],
+        [ sh:class <http://dbpedia.org/ontology/Organisation> ;
+            sh:path <http://dbpedia.org/ontology/team> ],
+        [ sh:path <http://dbpedia.org/ontology/deathYear> ],
+        [ sh:path <http://dbpedia.org/ontology/award> ],
+        [ sh:path <http://dbpedia.org/ontology/number> ],
+        [ sh:path <http://dbpedia.org/ontology/birthDate> ],
+        [ sh:path <http://dbpedia.org/ontology/battingSide> ],
+        [ sh:path <http://dbpedia.org/ontology/formerTeam> ],
+        [ sh:path <http://dbpedia.org/ontology/activeYearsStartYear> ],
+        [ sh:path <http://dbpedia.org/ontology/careerStation> ],
+        [ sh:class <http://dbpedia.org/ontology/Athlete> ;
+            sh:path rdf:type ],
+        [ sh:path dcat:resource_identifier ],
+        [ sh:path <http://dbpedia.org/ontology/draftPick> ],
+        [ sh:path <http://dbpedia.org/ontology/deathDate> ],
+        [ sh:class <http://dbpedia.org/ontology/EducationalInstitution> ;
+            sh:path <http://dbpedia.org/ontology/highschool> ],
+        [ sh:path <http://dbpedia.org/ontology/draftTeam> ],
+        [ sh:path <http://dbpedia.org/ontology/birthPlace> ],
+        [ sh:class <http://dbpedia.org/ontology/Organisation> ;
+            sh:path <http://dbpedia.org/ontology/debutTeam> ],
+        [ sh:path <http://dbpedia.org/ontology/deathPlace> ],
+        [ sh:path <http://dbpedia.org/ontology/undraftedYear> ],
+        [ sh:path <http://dbpedia.org/ontology/weight> ],
+        [ sh:path <http://dbpedia.org/ontology/draftRound> ],
+        [ sh:path <http://dbpedia.org/ontology/college> ],
+        [ sh:path <http://dbpedia.org/ontology/nationality> ],
+        [ sh:path <http://dbpedia.org/ontology/bowlingSide> ],
+        [ sh:path <http://dbpedia.org/ontology/draftYear> ],
+        [ sh:path foaf:name ],
+        [ sh:path <http://dbpedia.org/ontology/status> ],
+        [ sh:path <http://dbpedia.org/ontology/birthYear> ],
+        [ sh:path <http://dbpedia.org/ontology/position> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/Athlete> .
+

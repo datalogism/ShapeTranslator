@@ -1,0 +1,205 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/OntologyShape> a sh:NodeShape ;
+    rdfs:label "ontology"@en ;
+    sh:name "ontology"@en ;
+    sh:property [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:maxCount 1 ;
+            sh:name "URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2699 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:name "contributor to the creative work or subject"@en ;
+            sh:or ( [ sh:class wd:Q16334295 ] [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P767 ],
+        [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q2668072 ] [ sh:class wd:Q13442814 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:class wd:Q50424085 ;
+            sh:maxCount 1 ;
+            sh:name "copyright status"@en ;
+            sh:path wdt:P6216 ],
+        [ sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:maxCount 1 ;
+            sh:name "XML namespace URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P7510 ],
+        [ sh:name "author"@en ;
+            sh:or ( [ sh:class wd:Q16334295 ] [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P50 ],
+        [ sh:class wd:Q3331189 ;
+            sh:name "has edition or translation"@en ;
+            sh:path wdt:P747 ],
+        [ sh:class wd:Q33742 ;
+            sh:name "language of work or name"@en ;
+            sh:path wdt:P407 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "publication date"@en ;
+            sh:path wdt:P577 ],
+        [ sh:name "developer"@en ;
+            sh:or ( [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P178 ],
+        [ sh:maxCount 1 ;
+            sh:name "official website"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P856 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "software version identifier"@en ;
+            sh:path wdt:P348 ],
+        [ sh:class wd:Q324254 ;
+            sh:name "replaces"@en ;
+            sh:path wdt:P1365 ],
+        [ sh:maxCount 1 ;
+            sh:name "exact match"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2888 ],
+        [ sh:class wd:Q77205602 ;
+            sh:maxCount 1 ;
+            sh:name "copyright license"@en ;
+            sh:path wdt:P275 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ],
+        [ sh:class wd:Q5 ;
+            sh:maxCount 1 ;
+            sh:name "curator"@en ;
+            sh:path wdt:P1640 ],
+        [ sh:name "main subject"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P921 ],
+        [ sh:name "work available at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P953 ],
+        [ sh:maxCount 1 ;
+            sh:name "publisher"@en ;
+            sh:or ( [ sh:class wd:Q2085381 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P123 ],
+        [ sh:class wd:Q324254 ;
+            sh:name "uses"@en ;
+            sh:path wdt:P2283 ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:name "title"@en ;
+            sh:path wdt:P1476 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q6256 ;
+            sh:maxCount 1 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:maxCount 1 ;
+            sh:name "maintained by"@en ;
+            sh:or ( [ sh:class wd:Q170584 ] [ sh:class wd:Q5 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P126 ],
+        [ sh:name "based on"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P144 ],
+        [ sh:maxCount 1 ;
+            sh:name "source code repository URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1324 ] ;
+    sh:targetClass wd:Q324254 .
+
+wd:Q13442814 rdfs:label "scholarly article"@en .
+
+wd:Q170584 rdfs:label "project"@en .
+
+wd:Q2085381 rdfs:label "publishing house"@en .
+
+wd:Q2668072 rdfs:label "collection"@en .
+
+wd:Q3331189 rdfs:label "version, edition or translation"@en .
+
+wd:Q33742 rdfs:label "natural language"@en .
+
+wd:Q50424085 rdfs:label "copyright status"@en .
+
+wd:Q6256 rdfs:label "country"@en .
+
+wd:Q77205602 rdfs:label "copyright license"@en .
+
+wdt:P123 rdfs:label "publisher"@en .
+
+wdt:P126 rdfs:label "maintained by"@en .
+
+wdt:P1324 rdfs:label "source code repository URL"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P1365 rdfs:label "replaces"@en .
+
+wdt:P144 rdfs:label "based on"@en .
+
+wdt:P1476 rdfs:label "title"@en .
+
+wdt:P1640 rdfs:label "curator"@en .
+
+wdt:P17 rdfs:label "country"@en .
+
+wdt:P178 rdfs:label "developer"@en .
+
+wdt:P1813 rdfs:label "short name"@en .
+
+wdt:P2283 rdfs:label "uses"@en .
+
+wdt:P2699 rdfs:label "URL"@en .
+
+wdt:P275 rdfs:label "copyright license"@en .
+
+wdt:P2888 rdfs:label "exact match"@en .
+
+wdt:P348 rdfs:label "software version identifier"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P407 rdfs:label "language of work or name"@en .
+
+wdt:P50 rdfs:label "author"@en .
+
+wdt:P527 rdfs:label "has part(s)"@en .
+
+wdt:P571 rdfs:label "inception"@en .
+
+wdt:P577 rdfs:label "publication date"@en .
+
+wdt:P6216 rdfs:label "copyright status"@en .
+
+wdt:P747 rdfs:label "has edition or translation"@en .
+
+wdt:P7510 rdfs:label "XML namespace URL"@en .
+
+wdt:P767 rdfs:label "contributor to the creative work or subject"@en .
+
+wdt:P856 rdfs:label "official website"@en .
+
+wdt:P921 rdfs:label "main subject"@en .
+
+wdt:P953 rdfs:label "work available at URL"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q16334295 rdfs:label "group of humans"@en .
+
+wd:Q324254 rdfs:label "ontology"@en .
+
+wd:Q43229 rdfs:label "organization"@en .
+
+wd:Q5 rdfs:label "human"@en .
+

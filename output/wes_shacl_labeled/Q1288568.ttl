@@ -1,0 +1,210 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/ModernLanguageShape> a sh:NodeShape ;
+    rdfs:label "modern language"@en ;
+    sh:property [ sh:class wd:Q29051545 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:name "Ethnologue language status"@en ;
+            sh:path wdt:P3823 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons gallery"@en ;
+            sh:path wdt:P935 ],
+        [ sh:class wd:Q4663903 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main Wikimedia portal"@en ;
+            sh:path wdt:P1151 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "name"@en ;
+            sh:path wdt:P2561 ],
+        [ sh:class wd:Q53996674 ;
+            sh:name "has conjugation class"@en ;
+            sh:path wdt:P5206 ],
+        [ sh:class wd:Q6256 ;
+            sh:name "country"@en ;
+            sh:path wdt:P17 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "related category"@en ;
+            sh:path wdt:P7084 ],
+        [ sh:name "Stack Exchange tag"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1482 ],
+        [ sh:name "has part(s)"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P527 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "category for films in this language"@en ;
+            sh:path wdt:P5996 ],
+        [ sh:class wd:Q8183 ;
+            sh:name "has phoneme"@en ;
+            sh:path wdt:P2587 ],
+        [ sh:class wd:Q34770 ;
+            sh:maxCount 1 ;
+            sh:name "dialect of"@en ;
+            sh:path wdt:P4913 ],
+        [ sh:class wd:Q690940 ;
+            sh:name "has grammatical person"@en ;
+            sh:path wdt:P5110 ],
+        [ sh:class wd:Q177691 ;
+            sh:name "has tense"@en ;
+            sh:path wdt:P3103 ],
+        [ sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "native label"@en ;
+            sh:path wdt:P1705 ],
+        [ sh:class wd:Q11266439 ;
+            sh:name "topic has template"@en ;
+            sh:path wdt:P1424 ],
+        [ sh:class wd:Q21993397 ;
+            sh:maxCount 1 ;
+            sh:name "UNESCO language status"@en ;
+            sh:path wdt:P1999 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:name "language regulatory body"@en ;
+            sh:or ( [ sh:class wd:Q2093358 ] [ sh:class wd:Q43229 ] ) ;
+            sh:path wdt:P1018 ],
+        [ sh:maxCount 1 ;
+            sh:name "ethnic group"@en ;
+            sh:or ( [ sh:class wd:Q41710 ] [ sh:class wd:Q2472587 ] [ sh:class wd:Q133311 ] ) ;
+            sh:path wdt:P172 ],
+        [ sh:name "has characteristic"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1552 ],
+        [ sh:name "described by source"@en ;
+            sh:or ( [ sh:class wd:Q3331189 ] [ sh:class wd:Q47461344 ] ) ;
+            sh:path wdt:P1343 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "hashtag"@en ;
+            sh:path wdt:P2572 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:class wd:Q162378 ;
+            sh:name "has grammatical gender"@en ;
+            sh:path wdt:P5109 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Wikimedia language code"@en ;
+            sh:path wdt:P424 ],
+        [ sh:class wd:Q17524420 ;
+            sh:maxCount 1 ;
+            sh:name "history of topic"@en ;
+            sh:path wdt:P2184 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "official name"@en ;
+            sh:path wdt:P1448 ],
+        [ sh:name "uses"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2283 ],
+        [ sh:name "indigenous to"@en ;
+            sh:or ( [ sh:class wd:Q56061 ] [ sh:class wd:Q82794 ] [ sh:class wd:Q41710 ] [ sh:class wd:Q3502482 ] [ sh:class wd:Q851990 ] [ sh:class wd:Q6266 ] ) ;
+            sh:path wdt:P2341 ],
+        [ sh:class wd:Q72775801 ;
+            sh:name "linguistic typology"@en ;
+            sh:path wdt:P4132 ],
+        [ sh:maxCount 1 ;
+            sh:name "exact match"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2888 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "maintained by WikiProject"@en ;
+            sh:path wdt:P6104 ],
+        [ sh:class wd:Q34770 ;
+            sh:maxCount 1 ;
+            sh:name "follows"@en ;
+            sh:path wdt:P155 ],
+        [ sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q41710 ;
+            sh:name "used by"@en ;
+            sh:path wdt:P1535 ],
+        [ sh:name "uses capitalization for"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P6106 ],
+        [ sh:class wd:Q184932 ;
+            sh:name "has grammatical mood"@en ;
+            sh:path wdt:P3161 ],
+        [ sh:name "studied by"@en ;
+            sh:or ( [ sh:class wd:Q11862829 ] [ sh:class wd:Q1047113 ] ) ;
+            sh:path wdt:P2579 ],
+        [ sh:class wd:Q34770 ;
+            sh:name "influenced by"@en ;
+            sh:path wdt:P737 ],
+        [ sh:class wd:Q21286738 ;
+            sh:name "permanent duplicated item"@en ;
+            sh:path wdt:P2959 ],
+        [ sh:name "said to be the same as"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P460 ],
+        [ sh:name "writing system"@en ;
+            sh:or ( [ sh:class wd:Q8192 ] [ sh:class wd:Q9779 ] ) ;
+            sh:path wdt:P282 ],
+        [ sh:name "Stack Exchange site URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P6541 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:name "Wikimedia Incubator URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P9748 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "inception"@en ;
+            sh:path wdt:P571 ],
+        [ sh:class wd:Q34770 ;
+            sh:name "based on"@en ;
+            sh:path wdt:P144 ],
+        [ sh:datatype xsd:string ;
+            sh:name "OpenStreetMap tag"@en ;
+            sh:path wdt:P1282 ],
+        [ sh:class wd:Q34770 ;
+            sh:name "replaces"@en ;
+            sh:path wdt:P1365 ],
+        [ sh:datatype rdf:langString ;
+            sh:name "short name"@en ;
+            sh:path wdt:P1813 ],
+        [ sh:class wd:Q16695773 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:maxCount 1 ;
+            sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:class wd:Q128234 ;
+            sh:name "has grammatical case"@en ;
+            sh:path wdt:P2989 ],
+        [ sh:class wd:Q1288568 ;
+            sh:name "partially coincident with"@en ;
+            sh:path wdt:P1382 ],
+        [ sh:name "location"@en ;
+            sh:or ( [ sh:class wd:Q2221906 ] [ sh:class wd:Q82794 ] [ sh:class wd:Q17334923 ] ) ;
+            sh:path wdt:P276 ],
+        [ sh:datatype xsd:decimal ;
+            sh:name "number of speakers, writers, or signers"@en ;
+            sh:path wdt:P1098 ],
+        [ sh:class wd:Q6256 ;
+            sh:name "country of origin"@en ;
+            sh:path wdt:P495 ],
+        [ sh:datatype xsd:string ;
+            sh:name "entry in abbreviations table"@en ;
+            sh:path wdt:P8703 ] ;
+    sh:targetClass wd:Q1288568 .
+

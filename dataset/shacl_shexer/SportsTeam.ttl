@@ -1,0 +1,148 @@
+@prefix : <http://weso.es/shapes/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:SportsTeam a sh:NodeShape ;
+    sh:property [ a sh:PropertyShape ;
+            sh:in ( <http://schema.org/Organization> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Thing ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:stadium ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path dbo:wikiPageRevisionID ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q4498974> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:city ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path dbo:logo ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:path dbo:dissolutionYear ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:CricketTeam ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:league ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://schema.org/SportsTeam> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:maxCount 1 ;
+            sh:path rdfs:label ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:path dbo:capacity ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:location ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q12973014> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialPerson> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Agent ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:BasketballTeam ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:SportsTeam ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path rdfs:comment ],
+        [ a sh:PropertyShape ;
+            sh:in ( owl:Thing ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:HockeyTeam ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path dbo:coach ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path rdfs:comment ],
+        [ a sh:PropertyShape ;
+            sh:in ( dbo:Organisation ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path foaf:name ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:path foaf:nick ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:string ;
+            sh:maxCount 1 ;
+            sh:path dcat:resource_identifier ],
+        [ a sh:PropertyShape ;
+            sh:dataType xsd:integer ;
+            sh:path dbo:foundingYear ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q24229398> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ a sh:PropertyShape ;
+            sh:nodeKind sh:IRI ;
+            sh:path foaf:homepage ],
+        [ a sh:PropertyShape ;
+            sh:in ( <http://www.wikidata.org/entity/Q43229> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdf:type ] ;
+    sh:targetClass dbo:SportsTeam .
+

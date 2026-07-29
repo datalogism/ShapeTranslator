@@ -1,0 +1,81 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/CryptocurrencyShape> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P571> ],
+        [ sh:class <http://www.wikidata.org/entity/Q50423863> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P6216> ],
+        [ sh:node <http://shaclshapes.org/CryptocurrencyShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P144> ],
+        [ sh:class <http://www.wikidata.org/entity/Q308229> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P489> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1324> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://www.wikidata.org/prop/direct/P5810> ],
+        [ sh:class <http://www.wikidata.org/entity/Q25401607> ;
+            sh:path <http://www.wikidata.org/prop/direct/P414> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1535> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P170> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q4830453> ] [ sh:class <http://www.wikidata.org/entity/Q5> ] ) ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P5061> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P366> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q1047113> ] [ sh:class <http://www.wikidata.org/entity/Q11862829> ] ) ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2226> ],
+        [ sh:class <http://www.wikidata.org/entity/Q9135> ;
+            sh:path <http://www.wikidata.org/prop/direct/P306> ],
+        [ sh:datatype xsd:decimal ;
+            sh:path <http://www.wikidata.org/prop/direct/P8687> ],
+        [ sh:datatype xsd:string ;
+            sh:path <http://www.wikidata.org/prop/direct/P348> ],
+        [ sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P6363> ;
+            sh:pattern "^http://data.thenextweb.com/tnw/entity//" ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P112> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q4830453> ] [ sh:class <http://www.wikidata.org/entity/Q5> ] ) ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P138> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P2283> ],
+        [ sh:class <http://www.wikidata.org/entity/Q77205602> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P275> ],
+        [ sh:class <http://www.wikidata.org/entity/Q4167836> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P910> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P856> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P6541> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P973> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1889> ],
+        [ sh:class <http://www.wikidata.org/entity/Q4830453> ;
+            sh:path <http://www.wikidata.org/prop/direct/P178> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ],
+        [ sh:datatype xsd:decimal ;
+            sh:path <http://www.wikidata.org/prop/direct/P2284> ],
+        [ sh:class <http://www.wikidata.org/entity/Q9143> ;
+            sh:path <http://www.wikidata.org/prop/direct/P277> ],
+        [ sh:class <http://www.wikidata.org/entity/Q6256> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P495> ],
+        [ sh:node <http://shaclshapes.org/CryptocurrencyShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P941> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q13479982> .
+

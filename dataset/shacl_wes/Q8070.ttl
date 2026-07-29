@@ -1,0 +1,50 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/TsunamiShape> a sh:NodeShape ;
+    sh:property [ sh:class <http://www.wikidata.org/entity/Q56061> ;
+            sh:path <http://www.wikidata.org/prop/direct/P131> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1120> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2048> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1446> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P585> ],
+        [ sh:class <http://www.wikidata.org/entity/Q6256> ;
+            sh:path <http://www.wikidata.org/prop/direct/P17> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2630> ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1448> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P276> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q165> ] [ sh:class <http://www.wikidata.org/entity/Q6256> ] ) ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P828> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q7944> ] [ sh:class <http://www.wikidata.org/entity/Q8065> ] ) ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P4511> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2047> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P1542> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q15725976> ] [ sh:class <http://www.wikidata.org/entity/Q8065> ] ) ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P138> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1339> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q8070> .
+

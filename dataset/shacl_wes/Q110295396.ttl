@@ -1,0 +1,80 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/TypeOfMusicalInstrumentShape> a sh:NodeShape ;
+    sh:property [ sh:class <http://www.wikidata.org/entity/Q98645843> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2354> ],
+        [ sh:class <http://www.wikidata.org/entity/Q55190325> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P176> ],
+        [ sh:class <http://www.wikidata.org/entity/Q16695773> ;
+            sh:path <http://www.wikidata.org/prop/direct/P5008> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P361> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P2888> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P366> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1889> ],
+        [ sh:class <http://www.wikidata.org/entity/Q214609> ;
+            sh:path <http://www.wikidata.org/prop/direct/P186> ],
+        [ sh:datatype rdf:langString ;
+            sh:path <http://www.wikidata.org/prop/direct/P1448> ],
+        [ sh:class <http://www.wikidata.org/entity/Q4167836> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P910> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P2670> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P487> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P973> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P3259> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q113040113> ] [ sh:class <http://www.wikidata.org/entity/Q116056897> ] ) ],
+        [ sh:class <http://www.wikidata.org/entity/Q66715801> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1535> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P575> ],
+        [ sh:class <http://www.wikidata.org/entity/Q16695773> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P6104> ],
+        [ sh:class <http://www.wikidata.org/entity/Q618779> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P166> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P2596> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q11042> ] [ sh:class <http://www.wikidata.org/entity/Q19958368> ] ) ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P1343> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q3331189> ] [ sh:class <http://www.wikidata.org/entity/Q47461344> ] ) ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P527> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/TypeOfMusicalInstrumentShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P460> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1762> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P935> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P61> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q16334295> ] [ sh:class <http://www.wikidata.org/entity/Q43229> ] [ sh:class <http://www.wikidata.org/entity/Q5> ] ) ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P2341> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q56061> ] [ sh:class <http://www.wikidata.org/entity/Q82794> ] ) ],
+        [ sh:class <http://www.wikidata.org/entity/Q6256> ;
+            sh:path <http://www.wikidata.org/prop/direct/P495> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P138> ],
+        [ sh:class <http://www.wikidata.org/entity/Q66715801> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P3095> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q110295396> .
+

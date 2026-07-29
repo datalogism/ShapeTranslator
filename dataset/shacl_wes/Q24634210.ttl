@@ -1,0 +1,172 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/PodcastShowShape> a sh:NodeShape ;
+    sh:property [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P921> ],
+        [ sh:class <http://www.wikidata.org/entity/Q13406463> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1811> ],
+        [ sh:class <http://www.wikidata.org/entity/Q104822033> ;
+            sh:path <http://www.wikidata.org/prop/direct/P136> ],
+        [ sh:class <http://www.wikidata.org/entity/Q110571913> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P179> ],
+        [ sh:class <http://www.wikidata.org/entity/Q41825> ;
+            sh:path <http://www.wikidata.org/prop/direct/P6437> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q14350> ] [ sh:class <http://www.wikidata.org/entity/Q24581379> ] ) ;
+            sh:path <http://www.wikidata.org/prop/direct/P449> ],
+        [ sh:class <http://www.wikidata.org/entity/Q105543609> ;
+            sh:path <http://www.wikidata.org/prop/direct/P942> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1329> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P973> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P859> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q43229> ] [ sh:class <http://www.wikidata.org/entity/Q4830453> ] ) ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2047> ],
+        [ sh:class <http://www.wikidata.org/entity/Q12909644> ;
+            sh:path <http://www.wikidata.org/prop/direct/P1142> ],
+        [ sh:class <http://www.wikidata.org/entity/Q618779> ;
+            sh:path <http://www.wikidata.org/prop/direct/P1411> ],
+        [ sh:class <http://www.wikidata.org/entity/Q81941037> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P437> ],
+        [ sh:class <http://www.wikidata.org/entity/Q618779> ;
+            sh:path <http://www.wikidata.org/prop/direct/P166> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2572> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1581> ],
+        [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P371> ],
+        [ sh:class <http://www.wikidata.org/entity/Q35127> ;
+            sh:path <http://www.wikidata.org/prop/direct/P553> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P840> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q17334923> ] [ sh:class <http://www.wikidata.org/entity/Q3895768> ] ) ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P953> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P580> ],
+        [ sh:class <http://www.wikidata.org/entity/Q16695773> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P5008> ],
+        [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P127> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2896> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P968> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P674> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q106921001> ] [ sh:class <http://www.wikidata.org/entity/Q15632617> ] ) ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P272> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q11396960> ] [ sh:class <http://www.wikidata.org/entity/Q4830453> ] ) ],
+        [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P162> ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1680> ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/PodcastShowShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P156> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P112> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q43229> ] [ sh:class <http://www.wikidata.org/entity/Q5> ] ) ],
+        [ sh:maxCount 1 ;
+            sh:node <http://shaclshapes.org/PodcastShowShape> ;
+            sh:path <http://www.wikidata.org/prop/direct/P155> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1019> ],
+        [ sh:class <http://www.wikidata.org/entity/Q49773> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P135> ],
+        [ sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1476> ],
+        [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P170> ],
+        [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P2437> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P444> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P361> ],
+        [ sh:path <http://www.wikidata.org/prop/direct/P527> ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q61855877> ] [ sh:class <http://www.wikidata.org/entity/Q69154911> ] ) ],
+        [ sh:class <http://www.wikidata.org/entity/Q77205602> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P275> ],
+        [ sh:class <http://www.wikidata.org/entity/Q559618> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P1434> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q14350> ] [ sh:class <http://www.wikidata.org/entity/Q4830453> ] [ sh:class <http://www.wikidata.org/entity/Q61715186> ] ) ;
+            sh:path <http://www.wikidata.org/prop/direct/P3301> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q24581379> ] [ sh:class <http://www.wikidata.org/entity/Q43229> ] [ sh:class <http://www.wikidata.org/entity/Q4830453> ] [ sh:class <http://www.wikidata.org/entity/Q5> ] ) ;
+            sh:path <http://www.wikidata.org/prop/direct/P123> ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P582> ],
+        [ sh:class <http://www.wikidata.org/entity/Q50423863> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P6216> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P144> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P1889> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:class <http://www.wikidata.org/entity/Q106588463> ] [ sh:class <http://www.wikidata.org/entity/Q106677578> ] ) ;
+            sh:path <http://www.wikidata.org/prop/direct/P1552> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P856> ],
+        [ sh:datatype xsd:decimal ;
+            sh:path <http://www.wikidata.org/prop/direct/P1113> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P138> ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P373> ],
+        [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P710> ],
+        [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P161> ],
+        [ sh:class <http://www.wikidata.org/entity/Q5> ;
+            sh:path <http://www.wikidata.org/prop/direct/P58> ],
+        [ sh:class <http://www.wikidata.org/entity/Q61715186> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P750> ],
+        [ sh:class <http://www.wikidata.org/entity/Q34770> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P407> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P7101> ],
+        [ sh:datatype xsd:decimal ;
+            sh:path <http://www.wikidata.org/prop/direct/P8687> ],
+        [ sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.wikidata.org/prop/direct/P10286> ],
+        [ sh:class <http://www.wikidata.org/entity/Q6256> ;
+            sh:maxCount 1 ;
+            sh:path <http://www.wikidata.org/prop/direct/P495> ] ;
+    sh:targetClass <http://www.wikidata.org/entity/Q24634210> .
+

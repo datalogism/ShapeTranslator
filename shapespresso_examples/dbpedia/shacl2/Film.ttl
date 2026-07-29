@@ -1,0 +1,49 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/movieShape> a sh:NodeShape ;
+    sh:property [ sh:datatype <rdf:langString> ;
+            sh:path foaf:name ],
+        [ sh:class <http://dbpedia.org/ontology/Film> ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/starring> ],
+        [ sh:datatype <xsd:double> ;
+            sh:maxCount 1 ;
+            sh:path dcat:resource_identifier ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/language> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/writer> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/musicComposer> ],
+        [ sh:datatype <http://dbpedia.org/datatype/poundSterling> ;
+            sh:path <http://dbpedia.org/ontology/budget> ],
+        [ sh:datatype <http://dbpedia.org/datatype/usDollar> ;
+            sh:path <http://dbpedia.org/ontology/gross> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/editing> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/producer> ],
+        [ sh:class <http://dbpedia.org/ontology/Organisation> ;
+            sh:path <http://dbpedia.org/ontology/productionCompany> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/cinematography> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/director> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/distributor> ],
+        [ sh:datatype <xsd:string> ;
+            sh:path <http://dbpedia.org/ontology/imdbId> ],
+        [ sh:datatype <xsd:date> ;
+            sh:path <http://dbpedia.org/ontology/releaseDate> ],
+        [ sh:datatype <xsd:double> ;
+            sh:path <http://dbpedia.org/ontology/runtime> ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path <http://dbpedia.org/ontology/country> ] ;
+    sh:targetClass <http://dbpedia.org/ontology/Film> .
+

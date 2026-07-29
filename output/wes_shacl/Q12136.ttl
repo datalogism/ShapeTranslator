@@ -1,0 +1,243 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://shaclshapes.org/DiseaseShape> a sh:NodeShape ;
+    rdfs:label "disease"@en ;
+    sh:name "disease"@en ;
+    sh:property [ sh:datatype xsd:decimal ;
+            sh:maxCount 1 ;
+            sh:name "prevalence"@en ;
+            sh:path wdt:P1193 ],
+        [ sh:class wd:Q639907 ;
+            sh:name "possible medical findings"@en ;
+            sh:path wdt:P5131 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "ICD-9-CM"@en ;
+            sh:path wdt:P1692 ],
+        [ sh:name "different from"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1889 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "ICPC 2 ID"@en ;
+            sh:path wdt:P667 ],
+        [ sh:name "risk factor"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P5642 ],
+        [ sh:name "exact match"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P2888 ],
+        [ sh:maxCount 1 ;
+            sh:name "external data available at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1325 ],
+        [ sh:name "described at URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P973 ],
+        [ sh:name "has cause"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P828 ],
+        [ sh:maxCount 1 ;
+            sh:name "said to be the same as"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P460 ],
+        [ sh:maxCount 1 ;
+            sh:name "named after"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P138 ],
+        [ sh:name "health specialty"@en ;
+            sh:or ( [ sh:class wd:Q930752 ] [ sh:class wd:Q44597158 ] ) ;
+            sh:path wdt:P1995 ],
+        [ sh:class wd:Q103812529 ;
+            sh:name "afflicts"@en ;
+            sh:path wdt:P689 ],
+        [ sh:name "medical examination"@en ;
+            sh:or ( [ sh:class wd:Q177719 ] [ sh:class wd:Q2671652 ] ) ;
+            sh:path wdt:P923 ],
+        [ sh:name "possible treatment"@en ;
+            sh:or ( [ sh:class wdt:Q130705900 ] [ sh:class wd:Q179661 ] ) ;
+            sh:path wdt:P924 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:name "time of discovery or invention"@en ;
+            sh:path wdt:P575 ],
+        [ sh:maxCount 1 ;
+            sh:name "facet of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P1269 ],
+        [ sh:class wd:Q113145171 ;
+            sh:name "drug or therapy used for treatment"@en ;
+            sh:path wdt:P2176 ],
+        [ sh:class wd:Q1662340 ;
+            sh:name "disease transmission process"@en ;
+            sh:path wdt:P1060 ],
+        [ sh:maxCount 1 ;
+            sh:name "part of"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P361 ],
+        [ sh:class wd:Q7187 ;
+            sh:maxCount 1 ;
+            sh:name "genetic association"@en ;
+            sh:path wdt:P2293 ],
+        [ sh:maxCount 1 ;
+            sh:name "studied by"@en ;
+            sh:or ( [ sh:class wd:Q11862829 ] [ sh:class wd:Q1047113 ] ) ;
+            sh:path wdt:P2579 ],
+        [ sh:class wd:Q3331189 ;
+            sh:name "described by source"@en ;
+            sh:path wdt:P1343 ],
+        [ sh:name "has effect"@en ;
+            sh:or ( [ sh:class wd:Q112965645 ] [ sh:class wd:Q12136 ] ) ;
+            sh:path wdt:P1542 ],
+        [ sh:class wd:Q16695773 ;
+            sh:maxCount 1 ;
+            sh:name "on focus list of Wikimedia project"@en ;
+            sh:path wdt:P5008 ],
+        [ sh:class wd:Q5 ;
+            sh:name "discoverer or inventor"@en ;
+            sh:path wdt:P61 ],
+        [ sh:maxCount 1 ;
+            sh:name "anatomical location"@en ;
+            sh:or ( [ sh:class wd:Q112826905 ] [ sh:class wd:Q103812529 ] ) ;
+            sh:path wdt:P927 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "Commons category"@en ;
+            sh:path wdt:P373 ],
+        [ sh:class wd:Q12136 ;
+            sh:maxCount 1 ;
+            sh:name "opposite of"@en ;
+            sh:path wdt:P461 ],
+        [ sh:maxCount 1 ;
+            sh:name "WordLift URL"@en ;
+            sh:nodeKind sh:IRI ;
+            sh:path wdt:P6363 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:name "NCI Thesaurus ID"@en ;
+            sh:path wdt:P1748 ],
+        [ sh:class wd:Q4167836 ;
+            sh:maxCount 1 ;
+            sh:name "topic's main category"@en ;
+            sh:path wdt:P910 ],
+        [ sh:name "symptoms and signs"@en ;
+            sh:or ( [ sh:class wd:Q112965645 ] [ sh:class wd:Q112826905 ] ) ;
+            sh:path wdt:P780 ],
+        [ sh:class wd:Q12136 ;
+            sh:name "has part(s)"@en ;
+            sh:path wdt:P527 ] ;
+    sh:targetClass wd:Q12136 .
+
+wd:Q1047113 rdfs:label "field of study"@en .
+
+wd:Q113145171 rdfs:label "type of chemical entity"@en .
+
+wd:Q11862829 rdfs:label "academic discipline"@en .
+
+wd:Q1662340 rdfs:label "mode of transmission"@en .
+
+wd:Q16695773 rdfs:label "WikiProject"@en .
+
+wd:Q177719 rdfs:label "medical diagnosis"@en .
+
+wd:Q179661 rdfs:label "medical treatment"@en .
+
+wd:Q2671652 rdfs:label "medical test"@en .
+
+wd:Q3331189 rdfs:label "version, edition or translation"@en .
+
+wd:Q4167836 rdfs:label "Wikimedia category"@en .
+
+wd:Q44597158 rdfs:label "health specialty"@en .
+
+wd:Q5 rdfs:label "human"@en .
+
+wd:Q639907 rdfs:label "medical finding"@en .
+
+wd:Q7187 rdfs:label "gene"@en .
+
+wd:Q930752 rdfs:label "medical specialty"@en .
+
+wdt:P1060 rdfs:label "disease transmission process"@en .
+
+wdt:P1193 rdfs:label "prevalence"@en .
+
+wdt:P1269 rdfs:label "facet of"@en .
+
+wdt:P1325 rdfs:label "external data available at URL"@en .
+
+wdt:P1343 rdfs:label "described by source"@en .
+
+wdt:P138 rdfs:label "named after"@en .
+
+wdt:P1542 rdfs:label "has effect"@en .
+
+wdt:P1692 rdfs:label "ICD-9-CM"@en .
+
+wdt:P1748 rdfs:label "NCI Thesaurus ID"@en .
+
+wdt:P1889 rdfs:label "different from"@en .
+
+wdt:P1995 rdfs:label "health specialty"@en .
+
+wdt:P2176 rdfs:label "drug or therapy used for treatment"@en .
+
+wdt:P2293 rdfs:label "genetic association"@en .
+
+wdt:P2579 rdfs:label "studied by"@en .
+
+wdt:P2888 rdfs:label "exact match"@en .
+
+wdt:P361 rdfs:label "part of"@en .
+
+wdt:P373 rdfs:label "Commons category"@en .
+
+wdt:P460 rdfs:label "said to be the same as"@en .
+
+wdt:P461 rdfs:label "opposite of"@en .
+
+wdt:P5008 rdfs:label "on focus list of Wikimedia project"@en .
+
+wdt:P5131 rdfs:label "possible medical findings"@en .
+
+wdt:P527 rdfs:label "has part(s)"@en .
+
+wdt:P5642 rdfs:label "risk factor"@en .
+
+wdt:P575 rdfs:label "time of discovery or invention"@en .
+
+wdt:P61 rdfs:label "discoverer or inventor"@en .
+
+wdt:P6363 rdfs:label "WordLift URL"@en .
+
+wdt:P667 rdfs:label "ICPC 2 ID"@en .
+
+wdt:P689 rdfs:label "afflicts"@en .
+
+wdt:P780 rdfs:label "symptoms and signs"@en .
+
+wdt:P828 rdfs:label "has cause"@en .
+
+wdt:P910 rdfs:label "topic's main category"@en .
+
+wdt:P923 rdfs:label "medical examination"@en .
+
+wdt:P924 rdfs:label "possible treatment"@en .
+
+wdt:P927 rdfs:label "anatomical location"@en .
+
+wdt:P973 rdfs:label "described at URL"@en .
+
+wd:Q103812529 rdfs:label "organ type"@en .
+
+wd:Q112826905 rdfs:label "class of anatomical entity"@en .
+
+wd:Q112965645 rdfs:label "symptom or sign"@en .
+
+wd:Q12136 rdfs:label "disease"@en .
+
