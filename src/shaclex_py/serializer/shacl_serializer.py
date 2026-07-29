@@ -148,12 +148,17 @@ def serialize_shacl(schema: SHACLSchema, label_map: dict | None = None) -> str:
         g.add((shape_uri, rdflib.RDF.type, SH.NodeShape))
 
         if shape.target_class:
-            g.add((shape_uri, SH.targetClass, _iri_to_uri(shape.target_class)))
+            target_classes = (
+                shape.target_class if isinstance(shape.target_class, list) else [shape.target_class]
+            )
+            for tc in target_classes:
+                g.add((shape_uri, SH.targetClass, _iri_to_uri(tc)))
             if label_map:
-                tc_label = label_map.get(shape.target_class.value)
-                if tc_label:
-                    g.add((shape_uri, RDFS.label, rdflib.Literal(tc_label, lang="en")))
-                    g.add((shape_uri, SH.name, rdflib.Literal(tc_label, lang="en")))
+                for tc in target_classes:
+                    tc_label = label_map.get(tc.value)
+                    if tc_label:
+                        g.add((shape_uri, RDFS.label, rdflib.Literal(tc_label, lang="en")))
+                        g.add((shape_uri, SH.name, rdflib.Literal(tc_label, lang="en")))
 
         if shape.closed:
             g.add((shape_uri, SH.closed, rdflib.Literal(True)))

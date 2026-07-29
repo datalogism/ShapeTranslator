@@ -406,13 +406,15 @@ def _shape_to_shex(
 ) -> Shape:
     triple_constraints: list[TripleConstraint] = []
 
-    # targetClass → rdf:type [Class] triple constraint
+    # targetClass → rdf:type [Class1 Class2 ...] triple constraint
     if shape.targetClass:
         tc_val = shape.targetClass
-        cls_iri = IRI(tc_val[0] if isinstance(tc_val, list) else tc_val)
+        cls_iris = tc_val if isinstance(tc_val, list) else [tc_val]
         tc_type = TripleConstraint(
             predicate=_RDF_TYPE_IRI,
-            constraint=NodeConstraint(values=[ValueSetValue(value=cls_iri)]),
+            constraint=NodeConstraint(
+                values=[ValueSetValue(value=IRI(cls_iri)) for cls_iri in cls_iris]
+            ),
             cardinality=Cardinality(),
         )
         triple_constraints.append(tc_type)

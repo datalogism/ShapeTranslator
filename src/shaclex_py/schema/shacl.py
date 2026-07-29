@@ -32,7 +32,7 @@ class PropertyShape:
 @dataclass
 class NodeShape:
     iri: IRI
-    target_class: Optional[IRI] = None
+    target_class: Optional[Union[IRI, list[IRI]]] = None
     properties: list[PropertyShape] = field(default_factory=list)
     closed: bool = False
     ignored_properties: list[IRI] = field(default_factory=list)

@@ -128,7 +128,11 @@ def collect_iris_from_shacl(schema) -> list[str]:
 
     for shape in schema.shapes:
         if shape.target_class:
-            iris.add(shape.target_class.value)
+            target_classes = (
+                shape.target_class if isinstance(shape.target_class, list) else [shape.target_class]
+            )
+            for tc in target_classes:
+                iris.add(tc.value)
         for ps in shape.properties:
             iris.add(ps.path.iri.value)
             if ps.datatype:

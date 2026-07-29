@@ -375,8 +375,10 @@ def _shape_to_node_shape(
     target_class = None
     if shape.targetClass:
         tc_val = shape.targetClass
-        raw = tc_val[0] if isinstance(tc_val, list) else tc_val
-        target_class = IRI(_clean_iri(raw))
+        if isinstance(tc_val, list):
+            target_class = [IRI(_clean_iri(raw)) for raw in tc_val]
+        else:
+            target_class = IRI(_clean_iri(tc_val))
 
     # Collect all triple constraints
     all_tcs: list[TripleConstraintE] = []
